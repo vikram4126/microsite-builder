@@ -1,0 +1,3063 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Alex Rivera",
+      "email": "alex@example.com",
+      "password": "password123",
+      "plan": "Pro Plan",
+      "avatar": "https://i.pravatar.cc/150?u=alex"
+    },
+    {
+      "id": "1773580019303",
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "password123",
+      "plan": "Free Plan",
+      "avatar": "https://i.pravatar.cc/150"
+    },
+    {
+      "id": "1773754717785",
+      "name": "Admin User",
+      "email": "admin@microsite.com",
+      "password": "admin123",
+      "plan": "Free Plan",
+      "avatar": "https://i.pravatar.cc/150"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1773570360919",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-15T20:27:20.586Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1773570360919",
+          "title": "Home",
+          "route": "/",
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [
+              {
+                "selectors": [
+                  "w-full",
+                  "bg-white",
+                  "border-b",
+                  "border-gray-100",
+                  "flex",
+                  "items-center",
+                  "justify-between",
+                  "p-6"
+                ],
+                "style": {
+                  "opacity": "1"
+                }
+              },
+              {
+                "selectors": [
+                  "cards-section"
+                ],
+                "style": {
+                  "max-width": "1200px",
+                  "margin-top": "0px",
+                  "margin-right": "auto",
+                  "margin-bottom": "0px",
+                  "margin-left": "auto",
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fill, minmax(250px, 1fr))",
+                  "row-gap": "20px",
+                  "column-gap": "20px"
+                }
+              },
+              {
+                "selectors": [
+                  "card"
+                ],
+                "style": {
+                  "background-color": "rgb(255, 255, 255)",
+                  "border-top-left-radius": "8px",
+                  "border-top-right-radius": "8px",
+                  "border-bottom-right-radius": "8px",
+                  "border-bottom-left-radius": "8px",
+                  "box-shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px",
+                  "overflow-x": "hidden",
+                  "overflow-y": "hidden",
+                  "transition-behavior": "normal, normal",
+                  "transition-duration": "0.3s, 0.3s",
+                  "transition-timing-function": "ease, ease",
+                  "transition-delay": "0s, 0s",
+                  "transition-property": "transform, box-shadow",
+                  "border-top-width": "1px",
+                  "border-right-width": "1px",
+                  "border-bottom-width": "1px",
+                  "border-left-width": "1px",
+                  "border-top-style": "solid",
+                  "border-right-style": "solid",
+                  "border-bottom-style": "solid",
+                  "border-left-style": "solid",
+                  "border-top-color": "rgb(221, 221, 221)",
+                  "border-right-color": "rgb(221, 221, 221)",
+                  "border-bottom-color": "rgb(221, 221, 221)",
+                  "border-left-color": "rgb(221, 221, 221)",
+                  "border-image-source": "initial",
+                  "border-image-slice": "initial",
+                  "border-image-width": "initial",
+                  "border-image-outset": "initial",
+                  "border-image-repeat": "initial",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "height": "100%"
+                }
+              },
+              {
+                "selectors": [
+                  "card"
+                ],
+                "style": {
+                  "transform": "translateY(-5px)",
+                  "box-shadow": "rgba(0, 0, 0, 0.2) 0px 8px 16px"
+                },
+                "state": "hover"
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card img",
+                "style": {
+                  "width": "100%",
+                  "height": "200px",
+                  "object-fit": "cover"
+                }
+              },
+              {
+                "selectors": [
+                  "card-content"
+                ],
+                "style": {
+                  "padding-top": "15px",
+                  "padding-right": "15px",
+                  "padding-bottom": "15px",
+                  "padding-left": "15px",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content h2",
+                "style": {
+                  "margin-top": "0px",
+                  "font-size": "1.4em",
+                  "color": "rgb(51, 51, 51)"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content p",
+                "style": {
+                  "color": "rgb(102, 102, 102)",
+                  "line-height": "1.4",
+                  "margin-bottom": "15px",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [
+                  "card-button"
+                ],
+                "style": {
+                  "display": "inline-block",
+                  "padding-top": "10px",
+                  "padding-right": "15px",
+                  "padding-bottom": "10px",
+                  "padding-left": "15px",
+                  "background-color": "rgb(0, 123, 255)",
+                  "color": "white",
+                  "text-decoration-line": "none",
+                  "text-decoration-thickness": "initial",
+                  "text-decoration-style": "initial",
+                  "text-decoration-color": "initial",
+                  "border-top-left-radius": "4px",
+                  "border-top-right-radius": "4px",
+                  "border-bottom-right-radius": "4px",
+                  "border-bottom-left-radius": "4px",
+                  "transition-behavior": "normal",
+                  "transition-duration": "0.3s",
+                  "transition-timing-function": "ease",
+                  "transition-delay": "0s",
+                  "transition-property": "background-color"
+                }
+              },
+              {
+                "selectors": [
+                  "card-button"
+                ],
+                "style": {
+                  "background-color": "rgb(0, 86, 179)"
+                },
+                "state": "hover"
+              },
+              {
+                "selectors": [
+                  "card-container"
+                ],
+                "style": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(300px, 1fr))",
+                  "row-gap": "20px",
+                  "column-gap": "20px",
+                  "padding-top": "20px",
+                  "padding-right": "20px",
+                  "padding-bottom": "20px",
+                  "padding-left": "20px",
+                  "max-width": "1200px",
+                  "margin-top": "0px",
+                  "margin-right": "auto",
+                  "margin-bottom": "0px",
+                  "margin-left": "auto"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content h3",
+                "style": {
+                  "margin-top": "0px",
+                  "font-size": "1.25rem"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content a",
+                "style": {
+                  "display": "inline-block",
+                  "background-color": "rgb(0, 123, 255)",
+                  "color": "white",
+                  "padding-top": "10px",
+                  "padding-right": "15px",
+                  "padding-bottom": "10px",
+                  "padding-left": "15px",
+                  "text-decoration-line": "none",
+                  "text-decoration-thickness": "initial",
+                  "text-decoration-style": "initial",
+                  "text-decoration-color": "initial",
+                  "border-top-left-radius": "4px",
+                  "border-top-right-radius": "4px",
+                  "border-bottom-right-radius": "4px",
+                  "border-bottom-left-radius": "4px",
+                  "text-align": "center",
+                  "margin-top": "auto"
+                }
+              }
+            ],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "attributes": {
+                        "id": "ikpm"
+                      },
+                      "components": [
+                        {
+                          "tagName": "nav",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "border-b",
+                            "border-gray-100",
+                            "flex",
+                            "items-center",
+                            "justify-between",
+                            "p-6"
+                          ],
+                          "attributes": {
+                            "data-animation": "slide-up"
+                          },
+                          "components": [
+                            {
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "font-bold",
+                                "text-gray-900"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Brand"
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "space-x-6",
+                                "hidden",
+                                "md:flex"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Home"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "About"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "text-white",
+                                "px-5",
+                                "py-2",
+                                "rounded-lg",
+                                "font-medium"
+                              ],
+                              "attributes": {
+                                "href": "#"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Contact Us"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "header",
+                          "classes": [
+                            "w-full",
+                            "bg-gray-900",
+                            "text-white",
+                            "py-24",
+                            "px-8",
+                            "text-center",
+                            "flex",
+                            "flex-col",
+                            "items-center"
+                          ],
+                          "components": [
+                            {
+                              "tagName": "h1",
+                              "type": "text",
+                              "classes": [
+                                "text-5xl",
+                                "font-extrabold",
+                                "mb-6"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Welcome to Our Platform"
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "p",
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "text-gray-400",
+                                "mb-8",
+                                "max-w-2xl"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Discover how we can help you grow your business effortlessly with our powerful tools."
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "button",
+                              "type": "text",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "px-8",
+                                "py-3",
+                                "rounded-xl",
+                                "font-bold",
+                                "hover:bg-[#3b82f6]",
+                                "transition-colors"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Get Started Now"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "section",
+                          "classes": [
+                            "py-20",
+                            "px-8",
+                            "w-full",
+                            "max-w-5xl",
+                            "mx-auto",
+                            "flex",
+                            "flex-col",
+                            "md:flex-row",
+                            "items-center",
+                            "gap-12"
+                          ],
+                          "components": [
+                            {
+                              "classes": [
+                                "flex-1"
+                              ],
+                              "components": [
+                                {
+                                  "tagName": "h2",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-3xl",
+                                    "font-bold",
+                                    "mb-4",
+                                    "text-gray-900"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Who We Are"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tagName": "p",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "leading-relaxed",
+                                    "mb-6"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "font-semibold",
+                                    "text-[#1e49e2]",
+                                    "hover:underline"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Learn more about our mission →"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "flex-1"
+                              ],
+                              "components": [
+                                {
+                                  "type": "image",
+                                  "resizable": {
+                                    "ratioDefault": 1
+                                  },
+                                  "classes": [
+                                    "rounded-2xl",
+                                    "shadow-xl",
+                                    "w-full"
+                                  ],
+                                  "attributes": {
+                                    "src": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+                                    "alt": "Team"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "classes": [
+                            "w-full",
+                            "bg-[#f8fafc]",
+                            "py-20",
+                            "px-8",
+                            "text-center",
+                            "flex",
+                            "flex-col",
+                            "items-center",
+                            "justify-center"
+                          ],
+                          "components": [
+                            {
+                              "tagName": "h1",
+                              "type": "text",
+                              "classes": [
+                                "text-5xl",
+                                "font-extrabold",
+                                "text-[#0c233c]",
+                                "mb-6",
+                                "tracking-tight"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Build Your Brand Today"
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "p",
+                              "type": "text",
+                              "classes": [
+                                "text-lg",
+                                "text-gray-600",
+                                "mb-10",
+                                "max-w-2xl"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes."
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "flex",
+                                "space-x-4"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "bg-[#1e49e2]",
+                                    "text-white",
+                                    "px-8",
+                                    "py-3",
+                                    "rounded-lg",
+                                    "font-medium",
+                                    "shadow",
+                                    "hover:bg-[#00338d]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Get Started Free"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "bg-white",
+                                    "text-gray-900",
+                                    "px-8",
+                                    "py-3",
+                                    "rounded-lg",
+                                    "font-medium",
+                                    "border",
+                                    "border-gray-200",
+                                    "shadow-sm",
+                                    "hover:bg-gray-50"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Book a Demo"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "classes": [
+                            "w-full",
+                            "py-20",
+                            "px-8",
+                            "bg-white",
+                            "max-w-7xl",
+                            "mx-auto"
+                          ],
+                          "components": [
+                            {
+                              "classes": [
+                                "text-center",
+                                "mb-16"
+                              ],
+                              "components": [
+                                {
+                                  "tagName": "h2",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-3xl",
+                                    "font-bold",
+                                    "text-gray-900",
+                                    "mb-4"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Everything you need"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tagName": "p",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-gray-500"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "All the features your team requires to succeed."
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "grid",
+                                "grid-cols-1",
+                                "md:grid-cols-3",
+                                "gap-8"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "p-6",
+                                    "border",
+                                    "border-gray-100",
+                                    "rounded-xl",
+                                    "shadow-sm",
+                                    "hover:shadow-md",
+                                    "transition",
+                                    "bg-white"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "text",
+                                      "classes": [
+                                        "w-12",
+                                        "h-12",
+                                        "bg-[#e0e7ff]",
+                                        "text-[#1e49e2]",
+                                        "rounded-lg",
+                                        "flex",
+                                        "items-center",
+                                        "justify-center",
+                                        "mb-6",
+                                        "font-bold",
+                                        "text-xl"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "🚀"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "h3",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-xl",
+                                        "font-bold",
+                                        "text-gray-900",
+                                        "mb-3"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Lightning Fast"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-gray-500",
+                                        "text-sm"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Optimized for speed to ensure your conversion rate stays high on all devices."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "p-6",
+                                    "border",
+                                    "border-[#1e49e2]",
+                                    "rounded-xl",
+                                    "shadow-md",
+                                    "bg-white",
+                                    "relative"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "text",
+                                      "classes": [
+                                        "absolute",
+                                        "-top-3",
+                                        "left-1/2",
+                                        "-translate-x-1/2",
+                                        "bg-[#1e49e2]",
+                                        "text-white",
+                                        "text-xs",
+                                        "font-bold",
+                                        "px-3",
+                                        "py-1",
+                                        "rounded-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "POPULAR"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "classes": [
+                                        "w-12",
+                                        "h-12",
+                                        "bg-[#e0e7ff]",
+                                        "text-[#1e49e2]",
+                                        "rounded-lg",
+                                        "flex",
+                                        "items-center",
+                                        "justify-center",
+                                        "mb-6",
+                                        "font-bold",
+                                        "text-xl"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "📊"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "h3",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-xl",
+                                        "font-bold",
+                                        "text-gray-900",
+                                        "mb-3"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Smart Analytics"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-gray-500",
+                                        "text-sm"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Track every click and view with built-in real-time tracking dashboard."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "p-6",
+                                    "border",
+                                    "border-gray-100",
+                                    "rounded-xl",
+                                    "shadow-sm",
+                                    "hover:shadow-md",
+                                    "transition",
+                                    "bg-white"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "text",
+                                      "classes": [
+                                        "w-12",
+                                        "h-12",
+                                        "bg-[#e0e7ff]",
+                                        "text-[#1e49e2]",
+                                        "rounded-lg",
+                                        "flex",
+                                        "items-center",
+                                        "justify-center",
+                                        "mb-6",
+                                        "font-bold",
+                                        "text-xl"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "🔗"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "h3",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-xl",
+                                        "font-bold",
+                                        "text-gray-900",
+                                        "mb-3"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Seamless Integrations"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-gray-500",
+                                        "text-sm"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Connect with your favorite tools natively and securely via APIs."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "custom-code-block",
+                              "attributes": {
+                                "id": "i1ksq"
+                              },
+                              "customHtml": "<div class=\"card-container\">\n    <!-- Card 1 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-1.jpg\" alt=\"Card 1 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 1</h3>\n            <p>A brief description for the first card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 2 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-2.jpg\" alt=\"Card 2 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 2</h3>\n            <p>A brief description for the second card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 3 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-3.jpg\" alt=\"Card 3 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 3</h3>\n            <p>A brief description for the third card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n</div>\n",
+                              "customCss": ".card-container {\n    display: grid;\n    /* Creates a responsive grid: minimum width of 300px per card,\n       and expands to fill available space (1fr) */\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n    gap: 20px; /* Space between the cards */\n    padding: 20px;\n    max-width: 1200px;\n    margin: 0 auto; /* Centers the container on the page */\n}\n\n.card {\n    border: 1px solid #ddd;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n    overflow: hidden; /* Ensures image corners are rounded */\n    background-color: #fff;\n    display: flex;\n    flex-direction: column;\n    height: 100%; /* Ensures all cards have the same height */\n}\n\n.card img {\n    width: 100%;\n    height: 200px; /* Fixed height for images, adjust as needed */\n    object-fit: cover; /* Ensures the image covers the area without distortion */\n}\n\n.card-content {\n    padding: 15px;\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1; /* Allows content to expand to fill remaining space */\n}\n\n.card-content h3 {\n    margin-top: 0;\n    font-size: 1.25rem;\n}\n\n.card-content p {\n    margin-bottom: 15px;\n    flex-grow: 1; /* Allows paragraph to expand */\n}\n\n.card-content a {\n    display: inline-block;\n    background-color: #007bff;\n    color: white;\n    padding: 10px 15px;\n    text-decoration: none;\n    border-radius: 4px;\n    text-align: center;\n    margin-top: auto; /* Pushes the link to the bottom */\n}\n",
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "\\n"
+                                },
+                                {
+                                  "classes": [
+                                    "card-container"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 1 "
+                                    },
+                                    {
+                                      "tagName": "article",
+                                      "classes": [
+                                        "card"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "image",
+                                          "resizable": {
+                                            "ratioDefault": 1
+                                          },
+                                          "attributes": {
+                                            "src": "placeholder-image-1.jpg",
+                                            "alt": "Card 1 image description"
+                                          }
+                                        },
+                                        {
+                                          "classes": [
+                                            "card-content"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Card Title 1"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "A brief description for the first card, providing some context or details."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Read More"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 2 "
+                                    },
+                                    {
+                                      "tagName": "article",
+                                      "classes": [
+                                        "card"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "image",
+                                          "resizable": {
+                                            "ratioDefault": 1
+                                          },
+                                          "attributes": {
+                                            "src": "placeholder-image-2.jpg",
+                                            "alt": "Card 2 image description"
+                                          }
+                                        },
+                                        {
+                                          "classes": [
+                                            "card-content"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Card Title 2"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "A brief description for the second card, providing some context or details."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Read More"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 3 "
+                                    },
+                                    {
+                                      "tagName": "article",
+                                      "classes": [
+                                        "card"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "image",
+                                          "resizable": {
+                                            "ratioDefault": 1
+                                          },
+                                          "attributes": {
+                                            "src": "placeholder-image-3.jpg",
+                                            "alt": "Card 3 image description"
+                                          }
+                                        },
+                                        {
+                                          "classes": [
+                                            "card-content"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Card Title 3"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "A brief description for the third card, providing some context or details."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Read More"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "YWHmm7oXM3tMCDCT"
+                  }
+                ],
+                "type": "main",
+                "id": "2ihuUtBhdIto9j1x"
+              }
+            ],
+            "symbols": []
+          },
+          "settings": "{\"headCode\":\"\",\"bodyStartCode\":\"\",\"bodyEndCode\":\"\"}"
+        },
+        {
+          "id": "p_1773570360919_91489404",
+          "title": "Page 2",
+          "route": "/page-2",
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [
+              {
+                "selectors": [
+                  "card-container"
+                ],
+                "style": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(300px, 1fr))",
+                  "row-gap": "20px",
+                  "column-gap": "20px",
+                  "padding-top": "20px",
+                  "padding-right": "20px",
+                  "padding-bottom": "20px",
+                  "padding-left": "20px",
+                  "max-width": "1200px",
+                  "margin-top": "0px",
+                  "margin-right": "auto",
+                  "margin-bottom": "0px",
+                  "margin-left": "auto"
+                }
+              },
+              {
+                "selectors": [
+                  "card"
+                ],
+                "style": {
+                  "border-top-width": "1px",
+                  "border-right-width": "1px",
+                  "border-bottom-width": "1px",
+                  "border-left-width": "1px",
+                  "border-top-style": "solid",
+                  "border-right-style": "solid",
+                  "border-bottom-style": "solid",
+                  "border-left-style": "solid",
+                  "border-top-color": "rgb(221, 221, 221)",
+                  "border-right-color": "rgb(221, 221, 221)",
+                  "border-bottom-color": "rgb(221, 221, 221)",
+                  "border-left-color": "rgb(221, 221, 221)",
+                  "border-image-source": "initial",
+                  "border-image-slice": "initial",
+                  "border-image-width": "initial",
+                  "border-image-outset": "initial",
+                  "border-image-repeat": "initial",
+                  "border-top-left-radius": "8px",
+                  "border-top-right-radius": "8px",
+                  "border-bottom-right-radius": "8px",
+                  "border-bottom-left-radius": "8px",
+                  "box-shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px",
+                  "overflow-x": "hidden",
+                  "overflow-y": "hidden",
+                  "background-color": "rgb(255, 255, 255)",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "height": "100%"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card img",
+                "style": {
+                  "width": "100%",
+                  "height": "200px",
+                  "object-fit": "cover"
+                }
+              },
+              {
+                "selectors": [
+                  "card-content"
+                ],
+                "style": {
+                  "padding-top": "15px",
+                  "padding-right": "15px",
+                  "padding-bottom": "15px",
+                  "padding-left": "15px",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content h3",
+                "style": {
+                  "margin-top": "0px",
+                  "font-size": "1.25rem"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content p",
+                "style": {
+                  "margin-bottom": "15px",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content a",
+                "style": {
+                  "display": "inline-block",
+                  "background-color": "rgb(0, 123, 255)",
+                  "color": "white",
+                  "padding-top": "10px",
+                  "padding-right": "15px",
+                  "padding-bottom": "10px",
+                  "padding-left": "15px",
+                  "text-decoration-line": "none",
+                  "text-decoration-thickness": "initial",
+                  "text-decoration-style": "initial",
+                  "text-decoration-color": "initial",
+                  "border-top-left-radius": "4px",
+                  "border-top-right-radius": "4px",
+                  "border-bottom-right-radius": "4px",
+                  "border-bottom-left-radius": "4px",
+                  "text-align": "center",
+                  "margin-top": "auto"
+                }
+              },
+              {
+                "selectors": [
+                  "#i1ac"
+                ],
+                "style": {
+                  "padding-top": "0px"
+                }
+              },
+              {
+                "selectors": [
+                  "w-full",
+                  "bg-gray-900",
+                  "text-white",
+                  "py-24",
+                  "px-8",
+                  "text-center",
+                  "flex",
+                  "flex-col",
+                  "items-center"
+                ],
+                "style": {
+                  "background-color": "#1e49e2"
+                }
+              },
+              {
+                "selectors": [
+                  "bg-[#1e49e2]",
+                  "px-8",
+                  "py-3",
+                  "rounded-xl",
+                  "font-bold",
+                  "hover:bg-[#3b82f6]",
+                  "transition-colors"
+                ],
+                "style": {
+                  "color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "text-5xl",
+                  "font-extrabold",
+                  "mb-6"
+                ],
+                "style": {
+                  "font-family": "Roboto, sans-serif"
+                }
+              }
+            ],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "attributes": {
+                        "id": "ic6u"
+                      },
+                      "components": [
+                        {
+                          "tagName": "nav",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "border-b",
+                            "border-gray-100",
+                            "flex",
+                            "items-center",
+                            "justify-between",
+                            "p-6"
+                          ],
+                          "attributes": {
+                            "id": "i1ac"
+                          },
+                          "components": [
+                            {
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "font-bold",
+                                "text-gray-900"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Brand"
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "space-x-6",
+                                "hidden",
+                                "md:flex"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Home"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "About"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "text-white",
+                                "px-5",
+                                "py-2",
+                                "rounded-lg",
+                                "font-medium"
+                              ],
+                              "attributes": {
+                                "href": "#"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Contact Us"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom-code-block",
+                          "attributes": {
+                            "id": "isxx7"
+                          },
+                          "customHtml": "<div class=\"card-container\">\n    <!-- Card 1 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-1.jpg\" alt=\"Card 1 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 1</h3>\n            <p>A brief description for the first card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 2 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-2.jpg\" alt=\"Card 2 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 2</h3>\n            <p>A brief description for the second card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 3 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-3.jpg\" alt=\"Card 3 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 3</h3>\n            <p>A brief description for the third card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n</div>\n",
+                          "customCss": ".card-container {\n    display: grid;\n    /* Creates a responsive grid: minimum width of 300px per card,\n       and expands to fill available space (1fr) */\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n    gap: 20px; /* Space between the cards */\n    padding: 20px;\n    max-width: 1200px;\n    margin: 0 auto; /* Centers the container on the page */\n}\n\n.card {\n    border: 1px solid #ddd;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n    overflow: hidden; /* Ensures image corners are rounded */\n    background-color: #fff;\n    display: flex;\n    flex-direction: column;\n    height: 100%; /* Ensures all cards have the same height */\n}\n\n.card img {\n    width: 100%;\n    height: 200px; /* Fixed height for images, adjust as needed */\n    object-fit: cover; /* Ensures the image covers the area without distortion */\n}\n\n.card-content {\n    padding: 15px;\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1; /* Allows content to expand to fill remaining space */\n}\n\n.card-content h3 {\n    margin-top: 0;\n    font-size: 1.25rem;\n}\n\n.card-content p {\n    margin-bottom: 15px;\n    flex-grow: 1; /* Allows paragraph to expand */\n}\n\n.card-content a {\n    display: inline-block;\n    background-color: #007bff;\n    color: white;\n    padding: 10px 15px;\n    text-decoration: none;\n    border-radius: 4px;\n    text-align: center;\n    margin-top: auto; /* Pushes the link to the bottom */\n}\n"
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "xk5T4zfZj2uHVAcm"
+                  }
+                ],
+                "type": "main",
+                "id": "KsAQ3Ut3rUbnsfWc"
+              }
+            ],
+            "symbols": []
+          }
+        },
+        {
+          "id": "p_1773570360919_06368754",
+          "title": "Page 2 (Copy)",
+          "route": "/page-2-copy",
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [
+              {
+                "selectors": [
+                  "card-container"
+                ],
+                "style": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(300px, 1fr))",
+                  "row-gap": "20px",
+                  "column-gap": "20px",
+                  "padding-top": "20px",
+                  "padding-right": "20px",
+                  "padding-bottom": "20px",
+                  "padding-left": "20px",
+                  "max-width": "1200px",
+                  "margin-top": "0px",
+                  "margin-right": "auto",
+                  "margin-bottom": "0px",
+                  "margin-left": "auto"
+                }
+              },
+              {
+                "selectors": [
+                  "card"
+                ],
+                "style": {
+                  "border-top-width": "1px",
+                  "border-right-width": "1px",
+                  "border-bottom-width": "1px",
+                  "border-left-width": "1px",
+                  "border-top-style": "solid",
+                  "border-right-style": "solid",
+                  "border-bottom-style": "solid",
+                  "border-left-style": "solid",
+                  "border-top-color": "rgb(221, 221, 221)",
+                  "border-right-color": "rgb(221, 221, 221)",
+                  "border-bottom-color": "rgb(221, 221, 221)",
+                  "border-left-color": "rgb(221, 221, 221)",
+                  "border-image-source": "initial",
+                  "border-image-slice": "initial",
+                  "border-image-width": "initial",
+                  "border-image-outset": "initial",
+                  "border-image-repeat": "initial",
+                  "border-top-left-radius": "8px",
+                  "border-top-right-radius": "8px",
+                  "border-bottom-right-radius": "8px",
+                  "border-bottom-left-radius": "8px",
+                  "box-shadow": "rgba(0, 0, 0, 0.1) 0px 4px 8px",
+                  "overflow-x": "hidden",
+                  "overflow-y": "hidden",
+                  "background-color": "rgb(255, 255, 255)",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "height": "100%"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card img",
+                "style": {
+                  "width": "100%",
+                  "height": "200px",
+                  "object-fit": "cover"
+                }
+              },
+              {
+                "selectors": [
+                  "card-content"
+                ],
+                "style": {
+                  "padding-top": "15px",
+                  "padding-right": "15px",
+                  "padding-bottom": "15px",
+                  "padding-left": "15px",
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content h3",
+                "style": {
+                  "margin-top": "0px",
+                  "font-size": "1.25rem"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content p",
+                "style": {
+                  "margin-bottom": "15px",
+                  "flex-grow": "1"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": ".card-content a",
+                "style": {
+                  "display": "inline-block",
+                  "background-color": "rgb(0, 123, 255)",
+                  "color": "white",
+                  "padding-top": "10px",
+                  "padding-right": "15px",
+                  "padding-bottom": "10px",
+                  "padding-left": "15px",
+                  "text-decoration-line": "none",
+                  "text-decoration-thickness": "initial",
+                  "text-decoration-style": "initial",
+                  "text-decoration-color": "initial",
+                  "border-top-left-radius": "4px",
+                  "border-top-right-radius": "4px",
+                  "border-bottom-right-radius": "4px",
+                  "border-bottom-left-radius": "4px",
+                  "text-align": "center",
+                  "margin-top": "auto"
+                }
+              },
+              {
+                "selectors": [
+                  "#i1ac"
+                ],
+                "style": {
+                  "padding-top": "0px"
+                }
+              },
+              {
+                "selectors": [
+                  "w-full",
+                  "bg-gray-900",
+                  "text-white",
+                  "py-24",
+                  "px-8",
+                  "text-center",
+                  "flex",
+                  "flex-col",
+                  "items-center"
+                ],
+                "style": {
+                  "background-color": "#1e49e2"
+                }
+              },
+              {
+                "selectors": [
+                  "bg-[#1e49e2]",
+                  "px-8",
+                  "py-3",
+                  "rounded-xl",
+                  "font-bold",
+                  "hover:bg-[#3b82f6]",
+                  "transition-colors"
+                ],
+                "style": {
+                  "color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "text-5xl",
+                  "font-extrabold",
+                  "mb-6"
+                ],
+                "style": {
+                  "font-family": "Roboto, sans-serif"
+                }
+              }
+            ],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "attributes": {
+                        "id": "ic6u"
+                      },
+                      "components": [
+                        {
+                          "tagName": "nav",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "border-b",
+                            "border-gray-100",
+                            "flex",
+                            "items-center",
+                            "justify-between",
+                            "p-6"
+                          ],
+                          "attributes": {
+                            "id": "i1ac"
+                          },
+                          "components": [
+                            {
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "font-bold",
+                                "text-gray-900"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Brand"
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "space-x-6",
+                                "hidden",
+                                "md:flex"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Home"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "About"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "text-white",
+                                "px-5",
+                                "py-2",
+                                "rounded-lg",
+                                "font-medium"
+                              ],
+                              "attributes": {
+                                "href": "#"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Contact Us"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom-code-block",
+                          "attributes": {
+                            "id": "isxx7"
+                          },
+                          "customHtml": "<div class=\"card-container\">\n    <!-- Card 1 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-1.jpg\" alt=\"Card 1 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 1</h3>\n            <p>A brief description for the first card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 2 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-2.jpg\" alt=\"Card 2 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 2</h3>\n            <p>A brief description for the second card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n\n    <!-- Card 3 -->\n    <article class=\"card\">\n        <img src=\"placeholder-image-3.jpg\" alt=\"Card 3 image description\">\n        <div class=\"card-content\">\n            <h3>Card Title 3</h3>\n            <p>A brief description for the third card, providing some context or details.</p>\n            <a href=\"#\">Read More</a>\n        </div>\n    </article>\n</div>\n",
+                          "customCss": ".card-container {\n    display: grid;\n    /* Creates a responsive grid: minimum width of 300px per card,\n       and expands to fill available space (1fr) */\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n    gap: 20px; /* Space between the cards */\n    padding: 20px;\n    max-width: 1200px;\n    margin: 0 auto; /* Centers the container on the page */\n}\n\n.card {\n    border: 1px solid #ddd;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n    overflow: hidden; /* Ensures image corners are rounded */\n    background-color: #fff;\n    display: flex;\n    flex-direction: column;\n    height: 100%; /* Ensures all cards have the same height */\n}\n\n.card img {\n    width: 100%;\n    height: 200px; /* Fixed height for images, adjust as needed */\n    object-fit: cover; /* Ensures the image covers the area without distortion */\n}\n\n.card-content {\n    padding: 15px;\n    display: flex;\n    flex-direction: column;\n    flex-grow: 1; /* Allows content to expand to fill remaining space */\n}\n\n.card-content h3 {\n    margin-top: 0;\n    font-size: 1.25rem;\n}\n\n.card-content p {\n    margin-bottom: 15px;\n    flex-grow: 1; /* Allows paragraph to expand */\n}\n\n.card-content a {\n    display: inline-block;\n    background-color: #007bff;\n    color: white;\n    padding: 10px 15px;\n    text-decoration: none;\n    border-radius: 4px;\n    text-align: center;\n    margin-top: auto; /* Pushes the link to the bottom */\n}\n"
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "xk5T4zfZj2uHVAcm"
+                  }
+                ],
+                "type": "main",
+                "id": "KsAQ3Ut3rUbnsfWc"
+              }
+            ],
+            "symbols": []
+          }
+        },
+        {
+          "id": "p_1773570360919_06440586",
+          "title": "Page 4",
+          "route": "/page-4",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "1773606432450qndy27b",
+      "userId": "1773580019303",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-17T14:39:54.741Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1773606432450qndy27b",
+          "title": "Home",
+          "route": "/",
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [
+              {
+                "selectors": [
+                  "#iwqc4"
+                ],
+                "style": {
+                  "background-color": "transparent",
+                  "color": "#ffffff"
+                }
+              },
+              {
+                "selectors": [
+                  "#id002"
+                ],
+                "style": {
+                  "color": "#0c233c"
+                }
+              },
+              {
+                "selectors": [
+                  "#iyl2j"
+                ],
+                "style": {
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#inqbe"
+                ],
+                "style": {
+                  "color": "#ffffff"
+                }
+              }
+            ],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "attributes": {
+                        "id": "iujg"
+                      },
+                      "components": [
+                        {
+                          "tagName": "nav",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "border-b",
+                            "border-gray-100",
+                            "flex",
+                            "items-center",
+                            "justify-between",
+                            "p-6"
+                          ],
+                          "attributes": {
+                            "id": "i1xy"
+                          },
+                          "components": [
+                            {
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "font-bold",
+                                "text-gray-900"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Brand"
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "space-x-6",
+                                "hidden",
+                                "md:flex"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Home"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "About"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "text-white",
+                                "px-5",
+                                "py-2",
+                                "rounded-lg",
+                                "font-medium"
+                              ],
+                              "attributes": {
+                                "href": "#"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Contact Us"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "header",
+                          "classes": [
+                            "w-full",
+                            "bg-gray-900",
+                            "text-white",
+                            "py-24",
+                            "px-8",
+                            "text-center",
+                            "flex",
+                            "flex-col",
+                            "items-center"
+                          ],
+                          "attributes": {
+                            "id": "iyl2j"
+                          },
+                          "components": [
+                            {
+                              "tagName": "h1",
+                              "type": "text",
+                              "classes": [
+                                "text-5xl",
+                                "font-extrabold",
+                                "mb-6"
+                              ],
+                              "attributes": {
+                                "id": "iwqc4"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Welcome to Our Platform",
+                                  "attributes": {
+                                    "id": "id002"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "p",
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "text-gray-400",
+                                "mb-8",
+                                "max-w-2xl"
+                              ],
+                              "attributes": {
+                                "id": "inqbe"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Discover how we can help you grow your business effortlessly with our powerful tools."
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "button",
+                              "type": "text",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "px-8",
+                                "py-3",
+                                "rounded-xl",
+                                "font-bold",
+                                "hover:bg-[#3b82f6]",
+                                "transition-colors"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Get Started Now"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "default",
+                          "classes": [
+                            "w-full",
+                            "min-h-[100px]",
+                            "py-8"
+                          ],
+                          "attributes": {
+                            "layout-mode": "container"
+                          },
+                          "components": [
+                            {
+                              "type": "responsive-grid",
+                              "classes": [
+                                "container-custom",
+                                "container",
+                                "mx-auto",
+                                "grid",
+                                "grid-cols-4",
+                                "gap-4"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "flex-1",
+                                    "min-h-[50px]"
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "flex-1",
+                                    "min-h-[50px]"
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "flex-1",
+                                    "min-h-[50px]"
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "flex-1",
+                                    "min-h-[50px]"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "4GfRwYc4Fo6LkcC5"
+                  }
+                ],
+                "type": "main",
+                "id": "neIrneaacSh6njE8"
+              }
+            ],
+            "symbols": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "1773606457273nizubc4",
+      "userId": "1773580019303",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-17T19:33:56.459Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1773606457273nizubc4_62022463",
+          "title": "About us",
+          "route": "/page-2",
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [
+              {
+                "selectors": [
+                  "#icqbo"
+                ],
+                "style": {
+                  "background-color": "#1e49e2"
+                }
+              },
+              {
+                "selectors": [
+                  "#ipxxi"
+                ],
+                "style": {
+                  "color": "#ffffff"
+                }
+              },
+              {
+                "selectors": [
+                  "#ieic5"
+                ],
+                "style": {
+                  "color": "#ffffff"
+                }
+              },
+              {
+                "selectors": [
+                  "#iqldi"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#i8vka-2"
+                ],
+                "style": {
+                  "background-color": "transparent",
+                  "color": "#00b894"
+                }
+              },
+              {
+                "selectors": [
+                  "#ia1bp"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#i8vka-2"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#ixlc7"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#i8vka-2-3"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#i8vka-2-3"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "#ib3d3"
+                ],
+                "style": {
+                  "background-color": "#00b894"
+                }
+              },
+              {
+                "selectors": [
+                  "#ikok7"
+                ],
+                "style": {
+                  "color": "#ffffff"
+                }
+              },
+              {
+                "selectors": [
+                  "#inzuh"
+                ],
+                "style": {
+                  "background-color": "#ffffff",
+                  "color": "#00b894"
+                }
+              }
+            ],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "components": [
+                        {
+                          "tagName": "nav",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "border-b",
+                            "border-gray-100",
+                            "flex",
+                            "items-center",
+                            "justify-between",
+                            "p-6"
+                          ],
+                          "attributes": {
+                            "id": "inmn"
+                          },
+                          "components": [
+                            {
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "font-bold",
+                                "text-gray-900"
+                              ],
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Brand"
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "space-x-6",
+                                "hidden",
+                                "md:flex"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Home"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "About"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#",
+                                    "id": "i7guv"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#",
+                                    "id": "ihr9h"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "hover:text-[#1e49e2]"
+                                  ],
+                                  "attributes": {
+                                    "href": "#",
+                                    "id": "izkwk"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Services"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "text-white",
+                                "px-5",
+                                "py-2",
+                                "rounded-lg",
+                                "font-medium"
+                              ],
+                              "attributes": {
+                                "href": "#",
+                                "id": "iblmc"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Contact Us"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "header",
+                          "classes": [
+                            "w-full",
+                            "bg-gray-900",
+                            "text-white",
+                            "py-24",
+                            "px-8",
+                            "text-center",
+                            "flex",
+                            "flex-col",
+                            "items-center"
+                          ],
+                          "attributes": {
+                            "id": "ib3d3"
+                          },
+                          "components": [
+                            {
+                              "tagName": "h1",
+                              "type": "text",
+                              "classes": [
+                                "text-5xl",
+                                "font-extrabold",
+                                "mb-6"
+                              ],
+                              "attributes": {
+                                "id": "iy8co"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Welcome to Our Platform"
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "p",
+                              "type": "text",
+                              "classes": [
+                                "text-xl",
+                                "text-gray-400",
+                                "mb-8",
+                                "max-w-2xl"
+                              ],
+                              "attributes": {
+                                "id": "ikok7"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Discover how we can help you grow your business effortlessly with our powerful tools."
+                                }
+                              ]
+                            },
+                            {
+                              "tagName": "button",
+                              "type": "text",
+                              "classes": [
+                                "bg-[#1e49e2]",
+                                "px-8",
+                                "py-3",
+                                "rounded-xl",
+                                "font-bold",
+                                "hover:bg-[#3b82f6]",
+                                "transition-colors"
+                              ],
+                              "attributes": {
+                                "id": "inzuh"
+                              },
+                              "components": [
+                                {
+                                  "type": "textnode",
+                                  "content": "Get Started Now"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tagName": "section",
+                          "classes": [
+                            "py-20",
+                            "px-8",
+                            "w-full",
+                            "max-w-5xl",
+                            "mx-auto",
+                            "flex",
+                            "flex-col",
+                            "md:flex-row",
+                            "items-center",
+                            "gap-12"
+                          ],
+                          "attributes": {
+                            "id": "idq0d"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "flex-1"
+                              ],
+                              "components": [
+                                {
+                                  "tagName": "h2",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-3xl",
+                                    "font-bold",
+                                    "mb-4",
+                                    "text-gray-900"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Who We Are"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tagName": "p",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-gray-600",
+                                    "leading-relaxed",
+                                    "mb-6"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "font-semibold",
+                                    "text-[#1e49e2]",
+                                    "hover:underline"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Learn more about our mission →"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "classes": [
+                                "flex-1"
+                              ],
+                              "components": [
+                                {
+                                  "type": "image",
+                                  "resizable": {
+                                    "ratioDefault": 1
+                                  },
+                                  "classes": [
+                                    "rounded-2xl",
+                                    "shadow-xl",
+                                    "w-full"
+                                  ],
+                                  "attributes": {
+                                    "src": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+                                    "alt": "Team"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "default",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "py-20"
+                          ],
+                          "attributes": {
+                            "layout-mode": "container",
+                            "id": "icqbo"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container-custom",
+                                "container",
+                                "mx-auto"
+                              ],
+                              "attributes": {
+                                "id": "ixtil"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "text-center",
+                                    "mb-16"
+                                  ],
+                                  "components": [
+                                    {
+                                      "tagName": "h2",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-3xl",
+                                        "font-bold",
+                                        "text-gray-900",
+                                        "mb-4"
+                                      ],
+                                      "attributes": {
+                                        "id": "ipxxi"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Everything you need"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-gray-500"
+                                      ],
+                                      "attributes": {
+                                        "id": "ieic5"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "All the features your team requires to succeed."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "grid",
+                                    "grid-cols-1",
+                                    "md:grid-cols-3",
+                                    "gap-8"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "p-6",
+                                        "border",
+                                        "border-[#1e49e2]",
+                                        "rounded-xl",
+                                        "shadow-md",
+                                        "bg-white",
+                                        "relative"
+                                      ],
+                                      "attributes": {
+                                        "id": "ie42f"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "absolute",
+                                            "-top-3",
+                                            "left-1/2",
+                                            "-translate-x-1/2",
+                                            "bg-[#1e49e2]",
+                                            "text-white",
+                                            "text-xs",
+                                            "font-bold",
+                                            "px-3",
+                                            "py-1",
+                                            "rounded-full"
+                                          ],
+                                          "attributes": {
+                                            "id": "iqldi"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "POPULAR"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "w-12",
+                                            "h-12",
+                                            "bg-[#e0e7ff]",
+                                            "text-[#1e49e2]",
+                                            "rounded-lg",
+                                            "flex",
+                                            "items-center",
+                                            "justify-center",
+                                            "mb-6",
+                                            "font-bold",
+                                            "text-xl"
+                                          ],
+                                          "attributes": {
+                                            "id": "i0xyp"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "📊"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "h3",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-xl",
+                                            "font-bold",
+                                            "text-gray-900",
+                                            "mb-3"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Smart Analytics"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-gray-500",
+                                            "text-sm"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Track every click and view with built-in real-time tracking dashboard."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "p-6",
+                                        "border",
+                                        "border-[#1e49e2]",
+                                        "rounded-xl",
+                                        "shadow-md",
+                                        "bg-white",
+                                        "relative"
+                                      ],
+                                      "attributes": {
+                                        "id": "ideau"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "absolute",
+                                            "-top-3",
+                                            "left-1/2",
+                                            "-translate-x-1/2",
+                                            "bg-[#1e49e2]",
+                                            "text-white",
+                                            "text-xs",
+                                            "font-bold",
+                                            "px-3",
+                                            "py-1",
+                                            "rounded-full"
+                                          ],
+                                          "attributes": {
+                                            "id": "ia1bp"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "POPULAR"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "absolute",
+                                            "-top-3",
+                                            "left-1/2",
+                                            "-translate-x-1/2",
+                                            "bg-[#1e49e2]",
+                                            "text-white",
+                                            "text-xs",
+                                            "font-bold",
+                                            "px-3",
+                                            "py-1",
+                                            "rounded-full"
+                                          ],
+                                          "attributes": {
+                                            "id": "i8vka-2"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "POPULAR"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "w-12",
+                                            "h-12",
+                                            "bg-[#e0e7ff]",
+                                            "text-[#1e49e2]",
+                                            "rounded-lg",
+                                            "flex",
+                                            "items-center",
+                                            "justify-center",
+                                            "mb-6",
+                                            "font-bold",
+                                            "text-xl"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "📊"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "h3",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-xl",
+                                            "font-bold",
+                                            "text-gray-900",
+                                            "mb-3"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Smart Analytics"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-gray-500",
+                                            "text-sm"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Track every click and view with built-in real-time tracking dashboard."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "p-6",
+                                        "border",
+                                        "border-[#1e49e2]",
+                                        "rounded-xl",
+                                        "shadow-md",
+                                        "bg-white",
+                                        "relative"
+                                      ],
+                                      "attributes": {
+                                        "id": "ideau-2"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "absolute",
+                                            "-top-3",
+                                            "left-1/2",
+                                            "-translate-x-1/2",
+                                            "bg-[#1e49e2]",
+                                            "text-white",
+                                            "text-xs",
+                                            "font-bold",
+                                            "px-3",
+                                            "py-1",
+                                            "rounded-full"
+                                          ],
+                                          "attributes": {
+                                            "id": "ixlc7"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "POPULAR"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "absolute",
+                                            "-top-3",
+                                            "left-1/2",
+                                            "-translate-x-1/2",
+                                            "bg-[#1e49e2]",
+                                            "text-white",
+                                            "text-xs",
+                                            "font-bold",
+                                            "px-3",
+                                            "py-1",
+                                            "rounded-full"
+                                          ],
+                                          "attributes": {
+                                            "id": "i8vka-2-3"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "POPULAR"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "text",
+                                          "classes": [
+                                            "w-12",
+                                            "h-12",
+                                            "bg-[#e0e7ff]",
+                                            "text-[#1e49e2]",
+                                            "rounded-lg",
+                                            "flex",
+                                            "items-center",
+                                            "justify-center",
+                                            "mb-6",
+                                            "font-bold",
+                                            "text-xl"
+                                          ],
+                                          "attributes": {
+                                            "id": "i7kqm"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "📊"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "h3",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-xl",
+                                            "font-bold",
+                                            "text-gray-900",
+                                            "mb-3"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Smart Analytics"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-gray-500",
+                                            "text-sm"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Track every click and view with built-in real-time tracking dashboard."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "WskrWYjYmrgRts2E"
+                  }
+                ],
+                "type": "main",
+                "id": "Oyhesy5jojYqYBqg"
+              }
+            ],
+            "symbols": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "1773754728955sc34mjx",
+      "userId": "1773754717785",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-17T13:38:48.955Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1773754728955sc34mjx",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
+    }
+  ],
+  "activity": [
+    {
+      "id": "a1",
+      "userId": "1",
+      "type": "project_edited",
+      "projectId": null,
+      "timestamp": "2024-06-12T10:00:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
