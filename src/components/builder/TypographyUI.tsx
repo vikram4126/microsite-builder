@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket } from 'lucide-react';
+import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket, List } from 'lucide-react';
 
 export const TypographyUI = ({ editor }: { editor: any }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +17,8 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     letterSpacing: '0px',
     color: '#1E293B',
     backgroundColor: 'transparent',
-    textAlign: 'left'
+    textAlign: 'left',
+    listStyleType: ''
   });
 
   useEffect(() => {
@@ -49,7 +50,8 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
           letterSpacing: currentStyles['letter-spacing'] || '0px',
           color: currentStyles['color'] || '#1E293B',
           backgroundColor: currentStyles['background-color'] || 'transparent',
-          textAlign: currentStyles['text-align'] || 'left'
+          textAlign: currentStyles['text-align'] || 'left',
+          listStyleType: currentStyles['list-style-type'] || ''
         });
       } else {
         setIsVisible(false);
@@ -109,6 +111,57 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         selected.addStyle({ 'background-color': value });
     } else if (key === 'textAlign') {
         selected.addStyle({ 'text-align': value });
+    } else if (key === 'listStyleType') {
+        if (!value || value === 'none') {
+            const currentTag = selected.get('tagName')?.toLowerCase();
+            if (currentTag === 'ul' || currentTag === 'ol') {
+                selected.set('tagName', 'p');
+                selected.removeStyle('list-style-type');
+                selected.removeStyle('padding-left');
+                selected.removeStyle('margin-left');
+                
+                const el = selected.getEl();
+                if (el) {
+                    const items = Array.from(el.querySelectorAll('li')).map((li: any) => li.innerHTML);
+                    if (items.length > 0) {
+                        selected.components(items.join('<br/>'));
+                    }
+                }
+            } else {
+                selected.removeStyle('list-style-type');
+            }
+        } else {
+            const currentTag = selected.get('tagName')?.toLowerCase();
+            const tag = (value === 'decimal' || value.includes('roman') || value.includes('alpha')) ? 'ol' : 'ul';
+            
+            if (currentTag !== 'ul' && currentTag !== 'ol') {
+                selected.set('tagName', tag);
+                selected.addStyle({ 'list-style-type': value, 'padding-left': '2rem', 'margin-left': '0' });
+                
+                const el = selected.getEl();
+                if (el) {
+                    const htmlContent = el.innerHTML;
+                    if (!htmlContent.includes('<li')) {
+                        // Split by <br> tags or Divs to infer lines
+                        let lines = htmlContent.split(/<br\s*\/?>/i).map((l: string) => l.trim()).filter(Boolean);
+                        // If no breaks, try innerText lines
+                        if (lines.length === 0 || lines.length === 1) {
+                            const textLines = (el.innerText || 'List item').split('\n').map((l: string) => l.trim()).filter(Boolean);
+                            if (textLines.length > lines.length) {
+                                lines = textLines;
+                            }
+                        }
+                        if (lines.length === 0) lines = ['List item'];
+                        
+                        const listHtml = lines.map((l: string) => `<li>${l}</li>`).join('');
+                        selected.components(listHtml);
+                    }
+                }
+            } else {
+                selected.set('tagName', tag);
+                selected.addStyle({ 'list-style-type': value });
+            }
+        }
     }
   };
 
@@ -151,6 +204,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     selected.removeStyle('color');
     selected.removeStyle('text-align');
     selected.removeStyle('background-color');
+    selected.removeStyle('list-style-type');
     
     // Force UI refresh by triggering update manually
     const currentStyles = selected.getStyle();
@@ -162,7 +216,8 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         letterSpacing: currentStyles['letter-spacing'] || '0px',
         color: currentStyles['color'] || '#1E293B',
         backgroundColor: currentStyles['background-color'] || 'transparent',
-        textAlign: currentStyles['text-align'] || 'left'
+        textAlign: currentStyles['text-align'] || 'left',
+        listStyleType: currentStyles['list-style-type'] || ''
     }));
   };
 
@@ -400,6 +455,30 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                             title="Custom Background Color"
                         />
                     </div>
+                </div>
+            </div>
+
+            {/* Row 6: List Style */}
+            <div className="space-y-1.5 pt-2 pb-1">
+                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
+                    <span className="mr-1.5 text-gray-400"><List size={12} strokeWidth={2.5} /></span> LIST STYLE
+                </label>
+                <div className="relative">
+                    <select 
+                        value={styles.listStyleType}
+                        onChange={(e) => updateStyle('listStyleType', e.target.value)}
+                        className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white shadow-sm"
+                    >
+                        <option value="">Default</option>
+                        <option value="none">None</option>
+                        <option value="disc">Disc</option>
+                        <option value="circle">Circle</option>
+                        <option value="square">Square</option>
+                        <option value="decimal">Numbers</option>
+                        <option value="lower-alpha">Letters (a, b, c)</option>
+                        <option value="lower-roman">Roman (i, ii, iii)</option>
+                    </select>
+                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 </div>
             </div>
 

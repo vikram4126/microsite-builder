@@ -111,11 +111,16 @@ export async function exportStaticWebsite(editor: any, projectName: string) {
   indexParts.push('  <title>' + (projectName || 'My Website') + '</title>');
   indexParts.push('  <link rel="stylesheet" href="css/style.css">');
   indexParts.push('  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
-  indexParts.push('  <' + sc + ' src="https://cdn.tailwindcss.com"></' + sc + '>');
+  indexParts.push('  <' + sc + ' src="https://cdn.tailwindcss.com?plugins=forms"></' + sc + '>');
+  indexParts.push('  <' + sc + ' src="canvas-tailwind-config.js"></' + sc + '>');
   indexParts.push('  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></' + sc + '>');
   indexParts.push('  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></' + sc + '>');
   indexParts.push('</head>');
-  indexParts.push('<body>');
+  const bodyEl = editor.Canvas?.getBody?.();
+  const themeStyles = bodyEl ? bodyEl.style.cssText : '';
+  const bodyClasses = bodyEl ? bodyEl.className : '';
+  
+  indexParts.push(`<body class="${bodyClasses}" style="${themeStyles}">`);
   indexParts.push(processedHtml);
   indexParts.push('  <' + sc + ' src="js/script.js"></' + sc + '>');
   indexParts.push('</body>');
@@ -127,6 +132,29 @@ export async function exportStaticWebsite(editor: any, projectName: string) {
   zip.file('index.html', indexHtml);
   zip.folder('css')!.file('style.css', css || '');
   zip.folder('js')!.file('script.js', finalJs);
+  
+  // Embed tailwind configuration
+  const tailwindConfigStr = `tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "var(--theme-primary, #00338d)",
+        "accent": "var(--theme-accent, #00b8f5)",
+        "secondary": "var(--theme-secondary, #1e49e2)",
+        "background-light": "var(--theme-bg-light, #f5f6f8)",
+        "background-dark": "var(--theme-bg-dark, #0c233c)",
+        "brand-navy": "var(--theme-navy, #0c233c)",
+        "purple-accent": "var(--theme-purple, #7213ea)",
+        "pink-accent": "var(--theme-pink, #fd349c)"
+      },
+      fontFamily: {
+        "display": ["Public Sans", "Inter", "sans-serif"]
+      }
+    }
+  }
+};`;
+  zip.file('canvas-tailwind-config.js', tailwindConfigStr);
 
   if (imageMap.size > 0) {
     const imgFolder = zip.folder('images')!;

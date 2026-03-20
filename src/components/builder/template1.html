@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fintech - Banking for the Modern Era</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00348f",
+                        "accent": "#00b8f5",
+                        "secondary": "#1e49e2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0f1623",
+                        "brand-navy": "#00338d"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navbar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-3 text-brand-navy dark:text-accent">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h2 class="text-brand-navy dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Fintech.</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-brand-navy dark:text-slate-300 text-sm font-semibold hover:text-accent transition-colors" href="#">Products</a>
+<a class="text-brand-navy dark:text-slate-300 text-sm font-semibold hover:text-accent transition-colors" href="#">Solutions</a>
+<a class="text-brand-navy dark:text-slate-300 text-sm font-semibold hover:text-accent transition-colors" href="#">Pricing</a>
+<a class="text-brand-navy dark:text-slate-300 text-sm font-semibold hover:text-accent transition-colors" href="#">About</a>
+</div>
+<div class="flex gap-3">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-slate-100 dark:bg-slate-800 text-brand-navy dark:text-white text-sm font-bold">
+<span>Login</span>
+</button>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-accent text-white text-sm font-bold hover:brightness-110 transition-all">
+<span>Get Started</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<div class="px-6 md:px-20 py-12 md:py-24 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+<div class="flex flex-col gap-8 flex-1">
+<div class="flex flex-col gap-4">
+<span class="text-secondary font-bold tracking-widest text-xs uppercase">The Future of Finance</span>
+<h1 class="text-brand-navy dark:text-white text-5xl md:text-7xl font-black leading-[1.1] tracking-tight">
+                                Banking for the <span class="text-accent">Modern Era</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-[540px] leading-relaxed">
+                                Experience the future of finance with unparalleled trust and security. Manage your wealth with a high-fidelity dashboard designed for the next generation.
+                            </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex min-w-[180px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-accent text-white text-lg font-bold shadow-lg shadow-accent/20">
+                                Open Account
+                            </button>
+<button class="flex min-w-[180px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 border-2 border-slate-200 dark:border-slate-700 text-brand-navy dark:text-white text-lg font-bold">
+                                See How it Works
+                            </button>
+</div>
+<div class="flex items-center gap-4 pt-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-200" data-alt="User avatar placeholder 1"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-300" data-alt="User avatar placeholder 2"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-400" data-alt="User avatar placeholder 3"></div>
+</div>
+<p class="text-slate-500 text-sm font-medium">Join 2M+ users worldwide</p>
+</div>
+</div>
+<div class="flex-1 relative">
+<div class="relative z-10 w-full max-w-[400px] mx-auto rounded-[3rem] border-[8px] border-slate-900 shadow-2xl overflow-hidden aspect-[9/19] bg-white">
+<div class="h-full w-full bg-slate-50 flex flex-col" data-alt="Mobile app UI dashboard showing account balance and charts">
+<div class="p-6 pt-10 flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<span class="material-symbols-outlined text-slate-400">menu</span>
+<div class="w-8 h-8 rounded-full bg-primary/10"></div>
+</div>
+<div class="bg-primary rounded-2xl p-6 text-white shadow-xl">
+<p class="text-xs opacity-80 mb-1">Total Balance</p>
+<h3 class="text-3xl font-bold mb-4">$42,500.00</h3>
+<div class="flex justify-between items-end">
+<p class="text-xs tracking-widest">**** 4290</p>
+<div class="flex gap-1">
+<div class="w-4 h-4 rounded-full bg-white/40"></div>
+<div class="w-4 h-4 rounded-full bg-white/20"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-bold text-slate-800">Quick Send</p>
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent"><span class="material-symbols-outlined">add</span></div>
+<div class="w-12 h-12 rounded-full bg-slate-200"></div>
+<div class="w-12 h-12 rounded-full bg-slate-200"></div>
+<div class="w-12 h-12 rounded-full bg-slate-200"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 rounded-full blur-3xl -z-0"></div>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="px-6 md:px-20 py-20 bg-background-light dark:bg-slate-900/50">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<div class="flex flex-col gap-4 text-center items-center">
+<h2 class="text-brand-navy dark:text-white text-3xl md:text-5xl font-black leading-tight max-w-[800px]">
+                            Everything you need to manage your money globally
+                        </h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-[600px]">
+                            Built for reliability, speed, and absolute security. Experience the difference of premium banking.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4 rounded-2xl bg-white dark:bg-background-dark p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-brand-navy dark:text-white text-xl font-bold">Real-time alerts</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                                    Stay informed with instant push notifications for every transaction, deposit, and login attempt.
+                                </p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl bg-white dark:bg-background-dark p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-brand-navy dark:text-white text-xl font-bold">Global transfers</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                                    Send money to over 150 countries with the best exchange rates and zero processing delays.
+                                </p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl bg-white dark:bg-background-dark p-8 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-brand-navy dark:text-white text-xl font-bold">Zero fees</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                                    No hidden charges, no monthly maintenance fees, and no minimum balance requirements.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Transaction Cards Section -->
+<div class="px-6 md:px-20 py-20 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 flex flex-col gap-6">
+<h2 class="text-brand-navy dark:text-white text-3xl md:text-5xl font-black leading-tight">
+                                Transact with confidence
+                            </h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                                Our interface is designed to keep you in control. Categorized spending, clear merchant details, and instant history updates make tracking effortless.
+                            </p>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent">check_circle</span>
+<span class="font-medium text-brand-navy dark:text-slate-200">Smart merchant identification</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent">check_circle</span>
+<span class="font-medium text-brand-navy dark:text-slate-200">Automatic spending categorization</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent">check_circle</span>
+<span class="font-medium text-brand-navy dark:text-slate-200">Instant digital receipts</span>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full grid gap-4">
+<!-- Card 1 -->
+<div class="flex items-center justify-between p-5 rounded-2xl bg-white dark:bg-slate-800 shadow-lg border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<div>
+<p class="text-brand-navy dark:text-white font-bold">Coffee Shop</p>
+<p class="text-slate-400 text-xs">Today, 9:41 AM • Food &amp; Drink</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-brand-navy dark:text-white font-bold">-$4.50</p>
+<p class="text-green-500 text-[10px] font-bold uppercase tracking-wider">Completed</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center justify-between p-5 rounded-2xl bg-white dark:bg-slate-800 shadow-lg border border-slate-100 dark:border-slate-700 md:ml-12">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-brand-navy dark:text-white font-bold">Monthly Salary</p>
+<p class="text-slate-400 text-xs">Yesterday, 4:00 PM • Income</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-green-600 font-black">+$5,000.00</p>
+<p class="text-green-500 text-[10px] font-bold uppercase tracking-wider">Completed</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex items-center justify-between p-5 rounded-2xl bg-white dark:bg-slate-800 shadow-lg border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<p class="text-brand-navy dark:text-white font-bold">Apple Store</p>
+<p class="text-slate-400 text-xs">Oct 12, 11:20 AM • Electronics</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-brand-navy dark:text-white font-bold">-$1,299.00</p>
+<p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Pending</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-brand-navy text-white px-6 md:px-20 py-16">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-12">
+<div class="flex flex-col gap-6 col-span-1 md:col-span-1">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center bg-accent rounded-lg text-white">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Fintech.</h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed">
+                            Pioneering the next generation of digital banking. Secure, fast, and borderless finance for everyone.
+                        </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">alternate_email</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-bold text-lg">Product</h4>
+<div class="flex flex-col gap-3 text-slate-400 text-sm">
+<a class="hover:text-accent transition-colors" href="#">Personal Banking</a>
+<a class="hover:text-accent transition-colors" href="#">Business Accounts</a>
+<a class="hover:text-accent transition-colors" href="#">Credit Cards</a>
+<a class="hover:text-accent transition-colors" href="#">Investing</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-bold text-lg">Company</h4>
+<div class="flex flex-col gap-3 text-slate-400 text-sm">
+<a class="hover:text-accent transition-colors" href="#">About Us</a>
+<a class="hover:text-accent transition-colors" href="#">Careers</a>
+<a class="hover:text-accent transition-colors" href="#">Press</a>
+<a class="hover:text-accent transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-bold text-lg">Legal</h4>
+<div class="flex flex-col gap-3 text-slate-400 text-sm">
+<a class="hover:text-accent transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-accent transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-accent transition-colors" href="#">Cookie Policy</a>
+<a class="hover:text-accent transition-colors" href="#">Security</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-slate-500 text-xs text-center md:text-left">
+                        © 2023 Fintech Global Inc. All rights reserved. Banking services provided by our partner banks, Members FDIC. The Fintech Debit Card is issued by Partner Bank, N.A.
+                    </p>
+<div class="flex gap-4">
+<div class="h-8 w-24 bg-white/5 rounded flex items-center justify-center grayscale opacity-50" data-alt="App Store badge">App Store</div>
+<div class="h-8 w-24 bg-white/5 rounded flex items-center justify-center grayscale opacity-50" data-alt="Google Play badge">Google Play</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

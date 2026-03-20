@@ -4,11 +4,14 @@ import grapesjs from 'grapesjs';
 import 'grapesjs/dist/css/grapes.min.css';
 import { exportStaticWebsite } from '../utils/exportWebsite';
 import { registerBlocks } from '../components/builder/Blocks';
+import { registerTemplates } from '../components/builder/Templates';
 import { registerStyles } from '../components/builder/Styles';
 import { 
-  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog
+  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette
 } from 'lucide-react';
 import { api } from '../utils/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BoxModelUI } from '../components/builder/BoxModelUI';
 import { TypographyUI } from '../components/builder/TypographyUI';
 import { BorderRadiusUI } from '../components/builder/BorderRadiusUI';
@@ -40,6 +43,8 @@ export default function Builder() {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Layout');
   const [hasSelection, setHasSelection] = useState(false);
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+  const [themeColor, setThemeColor] = useState<string>('default');
   const [projectData, setProjectData] = useState<any>(null);
   const [breadcrumb, setBreadcrumb] = useState<{ name: string; cid: string }[]>([]);
   const [isBordersActive, setIsBordersActive] = useState(true);
@@ -60,6 +65,45 @@ export default function Builder() {
   useEffect(() => {
     projectDataRef.current = projectData;
   }, [projectData]);
+
+  // Sync Theme Settings to Canvas
+  useEffect(() => {
+    if (!editorRef.current) return;
+    
+    const applyTheme = () => {
+      const body = editorRef.current.Canvas.getBody();
+      if (!body) return;
+
+      // Dark Mode
+      if (themeMode === 'dark') body.classList.add('dark');
+      else body.classList.remove('dark');
+
+      // Colors
+      const themePresets: any = {
+        default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
+        purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
+        dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
+        pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
+      };
+      
+      const colors = themePresets[themeColor];
+      if (colors) {
+        body.style.setProperty('--theme-primary', colors.primary);
+        body.style.setProperty('--theme-secondary', colors.secondary);
+        body.style.setProperty('--theme-accent', colors.accent);
+      }
+    };
+
+    applyTheme();
+    // Also apply whenever the canvas loads
+    editorRef.current.on('canvas:load', applyTheme);
+    
+    return () => {
+      if (editorRef.current) {
+        editorRef.current.off('canvas:load', applyTheme);
+      }
+    };
+  }, [themeMode, themeColor]);
 
   // Custom Code Editor Widget
   const [isCustomCodeModalOpen, setIsCustomCodeModalOpen] = useState(false);
@@ -101,11 +145,13 @@ export default function Builder() {
         },
         canvas: {
           styles: [
+            'https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap',
             'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
           ],
           scripts: [
-            'https://cdn.tailwindcss.com'
+            'https://cdn.tailwindcss.com?plugins=forms',
+            '/canvas-tailwind-config.js'
           ]
         }
       });
@@ -113,6 +159,7 @@ export default function Builder() {
       editorRef.current = editor;
 
       registerBlocks(editor);
+      registerTemplates(editor);
       registerStyles(editor);
 
       // Register Custom Trait BEFORE load so it is available when components are parsed
@@ -318,21 +365,29 @@ export default function Builder() {
             
             const getInnerContainer = () => {
               if (comps.length === 1) {
-                const firstChild = comps.at(0);
-                if (firstChild && firstChild.getClasses().includes('container')) {
-                  return firstChild;
-                }
+                return comps.at(0);
               }
               return null;
             };
 
-            this.addStyle({ 'width': '100%', 'max-width': '100%' });
+            this.removeStyle('width');
+            this.removeStyle('max-width');
             this.removeStyle('margin-left');
             this.removeStyle('margin-right');
 
-            if (layout === 'container') {
-              const existingContainer = getInnerContainer();
-              if (!existingContainer) {
+            const innerContainer = getInnerContainer();
+            if (innerContainer) {
+              if (layout === 'container') {
+                innerContainer.removeClass('w-full');
+                innerContainer.addClass('container');
+                innerContainer.addClass('mx-auto');
+              } else {
+                innerContainer.removeClass('container');
+                innerContainer.addClass('w-full');
+                innerContainer.addClass('mx-auto');
+              }
+            } else {
+              if (layout === 'container') {
                 const layoutClassesToMove = this.getClasses().filter((cls: string) => 
                   cls.startsWith('flex') || 
                   cls.startsWith('grid') || 
@@ -355,26 +410,6 @@ export default function Builder() {
                     containerComp.components().add(child);
                   }
                 });
-              }
-            } else {
-              const existingContainer = getInnerContainer();
-              if (existingContainer) {
-                const layoutClassesToRestore = existingContainer.getClasses().filter((cls: string) => 
-                  cls !== 'container' && 
-                  cls !== 'mx-auto' && 
-                  cls !== 'container-custom'
-                );
-                layoutClassesToRestore.forEach((cls: string) => this.addClass(cls));
-                const childrenToMove: any[] = [];
-                existingContainer.components().each((c: any) => childrenToMove.push(c));
-                childrenToMove.forEach(child => {
-                  if (child.move) {
-                    child.move(this);
-                  } else {
-                    comps.add(child);
-                  }
-                });
-                existingContainer.remove();
               }
             }
           }
@@ -765,13 +800,7 @@ export default function Builder() {
       setProjectData(updatedProject);
       projectDataRef.current = updatedProject;
       
-      // Simple visual feedback for manual save
-      const btn = document.getElementById('save-btn');
-      if (btn) {
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Saved!';
-        setTimeout(() => btn.innerHTML = originalText, 2000);
-      }
+      toast.success('Project saved successfully', { position: 'bottom-right', autoClose: 2000 });
       console.log('Project saved successfully');
     } catch (err) {
       console.error('Failed to save', err);
@@ -780,6 +809,7 @@ export default function Builder() {
 
   const handlePreviewNewTab = () => {
     if (!editorRef.current) return;
+    toast.info('Generating preview...', { position: 'bottom-right', autoClose: 2000 });
     const html = editorRef.current.getHtml();
     const css = editorRef.current.getCss();
     const previewHtml = [
@@ -822,6 +852,7 @@ export default function Builder() {
   const addBlockToCanvas = (block: any) => {
     if (!editorRef.current) return;
     const content = block.get('content');
+    toast.success(`Added ${block.get('label')} to canvas`, { position: 'bottom-right', autoClose: 2000 });
 
     if (insertAfterCid) {
       // Find the component by cid and add INSIDE it
@@ -1368,6 +1399,33 @@ export default function Builder() {
             </button>
           </div>
 
+          {/* Global Theme Settings UI */}
+          <div className="p-3 border-b border-gray-100 flex flex-col gap-2 bg-white">
+            <div className="flex items-center text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
+              <Palette className="w-3.5 h-3.5 mr-1" /> Global Theme
+            </div>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} 
+                className="flex-1 flex items-center justify-center py-1.5 rounded-md border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+              >
+                {themeMode === 'light' ? <Moon className="w-4 h-4 mr-2" /> : <Sun className="w-4 h-4 mr-2" />}
+                {themeMode === 'light' ? 'Dark Mode' : 'Light Mode'}
+              </button>
+              
+              <select 
+                value={themeColor} 
+                onChange={(e) => setThemeColor(e.target.value)}
+                className="flex-1 py-1.5 px-2 rounded-md border border-gray-200 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-[#1e49e2]"
+              >
+                <option value="default">KPMG Blue</option>
+                <option value="purple">Cosmic Purple</option>
+                <option value="pink">Neon Pink</option>
+                <option value="dark">Slate Dark</option>
+              </select>
+            </div>
+          </div>
+
           {/* Breadcrumb Layer Navigation */}
           {breadcrumb.length > 0 && (
             <div className="px-3 py-2 border-b border-gray-100 bg-white flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
@@ -1400,7 +1458,7 @@ export default function Builder() {
               </span>
             </div>
             <div 
-              className={`max-h-56 overflow-y-auto w-full ${hasSelection ? 'block' : 'hidden'}`}
+              className={`w-full ${hasSelection ? 'block' : 'hidden'}`}
               id="gjs-traits-container"
             ></div>
             {!hasSelection && (
@@ -1494,7 +1552,7 @@ export default function Builder() {
               {/* Category Sidebar */}
               <div className="w-64 border-r border-gray-100 bg-gray-50 flex flex-col py-4 overflow-y-auto shrink-0">
                 {categories.filter(cat => {
-                   const layouts = ['Layout', 'Sections', 'Navbar', 'Header', 'Introduction'];
+                   const layouts = ['Layout', 'Sections', 'Navbar', 'Header', 'Introduction', 'Full Page Templates'];
                    return libraryMode === 'layouts' ? layouts.includes(cat) : !layouts.includes(cat);
                 }).map(cat => (
                   <button
@@ -1528,8 +1586,12 @@ export default function Builder() {
                       className="group border border-gray-200 rounded-xl p-4 hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white"
                     >
                       <div className="h-28 bg-white border border-gray-100 rounded-lg mb-4 flex flex-col items-center justify-center text-gray-400 group-hover:text-[#1e49e2] group-hover:scale-[1.02] transition-all overflow-hidden relative">
-                         <div className="text-4xl opacity-20 group-hover:opacity-40 mb-2">+</div>
-                         <div className="font-mono text-xs opacity-50 px-4 text-center truncate w-full">{block.get('label')}</div>
+                         {block.get('media') ? (
+                           <div className="w-10 h-10 opacity-50 group-hover:opacity-100 mb-2 flex items-center justify-center" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
+                         ) : (
+                           <div className="text-4xl opacity-20 group-hover:opacity-40 mb-2">+</div>
+                         )}
+                         <div className="font-mono text-xs opacity-50 px-4 text-center truncate w-full relative z-10">{block.get('label')}</div>
                       </div>
                       <h3 className="font-semibold text-gray-900 text-sm group-hover:text-[#1e49e2] transition-colors text-center">{block.get('label')}</h3>
                     </div>
@@ -1619,6 +1681,7 @@ export default function Builder() {
 
       {/* Hidden container for GrapesJS blocks */}
       <div id="gjs-blocks" className="hidden"></div>
+      <ToastContainer />
     </div>
   );
 }

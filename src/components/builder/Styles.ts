@@ -87,6 +87,132 @@ export const registerStyles = (editor: any) => {
     }
   });
 
+  editor.StyleManager.addType('brand-gradient', {
+    create({ property, el }: any) {
+      const w = document.createElement('div');
+      w.className = 'w-full flex w-full flex-col gap-3 p-3 bg-white border border-gray-200 rounded-lg shadow-sm';
+      
+      const presetLabel = document.createElement('div');
+      presetLabel.className = 'text-xs font-bold text-gray-700 mb-1';
+      presetLabel.innerText = 'Brand Preset Gradients';
+      w.appendChild(presetLabel);
+      
+      const presetSelect = document.createElement('select');
+      presetSelect.className = 'w-full p-2 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none';
+      const presets = [
+         { label: 'None', val: 'none' },
+         { label: 'Primary & Accent', val: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))' },
+         { label: 'Accent & Dark', val: 'linear-gradient(to right, var(--color-accent), var(--color-dark))' },
+         { label: 'Vibrant Mix', val: 'linear-gradient(45deg, var(--color-cta), var(--color-purple))' },
+         { label: 'Soft Light', val: 'linear-gradient(to bottom, #ffffff, #e2e8f0)' }
+      ];
+      presets.forEach(p => {
+         const opt = document.createElement('option');
+         opt.value = p.val;
+         opt.innerText = p.label;
+         presetSelect.appendChild(opt);
+      });
+      presetSelect.onchange = (e: any) => {
+         if (e.target.value !== 'none') {
+             property.upValue(e.target.value);
+         } else {
+             property.upValue('');
+         }
+      };
+      w.appendChild(presetSelect);
+      
+      const customLabel = document.createElement('div');
+      customLabel.className = 'text-xs font-bold text-gray-700 mt-2 border-t pt-3';
+      customLabel.innerText = 'Or Build Custom Gradient';
+      w.appendChild(customLabel);
+      
+      const colors = [
+        { v: 'var(--color-primary)', hex: '#00338d' },
+        { v: 'var(--color-accent)', hex: '#1e49e2' },
+        { v: 'var(--color-dark)', hex: '#0c233c' },
+        { v: 'var(--color-cta)', hex: '#00b8f5' },
+        { v: 'var(--color-purple)', hex: '#7213ea' },
+        { v: 'var(--color-pink)', hex: '#fd349c' },
+        { v: '#ffffff', hex: '#ffffff' },
+        { v: 'transparent', hex: '#e2e8f0', label: 'X' }
+      ];
+      
+      const createSwatchRow = (label: string, defIndex: number) => {
+          const row = document.createElement('div');
+          row.className = 'flex flex-col gap-1 mb-2';
+          const rL = document.createElement('span');
+          rL.className = 'text-[10px] text-gray-500 uppercase font-bold';
+          rL.innerText = label;
+          row.appendChild(rL);
+          
+          const sContainer = document.createElement('div');
+          sContainer.className = 'flex flex-wrap gap-1.5';
+          
+          let activeBtn: any = null;
+          let selectedVal = colors[defIndex].v;
+          
+          colors.forEach((c, idx) => {
+             const btn = document.createElement('button');
+             btn.className = 'w-5 h-5 rounded-full border border-gray-300 shadow-sm transition hover:scale-110 text-[8px] flex items-center justify-center font-bold text-gray-600';
+             btn.style.backgroundColor = c.hex;
+             if (c.label) btn.innerText = c.label;
+             if (idx === defIndex) {
+                 btn.classList.add('ring-2', 'ring-offset-1', 'ring-blue-500');
+                 activeBtn = btn;
+             }
+             btn.onclick = () => {
+                if(activeBtn) activeBtn.classList.remove('ring-2', 'ring-offset-1', 'ring-blue-500');
+                btn.classList.add('ring-2', 'ring-offset-1', 'ring-blue-500');
+                activeBtn = btn;
+                selectedVal = c.v;
+             };
+             sContainer.appendChild(btn);
+          });
+          
+          row.appendChild(sContainer);
+          return { row, getVal: () => selectedVal };
+      };
+      
+      const c1 = createSwatchRow('Color 1', 0);
+      const c2 = createSwatchRow('Color 2', 1);
+      
+      w.appendChild(c1.row);
+      w.appendChild(c2.row);
+      
+      const angleRow = document.createElement('div');
+      angleRow.className = 'flex gap-2 items-center mt-2 justify-between';
+      const angleL = document.createElement('span');
+      angleL.className = 'text-[10px] text-gray-500 uppercase font-bold';
+      angleL.innerText = 'ANGLE Direction';
+      const angleInp = document.createElement('select');
+      angleInp.className = 'text-xs p-1.5 border rounded flex-1 ml-2 outline-none';
+      ['to right', 'to bottom', 'to bottom right', 'to top right', '135deg', '45deg', '180deg'].forEach(a => {
+         const o = document.createElement('option');
+         o.value = a; o.innerText = a;
+         angleInp.appendChild(o);
+      });
+      angleRow.appendChild(angleL);
+      angleRow.appendChild(angleInp);
+      w.appendChild(angleRow);
+      
+      const applyBtn = document.createElement('button');
+      applyBtn.className = 'w-full mt-3 bg-blue-600 text-white text-xs py-2 rounded font-bold hover:bg-blue-700 transition shadow-sm';
+      applyBtn.innerText = 'Apply Custom Mix';
+      applyBtn.onclick = () => {
+         const v = `linear-gradient(${angleInp.value}, ${c1.getVal()}, ${c2.getVal()})`;
+         property.upValue(v);
+         presetSelect.value = 'none'; // reset
+      };
+      
+      w.appendChild(applyBtn);
+      
+      el.appendChild(w);
+      return el;
+    },
+    update({ property, el }: any) {
+    }
+  });
+
   sm.addSector('layout', {
     name: 'Layout & Dimensions',
     open: true,
@@ -98,6 +224,11 @@ export const registerStyles = (editor: any) => {
     open: false,
     buildProps: ['opacity', 'background-color', 'background-image'],
     properties: [
+      {
+        property: 'background-image',
+        name: 'Brand Gradient Mix',
+        type: 'brand-gradient'
+      },
       {
         property: 'background-color',
         type: 'brand-color-picker',
