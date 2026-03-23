@@ -2202,6 +2202,108 @@
           "layout": []
         }
       ]
+    },
+    {
+      "id": "17741661552778mljtaq",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T07:55:55.277Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_17741661552778mljtaq",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "1774166309757k68uoft",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T07:58:29.757Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1774166309757k68uoft",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "17741663258175ql3pao",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T07:58:45.817Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_17741663258175ql3pao",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "177416634011378mnhbu",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T07:59:00.113Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_177416634011378mnhbu",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "1774169631263xkfos9g",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T09:17:51.769Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1774169631263xkfos9g",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        },
+        {
+          "id": "p_1774169631263xkfos9g_71060420",
+          "title": "custom-page",
+          "route": "/page-2",
+          "layout": []
+        }
+      ]
+    },
+    {
+      "id": "1774173461854hlslpal",
+      "userId": "1",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-22T09:57:41.854Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1774173461854hlslpal",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
     }
   ],
   "activity": [

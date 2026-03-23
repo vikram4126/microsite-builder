@@ -7,7 +7,7 @@ import { registerBlocks } from '../components/builder/Blocks';
 import { registerTemplates } from '../components/builder/Templates';
 import { registerStyles } from '../components/builder/Styles';
 import { 
-  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette
+  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { ToastContainer, toast } from 'react-toastify';
@@ -134,10 +134,6 @@ export default function Builder() {
           ]
         },
         colorPicker: {
-          appendTo: 'parent',
-          showPalette: true,
-          showPaletteOnly: true,
-          togglePaletteOnly: true,
           hideAfterPaletteSelect: true,
           palette: [
             ['#00338d', '#1e49e2', '#00b894', '#fd349c', '#0c233c']
@@ -145,13 +141,11 @@ export default function Builder() {
         },
         canvas: {
           styles: [
-            'https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap',
-            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
           ],
           scripts: [
-            'https://cdn.tailwindcss.com?plugins=forms',
-            '/canvas-tailwind-config.js'
+            'https://unpkg.com/@tailwindcss/browser@4'
           ]
         }
       });
@@ -331,8 +325,10 @@ export default function Builder() {
         }
       });
 
-      // Default component type - provides Layout Mode toggle + animation trait to all elements
-      domc.addType('default', {
+      // Section component type - provides Layout Mode toggle + animation trait to section elements
+      domc.addType('section', {
+        extend: 'default',
+        isComponent: (el: any) => el.getAttribute && el.getAttribute('data-gjs-type') === 'section',
         model: {
           defaults: {
             traits: [
@@ -389,11 +385,7 @@ export default function Builder() {
             } else {
               if (layout === 'container') {
                 const layoutClassesToMove = this.getClasses().filter((cls: string) => 
-                  cls.startsWith('flex') || 
-                  cls.startsWith('grid') || 
-                  cls.startsWith('items-') || 
-                  cls.startsWith('justify-') ||
-                  cls.startsWith('gap-')
+                  cls.startsWith('flex') || cls.startsWith('grid') || cls.startsWith('items-') || cls.startsWith('justify-') || cls.startsWith('gap-')
                 );
                 layoutClassesToMove.forEach((cls: string) => this.removeClass(cls));
                 const childrenToMove: any[] = [];
@@ -404,11 +396,8 @@ export default function Builder() {
                   style: { 'min-height': '50px' }
                 });
                 childrenToMove.forEach(child => {
-                  if (child.move) {
-                    child.move(containerComp);
-                  } else {
-                    containerComp.components().add(child);
-                  }
+                  if (child.move) child.move(containerComp);
+                  else containerComp.components().add(child);
                 });
               }
             }
@@ -416,10 +405,53 @@ export default function Builder() {
         }
       });
 
+      // Default component type - provides animation trait to all base elements
+      domc.addType('default', {
+        model: {
+          defaults: {
+            traits: [
+              'id',
+              'title',
+              {
+                type: 'select',
+                name: 'data-animation',
+                label: 'Animation',
+                options: [
+                  { id: '', name: 'None' },
+                  { id: 'fade-in', name: 'Fade In' },
+                  { id: 'slide-up', name: 'Slide Up' },
+                  { id: 'zoom-in', name: 'Zoom In' }
+                ]
+              }
+            ]
+          }
+        }
+      });
+
       let saveTimeout: any;
 
       editor.on('load', () => {
-        // Inject editor-only CSS for better layout visibility
+        // Inject Tailwind theme mapping into Editor Canvas for live design consistency
+        const doc = editor.Canvas.getDocument();
+        const tailwindStyle = doc.createElement('style');
+        tailwindStyle.setAttribute('type', 'text/tailwindcss');
+        tailwindStyle.innerHTML = `
+          @theme {
+            --color-primary: #00338d;
+            --color-secondary: #1e49e2;
+            --color-accent: #1e49e2;
+            --color-dark: #0c233c;
+            --color-light-accent: #aceaff;
+            --color-cta: #00b8f5;
+            --color-purple: #7213ea;
+            --color-pink: #fd349c;
+            --color-success: #00b894;
+            --color-background-dark: #071728;
+          }
+        `;
+        doc.head.appendChild(tailwindStyle);
+
+        // Make default template components easily selectable
         const style = editor.Canvas.getDocument().createElement('style');
         style.innerHTML = `
           /* Enhanced visibility for layout grids and columns in editor mode */
@@ -697,7 +729,8 @@ export default function Builder() {
                el.style.opacity = '0';
                el.style.transform = 'translateY(30px)';
                setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 50);
-            } else if (anim === 'zoom-in') {
+            }
+            else if (anim === 'zoom-in') {
                el.style.opacity = '0';
                el.style.transform = 'scale(0.9)';
                setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'scale(1)'; }, 50);
@@ -1387,116 +1420,120 @@ export default function Builder() {
       {/* Main Builder Area */}
       <div className="flex flex-1 overflow-hidden">
         
-        {/* Left Sidebar */}
-        <aside className="w-80 bg-white border-r border-gray-200 flex flex-col shrink-0 shadow-sm z-20 overflow-hidden">
-          {/* Add Section Button */}
-          <div className="p-3 border-b border-gray-100 bg-gray-50/50">
+        {/* Unified Left Sidebar - Premium Apple-Like Layout */}
+        <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-gray-200 flex flex-col shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-20 overflow-hidden">
+          
+          {/* Add Section Button (Sticky Top) */}
+          <div className="p-4 border-b border-gray-100 bg-white/90 backdrop-blur-md z-30 shadow-sm">
             <button 
               onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); setInsertAfterCid(null); setIsLibraryOpen(true); }}
-              className="w-full bg-[#1e49e2] hover:bg-[#3b82f6] text-white py-2.5 rounded-lg shadow-sm flex items-center justify-center transition-colors font-semibold"
+              className="w-full bg-[#1e49e2] hover:bg-[#00338d] text-white py-3 rounded-xl shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 font-semibold text-sm tracking-wide"
             >
-              <Plus className="w-5 h-5 mr-2" /> Add New Section
+              <Plus className="w-4 h-4 mr-2 stroke-[2.5px]" /> Add New Section
             </button>
           </div>
 
-          {/* Global Theme Settings UI */}
-          <div className="p-3 border-b border-gray-100 flex flex-col gap-2 bg-white">
-            <div className="flex items-center text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-              <Palette className="w-3.5 h-3.5 mr-1" /> Global Theme
+          <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth p-3 space-y-4">
+            
+            {/* Global Theme Settings UI */}
+            <div className="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col gap-3">
+              <div className="flex items-center text-[11px] font-bold text-gray-400 uppercase tracking-widest px-1">
+                <Palette className="w-3.5 h-3.5 mr-1.5" /> Global Theme
+              </div>
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} 
+                  className="flex-1 flex items-center justify-center py-2 rounded-lg bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                >
+                  {themeMode === 'light' ? <Moon className="w-3.5 h-3.5 mr-1.5" /> : <Sun className="w-3.5 h-3.5 mr-1.5" />}
+                  {themeMode === 'light' ? 'Dark' : 'Light'}
+                </button>
+                <select 
+                  value={themeColor} 
+                  onChange={(e) => setThemeColor(e.target.value)}
+                  className="flex-1 py-1.5 px-2 rounded-lg bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1e49e2]/20 transition-all appearance-none text-center cursor-pointer"
+                >
+                  <option value="default">KPMG Blue</option>
+                  <option value="purple">Cosmic Purple</option>
+                  <option value="pink">Neon Pink</option>
+                  <option value="dark">Slate Dark</option>
+                </select>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} 
-                className="flex-1 flex items-center justify-center py-1.5 rounded-md border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
-              >
-                {themeMode === 'light' ? <Moon className="w-4 h-4 mr-2" /> : <Sun className="w-4 h-4 mr-2" />}
-                {themeMode === 'light' ? 'Dark Mode' : 'Light Mode'}
-              </button>
-              
-              <select 
-                value={themeColor} 
-                onChange={(e) => setThemeColor(e.target.value)}
-                className="flex-1 py-1.5 px-2 rounded-md border border-gray-200 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-[#1e49e2]"
-              >
-                <option value="default">KPMG Blue</option>
-                <option value="purple">Cosmic Purple</option>
-                <option value="pink">Neon Pink</option>
-                <option value="dark">Slate Dark</option>
-              </select>
-            </div>
-          </div>
 
-          {/* Breadcrumb Layer Navigation */}
-          {breadcrumb.length > 0 && (
-            <div className="px-3 py-2 border-b border-gray-100 bg-white flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
-              {breadcrumb.map((crumb, i) => (
-                <span key={crumb.cid} className="flex items-center shrink-0">
-                  <button
-                    onClick={() => handleBreadcrumbClick(crumb.cid)}
-                    className={`text-xs font-medium px-1.5 py-0.5 rounded transition-colors ${
-                      i === breadcrumb.length - 1
-                        ? 'text-[#1e49e2] bg-blue-50 font-bold'
-                        : 'text-gray-500 hover:text-[#1e49e2] hover:bg-gray-100'
-                    }`}
-                  >
-                    {crumb.name}
-                  </button>
-                  {i < breadcrumb.length - 1 && (
-                    <ChevronRight className="w-3 h-3 text-gray-300 mx-0.5 shrink-0" />
-                  )}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Traits (Settings/Animations) — always mounted so the user knows where it is */}
-          <div className="flex flex-col border-b border-gray-200 bg-white transition-all">
-            <div className={`px-3 py-2 flex items-center border-b border-gray-200 shrink-0 ${hasSelection ? 'bg-[#eef2ff]' : 'bg-gray-50'}`}>
-              <Cog className={`w-4 h-4 mr-2 ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`} />
-              <span className={`text-xs font-bold uppercase tracking-wider ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`}>
-                Settings & Animations {hasSelection ? '' : '(Select Element)'}
-              </span>
-            </div>
-            <div 
-              className={`w-full ${hasSelection ? 'block' : 'hidden'}`}
-              id="gjs-traits-container"
-            ></div>
-            {!hasSelection && (
-              <div className="p-4 text-center text-xs text-gray-400 bg-gray-50/50 italic">
-                Click any element on the canvas to add scroll animations or configure layout.
+            {/* Breadcrumb Layer Navigation */}
+            {breadcrumb.length > 0 && (
+              <div className="bg-white rounded-2xl p-2 border border-gray-100 shadow-sm flex items-center overflow-x-auto whitespace-nowrap no-scrollbar">
+                {breadcrumb.map((crumb, i) => (
+                  <span key={crumb.cid} className="flex items-center shrink-0">
+                    <button
+                      onClick={() => handleBreadcrumbClick(crumb.cid)}
+                      className={`text-[11px] font-semibold px-2 py-1 rounded-md transition-colors ${
+                        i === breadcrumb.length - 1
+                          ? 'text-[#1e49e2] bg-blue-50/50'
+                          : 'text-gray-400 hover:text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {crumb.name}
+                    </button>
+                    {i < breadcrumb.length - 1 && (
+                      <ChevronRight className="w-3 h-3 text-gray-300 mx-0.5 shrink-0" />
+                    )}
+                  </span>
+                ))}
               </div>
             )}
-          </div>
 
-          {/* Styles - Takes remaining space */}
-          <div className="flex flex-col flex-1 overflow-hidden">
-            <div className="px-3 py-2 bg-[#eef2ff] flex items-center border-b border-[#c7d2fe] shrink-0">
-              <Paintbrush className="w-4 h-4 mr-2 text-[#1e49e2]" />
-              <span className="text-xs font-bold text-[#1e49e2] uppercase tracking-wider">Style Manager</span>
+            {/* Layers & Structure */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="px-4 py-3 bg-gray-50/50 border-b border-gray-100 flex items-center shrink-0">
+                <Layers className="w-4 h-4 mr-2 text-gray-500" />
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Layers & Structure</span>
+              </div>
+              <div id="gjs-layers-container" className="h-[220px] overflow-y-auto no-scrollbar p-1"></div>
             </div>
-            <div className="flex-1 overflow-y-auto relative pb-20 bg-gray-50">
-              {editorRef.current && (
-                 <>
-                   <BorderRadiusUI editor={editorRef.current} />
-                   <BoxModelUI editor={editorRef.current} />
-                 </>
-              )}
-              <div id="gjs-styles-container" className="bg-white"></div>
+
+            {/* Traits (Settings/Animations) */}
+            <div className={`bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ${!hasSelection ? 'opacity-50 grayscale pointer-events-none' : ''}`}>
+              <div className={`px-4 py-3 flex items-center border-b border-gray-100 shrink-0 ${hasSelection ? 'bg-[#eef2ff]/50' : 'bg-gray-50/50'}`}>
+                <Cog className={`w-4 h-4 mr-2 ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`} />
+                <span className={`text-[11px] font-bold uppercase tracking-widest ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`}>
+                  Settings & Animations {hasSelection ? '' : '(Select Box)'}
+                </span>
+              </div>
+              <div className="w-full" id="gjs-traits-container"></div>
             </div>
+
+            {/* Style Manager */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
+                <Paintbrush className="w-4 h-4 mr-2 text-[#1e49e2]" />
+                <span className="text-[11px] font-bold text-[#1e49e2] uppercase tracking-widest">Style Manager</span>
+              </div>
+              <div className="relative">
+                {editorRef.current && (
+                  <>
+                    <BorderRadiusUI editor={editorRef.current} />
+                    <BoxModelUI editor={editorRef.current} />
+                  </>
+                )}
+                <div id="gjs-styles-container"></div>
+              </div>
+            </div>
+
           </div>
         </aside>
 
-        {/* Center Canvas */}
-        <main className="flex-1 relative bg-gray-50 flex flex-col overflow-hidden w-full">
+        {/* Center Canvas - Takes up remaining width completely */}
+        <main className="flex-1 relative bg-[#f5f5f7] flex flex-col overflow-hidden w-full h-full shadow-inner ring-1 ring-gray-900/5">
            {editorRef.current && <TypographyUI editor={editorRef.current} />}
            <div className="w-full h-full relative" id="gjs">
              <div className="text-center text-gray-400 p-10 flex flex-col items-center justify-center h-full space-y-4">
                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1e49e2]"></div>
-               <span>Initializing Editor Canvas...</span>
+               <span className="font-medium">Initializing Workspace...</span>
              </div>
            </div>
         </main>
-
       </div>
 
       {/* Section Library Popup Overlay */}

@@ -28,7 +28,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Navbar',
     media: svgs.navbar,
     content: `
-      <div id="navbar-basic" data-gjs-type="default" class="w-full bg-white border-b border-gray-100" layout-mode="container">
+      <div id="navbar-basic" data-gjs-type="section" class="w-full bg-white border-b border-gray-100" layout-mode="container">
         <div class="container mx-auto flex flex-wrap items-center justify-between p-4 lg:py-6 lg:px-6">
           <div class="text-xl font-bold text-gray-900">Brand</div>
           <input type="checkbox" id="nav-toggle" class="hidden peer" />
@@ -50,11 +50,13 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: svgs.header,
     content: `
-      <div id="header-hero" data-gjs-type="default" class="w-full bg-gray-900" layout-mode="container">
-        <div class="container mx-auto text-white py-24 text-center flex flex-col items-center">
-          <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
-          <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-          <button class="bg-[#1e49e2] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+      <div id="header-hero" data-gjs-type="section" class="w-full bg-gray-900 py-24" layout-mode="container">
+        <div class="container mx-auto text-white text-center">
+          <div class="mx-auto flex flex-col items-center w-full">
+            <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
+            <button class="bg-[#1e49e2] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+          </div>
         </div>
       </div>
     `
@@ -66,15 +68,17 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: svgs.intro,
     content: `
-      <div id="introduction-section" data-gjs-type="default" class="w-full py-20" layout-mode="container">
-        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div class="flex-1">
-             <h2 class="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
-             <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
-             <a href="#" class="font-semibold text-[#1e49e2] hover:underline">Learn more about our mission &rarr;</a>
-          </div>
-          <div class="flex-1">
-             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
+      <div id="introduction-section" data-gjs-type="section" class="w-full py-20" layout-mode="container">
+        <div class="container mx-auto">
+          <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
+            <div class="flex-1">
+               <h2 class="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
+               <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
+               <a href="#" class="font-semibold text-[#1e49e2] hover:underline">Learn more about our mission &rarr;</a>
+            </div>
+            <div class="flex-1">
+               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
+            </div>
           </div>
         </div>
       </div>
@@ -87,13 +91,15 @@ export const registerBlocks = (editor: any) => {
     category: 'Sections',
     media: svgs.section,
     content: `
-      <div id="hero-section" data-gjs-type="default" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
-        <div class="container mx-auto text-center flex flex-col items-center justify-center">
-          <h1 class="text-5xl font-extrabold text-[#0c233c] mb-6 tracking-tight">Build Your Brand Today</h1>
-          <p class="text-lg text-gray-600 mb-10 max-w-2xl">The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes.</p>
-          <div class="flex space-x-4">
-            <a href="#" class="bg-[#1e49e2] text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-[#00338d]">Get Started Free</a>
-            <a href="#" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-medium border border-gray-200 shadow-sm hover:bg-gray-50">Book a Demo</a>
+      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
+        <div class="container mx-auto text-center">
+          <div class="mx-auto flex flex-col items-center justify-center w-full">
+            <h1 class="text-5xl font-extrabold text-[#0c233c] mb-6 tracking-tight">Build Your Brand Today</h1>
+            <p class="text-lg text-gray-600 mb-10 max-w-2xl">The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes.</p>
+            <div class="flex space-x-4">
+              <a href="#" class="bg-[#1e49e2] text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-[#00338d]">Get Started Free</a>
+              <a href="#" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-medium border border-gray-200 shadow-sm hover:bg-gray-50">Book a Demo</a>
+            </div>
           </div>
         </div>
       </div>
@@ -105,28 +111,30 @@ export const registerBlocks = (editor: any) => {
     category: 'Sections',
     media: svgs.cards,
     content: `
-      <div id="features-grid" data-gjs-type="default" class="w-full bg-white py-20" layout-mode="container">
+      <div id="features-grid" data-gjs-type="section" class="w-full bg-white py-20" layout-mode="container">
         <div class="container mx-auto">
-          <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need</h2>
-            <p class="text-gray-500">All the features your team requires to succeed.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-              <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
-              <h3 class="text-xl font-bold text-gray-900 mb-3">Lightning Fast</h3>
-              <p class="text-gray-500 text-sm">Optimized for speed to ensure your conversion rate stays high on all devices.</p>
+          <div class="mx-auto flex flex-col w-full">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need</h2>
+              <p class="text-gray-500">All the features your team requires to succeed.</p>
             </div>
-            <div class="p-6 border border-[#1e49e2] rounded-xl shadow-md bg-white relative">
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1e49e2] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
-              <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
-              <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
-              <p class="text-gray-500 text-sm">Track every click and view with built-in real-time tracking dashboard.</p>
-            </div>
-            <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-              <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
-              <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integrations</h3>
-              <p class="text-gray-500 text-sm">Connect with your favorite tools natively and securely via APIs.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+              <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Lightning Fast</h3>
+                <p class="text-gray-500 text-sm">Optimized for speed to ensure your conversion rate stays high on all devices.</p>
+              </div>
+              <div class="p-6 border border-[#1e49e2] rounded-xl shadow-md bg-white relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1e49e2] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
+                <p class="text-gray-500 text-sm">Track every click and view with built-in real-time tracking dashboard.</p>
+              </div>
+              <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integrations</h3>
+                <p class="text-gray-500 text-sm">Connect with your favorite tools natively and securely via APIs.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -150,7 +158,7 @@ export const registerBlocks = (editor: any) => {
       category: 'Layout',
       media: svgs.columns,
       content: `
-        <div data-gjs-type="default" class="w-full" layout-mode="container">
+        <div data-gjs-type="section" class="w-full" layout-mode="container">
           <div data-gjs-type="responsive-grid" class="container mx-auto grid ${combo.class} gap-4">
             ${Array.from({ length: parseInt(combo.label.split(' ')[0]) }).map(() => '<div class="flex-1 min-h-[50px]"></div>').join('')}
           </div>
@@ -172,7 +180,7 @@ export const registerBlocks = (editor: any) => {
       category: 'Layout',
       media: svgs.columns,
       content: `
-        <div data-gjs-type="default" class="w-full" layout-mode="container">
+        <div data-gjs-type="section" class="w-full" layout-mode="container">
           <div class="container mx-auto flex flex-col md:flex-row gap-4">
             <div class="min-h-[50px]" style="flex: ${combo.left}"></div>
             <div class="min-h-[50px]" style="flex: ${combo.right}"></div>

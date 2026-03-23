@@ -88,7 +88,7 @@ export const registerStyles = (editor: any) => {
   });
 
   editor.StyleManager.addType('brand-gradient', {
-    create({ property, el }: any) {
+    create({ property }: any) {
       const w = document.createElement('div');
       w.className = 'w-full flex w-full flex-col gap-3 p-3 bg-white border border-gray-200 rounded-lg shadow-sm';
       
@@ -101,9 +101,9 @@ export const registerStyles = (editor: any) => {
       presetSelect.className = 'w-full p-2 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 outline-none';
       const presets = [
          { label: 'None', val: 'none' },
-         { label: 'Primary & Accent', val: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))' },
-         { label: 'Accent & Dark', val: 'linear-gradient(to right, var(--color-accent), var(--color-dark))' },
-         { label: 'Vibrant Mix', val: 'linear-gradient(45deg, var(--color-cta), var(--color-purple))' },
+         { label: 'Primary & Accent', val: 'linear-gradient(135deg, #00338d, #1e49e2)' },
+         { label: 'Accent & Dark', val: 'linear-gradient(to right, #1e49e2, #0c233c)' },
+         { label: 'Vibrant Mix', val: 'linear-gradient(45deg, #00b8f5, #7213ea)' },
          { label: 'Soft Light', val: 'linear-gradient(to bottom, #ffffff, #e2e8f0)' }
       ];
       presets.forEach(p => {
@@ -127,12 +127,12 @@ export const registerStyles = (editor: any) => {
       w.appendChild(customLabel);
       
       const colors = [
-        { v: 'var(--color-primary)', hex: '#00338d' },
-        { v: 'var(--color-accent)', hex: '#1e49e2' },
-        { v: 'var(--color-dark)', hex: '#0c233c' },
-        { v: 'var(--color-cta)', hex: '#00b8f5' },
-        { v: 'var(--color-purple)', hex: '#7213ea' },
-        { v: 'var(--color-pink)', hex: '#fd349c' },
+        { v: '#00338d', hex: '#00338d' },
+        { v: '#1e49e2', hex: '#1e49e2' },
+        { v: '#0c233c', hex: '#0c233c' },
+        { v: '#00b8f5', hex: '#00b8f5' },
+        { v: '#7213ea', hex: '#7213ea' },
+        { v: '#fd349c', hex: '#fd349c' },
         { v: '#ffffff', hex: '#ffffff' },
         { v: 'transparent', hex: '#e2e8f0', label: 'X' }
       ];
@@ -206,8 +206,7 @@ export const registerStyles = (editor: any) => {
       
       w.appendChild(applyBtn);
       
-      el.appendChild(w);
-      return el;
+      return w;
     },
     update({ property, el }: any) {
     }
@@ -222,17 +221,17 @@ export const registerStyles = (editor: any) => {
   sm.addSector('decorations', {
     name: 'Decorations & Backgrounds',
     open: false,
-    buildProps: ['opacity', 'background-color', 'background-image'],
+    buildProps: ['opacity'],
     properties: [
-      {
-        property: 'background-image',
-        name: 'Brand Gradient Mix',
-        type: 'brand-gradient'
-      },
       {
         property: 'background-color',
         type: 'brand-color-picker',
         defaults: 'transparent'
+      },
+      {
+        property: 'background-image',
+        name: 'Brand Gradient Mix',
+        type: 'brand-gradient'
       }
     ]
   });

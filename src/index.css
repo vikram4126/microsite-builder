@@ -6,6 +6,18 @@
   --color-brand-3: #00b894;
   --color-brand-4: #fd349c;
   --color-brand-5: #0c233c;
+
+  /* Specific brand colors used by Templates */
+  --color-primary: #00338d;
+  --color-secondary: #1e49e2;
+  --color-accent: #1e49e2;
+  --color-dark: #0c233c;
+  --color-light-accent: #aceaff;
+  --color-cta: #00b8f5;
+  --color-purple: #7213ea;
+  --color-pink: #fd349c;
+  --color-success: #00b894;
+  --color-background-dark: #071728;
 }
 
 @layer base {

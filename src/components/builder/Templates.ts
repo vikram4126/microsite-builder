@@ -2,19 +2,16 @@ export const registerTemplates = (editor: any) => {
   const bm = editor.BlockManager;
 
   bm.add('template-business', {
-    label: '<div class="flex flex-col items-center gap-2 py-2"><i class="fa fa-briefcase text-2xl"></i><span class="text-xs text-center">Business Landing Page</span></div>',
+    label: 'Business Landing Page',
+    media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-[#1e49e2]"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
     category: 'Full Page Templates',
     content: `
 <!-- Navbar with Brand Colors (Fix for B&W preview) -->
-<div id="business-nav" data-gjs-type="default" class="w-full bg-white dark:bg-slate-900 border-b-[3px] border-accent sticky top-0 z-50 shadow-sm" layout-mode="container">
+<div id="business-nav" data-gjs-type="section" class="w-full bg-white dark:bg-slate-900 border-b-[3px] border-accent sticky top-0 z-50 shadow-sm" layout-mode="container">
   <div class="container mx-auto">
     <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-6">
-      <a href="#" class="block"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/KPMG_logo.svg/1024px-KPMG_logo.svg.png" alt="KPMG Logo" class="h-8 w-auto inline-block" /></a>
-      <input type="checkbox" id="bus-nav-toggle" class="hidden peer" />
-      <label for="bus-nav-toggle" class="md:hidden cursor-pointer p-2 text-slate-600 dark:text-slate-300">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </label>
-      <nav class="hidden peer-checked:flex flex-col w-full md:w-auto md:flex md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm">
+      <a href="#" class="block"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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" alt="Brand Logo" class="h-8 w-auto inline-block" /></a>
+      <nav class="flex flex-col w-full md:w-auto md:flex md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm">
         <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors">Home</a>
         <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors">Services</a>
         <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors">Features</a>
@@ -26,7 +23,7 @@ export const registerTemplates = (editor: any) => {
 </div>
 
 <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
-<div id="business-hero" data-gjs-type="default" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
+<div id="business-hero" data-gjs-type="section" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
   <div class="container mx-auto">
     <!-- Wrap interior in standard flex layout -->
     <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-6 lg:px-8">
@@ -34,7 +31,7 @@ export const registerTemplates = (editor: any) => {
         <div>
           <span class="inline-flex items-center rounded-full bg-accent/10 px-4 py-1.5 text-sm font-bold text-accent mb-6 border border-accent/20 shadow-sm">New: Enterprise Cloud 2.0</span>
           <h1 class="text-primary dark:text-white text-5xl lg:text-7xl font-black leading-tight tracking-tight">
-            Transform Your Business with <span class="text-accent underline decoration-accent/30 decoration-8 underline-offset-8">Modern Solutions</span>
+            Transform Your Business with <br/><span class="text-accent underline decoration-accent/30 decoration-8 underline-offset-8">Modern Solutions</span>
           </h1>
         </div>
         <p class="text-slate-700 dark:text-slate-300 text-lg lg:text-xl leading-relaxed max-w-xl">
@@ -53,7 +50,7 @@ export const registerTemplates = (editor: any) => {
 </div>
 
 <!-- Features (Using responsive-grid trait method) -->
-<div id="business-features" data-gjs-type="default" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+<div id="business-features" data-gjs-type="section" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <h2 class="text-primary dark:text-white text-4xl font-black mb-4 tracking-tight">Our Core Capabilities</h2>
@@ -88,7 +85,7 @@ export const registerTemplates = (editor: any) => {
 </div>
 
 <!-- Services Grid -->
-<div id="business-services" data-gjs-type="default" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
+<div id="business-services" data-gjs-type="section" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
       <div class="max-w-xl">
@@ -131,7 +128,7 @@ export const registerTemplates = (editor: any) => {
 </div>
 
 <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
-<div id="business-cta" data-gjs-type="default" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+<div id="business-cta" data-gjs-type="section" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
       
@@ -148,7 +145,7 @@ export const registerTemplates = (editor: any) => {
 </div>
 
 <!-- KPMG Footer -->
-<div id="business-footer" data-gjs-type="default" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+<div id="business-footer" data-gjs-type="section" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Responsive grid component trait -->
     <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-4 gap-12 mb-16">
