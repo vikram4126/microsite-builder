@@ -3,13 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { api } from '../utils/api';
 import {
-  Rocket,
-  LayoutDashboard,
-  Globe,
-  Layers,
-  Image as ImageIcon,
-  BarChart2,
-  Settings,
   Search,
   Bell,
   Plus,
@@ -20,21 +13,14 @@ import {
   Clock,
   Copy,
   Trash2,
-  MoreVertical,
-  Layout,
-  Users,
-  CreditCard,
-  LogOut,
-  Heart,
-  Edit2,
-  X
+  Edit2
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 
 export default function Dashboard() {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<any[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortMode, setSortMode] = useState<'desc' | 'asc'>('desc');

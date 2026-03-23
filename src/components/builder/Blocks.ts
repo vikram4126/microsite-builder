@@ -2,24 +2,25 @@ export const registerBlocks = (editor: any) => {
   const bm = editor.BlockManager;
 
   const svgs = {
-    navbar: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>',
-    header: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>',
-    intro: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
-    section: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/></svg>',
-    columns: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/></svg>',
-    heading: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M4 12h16M4 6v12M20 6v12"/></svg>',
-    text: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-    button: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="7" width="18" height="10" rx="3"/></svg>',
-    image: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
-    divider: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><line x1="4" y1="12" x2="20" y2="12"/></svg>',
-    spacer: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="4" y="8" width="16" height="8" stroke-dasharray="2 2"/></svg>',
-    card: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16"/></svg>',
-    accordion: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 12l4 4 4-4"/></svg>',
-    tabs: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v6"/></svg>',
-    testimonial: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1.5.5 1.5 1.5L5 21zm13 0c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1.5.5 1.5 1.5L18 21z"/></svg>',
-    cards: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>',
-    icons: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
-    list: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mb-1"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>'
+    navbar: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="#00338d"/><rect x="45" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="58" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="71" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="85" y="6" width="10" height="7" rx="2" fill="#1e49e2"/></svg>',
+    header: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="35" y="30" width="30" height="3" rx="1.5" fill="#94a3b8"/><rect x="40" y="40" width="20" height="6" rx="3" fill="#1e49e2"/></svg>',
+    intro: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="35" height="4" rx="2" fill="#00338d"/><rect x="10" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="10" y="32" width="35" height="2" rx="1" fill="#94a3b8"/><rect x="55" y="10" width="35" height="40" rx="4" fill="#eef2ff"/><rect x="65" y="20" width="15" height="20" rx="2" fill="#1e49e2" opacity="0.5"/></svg>',
+    section: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="20" y="20" width="60" height="4" rx="2" fill="#00338d"/><rect x="30" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="38" y="36" width="24" height="6" rx="3" fill="#1e49e2"/></svg>',
+    columns: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/><rect x="55" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/></svg>',
+    heading: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
+    text: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="80" height="4" rx="1" fill="#64748b"/><rect x="10" y="28" width="70" height="4" rx="1" fill="#64748b"/><rect x="10" y="36" width="50" height="4" rx="1" fill="#64748b"/></svg>',
+    button: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="20" width="40" height="20" rx="6" fill="#1e49e2"/></svg>',
+    image: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f1f5f9"/><rect x="25" y="10" width="50" height="40" rx="4" fill="#e2e8f0"/><circle cx="45" cy="25" r="5" fill="#cbd5e1"/><path d="M25 45 Q 40 30 50 40 T 75 25 V 50 H 25 Z" fill="#94a3b8" opacity="0.5"/></svg>',
+    divider: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><line x1="10" y1="30" x2="90" y2="30" stroke="#cbd5e1" stroke-width="2"/></svg>',
+    spacer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="15" width="80" height="30" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="2"/></svg>',
+    card: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="5" width="40" height="50" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/><rect x="30" y="5" width="40" height="20" fill="#e2e8f0" rx="3"/><rect x="35" y="30" width="20" height="3" rx="1.5" fill="#00338d"/><rect x="35" y="38" width="30" height="2" rx="1" fill="#94a3b8"/><rect x="35" y="47" width="10" height="2" rx="1" fill="#1e49e2"/></svg>',
+    accordion: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="10" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="20" y="25" width="60" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="25" y="31" width="30" height="2" fill="#0c233c"/><rect x="25" y="38" width="45" height="1.5" fill="#64748b"/><rect x="80" y="20" width="0" height="0"/></svg>',
+    tabs: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="3" fill="#ffffff" stroke="#cbd5e1"/><rect x="20" y="10" width="60" height="12" fill="#f8fafc"/><rect x="25" y="14" width="15" height="8" rx="1" fill="#ffffff"/><rect x="45" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/><rect x="60" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/></svg>',
+    testimonial: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="4" fill="#f8fafc" stroke="#e2e8f0"/><rect x="25" y="20" width="50" height="2" fill="#94a3b8"/><rect x="25" y="25" width="40" height="2" fill="#94a3b8"/><circle cx="35" cy="40" r="5" fill="#cbd5e1"/><rect x="45" y="38" width="20" height="2" fill="#00338d"/></svg>',
+    cards: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="15" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="15" y="30" width="12" height="2" fill="#1e49e2"/><rect x="39" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="44" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="44" y="30" width="12" height="2" fill="#1e49e2"/><rect x="68" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="73" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="73" y="30" width="12" height="2" fill="#1e49e2"/></svg>',
+    icons: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="50" cy="30" r="15" fill="#1e49e2" opacity="0.2"/><path d="M50 20 L 53 27 L 60 27 L 55 32 L 57 39 L 50 35 L 43 39 L 45 32 L 40 27 L 47 27 Z" fill="#1e49e2"/></svg>',
+    list: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="25" cy="20" r="2" fill="#1e49e2"/><rect x="35" y="19" width="40" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="30" r="2" fill="#1e49e2"/><rect x="35" y="29" width="30" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="40" r="2" fill="#1e49e2"/><rect x="35" y="39" width="35" height="2" rx="1" fill="#64748b"/></svg>',
+    footer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="#00338d"/><rect x="10" y="25" width="20" height="2" fill="#94a3b8"/><rect x="40" y="15" width="10" height="3" fill="#0c233c"/><rect x="40" y="22" width="12" height="2" fill="#94a3b8"/><rect x="55" y="15" width="10" height="3" fill="#0c233c"/><rect x="55" y="22" width="12" height="2" fill="#94a3b8"/><rect x="70" y="15" width="10" height="3" fill="#0c233c"/><rect x="70" y="22" width="20" height="8" rx="2" fill="#e2e8f0"/></svg>'
   };
 
   // 1. NAVBAR
@@ -29,15 +30,80 @@ export const registerBlocks = (editor: any) => {
     media: svgs.navbar,
     content: `
       <div id="navbar-basic" data-gjs-type="section" class="w-full bg-white border-b border-gray-100" layout-mode="container">
-        <div class="container mx-auto flex flex-wrap items-center justify-between p-4 lg:py-6 lg:px-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4 lg:py-5 lg:px-6 gap-4">
           <div class="text-xl font-bold text-gray-900">Brand</div>
-          <input type="checkbox" id="nav-toggle" class="hidden peer" />
-          <label for="nav-toggle" class="md:hidden cursor-pointer material-symbols-outlined text-gray-600 p-2">menu</label>
-          <div class="hidden peer-checked:flex peer-checked:flex-col peer-checked:w-full md:w-auto md:space-x-6 md:flex md:flex-row items-center gap-4 mt-4 md:mt-0 font-medium text-sm">
+          <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 font-medium text-sm w-full md:w-auto">
             <a href="#" class="text-gray-600 hover:text-[#1e49e2]">Home</a>
             <a href="#" class="text-gray-600 hover:text-[#1e49e2]">About</a>
             <a href="#" class="text-gray-600 hover:text-[#1e49e2]">Services</a>
-            <a href="#" class="bg-[#1e49e2] text-white px-5 py-2 rounded-lg font-medium inline-block mt-2 md:mt-0">Contact Us</a>
+            <a href="#" class="bg-[#1e49e2] text-white px-5 py-2.5 rounded-lg font-medium inline-flex hover:shadow-md transition-all text-center">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    `
+  });
+
+  // 1.5 FOOTER
+  bm.add('footer-business', {
+    label: 'Corporate Footer',
+    category: 'Sections',
+    media: svgs.footer,
+    content: `
+      <div id="business-footer" data-gjs-type="section" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+          <!-- Responsive grid component trait -->
+          <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <!-- Brand & Social Column -->
+            <div class="flex flex-col gap-6 w-full items-start">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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" alt="Brand Logo" class="h-8 w-auto inline-block" />
+              <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                Leading the future of digital business with specialized industry insights and strategic technology partnerships.
+              </p>
+              <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center text-primary dark:text-white hover:text-accent transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center text-primary dark:text-white hover:text-accent transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+              </div>
+            </div>
+      
+            <!-- Links Column 1 -->
+            <div class="flex flex-col gap-4 w-full">
+              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Company</h4>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">About Us</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Careers</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Engineering Blog</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Press & Media</a>
+            </div>
+      
+            <!-- Links Column 2 -->
+            <div class="flex flex-col gap-4 w-full">
+              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Products</h4>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Cloud Platform</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Analytics Engine</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">AI Assistant</a>
+              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Integrations API</a>
+            </div>
+      
+            <!-- Subscribe Column -->
+            <div class="flex flex-col gap-4 w-full">
+              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Subscribe</h4>
+              <p class="text-slate-600 dark:text-slate-400 font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
+              <div class="flex flex-col gap-3 w-full max-w-sm">
+                <input type="email" placeholder="Your work email" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-accent shadow-sm" />
+                <button class="w-full bg-primary text-white font-bold px-4 py-3 rounded-lg hover:bg-accent transition-colors shadow-sm">Subscribe Now</button>
+              </div>
+            </div>
+            
+          </div>
+      
+          <!-- Bottom Row -->
+          <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 text-sm text-slate-500 font-medium w-full">
+            <p>&copy; 2026 KPMG International Cooperative. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-6 items-center">
+              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Cookies Settings</a>
+            </div>
           </div>
         </div>
       </div>
@@ -377,30 +443,32 @@ export const registerBlocks = (editor: any) => {
   });
 
   // ICONS GALLERY
-  const icons = [
-    { id: 'icon-star', label: 'Star Icon', class: 'fa-star' },
-    { id: 'icon-heart', label: 'Heart Icon', class: 'fa-heart' },
-    { id: 'icon-check', label: 'Check Icon', class: 'fa-check-circle' },
-    { id: 'icon-user', label: 'User Icon', class: 'fa-user' },
-    { id: 'icon-envelope', label: 'Mail Icon', class: 'fa-envelope' },
-    { id: 'icon-phone', label: 'Phone Icon', class: 'fa-phone' },
-    { id: 'icon-globe', label: 'Globe Icon', class: 'fa-globe' },
-    { id: 'icon-camera', label: 'Camera Icon', class: 'fa-camera' },
-    { id: 'icon-rocket', label: 'Rocket Icon', class: 'fa-rocket' },
-    { id: 'icon-chart', label: 'Chart Icon', class: 'fa-chart-bar' },
-    { id: 'icon-shield', label: 'Security Icon', class: 'fa-shield-halved' },
-    { id: 'icon-bolt', label: 'Lightning Icon', class: 'fa-bolt' },
-    { id: 'icon-location', label: 'Location Icon', class: 'fa-map-marker-alt' },
-    { id: 'icon-play', label: 'Play Icon', class: 'fa-play-circle' },
-    { id: 'icon-cog', label: 'Settings Icon', class: 'fa-cog' }
+  const iconClasses = [
+    'star', 'heart', 'check', 'user', 'envelope', 'phone', 'globe', 'camera', 'rocket', 'chart-bar',
+    'shield-halved', 'bolt', 'map-marker-alt', 'play-circle', 'cog', 'home', 'search', 'bell', 'plus', 'minus',
+    'times', 'arrow-right', 'arrow-left', 'chevron-right', 'chevron-left', 'chevron-down', 'chevron-up', 'download',
+    'upload', 'share', 'reply', 'comment', 'comments', 'folder', 'folder-open', 'file', 'file-alt', 'edit',
+    'trash', 'trash-alt', 'key', 'lock', 'unlock', 'lock-open', 'eye', 'eye-slash', 'image', 'images',
+    'video', 'music', 'headphones', 'microphone', 'volume-up', 'volume-down', 'volume-mute', 'volume-off', 'wifi',
+    'signal', 'battery-full', 'battery-half', 'battery-empty', 'car', 'bus', 'train', 'subway', 'bicycle',
+    'motorcycle', 'plane', 'ship', 'paper-plane', 'shopping-cart', 'shopping-bag', 'shopping-basket', 'credit-card',
+    'money-bill-wave', 'wallet', 'coins', 'dollar-sign', 'euro-sign', 'pound-sign', 'yen-sign', 'rupee-sign',
+    'info-circle', 'question-circle', 'exclamation-triangle', 'exclamation-circle', 'thumbs-up', 'thumbs-down',
+    'calendar', 'calendar-alt', 'clock', 'sync', 'spinner', 'circle-notch', 'bars', 'ellipsis-h', 'ellipsis-v'
   ];
+
+  const icons = iconClasses.map(c => ({
+    id: `icon-${c}`,
+    label: c.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    class: `fa-solid fa-${c}`
+  }));
 
   icons.forEach(icon => {
     bm.add(icon.id, {
       label: icon.label,
       category: 'Icons',
-      media: svgs.icons,
-      content: `<i data-gjs-type="text" class="fa ${icon.class} text-4xl text-[#1e49e2] inline-block m-2"></i>`,
+      media: `<i class="${icon.class} text-3xl"></i>`,
+      content: `<i data-gjs-type="text" class="${icon.class} text-4xl text-[#1e49e2] inline-block m-2"></i>`,
     });
   });
 };

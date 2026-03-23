@@ -208,7 +208,7 @@ export const registerStyles = (editor: any) => {
       
       return w;
     },
-    update({ property, el }: any) {
+    update() {
     }
   });
 

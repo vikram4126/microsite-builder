@@ -110,6 +110,7 @@ export async function exportStaticWebsite(editor: any, projectName: string) {
   indexParts.push('  <meta name="viewport" content="width=device-width, initial-scale=1.0">');
   indexParts.push('  <title>' + (projectName || 'My Website') + '</title>');
   indexParts.push('  <link rel="stylesheet" href="css/style.css">');
+  indexParts.push('  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />');
   indexParts.push('  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
   indexParts.push('  <' + sc + ' src="https://cdn.tailwindcss.com?plugins=forms"></' + sc + '>');
   indexParts.push('  <' + sc + ' src="canvas-tailwind-config.js"></' + sc + '>');

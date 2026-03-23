@@ -213,7 +213,7 @@ export default function Builder() {
           `;
           return el;
         },
-        onEvent({ elInput, component, event }: any) {
+        onEvent({ elInput, component }: any) {
            const desktop = elInput.querySelector('[data-bp="desktop"]')?.value;
            const tablet = elInput.querySelector('[data-bp="tablet"]')?.value;
            const mobile = elInput.querySelector('[data-bp="mobile"]')?.value;
@@ -430,10 +430,12 @@ export default function Builder() {
 
       let saveTimeout: any;
 
-      editor.on('load', () => {
-        // Inject Tailwind theme mapping into Editor Canvas for live design consistency
+      // Make tailwind injection reusable to persist across canvas frame reloads
+      const injectTailwindTheme = () => {
         const doc = editor.Canvas.getDocument();
+        if (!doc || doc.getElementById('tw-canvas-theme')) return;
         const tailwindStyle = doc.createElement('style');
+        tailwindStyle.id = 'tw-canvas-theme';
         tailwindStyle.setAttribute('type', 'text/tailwindcss');
         tailwindStyle.innerHTML = `
           @theme {
@@ -450,6 +452,11 @@ export default function Builder() {
           }
         `;
         doc.head.appendChild(tailwindStyle);
+      };
+
+      editor.on('load', () => {
+        // Inject Tailwind theme mapping into Editor Canvas for live design consistency
+        injectTailwindTheme();
 
         // Make default template components easily selectable
         const style = editor.Canvas.getDocument().createElement('style');
@@ -714,7 +721,11 @@ export default function Builder() {
 
       editor.on('component:styleUpdate', adjustTextColor);
 
-      // Animation Live Preview in Editor
+    // Persist tailwind styling on preview mode toggles and screen resizing iframe reloads
+    editor.on('canvas:canvas:load', injectTailwindTheme);
+    editor.on('canvas:refresh', injectTailwindTheme);
+
+    // Animation Live Preview in Editor
       editor.on('trait:value', (payload: any) => {
         if (payload.trait.get('name') === 'data-animation') {
           const comp = payload.component;
@@ -852,11 +863,20 @@ export default function Builder() {
       '<meta charset="utf-8">',
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
       '<title>Preview</title>',
+      '<style type="text/tailwindcss">',
+      '  @theme {',
+      '    --color-primary: #00338d; --color-secondary: #1e49e2; --color-accent: #1e49e2;',
+      '    --color-dark: #0c233c; --color-light-accent: #aceaff; --color-cta: #00b8f5;',
+      '    --color-purple: #7213ea; --color-pink: #fd349c; --color-success: #00b894;',
+      '    --color-background-dark: #071728;',
+      '  }',
+      '</style>',
       '<style>' + css + '</style>',
-      '<script src="https://cdn.tailwindcss.com"></scr' + 'ipt>',
+      '<script src="https://unpkg.com/@tailwindcss/browser@4"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></scr' + 'ipt>',
       '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
+      '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />',
       '</head>',
       '<body>',
       html,
@@ -1311,6 +1331,49 @@ export default function Builder() {
           font-size: 12px !important;
         }
 
+        /* Enlarge Layer Manager and make items look like structural page blocks */
+        .gjs-layer {
+          padding: 8px 10px !important;
+          border: 1px solid #e2e8f0 !important;
+          border-radius: 6px !important;
+          margin-bottom: 6px !important;
+          background: #ffffff !important;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
+          transition: all 0.15s !important;
+        }
+        .gjs-layer-name {
+          font-weight: 600 !important;
+          color: #0c233c !important;
+          font-size: 12px !important;
+        }
+        .gjs-layer:hover {
+          background: #f8fafc !important;
+          border-color: #cbd5e1 !important;
+          transform: translateY(-1px) !important;
+          box-shadow: 0 3px 6px rgba(0,0,0,0.04) !important;
+        }
+        .gjs-layer.gjs-active {
+          background: #eef2ff !important;
+          border-color: #1e49e2 !important;
+          box-shadow: 0 0 0 1px rgba(30, 73, 226, 0.2) !important;
+        }
+        .gjs-layer-icon {
+          color: #1e49e2 !important;
+          opacity: 0.8 !important;
+          margin-right: 8px !important;
+        }
+        .gjs-layer-title {
+          font-family: 'Inter', sans-serif !important;
+        }
+
+        /* Force Background Color and Background Gradient to be on separate rows */
+        .gjs-sm-property__background-color,
+        .gjs-sm-property__background-image {
+          flex-basis: 100% !important;
+          width: 100% !important;
+          margin-bottom: 8px !important;
+        }
+
         /* Color input */
         .gjs-sm-property .gjs-field-color .gjs-field-colorp {
           border-radius: 4px !important;
@@ -1485,12 +1548,12 @@ export default function Builder() {
             )}
 
             {/* Layers & Structure */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col flex-1 min-h-[300px] max-h-[500px]">
               <div className="px-4 py-3 bg-gray-50/50 border-b border-gray-100 flex items-center shrink-0">
                 <Layers className="w-4 h-4 mr-2 text-gray-500" />
                 <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Layers & Structure</span>
               </div>
-              <div id="gjs-layers-container" className="h-[220px] overflow-y-auto no-scrollbar p-1"></div>
+              <div id="gjs-layers-container" className="flex-1 overflow-y-auto no-scrollbar p-2"></div>
             </div>
 
             {/* Traits (Settings/Animations) */}
@@ -1606,9 +1669,9 @@ export default function Builder() {
                 ))}
               </div>
 
-              {/* Blocks Grid */}
+              {/* Blocks Grid & Icons Gallery */}
               <div className="flex-1 overflow-y-auto p-8 bg-white">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className={selectedCategory === 'Icons' ? "flex flex-wrap gap-3" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}>
                   {blocks.filter(b => {
                      const catId = b.get('category').id || b.get('category');
                      if (catId !== selectedCategory) return false;
@@ -1616,21 +1679,29 @@ export default function Builder() {
                        return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
                      }
                      return true;
-                  }).map((block, idx) => (
+                  }).map((block, idx) => selectedCategory === 'Icons' ? (
+                     <div 
+                        key={idx} 
+                        onClick={() => addBlockToCanvas(block)} 
+                        className="w-12 h-12 flex items-center justify-center border border-gray-200 rounded-lg hover:border-[#1e49e2] hover:bg-blue-50 cursor-pointer text-[#1e49e2] transition-colors shadow-sm bg-white" 
+                        title={block.get('label')}
+                     >
+                        <div dangerouslySetInnerHTML={{ __html: block.get('media') }} className="scale-75 pointer-events-none flex items-center justify-center" />
+                     </div>
+                  ) : (
                     <div 
                       key={idx}
                       onClick={() => addBlockToCanvas(block)}
-                      className="group border border-gray-200 rounded-xl p-4 hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white"
+                      className="group border border-gray-200 rounded-xl hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white overflow-hidden"
                     >
-                      <div className="h-28 bg-white border border-gray-100 rounded-lg mb-4 flex flex-col items-center justify-center text-gray-400 group-hover:text-[#1e49e2] group-hover:scale-[1.02] transition-all overflow-hidden relative">
+                      <div className="h-40 bg-slate-50 border-b border-gray-100 mb-0 flex flex-col items-center justify-center group-hover:border-[#1e49e2]/80 group-hover:scale-[1.02] shadow-sm transition-all overflow-hidden relative">
                          {block.get('media') ? (
-                           <div className="w-10 h-10 opacity-50 group-hover:opacity-100 mb-2 flex items-center justify-center" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
+                           <div className="w-full h-full opacity-80 group-hover:opacity-100 flex flex-col items-center justify-center p-2" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
                          ) : (
-                           <div className="text-4xl opacity-20 group-hover:opacity-40 mb-2">+</div>
+                           <div className="text-5xl font-light opacity-20 group-hover:opacity-40 mb-2">+</div>
                          )}
-                         <div className="font-mono text-xs opacity-50 px-4 text-center truncate w-full relative z-10">{block.get('label')}</div>
+                         <div className="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 font-semibold text-xs text-gray-800 py-1.5 px-3 text-center truncate z-10 shadow-sm">{block.get('label')}</div>
                       </div>
-                      <h3 className="font-semibold text-gray-900 text-sm group-hover:text-[#1e49e2] transition-colors text-center">{block.get('label')}</h3>
                     </div>
                   ))}
                   
