@@ -2554,6 +2554,22 @@
           "layout": []
         }
       ]
+    },
+    {
+      "id": "1774512544426pojc053",
+      "userId": "1773754717785",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-03-26T08:09:04.426Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1774512544426pojc053",
+          "title": "Home",
+          "route": "/",
+          "layout": []
+        }
+      ]
     }
   ],
   "activity": [

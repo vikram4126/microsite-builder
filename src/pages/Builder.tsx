@@ -89,8 +89,11 @@ export default function Builder() {
       const colors = themePresets[themeColor];
       if (colors) {
         body.style.setProperty('--theme-primary', colors.primary);
+        body.style.setProperty('--color-primary', colors.primary);
         body.style.setProperty('--theme-secondary', colors.secondary);
+        body.style.setProperty('--color-secondary', colors.secondary);
         body.style.setProperty('--theme-accent', colors.accent);
+        body.style.setProperty('--color-accent', colors.accent);
       }
     };
 
@@ -438,17 +441,18 @@ export default function Builder() {
         tailwindStyle.id = 'tw-canvas-theme';
         tailwindStyle.setAttribute('type', 'text/tailwindcss');
         tailwindStyle.innerHTML = `
+          @custom-variant dark (&:where(.dark, .dark *));
           @theme {
-            --color-primary: #00338d;
-            --color-secondary: #1e49e2;
-            --color-accent: #1e49e2;
-            --color-dark: #0c233c;
-            --color-light-accent: #aceaff;
-            --color-cta: #00b8f5;
-            --color-purple: #7213ea;
-            --color-pink: #fd349c;
-            --color-success: #00b894;
-            --color-background-dark: #071728;
+            --color-primary: var(--theme-primary, #00338d);
+            --color-secondary: var(--theme-secondary, #1e49e2);
+            --color-accent: var(--theme-accent, #1e49e2);
+            --color-dark: var(--theme-dark, #0c233c);
+            --color-light-accent: var(--theme-light-accent, #aceaff);
+            --color-cta: var(--theme-cta, #00b8f5);
+            --color-purple: var(--theme-purple, #7213ea);
+            --color-pink: var(--theme-pink, #fd349c);
+            --color-success: var(--theme-success, #00b894);
+            --color-background-dark: var(--theme-background-dark, #071728);
           }
         `;
         doc.head.appendChild(tailwindStyle);
@@ -494,6 +498,12 @@ export default function Builder() {
           .gjs-hovered {
              outline: 2px dashed #00b894 !important;
              outline-offset: -2px !important;
+          }
+          /* Improve drag and drop zone targeting for section blocks */
+          body.gjs-dashed [data-gjs-type="section"],
+          body.gjs-dashed .template-wrapper > * {
+             margin-top: 4px !important;
+             margin-bottom: 4px !important;
           }
           /* Placeholder component styles */
           [data-gjs-type="default"]:empty, [data-gjs-type="responsive-grid"]:empty {
@@ -583,6 +593,11 @@ export default function Builder() {
 
       });
 
+      // Helper to identify components that act as visual group wrappers
+      const isContainer = (comp: any) => {
+        return comp && comp.getClasses && comp.getClasses().includes('template-wrapper');
+      };
+
       // Custom toolbar commands
       editor.Commands.add('custom:move-up', {
         run(ed: any) {
@@ -590,14 +605,38 @@ export default function Builder() {
           if (!sel) return;
           const parent = sel.parent();
           if (!parent) return;
-          const idx = parent.components().indexOf(sel);
+          const comps = parent.components();
+          const idx = comps.indexOf(sel);
+          
           if (idx > 0) {
-            parent.components().remove(sel);
-            parent.components().add(sel, { at: idx - 1 });
+            const prevSibling = comps.at(idx - 1);
+            if (isContainer(prevSibling)) {
+              // Move INTO the container, just above its LAST child
+              const targetComps = prevSibling.components();
+              const targetIdx = Math.max(0, targetComps.length);
+              comps.remove(sel);
+              targetComps.add(sel, { at: targetIdx });
+              ed.select(sel);
+              return;
+            }
+            
+            // Normal sibling swap
+            comps.remove(sel);
+            comps.add(sel, { at: idx - 1 });
             ed.select(sel);
+          } else {
+            // At the top of parent. Move OUT of parent, just ABOVE the parent.
+            const grandParent = parent.parent();
+            if (grandParent && isContainer(parent)) {
+              const pIdx = grandParent.components().indexOf(parent);
+              parent.components().remove(sel);
+              grandParent.components().add(sel, { at: pIdx });
+              ed.select(sel);
+            }
           }
         }
       });
+      
       editor.Commands.add('custom:move-down', {
         run(ed: any) {
           const sel = ed.getSelected();
@@ -606,10 +645,31 @@ export default function Builder() {
           if (!parent) return;
           const comps = parent.components();
           const idx = comps.indexOf(sel);
+          
           if (idx < comps.length - 1) {
+            const nextSibling = comps.at(idx + 1);
+            if (isContainer(nextSibling)) {
+              // Move INTO the container, just BELOW its FIRST child
+              const targetComps = nextSibling.components();
+              const targetIdx = Math.min(targetComps.length, 0);
+              comps.remove(sel);
+              targetComps.add(sel, { at: targetIdx });
+              ed.select(sel);
+              return;
+            }
+
             comps.remove(sel);
             comps.add(sel, { at: idx + 1 });
             ed.select(sel);
+          } else {
+            // At the bottom of parent. Move OUT of parent, just BELOW the parent.
+            const grandParent = parent.parent();
+            if (grandParent && isContainer(parent)) {
+              const pIdx = grandParent.components().indexOf(parent);
+              parent.components().remove(sel);
+              grandParent.components().add(sel, { at: pIdx + 1 });
+              ed.select(sel);
+            }
           }
         }
       });

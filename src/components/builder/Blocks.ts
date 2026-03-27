@@ -1,27 +1,39 @@
+import { sectionsLibrary } from './Sections';
+
 export const registerBlocks = (editor: any) => {
   const bm = editor.BlockManager;
 
   const svgs = {
-    navbar: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="#00338d"/><rect x="45" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="58" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="71" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="85" y="6" width="10" height="7" rx="2" fill="#1e49e2"/></svg>',
-    header: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="35" y="30" width="30" height="3" rx="1.5" fill="#94a3b8"/><rect x="40" y="40" width="20" height="6" rx="3" fill="#1e49e2"/></svg>',
-    intro: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="35" height="4" rx="2" fill="#00338d"/><rect x="10" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="10" y="32" width="35" height="2" rx="1" fill="#94a3b8"/><rect x="55" y="10" width="35" height="40" rx="4" fill="#eef2ff"/><rect x="65" y="20" width="15" height="20" rx="2" fill="#1e49e2" opacity="0.5"/></svg>',
-    section: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="20" y="20" width="60" height="4" rx="2" fill="#00338d"/><rect x="30" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="38" y="36" width="24" height="6" rx="3" fill="#1e49e2"/></svg>',
+    navbar: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="45" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="58" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="71" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
+    header: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="35" y="30" width="30" height="3" rx="1.5" fill="#94a3b8"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
+    intro: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="35" height="4" rx="2" fill="var(--color-primary)"/><rect x="10" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="10" y="32" width="35" height="2" rx="1" fill="#94a3b8"/><rect x="55" y="10" width="35" height="40" rx="4" fill="#eef2ff"/><rect x="65" y="20" width="15" height="20" rx="2" fill="var(--color-secondary)" opacity="0.5"/></svg>',
+    section: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="20" y="20" width="60" height="4" rx="2" fill="var(--color-primary)"/><rect x="30" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="38" y="36" width="24" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
     columns: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/><rect x="55" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/></svg>',
     heading: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
     text: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="80" height="4" rx="1" fill="#64748b"/><rect x="10" y="28" width="70" height="4" rx="1" fill="#64748b"/><rect x="10" y="36" width="50" height="4" rx="1" fill="#64748b"/></svg>',
-    button: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="20" width="40" height="20" rx="6" fill="#1e49e2"/></svg>',
+    button: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="20" width="40" height="20" rx="6" fill="var(--color-secondary)"/></svg>',
     image: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f1f5f9"/><rect x="25" y="10" width="50" height="40" rx="4" fill="#e2e8f0"/><circle cx="45" cy="25" r="5" fill="#cbd5e1"/><path d="M25 45 Q 40 30 50 40 T 75 25 V 50 H 25 Z" fill="#94a3b8" opacity="0.5"/></svg>',
     divider: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><line x1="10" y1="30" x2="90" y2="30" stroke="#cbd5e1" stroke-width="2"/></svg>',
     spacer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="15" width="80" height="30" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="2"/></svg>',
-    card: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="5" width="40" height="50" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/><rect x="30" y="5" width="40" height="20" fill="#e2e8f0" rx="3"/><rect x="35" y="30" width="20" height="3" rx="1.5" fill="#00338d"/><rect x="35" y="38" width="30" height="2" rx="1" fill="#94a3b8"/><rect x="35" y="47" width="10" height="2" rx="1" fill="#1e49e2"/></svg>',
+    card: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="5" width="40" height="50" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/><rect x="30" y="5" width="40" height="20" fill="#e2e8f0" rx="3"/><rect x="35" y="30" width="20" height="3" rx="1.5" fill="var(--color-primary)"/><rect x="35" y="38" width="30" height="2" rx="1" fill="#94a3b8"/><rect x="35" y="47" width="10" height="2" rx="1" fill="var(--color-secondary)"/></svg>',
     accordion: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="10" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="20" y="25" width="60" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="25" y="31" width="30" height="2" fill="#0c233c"/><rect x="25" y="38" width="45" height="1.5" fill="#64748b"/><rect x="80" y="20" width="0" height="0"/></svg>',
     tabs: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="3" fill="#ffffff" stroke="#cbd5e1"/><rect x="20" y="10" width="60" height="12" fill="#f8fafc"/><rect x="25" y="14" width="15" height="8" rx="1" fill="#ffffff"/><rect x="45" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/><rect x="60" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/></svg>',
-    testimonial: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="4" fill="#f8fafc" stroke="#e2e8f0"/><rect x="25" y="20" width="50" height="2" fill="#94a3b8"/><rect x="25" y="25" width="40" height="2" fill="#94a3b8"/><circle cx="35" cy="40" r="5" fill="#cbd5e1"/><rect x="45" y="38" width="20" height="2" fill="#00338d"/></svg>',
-    cards: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="15" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="15" y="30" width="12" height="2" fill="#1e49e2"/><rect x="39" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="44" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="44" y="30" width="12" height="2" fill="#1e49e2"/><rect x="68" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="73" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="73" y="30" width="12" height="2" fill="#1e49e2"/></svg>',
-    icons: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="50" cy="30" r="15" fill="#1e49e2" opacity="0.2"/><path d="M50 20 L 53 27 L 60 27 L 55 32 L 57 39 L 50 35 L 43 39 L 45 32 L 40 27 L 47 27 Z" fill="#1e49e2"/></svg>',
-    list: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="25" cy="20" r="2" fill="#1e49e2"/><rect x="35" y="19" width="40" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="30" r="2" fill="#1e49e2"/><rect x="35" y="29" width="30" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="40" r="2" fill="#1e49e2"/><rect x="35" y="39" width="35" height="2" rx="1" fill="#64748b"/></svg>',
-    footer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="#00338d"/><rect x="10" y="25" width="20" height="2" fill="#94a3b8"/><rect x="40" y="15" width="10" height="3" fill="#0c233c"/><rect x="40" y="22" width="12" height="2" fill="#94a3b8"/><rect x="55" y="15" width="10" height="3" fill="#0c233c"/><rect x="55" y="22" width="12" height="2" fill="#94a3b8"/><rect x="70" y="15" width="10" height="3" fill="#0c233c"/><rect x="70" y="22" width="20" height="8" rx="2" fill="#e2e8f0"/></svg>'
+    testimonial: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="4" fill="#f8fafc" stroke="#e2e8f0"/><rect x="25" y="20" width="50" height="2" fill="#94a3b8"/><rect x="25" y="25" width="40" height="2" fill="#94a3b8"/><circle cx="35" cy="40" r="5" fill="#cbd5e1"/><rect x="45" y="38" width="20" height="2" fill="var(--color-primary)"/></svg>',
+    cards: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="15" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="15" y="30" width="12" height="2" fill="var(--color-secondary)"/><rect x="39" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="44" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="44" y="30" width="12" height="2" fill="var(--color-secondary)"/><rect x="68" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="73" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="73" y="30" width="12" height="2" fill="var(--color-secondary)"/></svg>',
+    icons: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="50" cy="30" r="15" fill="var(--color-secondary)" opacity="0.2"/><path d="M50 20 L 53 27 L 60 27 L 55 32 L 57 39 L 50 35 L 43 39 L 45 32 L 40 27 L 47 27 Z" fill="var(--color-secondary)"/></svg>',
+    list: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="25" cy="20" r="2" fill="var(--color-secondary)"/><rect x="35" y="19" width="40" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="30" r="2" fill="var(--color-secondary)"/><rect x="35" y="29" width="30" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="40" r="2" fill="var(--color-secondary)"/><rect x="35" y="39" width="35" height="2" rx="1" fill="#64748b"/></svg>',
+    footer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/><rect x="10" y="25" width="20" height="2" fill="#94a3b8"/><rect x="40" y="15" width="10" height="3" fill="#0c233c"/><rect x="40" y="22" width="12" height="2" fill="#94a3b8"/><rect x="55" y="15" width="10" height="3" fill="#0c233c"/><rect x="55" y="22" width="12" height="2" fill="#94a3b8"/><rect x="70" y="15" width="10" height="3" fill="#0c233c"/><rect x="70" y="22" width="20" height="8" rx="2" fill="#e2e8f0"/></svg>'
   };
+
+  // REGISTER DYNAMIC SECTIONS LIBRARY
+  sectionsLibrary.forEach(section => {
+    bm.add(section.id, {
+      label: section.label,
+      category: 'Template Sections', // Keeping grouped in a specific category
+      media: section.svg || svgs.section,
+      content: section.html
+    });
+  });
 
   // 1. NAVBAR
   bm.add('navbar-basic', {
@@ -33,10 +45,10 @@ export const registerBlocks = (editor: any) => {
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4 lg:py-5 lg:px-6 gap-4">
           <div class="text-xl font-bold text-gray-900">Brand</div>
           <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 font-medium text-sm w-full md:w-auto">
-            <a href="#" class="text-gray-600 hover:text-[#1e49e2]">Home</a>
-            <a href="#" class="text-gray-600 hover:text-[#1e49e2]">About</a>
-            <a href="#" class="text-gray-600 hover:text-[#1e49e2]">Services</a>
-            <a href="#" class="bg-[#1e49e2] text-white px-5 py-2.5 rounded-lg font-medium inline-flex hover:shadow-md transition-all text-center">Contact Us</a>
+            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">Home</a>
+            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">About</a>
+            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">Services</a>
+            <a href="#" class="bg-[var(--color-secondary)] text-white px-5 py-2.5 rounded-lg font-medium inline-flex hover:shadow-md transition-all text-center">Contact Us</a>
           </div>
         </div>
       </div>
@@ -121,7 +133,7 @@ export const registerBlocks = (editor: any) => {
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
             <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-            <button class="bg-[#1e49e2] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+            <button class="bg-[var(--color-secondary)] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
           </div>
         </div>
       </div>
@@ -140,7 +152,7 @@ export const registerBlocks = (editor: any) => {
             <div class="flex-1">
                <h2 class="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
                <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
-               <a href="#" class="font-semibold text-[#1e49e2] hover:underline">Learn more about our mission &rarr;</a>
+               <a href="#" class="font-semibold text-[var(--color-secondary)] hover:underline">Learn more about our mission &rarr;</a>
             </div>
             <div class="flex-1">
                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
@@ -160,10 +172,10 @@ export const registerBlocks = (editor: any) => {
       <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
         <div class="container mx-auto text-center">
           <div class="mx-auto flex flex-col items-center justify-center w-full">
-            <h1 class="text-5xl font-extrabold text-[#0c233c] mb-6 tracking-tight">Build Your Brand Today</h1>
+            <h1 class="text-5xl font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
             <p class="text-lg text-gray-600 mb-10 max-w-2xl">The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes.</p>
             <div class="flex space-x-4">
-              <a href="#" class="bg-[#1e49e2] text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-[#00338d]">Get Started Free</a>
+              <a href="#" class="bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-[var(--color-primary)]">Get Started Free</a>
               <a href="#" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-medium border border-gray-200 shadow-sm hover:bg-gray-50">Book a Demo</a>
             </div>
           </div>
@@ -186,18 +198,18 @@ export const registerBlocks = (editor: any) => {
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Lightning Fast</h3>
                 <p class="text-gray-500 text-sm">Optimized for speed to ensure your conversion rate stays high on all devices.</p>
               </div>
-              <div class="p-6 border border-[#1e49e2] rounded-xl shadow-md bg-white relative">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1e49e2] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
+              <div class="p-6 border border-[var(--color-secondary)] rounded-xl shadow-md bg-white relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--color-secondary)] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
                 <p class="text-gray-500 text-sm">Track every click and view with built-in real-time tracking dashboard.</p>
               </div>
               <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[#1e49e2] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integrations</h3>
                 <p class="text-gray-500 text-sm">Connect with your favorite tools natively and securely via APIs.</p>
               </div>
@@ -262,21 +274,21 @@ export const registerBlocks = (editor: any) => {
     label: 'Heading',
     category: 'Basic',
     media: svgs.heading,
-    content: '<h2 data-gjs-type="text" class="text-3xl font-bold text-gray-900 mb-4">Insert Heading Here</h2>',
+    content: '<h2 data-gjs-type="text" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
   });
 
   bm.add('text', {
     label: 'Text Box',
     category: 'Basic',
     media: svgs.text,
-    content: '<p data-gjs-type="text" class="text-gray-600 mb-4 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
+    content: '<p data-gjs-type="text" class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
   });
 
   bm.add('button', {
     label: 'Button',
     category: 'Basic',
     media: svgs.button,
-    content: '<a href="#" data-gjs-type="link" class="inline-block bg-[#1e49e2] text-white font-medium px-6 py-3 rounded-lg hover:bg-[#00338d] transition-colors">Click Here</a>',
+    content: '<a href="#" data-gjs-type="link" class="inline-block bg-[var(--color-secondary)] dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-[var(--color-primary)] dark:hover:bg-blue-700 transition-colors">Click Here</a>',
   });
 
   bm.add('image', {
@@ -290,7 +302,7 @@ export const registerBlocks = (editor: any) => {
     label: 'Divider',
     category: 'Basic',
     media: svgs.divider,
-    content: '<hr class="my-8 border-t border-gray-200" />',
+    content: '<hr class="my-8 border-t border-gray-200 dark:border-gray-700" />',
   });
 
   bm.add('spacer', {
@@ -304,7 +316,7 @@ export const registerBlocks = (editor: any) => {
     label: 'List',
     category: 'Basic',
     media: svgs.list,
-    content: '<ul class="list-disc ml-5 mb-4 text-gray-700"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
+    content: '<ul class="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
   });
 
   // ADVANCED WIDGETS
@@ -313,12 +325,12 @@ export const registerBlocks = (editor: any) => {
     category: 'Advanced',
     media: svgs.card,
     content: `
-      <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden max-w-sm">
+      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden max-w-sm">
         <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Card" class="w-full h-48 object-cover" />
         <div class="p-6">
-          <h3 class="font-bold text-xl mb-2 text-gray-900">Premium Quality</h3>
-          <p class="text-gray-600 mb-4 text-sm">Designed with precision to meet the highest standards of modern aesthetics.</p>
-          <a href="#" class="text-[#1e49e2] font-semibold hover:underline">Read more &rarr;</a>
+          <h3 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">Premium Quality</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Designed with precision to meet the highest standards of modern aesthetics.</p>
+          <a href="#" class="text-[var(--color-secondary)] font-semibold hover:underline">Read more &rarr;</a>
         </div>
       </div>
     `
@@ -330,12 +342,12 @@ export const registerBlocks = (editor: any) => {
     media: svgs.accordion,
     content: {
       components: `
-        <div class="w-full border border-gray-200 rounded-lg bg-white overflow-hidden max-w-2xl mx-auto my-4 relative">
-          <div class="accordion-header p-4 bg-gray-50 border-b cursor-pointer font-bold text-gray-800 flex justify-between items-center">
+        <div class="w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 overflow-hidden max-w-2xl mx-auto my-4 relative">
+          <div class="accordion-header p-4 bg-gray-50 dark:bg-slate-700/50 border-b dark:border-gray-700 cursor-pointer font-bold text-gray-800 dark:text-gray-100 flex justify-between items-center">
             <span>How does the builder work?</span>
             <span class="pointer-events-none">&darr;</span>
           </div>
-          <div class="accordion-content p-4 text-gray-600 hidden bg-white">
+          <div class="accordion-content p-4 text-gray-600 dark:text-gray-400 hidden bg-white dark:bg-slate-800">
             It uses a drag-and-drop interface powered by modern web technologies, allowing you to design visually without writing code.
           </div>
         </div>
@@ -362,13 +374,13 @@ export const registerBlocks = (editor: any) => {
     media: svgs.tabs,
     content: {
       components: `
-        <div class="w-full max-w-2xl mx-auto my-8 border border-gray-200 rounded-lg overflow-hidden bg-white">
-          <div class="flex border-b border-gray-200 bg-gray-50">
-            <button class="tab-btn flex-1 py-3 px-4 font-bold text-[#1e49e2] border-b-2 border-[#1e49e2] bg-white" data-target="tab1">Tab 1</button>
-            <button class="tab-btn flex-1 py-3 px-4 font-medium text-gray-500 hover:text-gray-700 bg-transparent border-b-2 border-transparent" data-target="tab2">Tab 2</button>
-            <button class="tab-btn flex-1 py-3 px-4 font-medium text-gray-500 hover:text-gray-700 bg-transparent border-b-2 border-transparent" data-target="tab3">Tab 3</button>
+        <div class="w-full max-w-2xl mx-auto my-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-slate-800">
+          <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-slate-900">
+            <button class="tab-btn flex-1 py-3 px-4 font-bold text-[var(--color-secondary)] dark:text-blue-400 border-b-2 border-[var(--color-secondary)] bg-white dark:bg-slate-800" data-target="tab1">Tab 1</button>
+            <button class="tab-btn flex-1 py-3 px-4 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-transparent border-b-2 border-transparent" data-target="tab2">Tab 2</button>
+            <button class="tab-btn flex-1 py-3 px-4 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-transparent border-b-2 border-transparent" data-target="tab3">Tab 3</button>
           </div>
-          <div class="p-6 text-gray-600 bg-white min-h-[100px]">
+          <div class="p-6 text-gray-600 dark:text-gray-300 bg-white dark:bg-slate-800 min-h-[100px]">
             <div id="tab1" class="tab-content block">This is the content for Tab 1. You can add text, images, or even form elements inside this container to build complex UI patterns.</div>
             <div id="tab2" class="tab-content hidden">This is the content for Tab 2. It switches instantly without reloading.</div>
             <div id="tab3" class="tab-content hidden">And here is Tab 3 content.</div>
@@ -383,12 +395,12 @@ export const registerBlocks = (editor: any) => {
           btn.addEventListener('click', () => {
              // Reset all
              btns.forEach((b: any) => {
-               b.className = "tab-btn flex-1 py-3 px-4 font-medium text-gray-500 hover:text-gray-700 bg-transparent border-b-2 border-transparent";
+               b.className = "tab-btn flex-1 py-3 px-4 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-transparent border-b-2 border-transparent";
              });
              contents.forEach((c: any) => c.classList.add('hidden'));
              
              // Active current
-             btn.className = "tab-btn flex-1 py-3 px-4 font-bold text-[#1e49e2] border-b-2 border-[#1e49e2] bg-white";
+             btn.className = "tab-btn flex-1 py-3 px-4 font-bold text-[var(--color-secondary)] dark:text-blue-400 border-b-2 border-[var(--color-secondary)] bg-white dark:bg-slate-800";
              const targetId = btn.getAttribute('data-target');
              const targetContent = this.querySelector('#' + targetId);
              if (targetContent) targetContent.classList.remove('hidden');
@@ -403,14 +415,14 @@ export const registerBlocks = (editor: any) => {
     category: 'Testimonials',
     media: svgs.testimonial,
     content: `
-      <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 max-w-md mx-auto relative overflow-hidden">
-        <div class="text-6xl text-gray-200 absolute -top-2 left-4 font-serif">"</div>
-        <p class="text-gray-700 italic mb-6 relative z-10 leading-relaxed text-lg">"This platform transformed how our entire agency builds landing pages. It's incredibly fast and easy to use. Highly recommended!"</p>
+      <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 max-w-md mx-auto relative overflow-hidden">
+        <div class="text-6xl text-gray-200 dark:text-slate-700 absolute -top-2 left-4 font-serif">"</div>
+        <p class="text-gray-700 dark:text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg">"This platform transformed how our entire agency builds landing pages. It's incredibly fast and easy to use. Highly recommended!"</p>
         <div class="flex items-center">
           <img src="https://i.pravatar.cc/150?u=a042581f4e29026" class="w-12 h-12 rounded-full mr-4" />
           <div>
-            <h4 class="font-bold text-gray-900">Sarah Jenkins</h4>
-            <span class="text-gray-500 text-sm">Marketing Director</span>
+            <h4 class="font-bold text-gray-900 dark:text-white">Sarah Jenkins</h4>
+            <span class="text-gray-500 dark:text-gray-400 text-sm">Marketing Director</span>
           </div>
         </div>
       </div>
@@ -423,20 +435,20 @@ export const registerBlocks = (editor: any) => {
     media: svgs.cards,
     content: `
       <section class="py-16 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#1e49e2] transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2">Design Tools</h3>
-           <p class="text-gray-600 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Design Tools</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
         </div>
-        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#1e49e2] transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2">Analytics Insights</h3>
-           <p class="text-gray-600 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Analytics Insights</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
         </div>
-        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#1e49e2] transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2">Cloud Storage</h3>
-           <p class="text-gray-600 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Cloud Storage</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
         </div>
       </section>
     `
@@ -468,7 +480,7 @@ export const registerBlocks = (editor: any) => {
       label: icon.label,
       category: 'Icons',
       media: `<i class="${icon.class} text-3xl"></i>`,
-      content: `<i data-gjs-type="text" class="${icon.class} text-4xl text-[#1e49e2] inline-block m-2"></i>`,
+      content: `<span class="inline-block m-2 text-[var(--color-primary)] hover:text-opacity-80 transition-opacity"><i class="\${icon.class} text-4xl"></i></span>`,
     });
   });
 };
