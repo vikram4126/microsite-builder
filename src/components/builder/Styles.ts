@@ -14,6 +14,110 @@ export const registerStyles = (editor: any) => {
     { value: '#ffffff', label: 'White' }
   ];
 
+  const applyTextContrast = () => {
+      const model = editor.getSelected();
+      if (!model) return;
+      
+      setTimeout(() => {
+          const style = model.getStyle();
+          if (!style) return;
+          
+          const bgColor = (style['background-color'] || style['backgroundColor'] || '').toLowerCase().replace(/\s+/g, '');
+          const bgImg   = (style['background-image'] || style['backgroundImage'] || '').toLowerCase().replace(/\s+/g, '');
+          const bg      = (style['background'] || '').toLowerCase().replace(/\s+/g, '');
+          
+          if (!bgColor && !bgImg && !bg) return;
+          
+          const darkValues = [
+            '#00338d', 'rgb(0,51,141)', 'rgba(0,51,141,1)',
+            '#1e49e2', 'rgb(30,73,226)', 'rgba(30,73,226,1)',
+            '#0c233c', 'rgb(12,35,60)', 'rgba(12,35,60,1)',
+            '#00b894', 'rgb(0,184,148)', 'rgba(0,184,148,1)',
+            '#fd349c', 'rgb(253,52,156)', 'rgba(253,52,156,1)',
+            '#000000', 'rgb(0,0,0)', 'rgba(0,0,0,1)'
+          ];
+          const lightValues = [
+            '#ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)',
+            '#f8fafc', 'rgb(248,250,252)', 'rgba(248,250,252,1)',
+            'transparent', 'none', 'inherit', 'initial',
+            '#e5e5e5', 'rgb(229,229,229)', 'rgba(229,229,229,1)'
+          ];
+          
+          let targetColor: string | null = null;
+          
+          const hasDarkColor = darkValues.some(dv => bgColor === dv || bgColor.includes(dv));
+          const hasDarkGradient = darkValues.some(dv => bg.includes(dv) || bgImg.includes(dv));
+          const hasBgImage = bgImg.includes('url(') || bg.includes('url(');
+
+          if (hasDarkColor || hasDarkGradient || hasBgImage) {
+            targetColor = '#ffffff';
+          } else if (lightValues.some(lv => bgColor === lv || bgColor.includes(lv)) && !hasBgImage && !hasDarkGradient) {
+            targetColor = '#0c233c'; // Revert to standard dark if returning to light background
+          }
+
+          if (targetColor) {
+            const applyColor = (comp: any) => {
+              const currentStyle = (typeof comp.getStyle === 'function') ? comp.getStyle() : {};
+              
+              let hasOwnBg = false;
+              if (comp !== model) {
+                  const compBg = currentStyle['background-color'];
+                  const compBgImg = currentStyle['background-image'];
+                  const compBgGrad = currentStyle['background'];
+                  
+                  if ((compBg && compBg !== 'transparent' && compBg !== 'none' && compBg !== 'inherit' && compBg !== '') || 
+                      (compBgImg && compBgImg !== 'none' && compBgImg !== '') ||
+                      (compBgGrad && compBgGrad !== 'none' && compBgGrad !== '')) {
+                      hasOwnBg = true;
+                  }
+                  
+                  if (!hasOwnBg && typeof comp.getClasses === 'function') {
+                      const classes = comp.getClasses();
+                      hasOwnBg = classes.some((c: string) => {
+                          if (c === 'bg-transparent' || c === 'bg-inherit' || c === 'bg-current') return false;
+                          if (c === 'bg-white' || c === 'bg-black' || c === 'bg-primary' || c === 'bg-secondary' || c === 'bg-accent') return true;
+                          if (c.match(/^bg-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d+$/)) return true;
+                          return false;
+                      });
+                  }
+              }
+
+              // Strict boundary: Do not push parent text color overrides into children that have their own defined backgrounds
+              if (hasOwnBg) return;
+              
+              if (currentStyle.color !== targetColor) {
+                 comp.addStyle({ color: targetColor });
+              }
+              
+              if (typeof comp.getClasses === 'function') {
+                  const classes = comp.getClasses();
+                  const toRemove = classes.filter((c: string) => 
+                     !!c.match(/^text-(gray|slate|black|white|blue|red|green|amber|yellow|indigo|purple|pink|rose|emerald)-\d+$/) ||
+                     c === 'text-black' || c === 'text-white'
+                  );
+                  if (toRemove.length > 0) comp.removeClass(toRemove);
+              }
+
+              if (typeof comp.get === 'function' && typeof comp.set === 'function') {
+                  if (comp.is('text') || comp.get('type') === 'text' || comp.get('type') === 'textnode') {
+                     let content = comp.get('content');
+                     if (content && typeof content === 'string') {
+                        const regex = /text-(gray|slate|black|white|blue|red|green|amber|yellow|indigo|purple|pink|rose|emerald)-\d+/g;
+                        const newContent = content.replace(regex, '').replace(/text-(black|white)/g, '');
+                        if (content !== newContent) comp.set('content', newContent);
+                     }
+                  }
+              }
+
+              const children = (typeof comp.components === 'function') ? comp.components().models || [] : [];
+              children.forEach((c: any) => applyColor(c));
+            };
+            
+            applyColor(model);
+          }
+      }, 50);
+  };
+
   // Register Custom Property Type for Brand Colors
   sm.addType('brand-color-picker', {
     create({ property }: any) {
@@ -47,6 +151,7 @@ export const registerStyles = (editor: any) => {
         btn.onclick = () => {
           property.upValue(c.value);
           updateActiveState(c.value);
+          applyTextContrast();
         };
         el.appendChild(btn);
       });
@@ -62,6 +167,7 @@ export const registerStyles = (editor: any) => {
       customInput.oninput = (e: any) => {
         property.upValue(e.target.value);
         updateActiveState(e.target.value);
+        applyTextContrast();
       };
       
       customWrapper.appendChild(customInput);
@@ -118,6 +224,7 @@ export const registerStyles = (editor: any) => {
          } else {
              property.upValue('');
          }
+         applyTextContrast();
       };
       w.appendChild(presetSelect);
       
@@ -202,6 +309,7 @@ export const registerStyles = (editor: any) => {
          const v = `linear-gradient(${angleInp.value}, ${c1.getVal()}, ${c2.getVal()})`;
          property.upValue(v);
          presetSelect.value = 'none'; // reset
+         applyTextContrast();
       };
       
       w.appendChild(applyBtn);
@@ -239,6 +347,7 @@ export const registerStyles = (editor: any) => {
             const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
             property.upValue(`url('${src}')`);
             updatePreview();
+            applyTextContrast();
             if (complete) editor.AssetManager.close();
           }
         });
@@ -250,6 +359,7 @@ export const registerStyles = (editor: any) => {
       clearBtn.onclick = () => {
          property.upValue('');
          updatePreview();
+         applyTextContrast();
       };
 
       wrapper.appendChild(previewDiv);
