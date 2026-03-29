@@ -744,38 +744,114 @@ export default function Builder() {
         setBreadcrumb([]);
       });
 
+      // Redirect LI selection to the parent UL/OL so the entire list interacts as one cohesive group
+      editor.on('component:selected', (model: any) => {
+         if (model && model.get('tagName')?.toLowerCase() === 'li') {
+             const parent = model.parent();
+             if (parent && (parent.get('tagName')?.toLowerCase() === 'ul' || parent.get('tagName')?.toLowerCase() === 'ol')) {
+                 // Defer selection slightly to override default behavior cleanly
+                 setTimeout(() => {
+                     editor.select(parent);
+                 }, 10);
+             }
+         }
+      });
+
       // Automatic Text Contrast System
       const adjustTextColor = (model: any, propertyName?: string) => {
-        if (!model || !model.getStyle) return;
+        if (!model || typeof model.getStyle !== 'function') return;
         
-        // Only run contrast adjustments if the explicit background color is what changed
-        // Prevents overwriting manual text color changes from the Typography UI
-        if (propertyName && propertyName !== 'background-color') return;
+        // GrapesJS can send either kebab-case or camelCase property names depending on the trigger event
+        if (propertyName && !['background-color', 'backgroundColor', 'background-image', 'backgroundImage', 'background'].includes(propertyName)) return;
         
         const style = model.getStyle();
         if (!style) return;
         
-        const bgColor = style['background-color']?.toLowerCase();
-        if (!bgColor) return;
+        // Remove all spaces so we don't fail matching rgb(0, 51, 141) against rgb(0,51,141)
+        const bgColor = (style['background-color'] || style['backgroundColor'] || '').toLowerCase().replace(/\s+/g, '');
+        const bgImg   = (style['background-image'] || style['backgroundImage'] || '').toLowerCase().replace(/\s+/g, '');
+        const bg      = (style['background'] || '').toLowerCase().replace(/\s+/g, '');
         
-        const darkColors = ['#00338d', '#1e49e2', '#0c233c', '#00b894', '#fd349c'];
-        const lightColors = ['#ffffff', '#f8fafc', 'transparent', 'none', 'inherit', 'initial'];
+        if (!bgColor && !bgImg && !bg && propertyName) return;
         
-        let targetColor = null;
-        if (darkColors.includes(bgColor)) {
+        // Match robustly against stripped hex/rgba strings
+        const darkValues = [
+          '#00338d', 'rgb(0,51,141)', 'rgba(0,51,141,1)',
+          '#1e49e2', 'rgb(30,73,226)', 'rgba(30,73,226,1)',
+          '#0c233c', 'rgb(12,35,60)', 'rgba(12,35,60,1)',
+          '#00b894', 'rgb(0,184,148)', 'rgba(0,184,148,1)',
+          '#fd349c', 'rgb(253,52,156)', 'rgba(253,52,156,1)',
+          '#000000', 'rgb(0,0,0)', 'rgba(0,0,0,1)'
+        ];
+        const lightValues = [
+          '#ffffff', 'rgb(255,255,255)', 'rgba(255,255,255,1)',
+          '#f8fafc', 'rgb(248,250,252)', 'rgba(248,250,252,1)',
+          'transparent', 'none', 'inherit', 'initial',
+          '#e5e5e5', 'rgb(229,229,229)', 'rgba(229,229,229,1)'
+        ];
+        
+        let targetColor: string | null = null;
+        
+        const hasDarkColor = darkValues.some(dv => bgColor === dv || bgColor.includes(dv));
+        const hasDarkGradient = darkValues.some(dv => bg.includes(dv) || bgImg.includes(dv));
+        const hasBgImage = bgImg.includes('url(') || bg.includes('url(');
+
+        // When a custom image is added, default to light text (assumed hero image scenario).
+        if (hasDarkColor || hasDarkGradient || hasBgImage) {
           targetColor = '#ffffff';
-        } else if (lightColors.includes(bgColor)) {
-          targetColor = '#0c233c';
+        } else if (lightValues.some(lv => bgColor === lv || bgColor.includes(lv)) && !hasBgImage && !hasDarkGradient) {
+          targetColor = '#0c233c'; // Revert to standard dark if returning to light background
         }
 
         if (targetColor) {
-          // Simply apply the target color locally to the element where the background was modified
-          // Removed `applyColorToTree` to prevent forcefully overwriting all children's inline colors
-          // and locking out the manual Text Color picker
-          const currentStyle = model.getStyle() || {};
-          if (currentStyle.color !== targetColor) {
-             model.addStyle({ color: targetColor });
-          }
+          const applyColor = (comp: any) => {
+            const currentStyle = (typeof comp.getStyle === 'function') ? comp.getStyle() : {};
+            
+            // Skip deeper propagation if a nested wrapper specifies its own distinct background
+            const compBg = currentStyle['background-color'];
+            const compBgImg = currentStyle['background-image'];
+            if (comp !== model && 
+                ((compBg && compBg !== 'transparent' && compBg !== 'none' && compBg !== 'inherit' && compBg !== '') || 
+                 (compBgImg && compBgImg !== 'none' && compBgImg !== ''))) {
+               return; 
+            }
+            
+            if (currentStyle.color !== targetColor) {
+               comp.addStyle({ color: targetColor });
+            }
+            
+            // Rip out any interfering Tailwind typography default classes (e.g. text-gray-900)
+            if (typeof comp.getClasses === 'function') {
+                const classes = comp.getClasses();
+                const toRemove = classes.filter((c: string) => 
+                   !!c.match(/^text-(gray|slate|black|white|blue|red|green|amber|yellow|indigo|purple|pink|rose|emerald)-\d+$/) ||
+                   c === 'text-black' || c === 'text-white'
+                );
+                if (toRemove.length > 0) {
+                   comp.removeClass(toRemove);
+                }
+            }
+
+            // Also aggressively strip from raw inner HTML content when the element acts as an unparsed container
+            if (typeof comp.get === 'function' && typeof comp.set === 'function') {
+                if (comp.is('text') || comp.get('type') === 'text' || comp.get('type') === 'textnode') {
+                   let content = comp.get('content');
+                   if (content && typeof content === 'string') {
+                      const regex = /text-(gray|slate|black|white|blue|red|green|amber|yellow|indigo|purple|pink|rose|emerald)-\d+/g;
+                      const newContent = content.replace(regex, '').replace(/text-(black|white)/g, '');
+                      if (content !== newContent) {
+                         comp.set('content', newContent);
+                      }
+                   }
+                }
+            }
+
+            // Dive down
+            const children = (typeof comp.components === 'function') ? comp.components().models || [] : [];
+            children.forEach((c: any) => applyColor(c));
+          };
+          
+          applyColor(model);
         }
       };
 
@@ -1146,6 +1222,25 @@ export default function Builder() {
             {isFullscreenActive ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
           </button>
 
+          <button onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Toggle Theme Mode">
+            {themeMode === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+          </button>
+
+          <div className="relative flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Theme Color">
+            <Palette className="w-4 h-4" />
+            <select 
+              value={themeColor} 
+              onChange={(e) => setThemeColor(e.target.value)}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              title="Theme Color"
+            >
+              <option value="default">KPMG Blue</option>
+              <option value="purple">Cosmic Purple</option>
+              <option value="pink">Neon Pink</option>
+              <option value="dark">Slate Dark</option>
+            </select>
+          </div>
+
           <button onClick={handleCustomCode} className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Custom Code">
             <Code className="w-4 h-4" />
           </button>
@@ -1426,8 +1521,9 @@ export default function Builder() {
           font-family: 'Inter', sans-serif !important;
         }
 
-        /* Force Background Color and Background Gradient to be on separate rows */
+        /* Force Background properties to be on separate rows */
         .gjs-sm-property__background-color,
+        .gjs-sm-property__background,
         .gjs-sm-property__background-image {
           flex-basis: 100% !important;
           width: 100% !important;
@@ -1558,31 +1654,7 @@ export default function Builder() {
 
           <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth p-3 space-y-4">
             
-            {/* Global Theme Settings UI */}
-            <div className="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col gap-3">
-              <div className="flex items-center text-[11px] font-bold text-gray-400 uppercase tracking-widest px-1">
-                <Palette className="w-3.5 h-3.5 mr-1.5" /> Global Theme
-              </div>
-              <div className="flex gap-2">
-                <button 
-                  onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} 
-                  className="flex-1 flex items-center justify-center py-2 rounded-lg bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  {themeMode === 'light' ? <Moon className="w-3.5 h-3.5 mr-1.5" /> : <Sun className="w-3.5 h-3.5 mr-1.5" />}
-                  {themeMode === 'light' ? 'Dark' : 'Light'}
-                </button>
-                <select 
-                  value={themeColor} 
-                  onChange={(e) => setThemeColor(e.target.value)}
-                  className="flex-1 py-1.5 px-2 rounded-lg bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1e49e2]/20 transition-all appearance-none text-center cursor-pointer"
-                >
-                  <option value="default">KPMG Blue</option>
-                  <option value="purple">Cosmic Purple</option>
-                  <option value="pink">Neon Pink</option>
-                  <option value="dark">Slate Dark</option>
-                </select>
-              </div>
-            </div>
+
 
             {/* Breadcrumb Layer Navigation */}
             {breadcrumb.length > 0 && (

@@ -29,8 +29,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         setIsVisible(false);
         return;
       }
-      
-      const isText = selected.is('text') || selected.is('textnode') || ['h1','h2','h3','h4','h5','h6','p','span','a'].includes(selected.get('tagName')?.toLowerCase());
+      const isText = selected.is('text') || selected.is('textnode') || ['h1','h2','h3','h4','h5','h6','p','span','a','ul','ol'].includes(selected.get('tagName')?.toLowerCase());
       
       if (isText) {
         setIsVisible(true);
@@ -112,33 +111,45 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     } else if (key === 'textAlign') {
         selected.addStyle({ 'text-align': value });
     } else if (key === 'listStyleType') {
+        let targetComp = selected;
+        let p = targetComp;
+        while(p && p.get && p.get('tagName')) {
+            const t = p.get('tagName').toLowerCase();
+            if (t === 'ul' || t === 'ol') {
+                targetComp = p;
+                break;
+            }
+            if (t === 'wrapper' || t === 'body') break;
+            p = p.parent();
+        }
+
         if (!value || value === 'none') {
-            const currentTag = selected.get('tagName')?.toLowerCase();
+            const currentTag = targetComp.get('tagName')?.toLowerCase();
             if (currentTag === 'ul' || currentTag === 'ol') {
-                selected.set('tagName', 'p');
-                selected.removeStyle('list-style-type');
-                selected.removeStyle('padding-left');
-                selected.removeStyle('margin-left');
+                targetComp.set('tagName', 'p');
+                targetComp.removeStyle('list-style-type');
+                targetComp.removeStyle('padding-left');
+                targetComp.removeStyle('margin-left');
                 
-                const el = selected.getEl();
+                const el = targetComp.getEl();
                 if (el) {
                     const items = Array.from(el.querySelectorAll('li')).map((li: any) => li.innerHTML);
                     if (items.length > 0) {
-                        selected.components(items.join('<br/>'));
+                        targetComp.components(items.join('<br/>'));
                     }
                 }
             } else {
-                selected.removeStyle('list-style-type');
+                targetComp.removeStyle('list-style-type');
             }
         } else {
-            const currentTag = selected.get('tagName')?.toLowerCase();
+            const currentTag = targetComp.get('tagName')?.toLowerCase();
             const tag = (value === 'decimal' || value.includes('roman') || value.includes('alpha')) ? 'ol' : 'ul';
             
             if (currentTag !== 'ul' && currentTag !== 'ol') {
-                selected.set('tagName', tag);
-                selected.addStyle({ 'list-style-type': value, 'padding-left': '2rem', 'margin-left': '0' });
+                targetComp.set('tagName', tag);
+                targetComp.addStyle({ 'list-style-type': value, 'padding-left': '2rem', 'margin-left': '0' });
                 
-                const el = selected.getEl();
+                const el = targetComp.getEl();
                 if (el) {
                     const htmlContent = el.innerHTML;
                     if (!htmlContent.includes('<li')) {
@@ -154,13 +165,17 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                         if (lines.length === 0) lines = ['List item'];
                         
                         const listHtml = lines.map((l: string) => `<li>${l}</li>`).join('');
-                        selected.components(listHtml);
+                        targetComp.components(listHtml);
                     }
                 }
             } else {
-                selected.set('tagName', tag);
-                selected.addStyle({ 'list-style-type': value });
+                targetComp.set('tagName', tag);
+                targetComp.addStyle({ 'list-style-type': value });
             }
+        }
+        
+        if (targetComp !== selected) {
+            editor.select(targetComp);
         }
     }
   };

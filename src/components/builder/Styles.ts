@@ -212,6 +212,58 @@ export const registerStyles = (editor: any) => {
     }
   });
 
+  editor.StyleManager.addType('bg-image-file', {
+    create({ property }: any) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'flex flex-col gap-1 w-full mt-1 mb-2 bg-white';
+
+      const previewDiv = document.createElement('div');
+      previewDiv.className = 'w-full h-20 rounded border border-gray-300 bg-gray-50 flex flex-col items-center justify-center overflow-hidden cursor-pointer relative group transition hover:border-blue-400 shadow-sm';
+      
+      const updatePreview = () => {
+         const val = property.getValue();
+         if (val && val.includes('url(')) {
+             previewDiv.style.backgroundImage = val;
+             previewDiv.style.backgroundSize = 'cover';
+             previewDiv.style.backgroundPosition = 'center';
+             previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Image</div>';
+         } else {
+             previewDiv.style.backgroundImage = 'none';
+             previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+         }
+      };
+
+      previewDiv.onclick = () => {
+        editor.AssetManager.open({
+          select(asset: any, complete: boolean) {
+            const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
+            property.upValue(`url('${src}')`);
+            updatePreview();
+            if (complete) editor.AssetManager.close();
+          }
+        });
+      };
+      
+      const clearBtn = document.createElement('button');
+      clearBtn.className = 'text-[10px] font-bold text-red-500 hover:text-red-700 self-end uppercase mt-1 px-1';
+      clearBtn.innerText = 'Remove Image';
+      clearBtn.onclick = () => {
+         property.upValue('');
+         updatePreview();
+      };
+
+      wrapper.appendChild(previewDiv);
+      wrapper.appendChild(clearBtn);
+
+      setTimeout(updatePreview, 100);
+
+      return wrapper;
+    },
+    update() {
+      // noop
+    }
+  });
+
   sm.addSector('layout', {
     name: 'Layout & Dimensions',
     open: true,
@@ -229,9 +281,58 @@ export const registerStyles = (editor: any) => {
         defaults: 'transparent'
       },
       {
-        property: 'background-image',
+        property: 'background',
         name: 'Brand Gradient Mix',
         type: 'brand-gradient'
+      },
+      {
+        property: 'background-image',
+        type: 'bg-image-file',
+        name: 'Background Image'
+      },
+      {
+        property: 'background-size',
+        type: 'select',
+        defaults: 'auto',
+        options: [
+          { value: 'auto', name: 'Auto' },
+          { value: 'cover', name: 'Cover' },
+          { value: 'contain', name: 'Contain' },
+          { value: '100% 100%', name: 'Stretch' }
+        ]
+      },
+      {
+        property: 'background-position',
+        type: 'select',
+        defaults: 'left top',
+        options: [
+          { value: 'left top', name: 'Top Left' },
+          { value: 'center top', name: 'Top Center' },
+          { value: 'right top', name: 'Top Right' },
+          { value: 'center center', name: 'Center' },
+          { value: 'center bottom', name: 'Bottom Center' }
+        ]
+      },
+      {
+        property: 'background-attachment',
+        type: 'select',
+        defaults: 'scroll',
+        options: [
+          { value: 'scroll', name: 'Scroll' },
+          { value: 'fixed', name: 'Fixed (Parallax)' },
+          { value: 'local', name: 'Local' }
+        ]
+      },
+      {
+        property: 'background-repeat',
+        type: 'select',
+        defaults: 'repeat',
+        options: [
+          { value: 'repeat', name: 'Repeat' },
+          { value: 'no-repeat', name: 'No Repeat' },
+          { value: 'repeat-x', name: 'Repeat X' },
+          { value: 'repeat-y', name: 'Repeat Y' }
+        ]
       }
     ]
   });
