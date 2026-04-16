@@ -97,26 +97,35 @@ export const BorderRadiusUI = ({ editor }: { editor: any }) => {
           {isOpen ? <ChevronDown size={14} className="mr-1 opacity-70" /> : <ChevronRight size={14} className="mr-1 opacity-70" />}
           Border Radius
         </span>
-        {isOpen && (
-          <select
-            value={radii.unit}
-            onChange={(e) => { e.stopPropagation(); changeUnit(e.target.value); }}
-            onClick={(e) => e.stopPropagation()}
-            className="bg-gray-50 border border-gray-200 rounded text-[10px] px-1 focus:outline-none"
-          >
-            <option value="px">px</option>
-            <option value="%">%</option>
-            <option value="em">em</option>
-            <option value="rem">rem</option>
-          </select>
-        )}
       </div>
 
       {isOpen && (
-        <div className="p-4 bg-white text-xs font-sans text-gray-500 flex flex-col justify-center items-center gap-6">
+        <div className="p-4 bg-white text-xs font-sans text-gray-500 flex flex-col justify-center items-center gap-6 relative">
+          
+          {/* Unit Selector & Lock - positioned top right like BoxModelUI */}
+          <div className="absolute top-2 right-2 flex space-x-1">
+            <select
+              value={radii.unit}
+              onChange={(e) => { e.stopPropagation(); changeUnit(e.target.value); }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-gray-50 border border-gray-200 rounded text-[10px] px-1 focus:outline-none cursor-pointer"
+            >
+              <option value="px">px</option>
+              <option value="%">%</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+            <button 
+              onClick={(e) => { e.stopPropagation(); toggleLock(); }}
+              className={`p-1 rounded transition-colors ${radii.locked ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-400 hover:text-gray-600'}`}
+              title={radii.locked ? 'Unlock Corners' : 'Lock All Corners'}
+            >
+              {radii.locked ? <Lock size={12} strokeWidth={2.5} /> : <Unlock size={12} strokeWidth={2.5} />}
+            </button>
+          </div>
 
           {/* Visual Radius Builder */}
-          <div className="relative w-48 h-24 mt-2 mb-2 bg-[#e8edff] border border-[#d0d9ff] flex items-center justify-center rounded-2xl">
+          <div className="relative w-48 h-16 mt-6 mb-2 bg-[#e8edff] border border-[#d0d9ff] flex items-center justify-center rounded-2xl">
 
             {/* Top-Left Corner Input */}
             <div className="absolute -top-3 -left-3 z-10">
@@ -145,15 +154,6 @@ export const BorderRadiusUI = ({ editor }: { editor: any }) => {
                     className="w-6 h-6 bg-white text-center text-[9px] font-bold text-gray-700 border border-[#819afc] rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500 shadow-sm"
                     title="Bottom Right" />
             </div>
-
-            {/* Center Lock Icon */}
-            <button
-               onClick={toggleLock}
-               className={`w-10 h-8 rounded-lg flex items-center justify-center transition-colors shadow-sm border ${radii.locked ? 'bg-[#1e49e2] text-white border-transparent' : 'bg-[#c5d0ff] text-white border-[#819afc] hover:bg-[#819afc]'}`}
-               title={radii.locked ? 'Unlock Corners' : 'Lock All Corners'}
-            >
-              {radii.locked ? <Lock size={14} strokeWidth={2.5} /> : <Unlock size={14} strokeWidth={2.5} />}
-            </button>
           </div>
 
         </div>

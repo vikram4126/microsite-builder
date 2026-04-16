@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Microsite Builder Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1e49e2",
+                        "brand-blue": "#1e49e2",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .canvas-bg {
+            background-color: #f1f1f1;
+            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<div class="flex h-screen flex-col">
+<header class="h-14 border-b border-primary/10 bg-white dark:bg-slate-900 flex items-center justify-between px-4 z-50">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<span class="font-bold text-lg hidden md:block">MicroBuild</span>
+</div>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+<div class="relative">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-100 dark:bg-slate-800 text-sm font-medium">
+<span>Home Page</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">undo</span>
+</button>
+<button class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors opacity-50">
+<span class="material-symbols-outlined text-[20px]">redo</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="p-1.5 bg-white dark:bg-slate-700 rounded shadow-sm text-brand-blue transition-colors">
+<span class="material-symbols-outlined text-[20px]">desktop_windows</span>
+</button>
+<button class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">tablet_android</span>
+</button>
+<button class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-sm font-medium hover:text-brand-blue transition-colors">Preview</button>
+<button class="px-4 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Save</button>
+<button class="px-4 py-1.5 bg-brand-blue text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">upload</span>
+                    Export
+                </button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-[260px] border-r border-primary/10 bg-white dark:bg-slate-900 flex flex-col overflow-y-auto">
+<div class="p-4 flex flex-col gap-6">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Elements</h3>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">title</span>
+<span class="text-[11px] font-medium">Heading</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">notes</span>
+<span class="text-[11px] font-medium">Text</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">image</span>
+<span class="text-[11px] font-medium">Image</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">smart_button</span>
+<span class="text-[11px] font-medium">Button</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">space_bar</span>
+<span class="text-[11px] font-medium">Spacer</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:border-brand-blue/50 hover:bg-brand-blue/5 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-brand-blue mb-1">horizontal_rule</span>
+<span class="text-[11px] font-medium">Divider</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Layout</h3>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer border border-transparent">
+<span class="material-symbols-outlined text-brand-blue">view_stream</span>
+<span class="text-sm font-medium">Section</span>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer border border-transparent">
+<span class="material-symbols-outlined text-brand-blue">view_column</span>
+<span class="text-sm font-medium">Columns</span>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer border border-transparent">
+<span class="material-symbols-outlined text-brand-blue">grid_view</span>
+<span class="text-sm font-medium">Grid</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Templates</h3>
+<div class="flex flex-col gap-2">
+<div class="group relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 aspect-video cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 flex items-end p-2">
+<span class="text-white text-[10px] font-bold">Hero Section</span>
+</div>
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800" data-alt="Hero section mockup preview"></div>
+</div>
+<div class="group relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 aspect-video cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 flex items-end p-2">
+<span class="text-white text-[10px] font-bold">Features Grid</span>
+</div>
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800" data-alt="Features grid mockup preview"></div>
+</div>
+<div class="group relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 aspect-video cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 flex items-end p-2">
+<span class="text-white text-[10px] font-bold">Call to Action</span>
+</div>
+<div class="w-full h-full bg-slate-200 dark:bg-slate-800" data-alt="Call to action mockup preview"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 canvas-bg overflow-y-auto flex flex-col items-center py-12 px-6">
+<div class="w-full max-w-[1200px] min-h-[1400px] bg-white dark:bg-slate-900 shadow-xl rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden relative">
+<section class="relative group outline outline-transparent hover:outline-primary/40 outline-2 -outline-offset-2 transition-all">
+<div class="absolute -left-10 top-0 hidden group-hover:flex flex-col gap-1">
+<button class="w-8 h-8 bg-primary text-white rounded shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">drag_indicator</span>
+</button>
+<button class="w-8 h-8 bg-white dark:bg-slate-800 text-slate-600 rounded shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+<button class="w-8 h-8 bg-white dark:bg-slate-800 text-red-500 rounded shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+<div class="p-20 text-center">
+<div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6">NEW PRODUCT LAUNCH</div>
+<h1 class="text-5xl font-extrabold tracking-tight mb-6">Build your brand <span class="text-primary">faster</span> than ever.</h1>
+<p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes.</p>
+<div class="flex items-center justify-center gap-4">
+<button class="px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-transform">Get Started Free</button>
+<button class="px-8 py-4 bg-slate-100 dark:bg-slate-800 font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Book a Demo</button>
+</div>
+</div>
+</section>
+<section class="py-20 px-12 border-t border-slate-100 dark:border-slate-800">
+<div class="grid grid-cols-3 gap-8">
+<div class="p-8 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-xl transition-shadow group cursor-pointer relative">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Rapid Loading</h3>
+<p class="text-slate-500 dark:text-slate-400">Optimized for speed to ensure your conversion rate stays high on mobile.</p>
+</div>
+<div class="p-8 rounded-2xl border border-primary/30 bg-primary/5 hover:shadow-xl transition-shadow group cursor-pointer relative">
+<div class="absolute -top-3 -right-3 px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full">ACTIVE</div>
+<div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Smart Analytics</h3>
+<p class="text-slate-500 dark:text-slate-400">Track every click and view with built-in real-time tracking dashboard.</p>
+</div>
+<div class="p-8 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-xl transition-shadow group cursor-pointer relative">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">share</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Social Links</h3>
+<p class="text-slate-500 dark:text-slate-400">Connect all your profiles in one beautiful, cohesive landing page.</p>
+</div>
+</div>
+</section>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 bg-slate-900/80 backdrop-blur text-white rounded-full shadow-2xl border border-white/10 opacity-0 hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+<span class="text-xs font-bold px-2">Add New Section</span>
+<button class="p-2 hover:bg-white/20 rounded-full transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+</div>
+</main>
+<aside class="w-[300px] border-l border-primary/10 bg-white dark:bg-slate-900 flex flex-col overflow-y-auto">
+<div class="flex border-b border-slate-100 dark:border-slate-800">
+<button class="flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 border-brand-blue text-brand-blue">Content</button>
+<button class="flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">Style</button>
+<button class="flex-1 py-3 text-xs font-bold uppercase tracking-widest border-b-2 border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">Advanced</button>
+</div>
+<div class="p-4 flex flex-col gap-6">
+<div class="flex flex-col gap-3">
+<label class="text-xs font-bold text-slate-500 uppercase">Text Content</label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-brand-blue focus:border-brand-blue min-h-[100px]" placeholder="Enter text here...">Build your brand faster than ever.</textarea>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800"></div>
+<div class="flex flex-col gap-4">
+<h4 class="text-xs font-bold text-slate-500 uppercase">Typography</h4>
+<div class="flex flex-col gap-3">
+<label class="text-xs font-medium">Font Family</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-brand-blue">
+<option>Public Sans</option>
+<option>Inter</option>
+<option>Roboto</option>
+<option>Playfair Display</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium">Size</label>
+<div class="flex items-center bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden focus-within:ring-1 focus-within:ring-brand-blue">
+<input class="w-full bg-transparent border-none text-sm px-2 py-1.5 focus:ring-0" type="number" value="48"/>
+<span class="text-[10px] font-bold text-slate-400 pr-2">PX</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium">Weight</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1.5 text-sm focus:ring-brand-blue">
+<option>Regular</option>
+<option>Medium</option>
+<option>Bold</option>
+<option selected="">Extra Bold</option>
+</select>
+</div>
+</div>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800"></div>
+<div class="flex flex-col gap-4">
+<h4 class="text-xs font-bold text-slate-500 uppercase">Color &amp; Background</h4>
+<div class="flex items-center justify-between">
+<label class="text-xs font-medium">Text Color</label>
+<div class="flex items-center gap-2">
+<span class="text-xs font-mono">#0F172A</span>
+<div class="w-6 h-6 rounded-full border border-slate-200 bg-slate-900 cursor-pointer"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<label class="text-xs font-medium">Accent Color</label>
+<div class="flex items-center gap-2">
+<span class="text-xs font-mono">#1E49E2</span>
+<div class="w-6 h-6 rounded-full border border-slate-200 bg-primary cursor-pointer"></div>
+</div>
+</div>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800"></div>
+<div class="flex flex-col gap-4">
+<h4 class="text-xs font-bold text-slate-500 uppercase">Spacing</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium">Margin Bottom</label>
+<input class="w-full accent-brand-blue" type="range"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium">Line Height</label>
+<input class="w-full accent-brand-blue" type="range"/>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<button class="w-full py-2 bg-brand-blue/10 text-brand-blue font-bold rounded-lg text-sm hover:bg-brand-blue/20 transition-colors">Apply Preset</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</body></html>

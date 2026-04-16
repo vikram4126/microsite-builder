@@ -381,7 +381,7 @@ export const registerStyles = (editor: any) => {
   });
 
   sm.addSector('decorations', {
-    name: 'Decorations & Backgrounds',
+    name: 'Background',
     open: false,
     buildProps: ['opacity'],
     properties: [

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1e49e2",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-20 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Microsite Builder</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Sites</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Assets</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPcoZZ5jyLcD2ZzvEYl3xqVDpBj_S3dtt9wxAzNaYiyZYaveG0lijbEpFtfi5EhbbgnPyI2_rBKo3LeJO6mzFS69DLBqIv7Wnu4ESCFK1dH8T3j2sBcMFLKeHogBCZmgqsTR4tZPIaLdntK8Yybv0KaOyA8EffBtrU8C9QWQMS_uWKc-Dp_zdJ_eTj9-nlt-tHoij2n4Zc2fMsDyTVQJns9R4om9ieVUnRZ4vxglSsNM6oCeBXr4pm07-3VJtqVPjJKEQV7UFo2d4");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1200px] mx-auto w-full px-6 lg:px-10 py-8">
+<!-- Header Section -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Site Settings &amp; Analytics</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Manage your "Summer Campaign 2024" microsite and track real-time performance.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-lg font-bold text-sm hover:bg-slate-200 transition-colors">Discard Changes</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">Save Settings</button>
+</div>
+</div>
+<!-- Tabs Navigation -->
+<div class="mb-8 border-b border-slate-200 dark:border-slate-800">
+<div class="flex gap-8">
+<a class="flex items-center gap-2 border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-4 px-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="text-sm font-bold">General Settings</span>
+</a>
+<a class="flex items-center gap-2 border-b-2 border-primary text-primary pb-4 px-1" href="#">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="text-sm font-bold">Analytics</span>
+</a>
+<a class="flex items-center gap-2 border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-4 px-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">extension</span>
+<span class="text-sm font-bold">Integrations</span>
+</a>
+</div>
+</div>
+<!-- Dashboard Analytics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Visitors</p>
+<span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded-full">+12.5%</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">12,450</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 70%;"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Page Views</p>
+<span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded-full">+8.2%</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">45,200</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 55%;"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Avg. Session Duration</p>
+<span class="bg-primary/10 dark:bg-primary/20 text-primary text-xs font-bold px-2 py-1 rounded-full">-2.1%</span>
+</div>
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">2m 45s</p>
+<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+<!-- Detailed Visualizations -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- Traffic Overview Chart -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Traffic Overview</p>
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Daily Visitors</h3>
+</div>
+<select class="bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm text-slate-600 dark:text-slate-300 py-1 pl-3 pr-8 focus:ring-primary">
+<option>Last 30 days</option>
+<option>Last 7 days</option>
+<option>Last 24 hours</option>
+</select>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<p class="text-emerald-500 text-sm font-medium">+15% vs prev month</p>
+</div>
+<div class="flex min-h-[220px] flex-1 flex-col gap-8 py-4">
+<svg fill="none" height="100%" preserveaspectratio="none" viewbox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#1e49e2" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#1e49e2" stop-opacity="0.3"></stop>
+<stop offset="1" stop-color="#1e49e2" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-between border-t border-slate-100 dark:border-slate-800 pt-4">
+<span class="text-slate-400 text-[11px] font-bold">MON</span>
+<span class="text-slate-400 text-[11px] font-bold">TUE</span>
+<span class="text-slate-400 text-[11px] font-bold">WED</span>
+<span class="text-slate-400 text-[11px] font-bold">THU</span>
+<span class="text-slate-400 text-[11px] font-bold">FRI</span>
+<span class="text-slate-400 text-[11px] font-bold">SAT</span>
+<span class="text-slate-400 text-[11px] font-bold">SUN</span>
+</div>
+</div>
+</div>
+<!-- Traffic Sources Bar Chart -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Traffic Sources</p>
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Top Referrals</h3>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                            View all <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<p class="text-emerald-500 text-sm font-medium">+5% new channels</p>
+</div>
+<div class="grid min-h-[220px] grid-flow-col gap-6 grid-rows-[1fr_auto] items-end justify-items-center px-3 flex-1">
+<div class="relative w-full flex flex-col items-center gap-2">
+<div class="bg-primary/20 rounded-t-lg w-full group relative cursor-pointer" style="height: 60%;">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded hidden group-hover:block">2,430</div>
+<div class="bg-primary rounded-t-lg w-full absolute bottom-0 transition-all duration-500" style="height: 70%"></div>
+</div>
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-tighter">Direct</p>
+</div>
+<div class="relative w-full flex flex-col items-center gap-2">
+<div class="bg-primary/20 rounded-t-lg w-full group relative cursor-pointer" style="height: 40%;">
+<div class="bg-primary rounded-t-lg w-full absolute bottom-0" style="height: 60%"></div>
+</div>
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-tighter">Social</p>
+</div>
+<div class="relative w-full flex flex-col items-center gap-2">
+<div class="bg-primary/20 rounded-t-lg w-full group relative cursor-pointer" style="height: 100%;">
+<div class="bg-primary rounded-t-lg w-full absolute bottom-0" style="height: 90%"></div>
+</div>
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-tighter">Search</p>
+</div>
+<div class="relative w-full flex flex-col items-center gap-2">
+<div class="bg-primary/20 rounded-t-lg w-full group relative cursor-pointer" style="height: 30%;">
+<div class="bg-primary rounded-t-lg w-full absolute bottom-0" style="height: 40%"></div>
+</div>
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-tighter">Email</p>
+</div>
+<div class="relative w-full flex flex-col items-center gap-2">
+<div class="bg-primary/20 rounded-t-lg w-full group relative cursor-pointer" style="height: 50%;">
+<div class="bg-primary rounded-t-lg w-full absolute bottom-0" style="height: 55%"></div>
+</div>
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-tighter">Ads</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Configuration Panels (Mocked Tabs Content) -->
+<div class="grid grid-cols-1 gap-8">
+<!-- General Settings Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold">General Settings</h3>
+</div>
+<div class="p-8 flex flex-col gap-6 max-w-2xl">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Site Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="text" value="Summer Campaign 2024"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Custom Domain</label>
+<div class="flex gap-2">
+<div class="flex-1 relative">
+<span class="absolute left-4 top-2 text-slate-400 text-sm">https://</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg pl-[60px] pr-4 py-2 focus:ring-2 focus:ring-primary outline-none" placeholder="your-domain.com" type="text"/>
+</div>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-200 transition-colors">Connect</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">SEO Description</label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary outline-none" rows="3">Launch your summer adventure with exclusive deals on gear and travel. Limited time offer!</textarea>
+</div>
+</div>
+</section>
+<!-- Integrations Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold">Integrations</h3>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Integration Card 1 -->
+<div class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/50 dark:bg-slate-800/50">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-[#4285F4]/10 rounded-lg flex items-center justify-center text-[#4285F4]">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Google Analytics</h4>
+<p class="text-xs text-slate-500">Connected to UA-482930-1</p>
+</div>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</div>
+</div>
+<!-- Integration Card 2 -->
+<div class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/50 dark:bg-slate-800/50">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-[#1877F2]/10 rounded-lg flex items-center justify-center text-[#1877F2]">
+<span class="material-symbols-outlined">ads_click</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Facebook Pixel</h4>
+<p class="text-xs text-slate-500">Not connected</p>
+</div>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Connect</button>
+</div>
+<!-- Integration Card 3 -->
+<div class="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/50 dark:bg-slate-800/50 col-span-full">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Custom Scripts</h4>
+<p class="text-xs text-slate-500">Add custom &lt;head&gt; or &lt;body&gt; scripts</p>
+</div>
+</div>
+<button class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-100 transition-colors">Manage Scripts</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 px-6 lg:px-20 mt-12">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+</div>
+<span class="font-bold text-slate-900 dark:text-white">Microsite Builder</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<p class="text-sm text-slate-400">© 2024 Microsite Builder. All rights reserved.</p>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

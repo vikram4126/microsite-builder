@@ -3,10 +3,13 @@ import { sectionsLibrary } from './Sections';
 export const registerTemplates = (editor: any) => {
   const bm = editor.BlockManager;
 
-  // Construct the template by combining all sections from the library
+  // Construct the template by combining only sections from 'Full Page Templates' category
   const content = `
 <div data-gjs-type="default" data-gjs-droppable="true" data-gjs-custom-name="Page Block" class="template-wrapper w-full flex flex-col min-h-screen">
-  ${sectionsLibrary.map(section => section.html).join('\n')}
+  ${sectionsLibrary
+    .filter(section => section.category === 'Full Page Templates')
+    .map(section => section.html)
+    .join('\n')}
 </div>
 `;
 

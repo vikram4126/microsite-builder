@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Template Marketplace - Microsite Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1e49e2",
+                        "brand-blue": "#1e49e2",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Left Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col fixed h-full overflow-y-auto z-50">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined block">layers</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Microsite</h1>
+</div>
+<nav class="space-y-1">
+<p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 px-3">Categories</p>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl bg-primary/10 text-primary font-medium" href="#">
+<span class="material-symbols-outlined text-xl">business_center</span>
+<span>Business</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+<span>Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">web</span>
+<span>Landing Page</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+<span>Event</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">rocket_launch</span>
+<span>Product Launch</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">corporate_fare</span>
+<span>Agency</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">JD</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-semibold truncate">Jane Doe</p>
+<p class="text-xs text-slate-500 truncate">Pro Account</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4">
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl py-2.5 pl-11 pr-4 focus:ring-2 focus:ring-primary/50 text-sm" placeholder="Search templates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+<span>Filters</span>
+</button>
+<button class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                        Create Blank
+                    </button>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8">
+<div class="mb-8">
+<h2 class="text-3xl font-bold tracking-tight mb-2">Choose a Template</h2>
+<p class="text-slate-500 dark:text-slate-400">Start with a professionally designed layout for your next big idea.</p>
+</div>
+<!-- Filters/Tabs -->
+<div class="flex gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-sm font-medium">All Templates</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary transition-colors">Popular</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary transition-colors">Newest</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary transition-colors">Free</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary transition-colors">Premium</button>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Template Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Modern business analytic dashboard landing page template" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADdpEU3s75nmLH4G_LC8y1dlX8I81w9zsT2HN10WRGDpPG9eFFYzEutZrBAePGXWWXXFEuijB4d-cX6enWNxMo2Ev-vQa0E5c0CyY8hbiShohIUdaZjGSkUsqQ8LMfDFnLC_fnPhfSo6oiurN6sQ5zZ2tqQ1KKLhrOLbzWYQm14q9LvLhmMo2ZGL3dT4FmpbgLkN7k-PyI3c3_L8u4EUEcILlCcnl7HEkNpTzdbSfn2sHydMI8KpMg2L7BPcxnwZuql372_mAP9nM')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Nova SaaS</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded">Business</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Perfect for modern tech startups and product launches.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+<!-- Template Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Creative agency portfolio with large typography" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdt5ZsWzzO4PeWQAZfPzZjTwsJWP9sCDs24nfMkQcaYlzTWC4I56ndVLXSpi3Y7ZMq5qo74nRtyJoEXKExA52iAceSAwalS-dXCJgrNrliWgD_Wcmj8cNKxWjU5P9rssqUySi6a2CZQz-TVvg2juZ6DAWHAHBhXAInkKLbWeSK_SZt_qoOdkd0uoX4qc5F50S5R6ghNUA0VOELqk3J9iBfg06XvJ3EBslnaXJ8CdszXOqrJNk-jttpcRHjMT5wqgntvBec7lu4QXU')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Creative Mind</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-2 py-1 rounded">Portfolio</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Showcase your best work with this minimalist design.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+<!-- Template Card 3 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Event conference landing page with schedule" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfo5mKLVI_zagGsvRXDeZlTqL2s7Ctpnonj-LCgp3Phszm5N-Hl6QR796igqdzK-i7wkPYZacsPzeL2hX3-KWJW0OF6lnOakaTfQMs8JJZVKUwCwEa-WX8E51aAGoUaXZTNFWbtlLdGd_XLxn_uEx9jt5TEc0FS64LwV8bm-9r7rjH8uNgzeSBrLoTMoqhrm6A8ENjXumSdcb0vDjuzwpipzSsJPMr_qXN331z5-qQ-q4AZM7DksBmb1Vemnouckz9AgwixqRSz88')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Summit 2024</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-blue-100 dark:bg-blue-900/30 text-primary px-2 py-1 rounded">Event</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Drive registrations for your next conference or workshop.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+<!-- Template Card 4 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Dark themed tech product dashboard landing" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGZBVQB2Kto4AY32hHXeCWPF48Dbc7AXKdPt7K0cPj-WMIp0Nmonai8diNf3tC6z4u2IeMEIRHh0x4_xflhAQo748o604DuzCAwnnm9XXQUHBqjdlYOlYbdCoAcwvRvLaC4daS-ULzYkr633cl_bmTIlRE3Q2m0qW-lzatMtSHD5_LUQwheKQqbIPAG7dvQwpYxY6cjmQHQ8QfEs0xnZMe7eUqUjVj6YUDCIZ2tWhww3SLoa6x_zU6ysOkG8KPsHqoOTnisn2g46k')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Eclipse UI</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded">Product Launch</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">High-conversion layout for software and digital goods.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+<!-- Template Card 5 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Corporate office building and agency landing page" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvWfR7H-Lf4BlBCWwfweN3WFbL4YpLobHRyhnekKOlftzriPXWVEFiJMih8RU6BErGlRGF_jQSYN50VfrJM1_yo3c7kaQb_l5I_XJuAQCWM_6MliMqTg8aJgExcUPBlQ1k9vEqT8KKgxIwNbPduoa7VTFmhrNGjuvPyTGE-3-6n-j6hYHsHNNlduwGT_CQ9Ol3PfkcbKNloU_zkRFcVsTM0qIvpLrvTcRRB224s5BhqsTB0PM90AZFBrCuYWwauGdZdZ_E7dtoXEE')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Nexus Agency</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-1 rounded">Agency</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Build trust with a professional and clean corporate look.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+<!-- Template Card 6 -->
+<div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200 dark:hover:shadow-black transition-all duration-300">
+<div class="relative aspect-[16/10] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Team collaboration software landing page interface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkBqXZvZ8uMnX4_ZsCsFAoI6ADE0JovsG3iVSBpJgvfdNJ_2Jny91PkRqlYWKHwCWGN6tp7tz62kaqgzr_VipEoLYqKddDsG28YkWIp0asXUwBpa6nTRS6CnuFJH9p4q0OoaDL4inCltIJ8LiGHRdzNd59FiRAomPsPvotyXlzwlNmHGropyIJeXp-BaktMbPL06EGMuzDsQ40UxSMqExUM7amHaSM1zaGd80MXRVWhIDgbDfAxdlsBd9cFPbxxEE7wUQBqvhB2mw')"></div>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-white text-slate-900 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                                Preview
+                            </button>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-bold text-lg">Flow App</h3>
+<span class="text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded">Landing Page</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Simple and effective landing page for mobile applications.</p>
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 transition-colors">
+                            Use Template
+                        </button>
+</div>
+</div>
+</div>
+<!-- Load More Section -->
+<div class="mt-12 flex justify-center pb-12">
+<button class="flex items-center gap-2 border-2 border-slate-200 dark:border-slate-800 px-8 py-3 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+                    Load More Templates
+                </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

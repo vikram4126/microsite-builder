@@ -1,0 +1,184 @@
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1e49e2",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 py-3 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Microsite Builder</h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors hover:bg-slate-200">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors hover:bg-slate-200">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<!-- Main Content (Mock Editor Background) -->
+<main class="flex-1 p-8 flex flex-col items-center">
+<div class="max-w-4xl w-full">
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">Home Page</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">Editing: index.html</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm">Preview</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm shadow-primary/20">Publish Changes</button>
+</div>
+</div>
+<!-- Editor Mock Placeholder -->
+<div class="w-full h-64 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl flex items-center justify-center bg-white/50 dark:bg-slate-900/50">
+<button class="flex items-center gap-2 text-primary font-semibold hover:underline">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add your first section
+                        </button>
+</div>
+</div>
+</main>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+<div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-slate-900 dark:text-white text-2xl font-bold leading-tight">Select Section Layout</h3>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Choose how you want to divide your section columns. You can change this later.</p>
+</div>
+<!-- Modal Body: Grid Layout Options -->
+<div class="p-8 pt-2">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<!-- Full Width -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<div class="w-4/5 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Full Width</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">100%</p>
+</div>
+</div>
+<!-- Split 50/50 -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-2 px-3 group-hover:bg-primary/10 transition-colors">
+<div class="w-1/2 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="w-1/2 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Split 50/50</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">50% | 50%</p>
+</div>
+</div>
+<!-- Three Columns -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-1.5 px-2 group-hover:bg-primary/10 transition-colors">
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Three Columns</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">33% | 33% | 33%</p>
+</div>
+</div>
+<!-- Four Columns -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-1 px-1.5 group-hover:bg-primary/10 transition-colors">
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="flex-1 h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Four Columns</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">25% x 4</p>
+</div>
+</div>
+<!-- Sidebar Left -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-2 px-3 group-hover:bg-primary/10 transition-colors">
+<div class="w-[30%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="w-[70%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Sidebar Left</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">30% | 70%</p>
+</div>
+</div>
+<!-- Sidebar Right -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-2 px-3 group-hover:bg-primary/10 transition-colors">
+<div class="w-[70%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="w-[30%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Sidebar Right</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">70% | 30%</p>
+</div>
+</div>
+<!-- Narrow Sidebar -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center gap-2 px-3 group-hover:bg-primary/10 transition-colors">
+<div class="w-[20%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+<div class="w-[80%] h-12 border-2 border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 group-hover:border-primary transition-colors"></div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Narrow Sidebar</h2>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">20% | 80%</p>
+</div>
+</div>
+<!-- Custom Layout (Placeholder) -->
+<div class="group flex flex-col gap-4 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<div class="w-full h-20 bg-slate-50 dark:bg-slate-800/50 rounded-lg flex items-center justify-center group-hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-3xl">add</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-400 dark:text-slate-500 text-base font-bold leading-tight">Custom</h2>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-medium">Define Grid</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-8 py-6 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3 bg-slate-50/50 dark:bg-slate-800/30">
+<button class="px-5 py-2.5 rounded-lg text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Cancel</button>
+<button class="px-6 py-2.5 rounded-lg text-sm font-bold bg-primary text-white shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity">Continue</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

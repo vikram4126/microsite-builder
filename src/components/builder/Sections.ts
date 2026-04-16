@@ -245,5 +245,244 @@ export const sectionsLibrary: SectionDef[] = [
         </div>
       </div>
     `
+  },
+  {
+    id: 'section-dual-cta-pdf',
+    category: 'Template Sections',
+    label: 'Split CTA Card',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
+    html: `
+      <div id="dual-cta-pdf" data-gjs-type="section" class="w-full bg-[var(--color-secondary)] py-20" layout-mode="container">
+        <div class="container mx-auto px-4">
+          <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
+            <div class="flex-1 min-h-[400px]">
+              <img src="/src/assets/background/campaign-creators-gMsnXqILjp4-unsplash.jpg" class="w-full h-full object-cover" alt="Handshake" />
+            </div>
+            <div class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
+              <h2 class="text-4xl font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
+              <a href="#" data-gjs-type="link" class="bg-[var(--color-secondary)] text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-trust-impact',
+    category: 'Template Sections',
+    label: 'Trust & Impact Hero',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="40" height="4" fill="var(--color-primary)"/><rect x="60" y="10" width="30" height="40" fill="#cbd5e1" opacity="0.5"/></svg>',
+    html: `
+      <div id="trust-impact-hero" data-gjs-type="section" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+          <div class="flex-[1.2] flex flex-col items-start text-left">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#1e49e2] mb-4">OVERLINE</span>
+            <h1 class="text-4xl lg:text-5xl font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
+            <p class="text-lg text-gray-600 leading-relaxed max-w-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+          </div>
+          <div class="flex-1 relative w-full">
+            <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] md:aspect-auto md:h-[450px]">
+              <img src="/src/assets/background/dylan-gillis-KdeqA3aTnBY-unsplash.jpg" class="w-full h-full object-cover" alt="Team impact" />
+              <div class="absolute inset-0 bg-gradient-to-tr from-[#0c233c]/20 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-expert-profiles',
+    category: 'Template Sections',
+    label: 'Expert Profiles',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="40" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="70" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/></svg>',
+    html: `
+      <div id="expert-profiles" data-gjs-type="section" class="w-full py-24 bg-[#F5F7FA]" layout-mode="container">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-20 max-w-3xl mx-auto">
+            <p class="text-gray-600 text-lg leading-relaxed font-medium">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+              <div class="p-8 pb-0 flex items-center gap-6 mb-6">
+                <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
+                  <img src="/src/assets/team/team-member (1).jpg" class="w-full h-full object-cover" alt="Expert" />
+                </div>
+                <div>
+                  <h3 class="text-2xl font-black text-[#00338d]">John Doe</h3>
+                  <p class="text-[#1e49e2] font-bold text-sm">Head of Pursuit, Partner</p>
+                </div>
+              </div>
+              <div class="p-8 pt-0 flex flex-col gap-6">
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+              <div class="p-8 pb-0 flex items-center gap-6 mb-6">
+                <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
+                  <img src="/src/assets/team/team-member (2).jpg" class="w-full h-full object-cover" alt="Expert" />
+                </div>
+                <div>
+                  <h3 class="text-2xl font-black text-[#00338d]">Jane Doe</h3>
+                  <p class="text-[#1e49e2] font-bold text-sm">Director, Strategy</p>
+                </div>
+              </div>
+              <div class="p-8 pt-0 flex flex-col gap-6">
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+              <div class="p-8 pb-0 flex items-center gap-6 mb-6">
+                <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
+                  <img src="/src/assets/team/team-member (3).jpg" class="w-full h-full object-cover" alt="Expert" />
+                </div>
+                <div>
+                  <h3 class="text-2xl font-black text-[#00338d]">Michael Smith</h3>
+                  <p class="text-[#1e49e2] font-bold text-sm">Chief Technology Officer</p>
+                </div>
+              </div>
+              <div class="p-8 pt-0 flex flex-col gap-6">
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+                <div>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-functional-team',
+    category: 'Template Sections',
+    label: 'Functional Team Grid',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
+    html: `
+      <div id="functional-team" data-gjs-type="section" class="w-full py-24 bg-white" layout-mode="container">
+        <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
+          <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (4).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (5).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (6).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (7).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (8).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (9).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (10).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (11).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (12).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+            <div class="flex flex-col items-center text-center group">
+              <div class="relative mb-6">
+                <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
+                  <img src="/src/assets/team/team-member (13).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                </div>
+                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+              </div>
+              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
   }
 ];

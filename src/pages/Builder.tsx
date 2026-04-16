@@ -1445,12 +1445,14 @@ export default function Builder() {
           background: white !important;
           border: 1.5px solid #1e49e2 !important;
           border-radius: 8px !important;
-          padding: 3px 5px !important;
-          gap: 2px !important;
-          box-shadow: 0 2px 12px rgba(0,51,141,0.15) !important;
+          padding: 4px 6px !important;
+          gap: 4px !important;
+          box-shadow: 0 4px 15px rgba(0,51,141,0.2) !important;
           display: flex !important;
           flex-direction: row !important;
+          flex-wrap: nowrap !important;
           align-items: center !important;
+          min-width: max-content !important;
         }
         .gjs-toolbar-item {
           width: 26px !important;
@@ -1583,25 +1585,7 @@ export default function Builder() {
               </div>
             )}
 
-            {/* Layers & Structure */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col flex-1 min-h-[300px] max-h-[500px]">
-              <div className="px-4 py-3 bg-gray-50/50 border-b border-gray-100 flex items-center shrink-0">
-                <Layers className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Layers & Structure</span>
-              </div>
-              <div id="gjs-layers-container" className="flex-1 overflow-y-auto no-scrollbar p-2"></div>
-            </div>
 
-            {/* Traits (Settings/Animations) */}
-            <div className={`bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col transition-all duration-300 ${!hasSelection ? 'opacity-50 grayscale pointer-events-none' : ''}`}>
-              <div className={`px-4 py-3 flex items-center border-b border-gray-100 shrink-0 ${hasSelection ? 'bg-[#eef2ff]/50' : 'bg-gray-50/50'}`}>
-                <Cog className={`w-4 h-4 mr-2 ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`} />
-                <span className={`text-[11px] font-bold uppercase tracking-widest ${hasSelection ? 'text-[#1e49e2]' : 'text-gray-400'}`}>
-                  Settings & Animations {hasSelection ? '' : '(Select Box)'}
-                </span>
-              </div>
-              <div className="w-full" id="gjs-traits-container"></div>
-            </div>
 
             {/* Style Manager */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
