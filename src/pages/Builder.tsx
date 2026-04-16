@@ -14,7 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BoxModelUI } from '../components/builder/BoxModelUI';
 import { TypographyUI } from '../components/builder/TypographyUI';
-import { BorderRadiusUI } from '../components/builder/BorderRadiusUI';
+import { BorderUI } from '../components/builder/BorderUI';
 
 // Helper: build breadcrumb path from a GrapesJS component model
 function getBreadcrumb(model: any): { name: string; cid: string }[] {
@@ -49,6 +49,7 @@ export default function Builder() {
   const [breadcrumb, setBreadcrumb] = useState<{ name: string; cid: string }[]>([]);
   const [isBordersActive, setIsBordersActive] = useState(true);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
+  const [state, setState] = useState<string>('');
   
   // Library State
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
@@ -704,9 +705,10 @@ export default function Builder() {
 
       // Custom toolbar for every component
       editor.on('component:selected', (model: any) => {
-        setHasSelection(true);
+        setHasSelection(!!model);
         setBreadcrumb(getBreadcrumb(model));
-        
+        if (!model) return;
+
         // Ensure ALL components get the Animation trait dynamically
         if (!model.getTrait('data-animation')) {
           model.addTrait({
@@ -739,6 +741,11 @@ export default function Builder() {
           { attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' },
         ]);
       });
+      
+      editor.on('styleManager:state', (s: string) => {
+        setState(s);
+      });
+
       editor.on('component:deselected', () => {
         setHasSelection(false);
         setBreadcrumb([]);
@@ -1596,7 +1603,34 @@ export default function Builder() {
               <div className="relative">
                 {editorRef.current && (
                   <>
-                    <BorderRadiusUI editor={editorRef.current} />
+                    {/* State Selector (Hover/Normal) */}
+                    <div className="px-4 py-2 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
+                        <div className="flex bg-white border border-gray-200 rounded-md p-0.5 shadow-sm">
+                            <button 
+                                onClick={() => {
+                                    editorRef.current.SelectorManager.setState('');
+                                    editorRef.current.trigger('styleManager:state', '');
+                                }}
+                                className={`px-3 py-1 text-[10px] font-bold rounded transition-colors ${!state || state === '' ? 'bg-[#1e49e2] text-white' : 'text-gray-400 hover:text-gray-600'}`}
+                            >
+                                NORMAL
+                            </button>
+                            <button 
+                                onClick={() => {
+                                    editorRef.current.SelectorManager.setState('hover');
+                                    editorRef.current.trigger('styleManager:state', 'hover');
+                                }}
+                                className={`px-3 py-1 text-[10px] font-bold rounded transition-colors ${state === 'hover' ? 'bg-[#7213ea] text-white shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                            >
+                                HOVER
+                            </button>
+                        </div>
+                        {state === 'hover' && (
+                            <span className="text-[9px] font-black text-[#7213ea] animate-pulse uppercase tracking-widest">Editing Hover Effects</span>
+                        )}
+                    </div>
+
+                    <BorderUI editor={editorRef.current} />
                     <BoxModelUI editor={editorRef.current} />
                   </>
                 )}

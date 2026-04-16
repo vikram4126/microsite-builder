@@ -447,54 +447,40 @@ export const registerStyles = (editor: any) => {
     ]
   });
 
-  sm.addSector('shadows', {
-    name: 'Shadows & Effects',
-    open: false,
-    buildProps: ['box-shadow'],
-    properties: [
-      {
-        property: 'box-shadow',
-        name: 'Box Shadow',
-        type: 'select',
-        defaults: 'none',
-        options: [
-          { value: 'none', name: 'None' },
-          { value: '0 1px 2px 0 rgb(0 0 0 / 0.05)', name: 'Small' },
-          { value: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', name: 'Medium' },
-          { value: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)', name: 'Large' },
-          { value: '0 25px 50px -12px rgb(0 0 0 / 0.25)', name: 'Extra Large' },
-        ]
-      }
-    ]
-  });
+
 
   sm.addSector('animations', {
-    name: 'Hover Effects (Select state:hover)',
+    name: 'Hover Effects & Animations',
     open: false,
-    buildProps: ['transition', 'transform'],
     properties: [
       {
         property: 'transition',
-        name: 'Transition Speed',
+        name: 'Animation Smoothness (Apply in Normal State)',
         type: 'select',
         defaults: 'none',
-        options: [
-          { value: 'none', name: 'None' },
-          { value: 'all 0.15s ease', name: 'Fast' },
-          { value: 'all 0.3s ease', name: 'Normal' },
-          { value: 'all 0.5s ease', name: 'Slow' },
+        list: [
+          { value: 'none', name: 'None (Instant)' },
+          { value: 'all 0.2s ease-out', name: 'Snappy (0.2s)' },
+          { value: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)', name: 'Smooth (0.35s)' },
+          { value: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', name: 'Elegant (0.5s)' },
+          { value: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)', name: 'Springy (Bounce)' }
         ]
       },
       {
         property: 'transform',
-        name: 'Transform',
+        name: 'Hover Motion (Switch to Hover State first)',
         type: 'select',
         defaults: 'none',
-        options: [
+        list: [
           { value: 'none', name: 'None' },
-          { value: 'translateY(-5px)', name: 'Lift Up' },
-          { value: 'scale(1.05)', name: 'Scale Up' },
-          { value: 'scale(0.95)', name: 'Scale Down' },
+          { value: 'translateY(-6px)', name: 'Float Up' },
+          { value: 'translateY(6px)', name: 'Push Down' },
+          { value: 'scale(1.04)', name: 'Gentle Zoom' },
+          { value: 'scale(1.08)', name: 'Strong Zoom' },
+          { value: 'scale(0.96)', name: 'Press Down' },
+          { value: 'rotate(2deg)', name: 'Tilt Right' },
+          { value: 'rotate(-2deg)', name: 'Tilt Left' },
+          { value: 'translateX(6px)', name: 'Slide Right' }
         ]
       }
     ]
