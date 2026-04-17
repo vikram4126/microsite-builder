@@ -147,13 +147,12 @@ export const BorderUI = ({ editor }: { editor: any }) => {
   };
 
   return (
-    <div className="gjs-sm-sector border-b border-gray-200">
+    <div className={`gjs-sm-sector border-b border-gray-100 ${isOpen ? 'custom-sector-open' : ''}`}>
       <div 
         className="gjs-sm-sector-title flex items-center justify-between cursor-pointer select-none"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="flex items-center uppercase tracking-widest font-bold text-[10px]">
-          {isOpen ? <ChevronDown size={14} className="mr-1 opacity-70" /> : <ChevronRight size={14} className="mr-1 opacity-70" />}
+        <span className="flex items-center tracking-[0.05em] font-bold text-[11px] text-white">
           Border & Radius
         </span>
       </div>
@@ -201,36 +200,36 @@ export const BorderUI = ({ editor }: { editor: any }) => {
 
                 {/* BORDER WIDTH INPUTS - Edge Centers (Styled like Spacing UI) */}
                 <input type="number" value={borderWidth.top} onChange={(e) => handleBorderWidthUpdate('top', Number(e.target.value))} 
-                    className="absolute top-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-blue-600 font-bold text-[10px] pointer-events-auto z-10" 
+                    className="absolute top-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-blue-600 font-bold text-[10px] pointer-events-auto z-10 transition-all" 
                     title="Border Top Width" />
                 
                 <input type="number" value={borderWidth.bottom} onChange={(e) => handleBorderWidthUpdate('bottom', Number(e.target.value))} 
-                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-blue-600 font-bold text-[10px] pointer-events-auto z-10" 
+                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-blue-600 font-bold text-[10px] pointer-events-auto z-10 transition-all" 
                     title="Border Bottom Width" />
                 
                 <input type="number" value={borderWidth.left} onChange={(e) => handleBorderWidthUpdate('left', Number(e.target.value))} 
-                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-blue-600 font-bold text-[10px] pointer-events-auto z-10" 
+                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-blue-600 font-bold text-[10px] pointer-events-auto z-10 transition-all" 
                     title="Border Left Width" />
                 
                 <input type="number" value={borderWidth.right} onChange={(e) => handleBorderWidthUpdate('right', Number(e.target.value))} 
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-blue-600 font-bold text-[10px] pointer-events-auto z-10" 
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-blue-600 font-bold text-[10px] pointer-events-auto z-10 transition-all" 
                     title="Border Right Width" />
 
                 {/* BORDER RADIUS INPUTS - Corners (Styled like Spacing UI) */}
                 <input type="number" value={radii.tl} onChange={(e) => handleRadiusUpdate('tl', Number(e.target.value))}
-                    className="absolute top-1 left-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 font-bold text-[10px] pointer-events-auto z-10"
+                    className="absolute top-1 left-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 font-bold text-[10px] pointer-events-auto z-10 transition-all"
                     title="Top Left Radius" />
 
                 <input type="number" value={radii.tr} onChange={(e) => handleRadiusUpdate('tr', Number(e.target.value))}
-                    className="absolute top-1 right-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 font-bold text-[10px] pointer-events-auto z-10"
+                    className="absolute top-1 right-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 font-bold text-[10px] pointer-events-auto z-10 transition-all"
                     title="Top Right Radius" />
 
                 <input type="number" value={radii.bl} onChange={(e) => handleRadiusUpdate('bl', Number(e.target.value))}
-                    className="absolute bottom-1 left-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 font-bold text-[10px] pointer-events-auto z-10"
+                    className="absolute bottom-1 left-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 font-bold text-[10px] pointer-events-auto z-10 transition-all"
                     title="Bottom Left Radius" />
 
                 <input type="number" value={radii.br} onChange={(e) => handleRadiusUpdate('br', Number(e.target.value))}
-                    className="absolute bottom-1 right-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 font-bold text-[10px] pointer-events-auto z-10"
+                    className="absolute bottom-1 right-2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 font-bold text-[10px] pointer-events-auto z-10 transition-all"
                     title="Bottom Right Radius" />
             </div>
           </div>
@@ -241,7 +240,7 @@ export const BorderUI = ({ editor }: { editor: any }) => {
                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Style</label>
                 <div className="relative">
                   <select value={borderStyle} onChange={(e) => { const s = e.target.value; setBorderStyle(s); editor.getSelected()?.addStyle({'border-style': s}); }}
-                    className="w-full appearance-none bg-gray-50 border border-gray-200 rounded px-2 py-1.5 text-[11px] font-medium text-gray-700 outline-none focus:ring-1 focus:ring-blue-500 transition-all cursor-pointer"
+                    className="w-full appearance-none bg-[#F5F7FA] border border-gray-200 rounded-lg px-2 py-1.5 text-[11px] font-medium text-gray-700 outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all cursor-pointer"
                   >
                     <option value="none">None</option>
                     <option value="solid">Solid</option>
@@ -256,8 +255,8 @@ export const BorderUI = ({ editor }: { editor: any }) => {
              {/* Border Color */}
              <div className="space-y-1">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Color</label>
-                <div className="flex items-center space-x-2 bg-gray-50 border border-gray-200 rounded px-2 py-1.5 h-[30px]">
-                    <div className="w-3.5 h-3.5 border border-gray-300 shadow-sm shrink-0" style={{ backgroundColor: borderColor }} />
+                <div className="flex items-center space-x-2 bg-[#F5F7FA] border border-gray-200 rounded-lg px-2 py-1.5 h-[32px] focus-within:ring-1 focus-within:ring-blue-500/20 focus-within:border-[#1E49E2] transition-all">
+                    <div className="w-3.5 h-3.5 border border-gray-300 shadow-sm shrink-0 rounded-sm" style={{ backgroundColor: borderColor }} />
                     <input type="text" value={borderColor} onChange={(e) => { const c = e.target.value; setBorderColor(c); editor.getSelected()?.addStyle({'border-color': c}); }}
                         className="w-full bg-transparent border-none outline-none text-[9px] uppercase font-mono font-bold text-gray-700"
                     />
@@ -284,7 +283,7 @@ export const BorderUI = ({ editor }: { editor: any }) => {
              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Effects (Shadows)</label>
              <div className="relative">
                 <select value={boxShadow} onChange={(e) => handleShadowUpdate(e.target.value)}
-                    className="w-full appearance-none bg-gray-50 border border-gray-200 rounded px-2 py-2 text-[11px] font-medium text-gray-700 outline-none focus:ring-1 focus:ring-blue-500 transition-all cursor-pointer"
+                    className="w-full appearance-none bg-[#F5F7FA] border border-gray-200 rounded-lg px-2 py-2 text-[11px] font-medium text-gray-700 outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all cursor-pointer"
                 >
                     {shadowPresets.map(s => (
                         <option key={s.name} value={s.value}>{s.name}</option>

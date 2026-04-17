@@ -449,40 +449,4 @@ export const registerStyles = (editor: any) => {
 
 
 
-  sm.addSector('animations', {
-    name: 'Hover Effects & Animations',
-    open: false,
-    properties: [
-      {
-        property: 'transition',
-        name: 'Animation Smoothness (Apply in Normal State)',
-        type: 'select',
-        defaults: 'none',
-        list: [
-          { value: 'none', name: 'None (Instant)' },
-          { value: 'all 0.2s ease-out', name: 'Snappy (0.2s)' },
-          { value: 'all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)', name: 'Smooth (0.35s)' },
-          { value: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', name: 'Elegant (0.5s)' },
-          { value: 'all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)', name: 'Springy (Bounce)' }
-        ]
-      },
-      {
-        property: 'transform',
-        name: 'Hover Motion (Switch to Hover State first)',
-        type: 'select',
-        defaults: 'none',
-        list: [
-          { value: 'none', name: 'None' },
-          { value: 'translateY(-6px)', name: 'Float Up' },
-          { value: 'translateY(6px)', name: 'Push Down' },
-          { value: 'scale(1.04)', name: 'Gentle Zoom' },
-          { value: 'scale(1.08)', name: 'Strong Zoom' },
-          { value: 'scale(0.96)', name: 'Press Down' },
-          { value: 'rotate(2deg)', name: 'Tilt Right' },
-          { value: 'rotate(-2deg)', name: 'Tilt Left' },
-          { value: 'translateX(6px)', name: 'Slide Right' }
-        ]
-      }
-    ]
-  });
 };

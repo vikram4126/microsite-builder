@@ -128,6 +128,7 @@ export default function Builder() {
         blockManager: { appendTo: '#gjs-blocks' },
         styleManager: { appendTo: '#gjs-styles-container' },
         traitManager: { appendTo: '#gjs-traits-container' },
+        layerManager: { appendTo: '#gjs-layers-container' },
         selectorManager: { componentFirst: true },
         panels: { defaults: [] },
         deviceManager: {
@@ -1302,7 +1303,7 @@ export default function Builder() {
           color: #1e49e2 !important;
           font-weight: 700 !important;
           font-size: 11px !important;
-          text-transform: uppercase !important;
+          text-transform: none !important;
           letter-spacing: 0.5px !important;
           margin-bottom: 4px !important;
         }
@@ -1547,7 +1548,109 @@ export default function Builder() {
           justify-content: space-evenly !important;
           margin-bottom: 5px !important;
         }
-      `}</style>
+        /* UNIFY GRAPESJS INTERNAL STYLES */
+    .gjs-sm-sector {
+      border-bottom: 1px solid #f3f4f6 !important; /* border-gray-100 */
+    }
+    .gjs-sm-sector-title {
+      position: relative !important;
+      background-color: #1e49e2 !important; /* Brand Blue */
+      padding: 10px 16px 10px 34px !important; /* Left padding for unified arrow */
+      color: #ffffff !important; /* Solid White Text */
+      text-transform: none !important; /* Force Title Case */
+      transition: none !important;
+      border: none !important;
+      cursor: pointer !important;
+    }
+    .gjs-sm-sector-title:hover {
+      background-color: #1e49e2 !important;
+      color: #ffffff !important;
+    }
+    /* Hide built-in GrapesJS carets */
+    .gjs-sm-caret, .gjs-sm-sector-caret, .gjs-sm-title i {
+      display: none !important;
+    }
+    /* Unified Absolute Arrow using pure CSS/SVG - UPDATED TO WHITE */
+    .gjs-sm-sector-title::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      transform: translateY(-50%) rotate(-90deg);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: transform 0.2s ease;
+      opacity: 1; /* Full visibility on blue */
+    }
+    /* Rotate arrow when sector is open */
+    .gjs-sm-sector.gjs-sm-open .gjs-sm-sector-title::before,
+    .custom-sector-open .gjs-sm-sector-title::before {
+       transform: translateY(-50%) rotate(0deg);
+    }
+    .gjs-sm-sector-title .gjs-sm-title {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.1em !important;
+    }
+    .gjs-sm-property {
+      padding: 12px 16px !important;
+    }
+    .gjs-sm-label {
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      color: #9ca3af !important; /* gray-400 */
+      margin-bottom: 6px !important;
+    }
+    .gjs-sm-field input, .gjs-sm-field select {
+      background-color: #f9fafb !important; /* gray-50 */
+      border: 1px solid #e5e7eb !important; /* gray-200 */
+      border-radius: 8px !important;
+      padding: 6px 10px !important;
+      font-size: 11px !important;
+      font-family: inherit !important;
+      color: #374151 !important;
+      transition: all 0.2s ease !important;
+    }
+    .gjs-sm-field input:focus, .gjs-sm-field select:focus {
+      border-color: #1e49e2 !important;
+      box-shadow: 0 0 0 2px rgba(30, 73, 226, 0.1) !important;
+      outline: none !important;
+    }
+    /* OPACITY SLIDER / COLOR PICKER FIX */
+    .gjs-sm-color-field {
+       border-radius: 8px !important;
+       overflow: hidden !important;
+    }
+    .gjs-field-range-input {
+      accent-color: #1e49e2 !important;
+    }
+    .gjs-sm-field-select::after {
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+    }
+    /* LAYERS MANAGER UNIFICATION */
+    .gjs-layer-title {
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      color: #4b5563 !important;
+    }
+    .gjs-layer-name {
+      font-size: 11px !important;
+      color: #374151 !important;
+    }
+    .gjs-layer.gjs-layer-selected {
+      background-color: #f0f7ff !important;
+      color: #1e49e2 !important;
+    }
+  `}</style>
 
       {/* Main Builder Area */}
       <div className="flex flex-1 overflow-hidden">
@@ -1559,7 +1662,7 @@ export default function Builder() {
           <div className="p-4 border-b border-gray-100 bg-white/90 backdrop-blur-md z-30 shadow-sm">
             <button 
               onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); setInsertAfterCid(null); setIsLibraryOpen(true); }}
-              className="w-full bg-[#1e49e2] hover:bg-[#00338d] text-white py-3 rounded-xl shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 font-semibold text-sm tracking-wide"
+              className="w-full bg-[#1e49e2] text-white py-3 rounded-2xl shadow-md flex items-center justify-center font-semibold text-sm tracking-wide transition-colors"
             >
               <Plus className="w-4 h-4 mr-2 stroke-[2.5px]" /> Add New Section
             </button>
@@ -1576,10 +1679,10 @@ export default function Builder() {
                   <span key={crumb.cid} className="flex items-center shrink-0">
                     <button
                       onClick={() => handleBreadcrumbClick(crumb.cid)}
-                      className={`text-[11px] font-semibold px-2 py-1 rounded-md transition-colors ${
+                      className={`text-[11px] font-semibold px-2 py-1 rounded-md ${
                         i === breadcrumb.length - 1
                           ? 'text-[#1e49e2] bg-blue-50/50'
-                          : 'text-gray-400 hover:text-gray-700 hover:bg-gray-50'
+                          : 'text-gray-400'
                       }`}
                     >
                       {crumb.name}
@@ -1594,11 +1697,34 @@ export default function Builder() {
 
 
 
+
+            {/* Layers Manager */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
+                <Layers className="w-4 h-4 mr-2 text-[#1e49e2]" />
+                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Page Layers</span>
+              </div>
+              <div className="p-1 max-h-[250px] overflow-y-auto no-scrollbar">
+                <div id="gjs-layers-container"></div>
+              </div>
+            </div>
+
+            {/* Element Settings (Trait Manager) */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
+                <Cog className="w-4 h-4 mr-2 text-[#1e49e2]" />
+                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Element Settings</span>
+              </div>
+              <div className="p-3">
+                <div id="gjs-traits-container"></div>
+              </div>
+            </div>
+
             {/* Style Manager */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
                 <Paintbrush className="w-4 h-4 mr-2 text-[#1e49e2]" />
-                <span className="text-[11px] font-bold text-[#1e49e2] uppercase tracking-widest">Style Manager</span>
+                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Style Manager</span>
               </div>
               <div className="relative">
                 {editorRef.current && (
@@ -1611,22 +1737,22 @@ export default function Builder() {
                                     editorRef.current.SelectorManager.setState('');
                                     editorRef.current.trigger('styleManager:state', '');
                                 }}
-                                className={`px-3 py-1 text-[10px] font-bold rounded transition-colors ${!state || state === '' ? 'bg-[#1e49e2] text-white' : 'text-gray-400 hover:text-gray-600'}`}
+                                className={`px-3 py-1 text-[10px] font-bold rounded ${!state || state === '' ? 'bg-[#1e49e2] text-white' : 'text-gray-400'}`}
                             >
-                                NORMAL
+                                Normal
                             </button>
                             <button 
                                 onClick={() => {
                                     editorRef.current.SelectorManager.setState('hover');
                                     editorRef.current.trigger('styleManager:state', 'hover');
                                 }}
-                                className={`px-3 py-1 text-[10px] font-bold rounded transition-colors ${state === 'hover' ? 'bg-[#7213ea] text-white shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                                className={`px-3 py-1 text-[10px] font-bold rounded ${state === 'hover' ? 'bg-[#7213ea] text-white shadow-sm' : 'text-gray-400'}`}
                             >
-                                HOVER
+                                Hover
                             </button>
                         </div>
                         {state === 'hover' && (
-                            <span className="text-[9px] font-black text-[#7213ea] animate-pulse uppercase tracking-widest">Editing Hover Effects</span>
+                            <span className="text-[9px] font-black text-[#7213ea] animate-pulse tracking-widest">Editing Hover Effects</span>
                         )}
                     </div>
 

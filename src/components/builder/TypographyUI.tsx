@@ -240,19 +240,19 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
 
   return (
     <div 
-      className="fixed w-[320px] bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-[100] font-sans"
+      className="fixed w-[320px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[100] font-sans"
       style={{ left: position.x, top: position.y }}
     >
         {/* Header */}
         <div 
           onMouseDown={handleMouseDown}
-          className="bg-[#0f172a] text-white p-3 flex items-center justify-between cursor-move select-none active:cursor-grabbing"
+          className="bg-[#0c233c] text-white p-3 flex items-center justify-between cursor-move select-none active:cursor-grabbing"
         >
             <div className="flex items-center space-x-2">
                 <Type size={16} className="text-[#3b82f6]" />
-                <span className="font-bold tracking-widest text-[11px] uppercase pointer-events-none">Typography</span>
+                <span className="font-bold tracking-widest text-[11px] pointer-events-none">Typography</span>
             </div>
-            <span className="text-[10px] text-gray-400 pointer-events-none">settings</span>
+            <span className="text-[10px] text-gray-400 pointer-events-none">Settings</span>
         </div>
 
         <div className="p-4 space-y-5">
@@ -261,14 +261,14 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
             <div className="flex space-x-4">
                 {/* Heading Style */}
                 <div className="flex-1 space-y-1.5">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                        <span className="mr-1.5 text-gray-400"><Heading1 size={12} strokeWidth={2.5} /></span> STYLE
+                    <label className="text-[10px] font-bold text-gray-400 tracking-widest flex items-center">
+                        <span className="mr-1.5 text-gray-300"><Heading1 size={12} strokeWidth={2.5} /></span> Style
                     </label>
                     <div className="relative">
                         <select 
                             value={styles.headingMode}
                             onChange={(e) => handleHeadingChange(e.target.value)}
-                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white shadow-sm"
+                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] shadow-sm focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all"
                         >
                             <option>Heading 1</option>
                             <option>Heading 2</option>
@@ -284,14 +284,14 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
 
                 {/* Font Family */}
                 <div className="flex-1 space-y-1.5">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                        <span className="mr-1.5 text-gray-400"><CaseSensitive size={12} strokeWidth={2.5} /></span> FAMILY
+                    <label className="text-[10px] font-bold text-gray-500 tracking-wider flex items-center">
+                        <span className="mr-1.5 text-gray-400"><CaseSensitive size={12} strokeWidth={2.5} /></span> Family
                     </label>
                     <div className="relative">
                         <select 
                             value={styles.fontFamily}
                             onChange={(e) => updateStyle('fontFamily', e.target.value)}
-                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white shadow-sm"
+                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] shadow-sm focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all"
                         >
                             <option value="Inter, sans-serif">Inter</option>
                             <option value="Roboto, sans-serif">Roboto</option>
@@ -308,26 +308,26 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
             <div className="flex space-x-4">
                 {/* Spacing */}
                 <div className="flex-1 space-y-1.5">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                        <span className="mr-1.5 text-gray-400"><ArrowLeftRight size={12} strokeWidth={2.5} /></span> SPACING
+                    <label className="text-[10px] font-bold text-gray-500 tracking-wider flex items-center">
+                        <span className="mr-1.5 text-gray-400"><ArrowLeftRight size={12} strokeWidth={2.5} /></span> Spacing
                     </label>
                     <input 
                         type="text" 
                         value={styles.letterSpacing}
                         onChange={(e) => updateStyle('letterSpacing', e.target.value)}
-                        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-[#6366f1] shadow-sm"
+                        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] focus:outline-none focus:border-[#1E49E2] focus:ring-1 focus:ring-blue-500/20 shadow-sm transition-all"
                     />
                 </div>
                 {/* Weight */}
                 <div className="flex-1 space-y-1.5">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                        <span className="mr-1.5 text-gray-400"><Bold size={12} strokeWidth={2.5} /></span> WEIGHT
+                    <label className="text-[10px] font-bold text-gray-500 tracking-wider flex items-center">
+                        <span className="mr-1.5 text-gray-400"><Bold size={12} strokeWidth={2.5} /></span> Weight
                     </label>
                     <div className="relative">
                         <select 
                             value={styles.fontWeight}
                             onChange={(e) => updateStyle('fontWeight', e.target.value)}
-                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white shadow-sm"
+                            className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] shadow-sm focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all"
                         >
                             <option value="300">Light (300)</option>
                             <option value="400">Regular (400)</option>
@@ -346,8 +346,8 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                 {/* Size */}
                 <div className="flex-1 space-y-2.5">
                     <div className="flex justify-between items-center">
-                        <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                            <span className="mr-1.5 text-gray-400"><Monitor size={12} strokeWidth={2.5} /></span> SIZE
+                        <label className="text-[10px] font-bold text-gray-500 tracking-wider flex items-center">
+                            <span className="mr-1.5 text-gray-400"><Monitor size={12} strokeWidth={2.5} /></span> Size
                         </label>
                         <span className="text-[10px] font-bold text-[#1e49e2] tracking-wider">{styles.fontSize || 16}PX</span>
                     </div>
@@ -357,7 +357,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                         max="120" 
                         value={styles.fontSize || 16}
                         onChange={(e) => updateStyle('fontSize', Number(e.target.value))}
-                        className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#1e49e2]"
+                        className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#1e49e2]"
                     />
                 </div>
                 {/* Alignment */}
@@ -482,7 +482,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                     <select 
                         value={styles.listStyleType}
                         onChange={(e) => updateStyle('listStyleType', e.target.value)}
-                        className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-white shadow-sm"
+                        className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] shadow-sm focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all"
                     >
                         <option value="">Default</option>
                         <option value="none">None</option>

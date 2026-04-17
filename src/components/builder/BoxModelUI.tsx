@@ -94,14 +94,13 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
   }
 
   return (
-    <div className="gjs-sm-sector border-b border-gray-200">
+    <div className={`gjs-sm-sector border-b border-gray-100 ${isOpen ? 'custom-sector-open' : ''}`}>
       <div 
         className="gjs-sm-sector-title flex items-center justify-between cursor-pointer select-none"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="flex items-center uppercase tracking-widest font-bold text-[10px]">
-          {isOpen ? <ChevronDown size={14} className="mr-1 opacity-70" /> : <ChevronRight size={14} className="mr-1 opacity-70" />}
-          Spacing (Margin & Padding)
+        <span className="flex items-center tracking-[0.05em] font-bold text-[11px] text-white">
+          Spacing
         </span>
       </div>
 
@@ -149,17 +148,17 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
                 </div>
 
                 {/* Padding Inputs - Positioned in the middle of the inner gap */}
-                <input type="number" value={padding.top} onChange={(e) => handleUpdate('padding', 'top', Number(e.target.value))} className="absolute top-3 left-1/2 -translate-x-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 text-[10px] font-bold pointer-events-auto z-10" />
-                <input type="number" value={padding.bottom} onChange={(e) => handleUpdate('padding', 'bottom', Number(e.target.value))} className="absolute bottom-3 left-1/2 -translate-x-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 text-[10px] font-bold pointer-events-auto z-10" />
-                <input type="number" value={padding.left} onChange={(e) => handleUpdate('padding', 'left', Number(e.target.value))} className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 text-[10px] font-bold pointer-events-auto z-10" />
-                <input type="number" value={padding.right} onChange={(e) => handleUpdate('padding', 'right', Number(e.target.value))} className="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-indigo-600 text-[10px] font-bold pointer-events-auto z-10" />
+                <input type="number" value={padding.top} onChange={(e) => handleUpdate('padding', 'top', Number(e.target.value))} className="absolute top-3 left-1/2 -translate-x-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 text-[10px] font-bold pointer-events-auto z-10 transition-all" />
+                <input type="number" value={padding.bottom} onChange={(e) => handleUpdate('padding', 'bottom', Number(e.target.value))} className="absolute bottom-3 left-1/2 -translate-x-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 text-[10px] font-bold pointer-events-auto z-10 transition-all" />
+                <input type="number" value={padding.left} onChange={(e) => handleUpdate('padding', 'left', Number(e.target.value))} className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 text-[10px] font-bold pointer-events-auto z-10 transition-all" />
+                <input type="number" value={padding.right} onChange={(e) => handleUpdate('padding', 'right', Number(e.target.value))} className="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded text-indigo-600 text-[10px] font-bold pointer-events-auto z-10 transition-all" />
             </div>
 
             {/* Margin Inputs - Moved to last position and given z-10 for clickability */}
-            <input type="number" value={margin.top} onChange={(e) => handleUpdate('margin', 'top', Number(e.target.value))} className="absolute top-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-gray-700 font-bold text-[10px] z-10" />
-            <input type="number" value={margin.bottom} onChange={(e) => handleUpdate('margin', 'bottom', Number(e.target.value))} className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-gray-700 font-bold text-[10px] z-10" />
-            <input type="number" value={margin.left} onChange={(e) => handleUpdate('margin', 'left', Number(e.target.value))} className="absolute left-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-gray-700 font-bold text-[10px] z-10" />
-            <input type="number" value={margin.right} onChange={(e) => handleUpdate('margin', 'right', Number(e.target.value))} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white rounded-none text-gray-700 font-bold text-[10px] z-10" />
+            <input type="number" value={margin.top} onChange={(e) => handleUpdate('margin', 'top', Number(e.target.value))} className="absolute top-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded font-bold text-[10px] z-10 transition-all" />
+            <input type="number" value={margin.bottom} onChange={(e) => handleUpdate('margin', 'bottom', Number(e.target.value))} className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded font-bold text-[10px] z-10 transition-all" />
+            <input type="number" value={margin.left} onChange={(e) => handleUpdate('margin', 'left', Number(e.target.value))} className="absolute left-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded font-bold text-[10px] z-10 transition-all" />
+            <input type="number" value={margin.right} onChange={(e) => handleUpdate('margin', 'right', Number(e.target.value))} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 bg-transparent text-center focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-500/20 rounded font-bold text-[10px] z-10 transition-all" />
           </div>
         </div>
       )}
