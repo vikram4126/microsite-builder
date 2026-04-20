@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BoxModelUI } from '../components/builder/BoxModelUI';
 import { TypographyUI } from '../components/builder/TypographyUI';
 import { BorderUI } from '../components/builder/BorderUI';
+import { StructuralMap } from '../components/builder/StructuralMap';
 
 // Helper: build breadcrumb path from a GrapesJS component model
 function getBreadcrumb(model: any): { name: string; cid: string }[] {
@@ -1398,37 +1399,161 @@ export default function Builder() {
           font-size: 12px !important;
         }
 
-        /* Enlarge Layer Manager and make items look like structural page blocks */
-        .gjs-layer {
-          padding: 8px 10px !important;
-          border: 1px solid #e2e8f0 !important;
-          border-radius: 6px !important;
-          margin-bottom: 6px !important;
-          background: #ffffff !important;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
-          transition: all 0.15s !important;
+
+
+
+        /* --- UNIFIED STRUCTURAL WIREFRAME (Vertical Priority) --- */
+        .gjs-layers-container {
+          padding: 12px 10px !important;
+          background: #fdfefe !important;
+          overflow-x: hidden !important;
         }
+
+        /* DEFAULT: Rigid Vertical Page Flow */
+        .gjs-layer-children {
+          display: block !important; /* Block ensures siblings stack vertically by default */
+          padding: 8px 4px 12px 14px !important;
+          margin-left: 10px !important;
+          border-left: 1px dashed #e2e8f0 !important;
+          width: calc(100% - 10px) !important;
+        }
+
+        /* Generic Layer (Vertical Block) */
+        .gjs-layer {
+          display: flex !important;
+          align-items: center !important;
+          position: relative !important;
+          padding: 8px 12px !important;
+          border: 1px solid #e5e7eb !important;
+          border-radius: 8px !important;
+          background: #ffffff !important;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+          margin-bottom: 6px !important;
+          width: 100% !important; /* Full width vertical stacking */
+          min-height: 40px !important;
+          transition: all 0.2s ease !important;
+        }
+
+        /* HORIZONTAL LAYOUT: Only for Rows/Grids/Action-Groups */
+        /* Target by component type */
+        .gjs-layer[data-gjs-type="responsive-grid"] + .gjs-layer-children,
+        .gjs-layer[data-gjs-type="row"] + .gjs-layer-children,
+        .gjs-layer[data-gjs-type="grid"] + .gjs-layer-children,
+        .gjs-layer[data-gjs-type="button-group"] + .gjs-layer-children {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          gap: 6px !important;
+        }
+
+        /* Items inside a horizontal container */
+        .gjs-layer-children[style*="flex-direction: row"] > .gjs-layer,
+        .gjs-layer-children[class*="flex"] > .gjs-layer,
+        .gjs-layer[data-gjs-type="card"],
+        .gjs-layer[data-gjs-type="button"],
+        .gjs-layer[data-gjs-type="link"] {
+          width: auto !important;
+          flex: 1 1 auto !important;
+          min-width: 70px !important;
+          max-width: fit-content !important;
+          margin-bottom: 0 !important;
+        }
+
+        /* Section Header Styling */
+        .gjs-layer[data-gjs-type="section"] {
+           background: #f8fafc !important;
+           border-color: #cbd5e1 !important;
+           padding: 10px 14px !important;
+           border-radius: 10px !important;
+           margin-top: 14px !important;
+           margin-bottom: 6px !important;
+           border-left-width: 4px !important;
+           border-left-color: #1e49e2 !important;
+        }
+        .gjs-layer[data-gjs-type="section"] .gjs-layer-name {
+           font-weight: 800 !important;
+           color: #0c233c !important;
+           font-size: 11px !important;
+           text-transform: uppercase !important;
+           letter-spacing: 0.05em !important;
+        }
+
+        /* Component Names & Type Icons */
         .gjs-layer-name {
           font-weight: 600 !important;
-          color: #0c233c !important;
-          font-size: 12px !important;
+          color: #475569 !important;
+          font-size: 10px !important;
+          margin-left: 24px !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
         }
+
+        .gjs-layer-icon {
+          position: absolute !important;
+          left: 10px !important;
+          width: 20px !important;
+          height: 20px !important;
+          background: #f1f5f9 !important;
+          border-radius: 4px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+        
+        /* TT Indicator for Text */
+        .gjs-layer[data-gjs-type="text"] .gjs-layer-icon::before {
+          content: "TT" !important;
+          font-size: 8px !important;
+          font-weight: 900 !important;
+          color: #1e49e2 !important;
+        }
+
+        /* Clipping: Hide children of Cards/Grid Items */
+        .gjs-layer[data-gjs-type="card"] + .gjs-layer-children,
+        .gjs-layer[data-gjs-type="grid-item"] + .gjs-layer-children {
+          display: none !important;
+        }
+
+        /* Drag & Hover States */
         .gjs-layer:hover {
-          background: #f8fafc !important;
-          border-color: #cbd5e1 !important;
-          transform: translateY(-1px) !important;
-          box-shadow: 0 3px 6px rgba(0,0,0,0.04) !important;
+          border-color: #1e49e2 !important;
+          background: #ffffff !important;
+          box-shadow: 0 4px 12px rgba(30, 73, 226, 0.08) !important;
+          z-index: 5 !important;
         }
         .gjs-layer.gjs-active {
-          background: #eef2ff !important;
           border-color: #1e49e2 !important;
-          box-shadow: 0 0 0 1px rgba(30, 73, 226, 0.2) !important;
+          background: #eef2ff !important;
+          box-shadow: 0 0 0 2px rgba(30, 73, 226, 0.1) !important;
         }
-        .gjs-layer-icon {
+
+        /* Right Actions */
+        .gjs-layer-vis {
+          margin-left: auto !important;
+          opacity: 0.4 !important;
+        }
+        .gjs-layer:hover .gjs-layer-vis {
+          opacity: 1 !important;
           color: #1e49e2 !important;
-          opacity: 0.8 !important;
-          margin-right: 8px !important;
         }
+
+        /* Drag Handle subtle indication */
+        .gjs-layer::after {
+          content: "⠿" !important;
+          position: absolute !important;
+          right: 24px !important;
+          font-size: 12px !important;
+          color: #cbd5e1 !important;
+          cursor: grab !important;
+          opacity: 0;
+        }
+        .gjs-layer:hover::after {
+          opacity: 1 !important;
+        }
+
+        /* Identification of Sections (Top Level) */
+        /* We can't easily select based on depth, but we can style all items as "layout blocks" */
         .gjs-layer-title {
           font-family: 'Inter', sans-serif !important;
         }
@@ -1662,7 +1787,7 @@ export default function Builder() {
           <div className="p-4 border-b border-gray-100 bg-white/90 backdrop-blur-md z-30 shadow-sm">
             <button 
               onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); setInsertAfterCid(null); setIsLibraryOpen(true); }}
-              className="w-full bg-[#1e49e2] text-white py-3 rounded-2xl shadow-md flex items-center justify-center font-semibold text-sm tracking-wide transition-colors"
+              className="w-full bg-[#1e49e2] text-white py-3 rounded-none shadow-md flex items-center justify-center font-semibold text-sm tracking-wide transition-colors"
             >
               <Plus className="w-4 h-4 mr-2 stroke-[2.5px]" /> Add New Section
             </button>
@@ -1672,45 +1797,34 @@ export default function Builder() {
             
 
 
-            {/* Breadcrumb Layer Navigation */}
-            {breadcrumb.length > 0 && (
-              <div className="bg-white rounded-2xl p-2 border border-gray-100 shadow-sm flex items-center overflow-x-auto whitespace-nowrap no-scrollbar">
-                {breadcrumb.map((crumb, i) => (
-                  <span key={crumb.cid} className="flex items-center shrink-0">
-                    <button
-                      onClick={() => handleBreadcrumbClick(crumb.cid)}
-                      className={`text-[11px] font-semibold px-2 py-1 rounded-md ${
-                        i === breadcrumb.length - 1
-                          ? 'text-[#1e49e2] bg-blue-50/50'
-                          : 'text-gray-400'
-                      }`}
-                    >
-                      {crumb.name}
-                    </button>
-                    {i < breadcrumb.length - 1 && (
-                      <ChevronRight className="w-3 h-3 text-gray-300 mx-0.5 shrink-0" />
-                    )}
-                  </span>
-                ))}
-              </div>
-            )}
+            {/* Structural Map (Replaces horizontal breadcrumbs and standard layers) */}
 
 
 
 
             {/* Layers Manager */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
                 <Layers className="w-4 h-4 mr-2 text-[#1e49e2]" />
                 <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Page Layers</span>
               </div>
-              <div className="p-1 max-h-[250px] overflow-y-auto no-scrollbar">
-                <div id="gjs-layers-container"></div>
+              <div className="p-1 max-h-[450px] overflow-y-auto no-scrollbar">
+                {editorRef.current && (
+                  <StructuralMap 
+                    editor={editorRef.current} 
+                    onOpenLibrary={() => { 
+                      setLibraryMode('layouts'); 
+                      setSelectedCategory('Layout'); 
+                      setInsertAfterCid(null); 
+                      setIsLibraryOpen(true); 
+                    }}
+                  />
+                )}
               </div>
             </div>
 
             {/* Element Settings (Trait Manager) */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
                 <Cog className="w-4 h-4 mr-2 text-[#1e49e2]" />
                 <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Element Settings</span>
@@ -1721,7 +1835,7 @@ export default function Builder() {
             </div>
 
             {/* Style Manager */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
                 <Paintbrush className="w-4 h-4 mr-2 text-[#1e49e2]" />
                 <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Style Manager</span>
@@ -1782,7 +1896,7 @@ export default function Builder() {
       {/* Section Library Popup Overlay */}
       {isLibraryOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-none shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center bg-gray-50 gap-4">
@@ -1872,7 +1986,7 @@ export default function Builder() {
                     <div 
                       key={idx}
                       onClick={() => addBlockToCanvas(block)}
-                      className="group border border-gray-200 rounded-xl hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white overflow-hidden"
+                      className="group border border-gray-200 rounded-none hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white overflow-hidden"
                     >
                       <div className="h-40 bg-slate-50 border-b border-gray-100 mb-0 flex flex-col items-center justify-center group-hover:border-[#1e49e2]/80 group-hover:scale-[1.02] shadow-sm transition-all overflow-hidden relative">
                          {block.get('media') ? (
@@ -1909,7 +2023,7 @@ export default function Builder() {
       {/* Custom Code Widget Modal */}
       {isCustomCodeModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm p-4">
-          <div className="bg-[#1e1e1e] rounded-xl shadow-2xl w-full max-w-5xl h-[80vh] flex flex-col overflow-hidden border border-gray-700 animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-[#1e1e1e] rounded-none shadow-2xl w-full max-w-5xl h-[80vh] flex flex-col overflow-hidden border border-gray-700 animate-in fade-in zoom-in-95 duration-200">
             
             <div className="px-4 py-3 border-b border-gray-700 flex justify-between items-center bg-[#252526]">
               <div className="flex space-x-1">
