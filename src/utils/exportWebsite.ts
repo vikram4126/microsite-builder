@@ -24,22 +24,48 @@ export async function exportStaticWebsite(editor: any, projectName: string) {
     }
   });
 
-  let processedHtml = baseDoc.body.innerHTML;
-
-  // 2. Scan for base64 images and extract them
+  // 2. Scan for base64 images and extract them via DOM for reliability
   const imageMap = new Map<string, string>();
-
-  const base64Regex = /src="(data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,([^"]+))"/gi;
-  let match: RegExpExecArray | null;
   let imgCounter = 0;
-  while ((match = base64Regex.exec(htmlBody)) !== null) {
-    const fullDataUri = match[1];
-    const ext = match[2].replace('+xml', '').replace('jpeg', 'jpg');
-    imgCounter++;
-    const localPath = 'images/image-' + imgCounter + '.' + ext;
-    imageMap.set(fullDataUri, localPath);
-    processedHtml = processedHtml.split(fullDataUri).join(localPath);
-  }
+
+  // Process <img> tags
+  baseDoc.querySelectorAll('img').forEach((img: any) => {
+    const src = img.getAttribute('src') || '';
+    if (src.startsWith('data:image/')) {
+      const match = src.match(/^data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,/);
+      if (match) {
+        if (imageMap.has(src)) {
+          img.setAttribute('src', imageMap.get(src)!);
+        } else {
+          const ext = match[1].replace('+xml', '').replace('jpeg', 'jpg');
+          imgCounter++;
+          const localPath = `images/image-${imgCounter}.${ext}`;
+          imageMap.set(src, localPath);
+          img.setAttribute('src', localPath);
+        }
+      }
+    }
+  });
+
+  // Process background images in style attributes
+  baseDoc.querySelectorAll('[style*="background-image"]').forEach((el: any) => {
+    const style = el.getAttribute('style') || '';
+    const bgMatch = style.match(/url\(["']?(data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,[^"']+)["']?\)/i);
+    if (bgMatch) {
+      const fullDataUri = bgMatch[1];
+      if (imageMap.has(fullDataUri)) {
+        el.setAttribute('style', style.replace(fullDataUri, imageMap.get(fullDataUri)!));
+      } else {
+        const ext = bgMatch[2].replace('+xml', '').replace('jpeg', 'jpg');
+        imgCounter++;
+        const localPath = `images/image-${imgCounter}.${ext}`;
+        imageMap.set(fullDataUri, localPath);
+        el.setAttribute('style', style.replace(fullDataUri, localPath));
+      }
+    }
+  });
+
+  let processedHtml = baseDoc.body.innerHTML;
 
   // 3. Widget scripts for interactive elements
   const widgetScripts = [

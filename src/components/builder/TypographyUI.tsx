@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket, List } from 'lucide-react';
+import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket, List, X } from 'lucide-react';
 
 export const TypographyUI = ({ editor }: { editor: any }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -252,7 +252,12 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                 <Type size={16} className="text-[#3b82f6]" />
                 <span className="font-bold tracking-widest text-[11px] pointer-events-none">Typography</span>
             </div>
-            <span className="text-[10px] text-gray-400 pointer-events-none">Settings</span>
+            <button 
+                onClick={() => setIsVisible(false)}
+                className="p-1 hover:bg-white/10 rounded-md transition-colors text-gray-400 hover:text-white"
+            >
+                <X size={14} />
+            </button>
         </div>
 
         <div className="p-4 space-y-5">
