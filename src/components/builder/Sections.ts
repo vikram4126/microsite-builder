@@ -14,7 +14,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with Brand Colors (Fix for B&W preview) -->
-      <div id="business-nav" data-gjs-type="section" class="w-full bg-white dark:bg-slate-900 border-b-[3px] border-accent shadow-sm" layout-mode="container">
+      <div id="business-nav" data-gjs-type="section" data-gjs-name="Navbar" class="w-full bg-white dark:bg-slate-900 border-b-[3px] border-accent shadow-sm" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-6">
             <a href="#" class="block"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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" alt="Brand Logo" class="h-8 w-auto inline-block" /></a>
@@ -37,7 +37,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
-      <div id="business-hero" data-gjs-type="section" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
+      <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
         <div class="container mx-auto">
           <!-- Wrap interior in standard flex layout -->
           <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-6 lg:px-8">
@@ -71,7 +71,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
       <!-- Features (Using responsive-grid trait method) -->
-      <div id="business-features" data-gjs-type="section" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+      <div id="business-features" data-gjs-type="section" data-gjs-name="Features List" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-primary dark:text-white text-4xl font-black mb-4 tracking-tight">Our Core Capabilities</h2>
@@ -113,7 +113,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
       <!-- Services Grid -->
-      <div id="business-services" data-gjs-type="section" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
+      <div id="business-services" data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div class="max-w-xl">
@@ -163,7 +163,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
-      <div id="business-cta" data-gjs-type="section" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+      <div id="business-cta" data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
             <div class="relative z-10 max-w-3xl mx-auto">
@@ -186,7 +186,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
       <!-- KPMG Footer -->
-      <div id="business-footer" data-gjs-type="section" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div id="business-footer" data-gjs-type="section" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -252,7 +252,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Split CTA Card',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
-      <div id="dual-cta-pdf" data-gjs-type="section" class="w-full bg-[var(--color-secondary)] py-20" layout-mode="container">
+      <div id="dual-cta-pdf" data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-[var(--color-secondary)] py-20" layout-mode="container">
         <div class="container mx-auto px-4">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
             <div class="flex-1 min-h-[400px]">
@@ -273,7 +273,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Trust & Impact Hero',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="40" height="4" fill="var(--color-primary)"/><rect x="60" y="10" width="30" height="40" fill="#cbd5e1" opacity="0.5"/></svg>',
     html: `
-      <div id="trust-impact-hero" data-gjs-type="section" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
+      <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Trust Hero" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
             <span class="text-xs font-bold uppercase tracking-widest text-[#1e49e2] mb-4">OVERLINE</span>
@@ -296,7 +296,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Expert Profiles',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="40" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="70" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/></svg>',
     html: `
-      <div id="expert-profiles" data-gjs-type="section" class="w-full py-24 bg-[#F5F7FA]" layout-mode="container">
+      <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Expert Profiles" class="w-full py-24 bg-[#F5F7FA]" layout-mode="container">
         <div class="container mx-auto px-4">
           <div class="text-center mb-20 max-w-3xl mx-auto">
             <p class="text-gray-600 text-lg leading-relaxed font-medium">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
@@ -376,7 +376,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Functional Team Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
-      <div id="functional-team" data-gjs-type="section" class="w-full py-24 bg-white" layout-mode="container">
+      <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Grid" class="w-full py-24 bg-white" layout-mode="container">
         <div class="container mx-auto px-4">
           <h2 class="text-4xl font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
           <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">

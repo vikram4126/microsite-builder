@@ -37,7 +37,7 @@ export default function Builder() {
   const editorRef = useRef<any>(null);
   
   const [device, setDevice] = useState('desktop');
-  const [autoSave, setAutoSave] = useState(false);
+  const [autoSave, setAutoSave] = useState(true);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [insertAfterCid, setInsertAfterCid] = useState<string | null>(null);
   const [blocks, setBlocks] = useState<any[]>([]);
@@ -59,6 +59,7 @@ export default function Builder() {
   // Refs for auto-save closures
   const autoSaveRef = useRef(autoSave);
   const projectDataRef = useRef(projectData);
+  const isProjectLoaded = useRef(false);
   
   useEffect(() => {
     autoSaveRef.current = autoSave;
@@ -585,7 +586,8 @@ export default function Builder() {
                   )
                 };
                 await api.put(`/projects/${projectId}`, updatedProject);
-                setProjectData(updatedProject);
+                // We update the ref but skip setProjectData to prevent a full React re-render of the Builder page
+                projectDataRef.current = updatedProject; 
                 console.log('Autosaved project');
               } catch (err) {
                 console.error('Autosave failed', err);
@@ -831,6 +833,7 @@ export default function Builder() {
 
   // Load project data
   useEffect(() => {
+    isProjectLoaded.current = false;
     const loadData = async () => {
       if (projectId === 'guest') {
         const dummyProject = {
@@ -850,8 +853,9 @@ export default function Builder() {
         
         if (editorRef.current) {
           const currentPage = data.pages.find((p: any) => p.id === pageId);
-          if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0) {
+          if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0 && !isProjectLoaded.current) {
             editorRef.current.loadProjectData(currentPage.layout);
+            isProjectLoaded.current = true;
           }
         }
       } catch (err) {
@@ -890,7 +894,7 @@ export default function Builder() {
         )
       };
       await api.put(`/projects/${projectId}`, updatedProject);
-      setProjectData(updatedProject);
+      // Update ref but skip state update to prevent re-render flicker
       projectDataRef.current = updatedProject;
       
       toast.success('Project saved successfully', { position: 'bottom-right', autoClose: 2000 });
@@ -984,7 +988,7 @@ export default function Builder() {
 
   const handleExportZip = async () => {
     if (!editorRef.current) return;
-    const name = projectData?.name || 'microsite';
+    const name = projectDataRef.current?.name || 'microsite';
     await exportStaticWebsite(editorRef.current, name);
   };
 
@@ -1091,17 +1095,8 @@ export default function Builder() {
         </div>
 
         <div className="flex items-center space-x-3">
-          {projectId !== 'guest' && (
-            <label className="flex items-center space-x-2 cursor-pointer mr-2">
-              <input 
-                type="checkbox" 
-                checked={autoSave} 
-                onChange={(e) => setAutoSave(e.target.checked)} 
-                className="rounded border-gray-300 text-[#1e49e2] focus:ring-[#1e49e2]"
-              />
-              <span className="text-xs font-semibold text-gray-600 select-none uppercase tracking-wider">Auto Save</span>
-            </label>
-          )}
+          {/* Auto Save is now handled in the background to reduce UI clutter */}
+
 
           <button onClick={() => {
              const ed = editorRef.current;

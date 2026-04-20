@@ -41,7 +41,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Navbar',
     media: svgs.navbar,
     content: `
-      <div id="navbar-basic" data-gjs-type="section" class="w-full bg-white border-b border-gray-100" layout-mode="container">
+      <div id="navbar-basic" data-gjs-type="section" data-gjs-name="Navbar" class="w-full bg-white border-b border-gray-100" layout-mode="container">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between p-4 lg:py-5 lg:px-6 gap-4">
           <div class="text-xl font-bold text-gray-900">Brand</div>
           <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 font-medium text-sm w-full md:w-auto">
@@ -61,7 +61,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Sections',
     media: svgs.footer,
     content: `
-      <div id="business-footer" data-gjs-type="section" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div id="business-footer" data-gjs-type="section" data-gjs-name="Footer" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -128,7 +128,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: svgs.header,
     content: `
-      <div id="header-hero" data-gjs-type="section" class="w-full bg-gray-900 py-24" layout-mode="container">
+      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-24" layout-mode="container">
         <div class="container mx-auto text-white text-center">
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
@@ -146,7 +146,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: svgs.intro,
     content: `
-      <div id="introduction-section" data-gjs-type="section" class="w-full py-20" layout-mode="container">
+      <div id="introduction-section" data-gjs-type="section" data-gjs-name="Intro Section" class="w-full py-20" layout-mode="container">
         <div class="container mx-auto">
           <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
             <div class="flex-1">

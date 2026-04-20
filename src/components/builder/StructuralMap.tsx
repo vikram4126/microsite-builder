@@ -15,7 +15,8 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
     if (!editor) return;
     const wrapper = editor.getWrapper();
     if (wrapper) {
-      setComponents(wrapper.get('components').models);
+      // Use spread operator to ensure React detects a new array reference
+      setComponents([...wrapper.get('components').models]);
     }
   }, [editor]);
 
@@ -37,16 +38,8 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
   // --- COMPONENT LOOKUP HELPER (The Fix) ---
   const findModelByCid = (cid: string) => {
     if (!editor || !cid) return null;
-    // 1. Try direct collection lookup (Fastest)
-    const all = editor.Components.all;
-    if (all && all.get) {
-      const found = all.get(cid);
-      if (found) return found;
-    }
-    // 2. Fallback to wrapper scan (Most Reliable)
-    const wrapper = editor.getWrapper();
-    const found = wrapper.find((c: any) => c.cid === cid)[0];
-    return found || null;
+    // Use the standard GrapesJS method to find by CID or ID
+    return editor.Components.getById(cid) || editor.getWrapper().find(`#${cid}`)[0] || null;
   };
 
   const handleDragStart = (cid: string) => {
@@ -84,16 +77,16 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
         index = position === 'after' ? targetIndex + 1 : targetIndex;
       }
 
-      if (parent) {
-        // --- RELIABILITY OVERHAUL V3: NATIVE MOVE WITH SYNC ---
-        // We use JSON-based re-add only if parent changes or it's a cross-section movement
-        const componentData = draggedModel.toJSON();
-        draggedModel.remove();
-        const newModel = parent.add(componentData, { at: index });
+      if (parent && draggedModel) {
+        // --- DEEP NATIVE MOVE ---
+        // This is the most reliable way to move a component in GrapesJS.
+        // It handles DOM movement, internal collection sync, and events.
+        draggedModel.move(parent, { at: index });
         
-        editor.select(newModel);
-        editor.Canvas.scrollToComponent(newModel, { force: true });
+        editor.select(draggedModel);
+        editor.Canvas.scrollToComponent(draggedModel, { force: true });
         
+        // Force a UI refresh
         editor.refresh();
         refreshTree();
       }
@@ -115,7 +108,8 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
       const parent = model.parent();
       if (parent) {
         const index = model.index();
-        const componentData = model.toJSON();
+        const componentData = JSON.parse(JSON.stringify(model.toJSON()));
+        // Adding a new component with the same data clones it
         const cloned = parent.add(componentData, { at: index + 1 });
         
         editor.refresh();
@@ -242,9 +236,15 @@ const MapNode: React.FC<{
 
   const isDragging = draggedCid === node.cid;
 
-  let displayName = meta.name;
+  // Robust name detection logic
+  const customName = node.get('custom-name');
+  const nameProp = node.get('name');
+  const attrName = node.getAttributes?.()?.['data-gjs-name'];
+  
+  let displayName = customName || nameProp || attrName || meta.name;
+  
   if (isParentHorizontal) displayName = "Col";
-  else if (meta.name === 'Text') {
+  else if (meta.name === 'Text' && !customName && !nameProp && !attrName) {
     const rawContent = node.get('content') || "";
     const cleanContent = rawContent.replace(/<[^>]*>?/gm, '').trim();
     if (cleanContent) {

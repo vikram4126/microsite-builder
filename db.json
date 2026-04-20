@@ -1813,7 +1813,7 @@
       "userId": "1773580019303",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-04-20T04:14:29.184Z",
+      "lastEdited": "2026-04-20T04:47:39.286Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -1889,6 +1889,9 @@
                                         "lg:py-4",
                                         "lg:px-6"
                                       ],
+                                      "attributes": {
+                                        "id": "ile7c"
+                                      },
                                       "components": [
                                         {
                                           "type": "link",
@@ -1961,7 +1964,8 @@
                                                 "transition-colors"
                                               ],
                                               "attributes": {
-                                                "href": "#"
+                                                "href": "#",
+                                                "id": "itbu6"
                                               },
                                               "components": [
                                                 {
@@ -2019,7 +2023,8 @@
                                                 "transition-all"
                                               ],
                                               "attributes": {
-                                                "href": "#"
+                                                "href": "#",
+                                                "id": "iyn15"
                                               },
                                               "components": [
                                                 {
@@ -2112,6 +2117,9 @@
                                                     "border-accent/20",
                                                     "shadow-sm"
                                                   ],
+                                                  "attributes": {
+                                                    "id": "i5byq"
+                                                  },
                                                   "components": [
                                                     {
                                                       "type": "textnode",
@@ -3968,6 +3976,308 @@
                                                 {
                                                   "type": "textnode",
                                                   "content": "Cookies Settings"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "section",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "py-20"
+                          ],
+                          "attributes": {
+                            "id": "features-grid",
+                            "layout-mode": "container"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container",
+                                "mx-auto"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "mx-auto",
+                                    "flex",
+                                    "flex-col",
+                                    "w-full"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "text-center",
+                                        "mb-16"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "h2",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-3xl",
+                                            "font-bold",
+                                            "text-gray-900",
+                                            "mb-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Everything you need"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-gray-500"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "All the features your team requires to succeed."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "grid",
+                                        "grid-cols-1",
+                                        "md:grid-cols-3",
+                                        "gap-8",
+                                        "w-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "p-6",
+                                            "border",
+                                            "border-gray-100",
+                                            "rounded-xl",
+                                            "shadow-sm",
+                                            "hover:shadow-md",
+                                            "transition",
+                                            "bg-white"
+                                          ],
+                                          "attributes": {
+                                            "id": "itoxbe"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "text",
+                                              "classes": [
+                                                "w-12",
+                                                "h-12",
+                                                "bg-[#e0e7ff]",
+                                                "text-[var(--color-secondary)]",
+                                                "rounded-lg",
+                                                "flex",
+                                                "items-center",
+                                                "justify-center",
+                                                "mb-6",
+                                                "font-bold",
+                                                "text-xl"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "🚀"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "text-gray-900",
+                                                "mb-3"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Lightning Fast"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-500",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Optimized for speed to ensure your conversion rate stays high on all devices."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "p-6",
+                                            "border",
+                                            "border-[var(--color-secondary)]",
+                                            "rounded-xl",
+                                            "shadow-md",
+                                            "bg-white",
+                                            "relative"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "text",
+                                              "classes": [
+                                                "absolute",
+                                                "-top-3",
+                                                "left-1/2",
+                                                "-translate-x-1/2",
+                                                "bg-[var(--color-secondary)]",
+                                                "text-white",
+                                                "text-xs",
+                                                "font-bold",
+                                                "px-3",
+                                                "py-1",
+                                                "rounded-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "POPULAR"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "text",
+                                              "classes": [
+                                                "w-12",
+                                                "h-12",
+                                                "bg-[#e0e7ff]",
+                                                "text-[var(--color-secondary)]",
+                                                "rounded-lg",
+                                                "flex",
+                                                "items-center",
+                                                "justify-center",
+                                                "mb-6",
+                                                "font-bold",
+                                                "text-xl"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "📊"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "text-gray-900",
+                                                "mb-3"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Smart Analytics"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-500",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Track every click and view with built-in real-time tracking dashboard."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "p-6",
+                                            "border",
+                                            "border-gray-100",
+                                            "rounded-xl",
+                                            "shadow-sm",
+                                            "hover:shadow-md",
+                                            "transition",
+                                            "bg-white"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "text",
+                                              "classes": [
+                                                "w-12",
+                                                "h-12",
+                                                "bg-[#e0e7ff]",
+                                                "text-[var(--color-secondary)]",
+                                                "rounded-lg",
+                                                "flex",
+                                                "items-center",
+                                                "justify-center",
+                                                "mb-6",
+                                                "font-bold",
+                                                "text-xl"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "🔗"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "text-gray-900",
+                                                "mb-3"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Seamless Integrations"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-500",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Connect with your favorite tools natively and securely via APIs."
                                                 }
                                               ]
                                             }
