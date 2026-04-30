@@ -25,7 +25,7 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
     const handleSync = () => refreshTree();
     const handleSelect = (model: any) => setSelected(model?.cid || null);
     
-    editor.on('component:add component:remove component:update canvas:drop component:drag:end', handleSync);
+    editor.on('component:add component:remove canvas:drop component:drag:end', handleSync);
     editor.on('component:toggled', handleSelect);
     
     refreshTree();
@@ -38,8 +38,8 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
   // --- COMPONENT LOOKUP HELPER (The Fix) ---
   const findModelByCid = (cid: string) => {
     if (!editor || !cid) return null;
-    // Use the standard GrapesJS method to find by CID or ID
-    return editor.Components.getById(cid) || editor.getWrapper().find(`#${cid}`)[0] || null;
+    // Search the entire wrapper for the component with matching CID
+    return editor.getWrapper().find('*').find((c: any) => c.cid === cid) || null;
   };
 
   const handleDragStart = (cid: string) => {
@@ -257,6 +257,7 @@ const MapNode: React.FC<{
       className={`relative ${isParentHorizontal ? 'flex-1 min-w-[20px]' : 'w-full'} ${isDragging ? 'opacity-30' : ''} transition-all`}
       onDragOver={(e) => {
         e.preventDefault(); e.stopPropagation();
+        if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
         const rect = e.currentTarget.getBoundingClientRect();
         const y = e.clientY - rect.top;
         if (isSection) {
@@ -284,7 +285,10 @@ const MapNode: React.FC<{
       <div 
         draggable
         onDragStart={(e) => {
-          if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+          if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', node.cid);
+          }
           onDragStart(node.cid);
         }}
         onClick={handleSelect}

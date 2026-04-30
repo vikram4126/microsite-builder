@@ -143,7 +143,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-shadow w-full">
-              <img src="https://images.unsplash.com/photo-1563986768494-4d8dd9e469c0?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Security" />
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Security" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Security</div>
                 <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Cyber Protection</h4>

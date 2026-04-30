@@ -1813,7 +1813,7 @@
       "userId": "1773580019303",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-04-20T04:47:39.286Z",
+      "lastEdited": "2026-04-30T11:31:03.858Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -1823,7 +1823,47 @@
           "layout": {
             "dataSources": [],
             "assets": [],
-            "styles": [],
+            "styles": [
+              {
+                "selectors": [
+                  "#idsin"
+                ],
+                "style": {
+                  "border-color": "#FD349C"
+                },
+                "state": "hover"
+              },
+              {
+                "selectors": [
+                  "#idsin"
+                ],
+                "style": {
+                  "border-color": "#FD349C"
+                }
+              },
+              {
+                "selectors": [
+                  "#iuqur"
+                ],
+                "style": {
+                  "border-color": "#0C233C"
+                }
+              },
+              {
+                "selectors": [
+                  "#is3as"
+                ],
+                "style": {
+                  "cursor": "grab",
+                  "border-top-width": "14px",
+                  "border-right-width": "14px",
+                  "border-bottom-width": "14px",
+                  "border-left-width": "14px",
+                  "border-style": "solid",
+                  "border-color": "#0C233C"
+                }
+              }
+            ],
             "pages": [
               {
                 "frames": [
@@ -1852,6 +1892,9 @@
                             "flex-col",
                             "min-h-screen"
                           ],
+                          "attributes": {
+                            "id": "ibal"
+                          },
                           "custom-name": "Page Block",
                           "components": [
                             {
@@ -1860,6 +1903,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Navbar",
                               "classes": [
                                 "w-full",
                                 "bg-white",
@@ -1889,9 +1933,6 @@
                                         "lg:py-4",
                                         "lg:px-6"
                                       ],
-                                      "attributes": {
-                                        "id": "ile7c"
-                                      },
                                       "components": [
                                         {
                                           "type": "link",
@@ -1964,8 +2005,7 @@
                                                 "transition-colors"
                                               ],
                                               "attributes": {
-                                                "href": "#",
-                                                "id": "itbu6"
+                                                "href": "#"
                                               },
                                               "components": [
                                                 {
@@ -2023,8 +2063,7 @@
                                                 "transition-all"
                                               ],
                                               "attributes": {
-                                                "href": "#",
-                                                "id": "iyn15"
+                                                "href": "#"
                                               },
                                               "components": [
                                                 {
@@ -2047,6 +2086,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Hero Header",
                               "classes": [
                                 "w-full",
                                 "bg-gradient-to-b",
@@ -2098,6 +2138,9 @@
                                           ],
                                           "components": [
                                             {
+                                              "attributes": {
+                                                "id": "ijigv"
+                                              },
                                               "components": [
                                                 {
                                                   "tagName": "span",
@@ -2118,48 +2161,12 @@
                                                     "shadow-sm"
                                                   ],
                                                   "attributes": {
-                                                    "id": "i5byq"
+                                                    "id": "idsin"
                                                   },
                                                   "components": [
                                                     {
                                                       "type": "textnode",
                                                       "content": "New: Enterprise Cloud 2.0"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "tagName": "h1",
-                                                  "type": "text",
-                                                  "classes": [
-                                                    "text-primary",
-                                                    "dark:text-white",
-                                                    "text-4xl",
-                                                    "lg:text-5xl",
-                                                    "font-black",
-                                                    "leading-tight",
-                                                    "tracking-tight"
-                                                  ],
-                                                  "components": [
-                                                    {
-                                                      "type": "textnode",
-                                                      "content": "\n                  Transform Your Business with "
-                                                    },
-                                                    {
-                                                      "tagName": "br",
-                                                      "void": true
-                                                    },
-                                                    {
-                                                      "tagName": "span",
-                                                      "type": "text",
-                                                      "classes": [
-                                                        "text-accent"
-                                                      ],
-                                                      "components": [
-                                                        {
-                                                          "type": "textnode",
-                                                          "content": "Modern Solutions"
-                                                        }
-                                                      ]
                                                     }
                                                   ]
                                                 }
@@ -2176,10 +2183,53 @@
                                                 "leading-relaxed",
                                                 "max-w-xl"
                                               ],
+                                              "attributes": {
+                                                "id": "is3as",
+                                                "data-animation": "zoom-in"
+                                              },
                                               "components": [
                                                 {
                                                   "type": "textnode",
                                                   "content": "\n                Empowering teams with the tools they need to scale faster and work smarter in a digital-first world. Built for modern enterprises.\n              "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h1",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "text-4xl",
+                                                "lg:text-5xl",
+                                                "font-black",
+                                                "leading-tight",
+                                                "tracking-tight"
+                                              ],
+                                              "attributes": {
+                                                "id": "iuqur"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "\n                  Transform Your Business with "
+                                                },
+                                                {
+                                                  "tagName": "br",
+                                                  "void": true
+                                                },
+                                                {
+                                                  "tagName": "span",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-accent"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Modern Solutions"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             },
@@ -2294,6 +2344,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Features List",
                               "classes": [
                                 "w-full",
                                 "py-24",
@@ -2307,12 +2358,15 @@
                               "components": [
                                 {
                                   "classes": [
-                                    "container",
                                     "mx-auto",
                                     "px-4",
                                     "sm:px-6",
-                                    "lg:px-8"
+                                    "lg:px-8",
+                                    "container"
                                   ],
+                                  "attributes": {
+                                    "id": "id0lt"
+                                  },
                                   "components": [
                                     {
                                       "classes": [
@@ -2360,352 +2414,6 @@
                                     {
                                       "type": "comment",
                                       "content": " Replaced raw tailwind grid with native GrapesJS responsive-grid component "
-                                    },
-                                    {
-                                      "type": "responsive-grid",
-                                      "classes": [
-                                        "container",
-                                        "mx-auto",
-                                        "grid",
-                                        "grid-cols-1",
-                                        "md:grid-cols-3",
-                                        "gap-8"
-                                      ],
-                                      "components": [
-                                        {
-                                          "classes": [
-                                            "p-8",
-                                            "rounded-2xl",
-                                            "border",
-                                            "border-slate-200",
-                                            "dark:border-slate-800",
-                                            "bg-slate-50",
-                                            "dark:bg-slate-900",
-                                            "hover:border-accent/50",
-                                            "transition-colors",
-                                            "h-full",
-                                            "w-full"
-                                          ],
-                                          "components": [
-                                            {
-                                              "classes": [
-                                                "w-14",
-                                                "h-14",
-                                                "bg-accent/10",
-                                                "text-accent",
-                                                "rounded-xl",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "svg",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "classes": [
-                                                    "fill-none"
-                                                  ],
-                                                  "attributes": {
-                                                    "viewBox": "0 0 24 24",
-                                                    "width": "28",
-                                                    "height": "28",
-                                                    "stroke": "currentColor",
-                                                    "stroke-width": "2"
-                                                  },
-                                                  "components": [
-                                                    {
-                                                      "tagName": "path",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"
-                                                      }
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-primary",
-                                                "dark:text-white",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Cloud Integration"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-slate-600",
-                                                "dark:text-slate-400",
-                                                "leading-relaxed"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Connect your legacy systems to modern cloud infrastructure with zero downtime."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "p-8",
-                                            "rounded-2xl",
-                                            "border",
-                                            "border-slate-200",
-                                            "dark:border-slate-800",
-                                            "bg-slate-50",
-                                            "dark:bg-slate-900",
-                                            "border-b-4",
-                                            "border-b-accent",
-                                            "relative",
-                                            "shadow-xl",
-                                            "shadow-accent/5",
-                                            "h-full",
-                                            "w-full"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "text",
-                                              "classes": [
-                                                "absolute",
-                                                "top-4",
-                                                "right-4",
-                                                "bg-accent",
-                                                "text-white",
-                                                "text-xs",
-                                                "font-bold",
-                                                "px-3",
-                                                "py-1",
-                                                "rounded-full"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "POPULAR"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [
-                                                "w-14",
-                                                "h-14",
-                                                "bg-accent",
-                                                "text-white",
-                                                "rounded-xl",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6",
-                                                "shadow-lg",
-                                                "shadow-accent/20"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "svg",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "classes": [
-                                                    "fill-none"
-                                                  ],
-                                                  "attributes": {
-                                                    "viewBox": "0 0 24 24",
-                                                    "width": "28",
-                                                    "height": "28",
-                                                    "stroke": "currentColor",
-                                                    "stroke-width": "2"
-                                                  },
-                                                  "components": [
-                                                    {
-                                                      "tagName": "path",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "d": "M12 20V10M18 20V4M6 20v-4"
-                                                      }
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-primary",
-                                                "dark:text-white",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Data Analytics"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-slate-600",
-                                                "dark:text-slate-400",
-                                                "leading-relaxed"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Turn raw numbers into actionable business insights with our real-time processing engine."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "p-8",
-                                            "rounded-2xl",
-                                            "border",
-                                            "border-slate-200",
-                                            "dark:border-slate-800",
-                                            "bg-slate-50",
-                                            "dark:bg-slate-900",
-                                            "hover:border-accent/50",
-                                            "transition-colors",
-                                            "h-full",
-                                            "w-full"
-                                          ],
-                                          "components": [
-                                            {
-                                              "classes": [
-                                                "w-14",
-                                                "h-14",
-                                                "bg-accent/10",
-                                                "text-accent",
-                                                "rounded-xl",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "svg",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "classes": [
-                                                    "fill-none"
-                                                  ],
-                                                  "attributes": {
-                                                    "viewBox": "0 0 24 24",
-                                                    "width": "28",
-                                                    "height": "28",
-                                                    "stroke": "currentColor",
-                                                    "stroke-width": "2"
-                                                  },
-                                                  "components": [
-                                                    {
-                                                      "tagName": "rect",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "x": "2",
-                                                        "y": "3",
-                                                        "width": "20",
-                                                        "height": "14",
-                                                        "rx": "2",
-                                                        "ry": "2"
-                                                      }
-                                                    },
-                                                    {
-                                                      "tagName": "line",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "x1": "8",
-                                                        "y1": "21",
-                                                        "x2": "16",
-                                                        "y2": "21"
-                                                      }
-                                                    },
-                                                    {
-                                                      "tagName": "line",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "x1": "12",
-                                                        "y1": "17",
-                                                        "x2": "12",
-                                                        "y2": "21"
-                                                      }
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-primary",
-                                                "dark:text-white",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "AI Automation"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-slate-600",
-                                                "dark:text-slate-400",
-                                                "leading-relaxed"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Reduce manual workloads by 40% using intelligent workflows and custom machine learning."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
                                     }
                                   ]
                                 }
@@ -2717,6 +2425,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Services Grid",
                               "classes": [
                                 "w-full",
                                 "py-24",
@@ -2824,6 +2533,12 @@
                                         "md:grid-cols-3",
                                         "gap-8"
                                       ],
+                                      "attributes": {
+                                        "data-cols-desktop": "3",
+                                        "data-cols-tablet": "1",
+                                        "data-cols-mobile": "1",
+                                        "id": "in3qj"
+                                      },
                                       "components": [
                                         {
                                           "classes": [
@@ -2852,7 +2567,8 @@
                                               ],
                                               "attributes": {
                                                 "src": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop",
-                                                "alt": "Consulting"
+                                                "alt": "Consulting",
+                                                "id": "ihs62"
                                               }
                                             },
                                             {
@@ -3209,6 +2925,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Call to Action",
                               "classes": [
                                 "w-full",
                                 "py-24",
@@ -3370,6 +3087,7 @@
                             },
                             {
                               "type": "section",
+                              "name": "Page Footer",
                               "classes": [
                                 "w-full",
                                 "bg-slate-50",
@@ -3976,308 +3694,6 @@
                                                 {
                                                   "type": "textnode",
                                                   "content": "Cookies Settings"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "classes": [
-                            "w-full",
-                            "bg-white",
-                            "py-20"
-                          ],
-                          "attributes": {
-                            "id": "features-grid",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "mx-auto",
-                                    "flex",
-                                    "flex-col",
-                                    "w-full"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "text-center",
-                                        "mb-16"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "h2",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "font-bold",
-                                            "text-gray-900",
-                                            "mb-4"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Everything you need"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-gray-500"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "All the features your team requires to succeed."
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "classes": [
-                                        "grid",
-                                        "grid-cols-1",
-                                        "md:grid-cols-3",
-                                        "gap-8",
-                                        "w-full"
-                                      ],
-                                      "components": [
-                                        {
-                                          "classes": [
-                                            "p-6",
-                                            "border",
-                                            "border-gray-100",
-                                            "rounded-xl",
-                                            "shadow-sm",
-                                            "hover:shadow-md",
-                                            "transition",
-                                            "bg-white"
-                                          ],
-                                          "attributes": {
-                                            "id": "itoxbe"
-                                          },
-                                          "components": [
-                                            {
-                                              "type": "text",
-                                              "classes": [
-                                                "w-12",
-                                                "h-12",
-                                                "bg-[#e0e7ff]",
-                                                "text-[var(--color-secondary)]",
-                                                "rounded-lg",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6",
-                                                "font-bold",
-                                                "text-xl"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "🚀"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-gray-900",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Lightning Fast"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-gray-500",
-                                                "text-sm"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Optimized for speed to ensure your conversion rate stays high on all devices."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "p-6",
-                                            "border",
-                                            "border-[var(--color-secondary)]",
-                                            "rounded-xl",
-                                            "shadow-md",
-                                            "bg-white",
-                                            "relative"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "text",
-                                              "classes": [
-                                                "absolute",
-                                                "-top-3",
-                                                "left-1/2",
-                                                "-translate-x-1/2",
-                                                "bg-[var(--color-secondary)]",
-                                                "text-white",
-                                                "text-xs",
-                                                "font-bold",
-                                                "px-3",
-                                                "py-1",
-                                                "rounded-full"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "POPULAR"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "text",
-                                              "classes": [
-                                                "w-12",
-                                                "h-12",
-                                                "bg-[#e0e7ff]",
-                                                "text-[var(--color-secondary)]",
-                                                "rounded-lg",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6",
-                                                "font-bold",
-                                                "text-xl"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "📊"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-gray-900",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Smart Analytics"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-gray-500",
-                                                "text-sm"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Track every click and view with built-in real-time tracking dashboard."
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "p-6",
-                                            "border",
-                                            "border-gray-100",
-                                            "rounded-xl",
-                                            "shadow-sm",
-                                            "hover:shadow-md",
-                                            "transition",
-                                            "bg-white"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "text",
-                                              "classes": [
-                                                "w-12",
-                                                "h-12",
-                                                "bg-[#e0e7ff]",
-                                                "text-[var(--color-secondary)]",
-                                                "rounded-lg",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "mb-6",
-                                                "font-bold",
-                                                "text-xl"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "🔗"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "h3",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-xl",
-                                                "font-bold",
-                                                "text-gray-900",
-                                                "mb-3"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Seamless Integrations"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-gray-500",
-                                                "text-sm"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Connect with your favorite tools natively and securely via APIs."
                                                 }
                                               ]
                                             }

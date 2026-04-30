@@ -377,13 +377,13 @@ export const registerStyles = (editor: any) => {
   sm.addSector('layout', {
     name: 'Layout & Dimensions',
     open: true,
-    buildProps: ['width', 'height', 'max-width', 'min-height']
+    buildProps: ['display', 'position', 'top', 'right', 'bottom', 'left', 'flex-direction', 'justify-content', 'align-items', 'width', 'height', 'max-width', 'min-height', 'z-index']
   });
 
   sm.addSector('decorations', {
-    name: 'Background',
+    name: 'Decorations & Background',
     open: false,
-    buildProps: ['opacity'],
+    buildProps: ['opacity', 'box-shadow', 'cursor', 'overflow'],
     properties: [
       {
         property: 'background-color',

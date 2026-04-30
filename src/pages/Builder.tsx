@@ -6,7 +6,7 @@ import { exportStaticWebsite } from '../utils/exportWebsite';
 import { registerBlocks } from '../components/builder/Blocks';
 import { registerTemplates } from '../components/builder/Templates';
 import { registerStyles } from '../components/builder/Styles';
-import { 
+import {
   Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers
 } from 'lucide-react';
 import { api } from '../utils/api';
@@ -35,7 +35,7 @@ export default function Builder() {
   const { projectId, pageId } = useParams();
   const navigate = useNavigate();
   const editorRef = useRef<any>(null);
-  
+
   const [device, setDevice] = useState('desktop');
   const [autoSave, setAutoSave] = useState(true);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
@@ -51,16 +51,22 @@ export default function Builder() {
   const [isBordersActive, setIsBordersActive] = useState(true);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [state, setState] = useState<string>('');
-  
+
   // Library State
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState<'layers' | 'settings' | 'style'>('layers');
+  const activeTabRef = useRef(activeTab);
+  
+  useEffect(() => {
+    activeTabRef.current = activeTab;
+  }, [activeTab]);
 
   // Refs for auto-save closures
   const autoSaveRef = useRef(autoSave);
   const projectDataRef = useRef(projectData);
   const isProjectLoaded = useRef(false);
-  
+
   useEffect(() => {
     autoSaveRef.current = autoSave;
   }, [autoSave]);
@@ -72,14 +78,29 @@ export default function Builder() {
   // Sync Theme Settings to Canvas
   useEffect(() => {
     if (!editorRef.current) return;
-    
+
     const applyTheme = () => {
       const body = editorRef.current.Canvas.getBody();
-      if (!body) return;
+      const iframe = editorRef.current.Canvas.getFrameEl();
+      if (!body || !iframe) return;
 
       // Dark Mode
       if (themeMode === 'dark') body.classList.add('dark');
       else body.classList.remove('dark');
+
+      // Inject theme variables
+      let styleTag = iframe.contentDocument.getElementById('tailwind-theme-vars');
+      if (!styleTag) {
+        styleTag = iframe.contentDocument.createElement('style');
+        styleTag.id = 'tailwind-theme-vars';
+        iframe.contentDocument.head.appendChild(styleTag);
+      }
+      styleTag.textContent = `
+        :root {
+          --theme-primary: ${themeColor === 'default' ? '#00338d' : themeColor === 'purple' ? '#7213ea' : themeColor === 'pink' ? '#fd349c' : '#0f172a'};
+          --theme-secondary: ${themeColor === 'default' ? '#1e49e2' : themeColor === 'purple' ? '#aceaff' : themeColor === 'pink' ? '#00b8f5' : '#334155'};
+        }
+      `;
 
       // Colors
       const themePresets: any = {
@@ -88,7 +109,7 @@ export default function Builder() {
         dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
         pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
       };
-      
+
       const colors = themePresets[themeColor];
       if (colors) {
         body.style.setProperty('--theme-primary', colors.primary);
@@ -103,7 +124,7 @@ export default function Builder() {
     applyTheme();
     // Also apply whenever the canvas loads
     editorRef.current.on('canvas:load', applyTheme);
-    
+
     return () => {
       if (editorRef.current) {
         editorRef.current.off('canvas:load', applyTheme);
@@ -132,6 +153,7 @@ export default function Builder() {
         traitManager: { appendTo: '#gjs-traits-container' },
         layerManager: { appendTo: '#gjs-layers-container' },
         selectorManager: { componentFirst: true },
+        undoManager: { trackComponents: true, trackStyles: true },
         panels: { defaults: [] },
         deviceManager: {
           devices: [
@@ -156,7 +178,7 @@ export default function Builder() {
           ]
         }
       });
-      
+
       editorRef.current = editor;
 
       registerBlocks(editor);
@@ -201,19 +223,19 @@ export default function Builder() {
               <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Desktop Columns">
                 <i class="fa fa-desktop text-gray-400 mr-2 ml-1"></i>
                 <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="desktop">
-                  ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `<option value="${n}">${n}</option>`).join('')}
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
                 </select>
               </div>
               <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Tablet Columns">
                 <i class="fa fa-tablet text-gray-400 mr-2 ml-1"></i>
                 <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="tablet">
-                  ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `<option value="${n}">${n}</option>`).join('')}
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
                 </select>
               </div>
               <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Mobile Columns">
                 <i class="fa fa-mobile text-gray-400 mr-2 ml-1"></i>
                 <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="mobile">
-                  ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `<option value="${n}">${n}</option>`).join('')}
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
                 </select>
               </div>
             </div>
@@ -221,64 +243,64 @@ export default function Builder() {
           return el;
         },
         onEvent({ elInput, component }: any) {
-           const desktop = elInput.querySelector('[data-bp="desktop"]')?.value;
-           const tablet = elInput.querySelector('[data-bp="tablet"]')?.value;
-           const mobile = elInput.querySelector('[data-bp="mobile"]')?.value;
-           
-           if (!desktop || !tablet || !mobile) return;
+          const desktop = elInput.querySelector('[data-bp="desktop"]')?.value;
+          const tablet = elInput.querySelector('[data-bp="tablet"]')?.value;
+          const mobile = elInput.querySelector('[data-bp="mobile"]')?.value;
 
-           // update component classes
-           const classes = component.getClasses();
-           const newClasses = classes.filter((c: string) => !c.match(/^(md:|sm:)?grid-cols-\d+$/));
-           newClasses.push(`grid-cols-${mobile}`);
-           newClasses.push(`sm:grid-cols-${tablet}`);
-           newClasses.push(`md:grid-cols-${desktop}`);
-           
-           component.setClass(newClasses.join(' '));
-           
-           // save config to attributes to retain selection
-           component.addAttributes({
-             'data-cols-desktop': desktop,
-             'data-cols-tablet': tablet,
-             'data-cols-mobile': mobile,
-           });
-           
-           // If it's a structural change, we might want to alert GrapesJS
-           editor.trigger('component:update', component);
+          if (!desktop || !tablet || !mobile) return;
+
+          // update component classes
+          const classes = component.getClasses();
+          const newClasses = classes.filter((c: string) => !c.match(/^(md:|sm:)?grid-cols-\d+$/));
+          newClasses.push(`grid-cols-${mobile}`);
+          newClasses.push(`sm:grid-cols-${tablet}`);
+          newClasses.push(`md:grid-cols-${desktop}`);
+
+          component.setClass(newClasses.join(' '));
+
+          // save config to attributes to retain selection
+          component.addAttributes({
+            'data-cols-desktop': desktop,
+            'data-cols-tablet': tablet,
+            'data-cols-mobile': mobile,
+          });
+
+          // If it's a structural change, we might want to alert GrapesJS
+          editor.trigger('component:update', component);
         },
         onUpdate({ elInput, component }: any) {
-           const attrs = component.getAttributes();
-           // fallback logic in case it's newly dropped and attrs haven't synced
-           let desktop = attrs['data-cols-desktop'];
-           let tablet = attrs['data-cols-tablet'];
-           let mobile = attrs['data-cols-mobile'];
-           
-           if (!desktop) {
-             const classes = component.getClasses();
-             classes.forEach((c: string) => {
-                if (c.startsWith('md:grid-cols-')) desktop = c.split('-')[2];
-                else if (c.startsWith('sm:grid-cols-')) tablet = c.split('-')[2];
-                else if (c.startsWith('grid-cols-')) mobile = c.split('-')[2];
-             });
-             if (!desktop) desktop = mobile || '1';
-             if (!tablet) tablet = mobile || '1';
-             if (!mobile) mobile = '1';
-             
-             // Backfill
-             component.addAttributes({
-               'data-cols-desktop': desktop,
-               'data-cols-tablet': tablet,
-               'data-cols-mobile': mobile,
-             });
-           }
-           
-           const dSel = elInput.querySelector('[data-bp="desktop"]');
-           const tSel = elInput.querySelector('[data-bp="tablet"]');
-           const mSel = elInput.querySelector('[data-bp="mobile"]');
-           
-           if(dSel) dSel.value = desktop;
-           if(tSel) tSel.value = tablet;
-           if(mSel) mSel.value = mobile;
+          const attrs = component.getAttributes();
+          // fallback logic in case it's newly dropped and attrs haven't synced
+          let desktop = attrs['data-cols-desktop'];
+          let tablet = attrs['data-cols-tablet'];
+          let mobile = attrs['data-cols-mobile'];
+
+          if (!desktop) {
+            const classes = component.getClasses();
+            classes.forEach((c: string) => {
+              if (c.startsWith('md:grid-cols-')) desktop = c.split('-')[2];
+              else if (c.startsWith('sm:grid-cols-')) tablet = c.split('-')[2];
+              else if (c.startsWith('grid-cols-')) mobile = c.split('-')[2];
+            });
+            if (!desktop) desktop = mobile || '1';
+            if (!tablet) tablet = mobile || '1';
+            if (!mobile) mobile = '1';
+
+            // Backfill
+            component.addAttributes({
+              'data-cols-desktop': desktop,
+              'data-cols-tablet': tablet,
+              'data-cols-mobile': mobile,
+            });
+          }
+
+          const dSel = elInput.querySelector('[data-bp="desktop"]');
+          const tSel = elInput.querySelector('[data-bp="tablet"]');
+          const mSel = elInput.querySelector('[data-bp="mobile"]');
+
+          if (dSel) dSel.value = desktop;
+          if (tSel) tSel.value = tablet;
+          if (mSel) mSel.value = mobile;
         }
       });
 
@@ -321,7 +343,7 @@ export default function Builder() {
             const html = this.get('customHtml') || '';
             const css = this.get('customCss') || '';
             const js = this.get('customJs') || '';
-            
+
             if (!html.trim() && !css.trim() && !js.trim()) {
               this.components().reset();
               this.components('<div style="padding: 10px; text-align: center; color: #94a3b8; font-family: sans-serif; border: 1px dashed #cbd5e1; font-size: 12px;">Empty Custom Code</div>');
@@ -344,12 +366,23 @@ export default function Builder() {
               {
                 type: 'select',
                 name: 'data-animation',
-                label: 'Animation',
+                label: 'GSAP Animation',
                 options: [
                   { id: '', name: 'None' },
                   { id: 'fade-in', name: 'Fade In' },
                   { id: 'slide-up', name: 'Slide Up' },
                   { id: 'zoom-in', name: 'Zoom In' }
+                ]
+              },
+              {
+                type: 'select',
+                name: 'data-responsive',
+                label: 'Responsive Visibility',
+                options: [
+                  { id: '', name: 'Always Visible' },
+                  { id: 'hidden-mobile', name: 'Hide on Mobile' },
+                  { id: 'hidden-tablet', name: 'Hide on Tablet' },
+                  { id: 'hidden-desktop', name: 'Hide on Desktop' },
                 ]
               },
               {
@@ -365,7 +398,7 @@ export default function Builder() {
           handleLayoutChange() {
             const layout = this.getAttributes()['layout-mode'] || 'container';
             const comps = this.components();
-            
+
             const getInnerContainer = () => {
               if (comps.length === 1) {
                 return comps.at(0);
@@ -391,7 +424,7 @@ export default function Builder() {
               }
             } else {
               if (layout === 'container') {
-                const layoutClassesToMove = this.getClasses().filter((cls: string) => 
+                const layoutClassesToMove = this.getClasses().filter((cls: string) =>
                   cls.startsWith('flex') || cls.startsWith('grid') || cls.startsWith('items-') || cls.startsWith('justify-') || cls.startsWith('gap-')
                 );
                 layoutClassesToMove.forEach((cls: string) => this.removeClass(cls));
@@ -422,12 +455,23 @@ export default function Builder() {
               {
                 type: 'select',
                 name: 'data-animation',
-                label: 'Animation',
+                label: 'GSAP Animation',
                 options: [
                   { id: '', name: 'None' },
                   { id: 'fade-in', name: 'Fade In' },
                   { id: 'slide-up', name: 'Slide Up' },
                   { id: 'zoom-in', name: 'Zoom In' }
+                ]
+              },
+              {
+                type: 'select',
+                name: 'data-responsive',
+                label: 'Responsive Visibility',
+                options: [
+                  { id: '', name: 'Always Visible' },
+                  { id: 'hidden-mobile', name: 'Hide on Mobile' },
+                  { id: 'hidden-tablet', name: 'Hide on Tablet' },
+                  { id: 'hidden-desktop', name: 'Hide on Desktop' },
                 ]
               }
             ]
@@ -563,7 +607,7 @@ export default function Builder() {
 
         const allBlocks = editor.BlockManager.getAll().models;
         setBlocks(allBlocks);
-        
+
         const cats = Array.from(new Set(allBlocks.map((b: any) => b.get('category').id || b.get('category')))) as string[];
         setCategories(cats);
         if (cats.length > 0) setSelectedCategory(cats[0]);
@@ -571,7 +615,7 @@ export default function Builder() {
         // Auto Save Listener
         editor.on('update', () => {
           if (projectId === 'guest') return;
-          
+
           if (autoSaveRef.current && projectDataRef.current) {
             clearTimeout(saveTimeout);
             saveTimeout = setTimeout(async () => {
@@ -581,13 +625,13 @@ export default function Builder() {
                 const updatedProject = {
                   ...pData,
                   lastEdited: new Date().toISOString(),
-                  pages: pData.pages.map((p: any) => 
+                  pages: pData.pages.map((p: any) =>
                     p.id === pageId ? { ...p, layout: editorData } : p
                   )
                 };
                 await api.put(`/projects/${projectId}`, updatedProject);
                 // We update the ref but skip setProjectData to prevent a full React re-render of the Builder page
-                projectDataRef.current = updatedProject; 
+                projectDataRef.current = updatedProject;
                 console.log('Autosaved project');
               } catch (err) {
                 console.error('Autosave failed', err);
@@ -612,7 +656,7 @@ export default function Builder() {
           if (!parent) return;
           const comps = parent.components();
           const idx = comps.indexOf(sel);
-          
+
           if (idx > 0) {
             const prevSibling = comps.at(idx - 1);
             if (isContainer(prevSibling)) {
@@ -624,7 +668,7 @@ export default function Builder() {
               ed.select(sel);
               return;
             }
-            
+
             // Normal sibling swap
             comps.remove(sel);
             comps.add(sel, { at: idx - 1 });
@@ -641,7 +685,7 @@ export default function Builder() {
           }
         }
       });
-      
+
       editor.Commands.add('custom:move-down', {
         run(ed: any) {
           const sel = ed.getSelected();
@@ -650,7 +694,7 @@ export default function Builder() {
           if (!parent) return;
           const comps = parent.components();
           const idx = comps.indexOf(sel);
-          
+
           if (idx < comps.length - 1) {
             const nextSibling = comps.at(idx + 1);
             if (isContainer(nextSibling)) {
@@ -708,12 +752,39 @@ export default function Builder() {
       });
 
       // Custom toolbar for every component
+      // Combined Selection Listener for performance and consistency
       editor.on('component:selected', (model: any) => {
-        setHasSelection(!!model);
-        setBreadcrumb(getBreadcrumb(model));
-        if (!model) return;
+        if (!model) {
+          setHasSelection(false);
+          setBreadcrumb([]);
+          return;
+        }
 
-        // Ensure ALL components get the Animation trait dynamically
+        const newBreadcrumb = getBreadcrumb(model);
+        setBreadcrumb(prev => {
+          if (JSON.stringify(prev) === JSON.stringify(newBreadcrumb)) return prev;
+          return newBreadcrumb;
+        });
+        setHasSelection(true);
+
+        // Auto-switch to style tab ONLY on fresh selection from layers (not on property changes)
+        if (activeTabRef.current === 'layers') {
+          setActiveTab('style');
+        }
+
+        // Redirect LI selection to parent UL/OL
+        if (model.get('tagName')?.toLowerCase() === 'li') {
+          const parent = model.parent();
+          if (parent && (parent.get('tagName')?.toLowerCase() === 'ul' || parent.get('tagName')?.toLowerCase() === 'ol')) {
+            setTimeout(() => editor.select(parent), 10);
+            return;
+          }
+        }
+
+        // Dynamically add requested traits ONLY if missing
+        // NOTE: Do NOT call TraitManager.render() or StyleManager.render() — 
+        // GrapesJS auto-updates when addTrait is called. Forcing render()
+        // destroys and recreates the DOM, causing visible flicker.
         if (!model.getTrait('data-animation')) {
           model.addTrait({
             type: 'select',
@@ -728,15 +799,36 @@ export default function Builder() {
           });
         }
 
+        if (!model.getTrait('data-responsive')) {
+          model.addTrait({
+            type: 'select',
+            name: 'data-responsive',
+            label: 'Responsive Visibility',
+            options: [
+              { id: '', name: 'Always Visible' },
+              { id: 'hidden-mobile', name: 'Hide on Mobile' },
+              { id: 'hidden-tablet', name: 'Hide on Tablet' },
+              { id: 'hidden-desktop', name: 'Hide on Desktop' },
+            ]
+          });
+        }
+
+        if (model.get('type') === 'section' && !model.getTrait('layout-mode')) {
+          model.addTrait({
+            type: 'layout-toggle',
+            name: 'layout-mode',
+            label: 'Content Layout Width',
+          });
+        }
+
+        // Ensure typography sector opens for text elements
         const type = model.get('type');
         if (type === 'text' || type === 'header' || type === 'heading') {
           const typographySector = editor.StyleManager.getSector('typography');
-          if (typographySector) {
-            typographySector.set('open', true);
-          }
+          if (typographySector) typographySector.set('open', true);
         }
 
-        // Set toolbar on the selected component
+        // Set custom toolbar
         model.set('toolbar', [
           { attributes: { class: 'fa fa-arrow-up', title: 'Move Up' }, command: 'custom:move-up' },
           { attributes: { class: 'fa fa-arrow-down', title: 'Move Down' }, command: 'custom:move-down' },
@@ -745,38 +837,24 @@ export default function Builder() {
           { attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' },
         ]);
       });
-      
-      editor.on('styleManager:state', (s: string) => {
-        setState(s);
-      });
 
       editor.on('component:deselected', () => {
         setHasSelection(false);
         setBreadcrumb([]);
       });
 
-      // Redirect LI selection to the parent UL/OL so the entire list interacts as one cohesive group
-      editor.on('component:selected', (model: any) => {
-         if (model && model.get('tagName')?.toLowerCase() === 'li') {
-             const parent = model.parent();
-             if (parent && (parent.get('tagName')?.toLowerCase() === 'ul' || parent.get('tagName')?.toLowerCase() === 'ol')) {
-                 // Defer selection slightly to override default behavior cleanly
-                 setTimeout(() => {
-                     editor.select(parent);
-                 }, 10);
-             }
-         }
+      editor.on('styleManager:state', (s: string) => {
+        setState(s);
       });
 
       // Note: Automatic Text Contrast logic is now securely embedded inside 
       // the custom Style Manager property types (in Styles.ts) to guarantee
       // execution whenever a user modifies a background via the UI.
 
-    // Persist tailwind styling on preview mode toggles and screen resizing iframe reloads
-    editor.on('canvas:canvas:load', injectTailwindTheme);
-    editor.on('canvas:refresh', injectTailwindTheme);
+      // Persist tailwind styling on preview mode toggles and screen resizing iframe reloads
+      editor.on('canvas:canvas:load', injectTailwindTheme);
 
-    // Animation Live Preview in Editor
+      // Animation Live Preview in Editor
       editor.on('trait:value', (payload: any) => {
         if (payload.trait.get('name') === 'data-animation') {
           const comp = payload.component;
@@ -785,34 +863,34 @@ export default function Builder() {
           if (el && anim && anim !== 'none' && anim !== '') {
             el.style.transition = 'all 0.6s ease-out';
             if (anim === 'fade-in') {
-               el.style.opacity = '0';
-               setTimeout(() => { el.style.opacity = '1'; }, 50);
+              el.style.opacity = '0';
+              setTimeout(() => { el.style.opacity = '1'; }, 50);
             } else if (anim === 'slide-up') {
-               el.style.opacity = '0';
-               el.style.transform = 'translateY(30px)';
-               setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 50);
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(30px)';
+              setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 50);
             }
             else if (anim === 'zoom-in') {
-               el.style.opacity = '0';
-               el.style.transform = 'scale(0.9)';
-               setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'scale(1)'; }, 50);
+              el.style.opacity = '0';
+              el.style.transform = 'scale(0.9)';
+              setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'scale(1)'; }, 50);
             }
-            
+
             // Clean up inline styles after animation so it doesn't pollute the export
             setTimeout(() => {
-               el.style.transition = '';
-               el.style.opacity = '';
-               el.style.transform = '';
+              el.style.transition = '';
+              el.style.opacity = '';
+              el.style.transform = '';
             }, 700);
           }
         }
       });
 
       return () => {
-         if (editorRef.current) {
-            editorRef.current.destroy();
-            editorRef.current = null;
-         }
+        if (editorRef.current) {
+          editorRef.current.destroy();
+          editorRef.current = null;
+        }
       };
     }
   }, []);
@@ -850,7 +928,7 @@ export default function Builder() {
         const data = await api.get(`/projects/${projectId}`);
         setProjectData(data);
         projectDataRef.current = data; // Immeidately hydrate ref for autosave
-        
+
         if (editorRef.current) {
           const currentPage = data.pages.find((p: any) => p.id === pageId);
           if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0 && !isProjectLoaded.current) {
@@ -889,14 +967,14 @@ export default function Builder() {
       const updatedProject = {
         ...projectData,
         lastEdited: new Date().toISOString(),
-        pages: projectData.pages.map((p: any) => 
+        pages: projectData.pages.map((p: any) =>
           p.id === pageId ? { ...p, layout: editorData } : p
         )
       };
       await api.put(`/projects/${projectId}`, updatedProject);
       // Update ref but skip state update to prevent re-render flicker
       projectDataRef.current = updatedProject;
-      
+
       toast.success('Project saved successfully', { position: 'bottom-right', autoClose: 2000 });
       console.log('Project saved successfully');
     } catch (err) {
@@ -994,7 +1072,7 @@ export default function Builder() {
 
   const handleCustomCode = () => {
     let selected = editorRef.current?.getSelected();
-    
+
     // Create new block if not selecting a custom code block
     if (!selected || selected.get('type') !== 'custom-code-block') {
       const target = selected || editorRef.current?.getWrapper();
@@ -1042,54 +1120,58 @@ export default function Builder() {
     }
   };
 
+  // NOTE: Do NOT wrap the sidebar in useMemo. GrapesJS manages #gjs-traits-container
+  // and #gjs-styles-container DOM nodes directly. useMemo can recreate the React element
+  // tree when deps change, which destroys those DOM nodes and breaks GrapesJS.
+
   return (
     <div className="flex flex-col h-screen bg-gray-100 overflow-hidden font-sans">
-      
+
       {/* Top Toolbar */}
       <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 shrink-0 z-10 shadow-sm relative">
         <div className="flex items-center space-x-4">
-          <button 
-             onClick={() => {
-               if (projectId === 'guest') navigate('/login');
-               else navigate(`/project/${projectId}`);
-             }} 
-             className="flex items-center text-gray-500 hover:text-[#1e49e2] transition-colors"
+          <button
+            onClick={() => {
+              if (projectId === 'guest') navigate('/login');
+              else navigate(`/project/${projectId}`);
+            }}
+            className="flex items-center text-gray-500 hover:text-[#1e49e2] transition-colors"
           >
             <ChevronLeft className="w-5 h-5 mr-1" />
             <span className="font-medium text-sm hidden sm:inline">Back</span>
           </button>
-          
+
           <div className="h-5 w-px bg-gray-200"></div>
-          
+
           <div className="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200">
-             <button onClick={() => setDeviceMode('desktop')} className={`p-1.5 rounded-md ${device === 'desktop' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
-               <Monitor className="w-4 h-4" />
-             </button>
-             <button onClick={() => setDeviceMode('tablet')} className={`p-1.5 rounded-md ${device === 'tablet' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
-               <Tablet className="w-4 h-4" />
-             </button>
-             <button onClick={() => setDeviceMode('mobile')} className={`p-1.5 rounded-md ${device === 'mobile' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
-               <Smartphone className="w-4 h-4" />
-             </button>
+            <button onClick={() => setDeviceMode('desktop')} className={`p-1.5 rounded-md ${device === 'desktop' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
+              <Monitor className="w-4 h-4" />
+            </button>
+            <button onClick={() => setDeviceMode('tablet')} className={`p-1.5 rounded-md ${device === 'tablet' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
+              <Tablet className="w-4 h-4" />
+            </button>
+            <button onClick={() => setDeviceMode('mobile')} className={`p-1.5 rounded-md ${device === 'mobile' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
+              <Smartphone className="w-4 h-4" />
+            </button>
           </div>
 
           <div className="h-5 w-px bg-gray-200"></div>
-          
+
           <div className="flex space-x-1">
             <button onClick={handleUndo} className="p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors" title="Undo">
-               <Undo className="w-4 h-4" />
+              <Undo className="w-4 h-4" />
             </button>
             <button onClick={handleRedo} className="p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors" title="Redo">
-               <Redo className="w-4 h-4" />
+              <Redo className="w-4 h-4" />
             </button>
             <div className="h-5 w-px bg-gray-200 self-center mx-1"></div>
-            <button 
-              onClick={handleDelete} 
+            <button
+              onClick={handleDelete}
               disabled={!hasSelection}
-              className={`p-1.5 rounded transition-colors ${hasSelection ? 'text-gray-500 hover:bg-red-50 hover:text-red-500' : 'text-gray-300 cursor-not-allowed'}`} 
+              className={`p-1.5 rounded transition-colors ${hasSelection ? 'text-gray-500 hover:bg-red-50 hover:text-red-500' : 'text-gray-300 cursor-not-allowed'}`}
               title="Delete Selected"
             >
-               <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -1099,15 +1181,15 @@ export default function Builder() {
 
 
           <button onClick={() => {
-             const ed = editorRef.current;
-             if (!ed) return;
-             if (ed.Commands.isActive('sw-visibility')) {
-               ed.Commands.stop('sw-visibility');
-               setIsBordersActive(false);
-             } else {
-               ed.Commands.run('sw-visibility');
-               setIsBordersActive(true);
-             }
+            const ed = editorRef.current;
+            if (!ed) return;
+            if (ed.Commands.isActive('sw-visibility')) {
+              ed.Commands.stop('sw-visibility');
+              setIsBordersActive(false);
+            } else {
+              ed.Commands.run('sw-visibility');
+              setIsBordersActive(true);
+            }
           }} className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors border border-transparent hover:border-blue-100 ${isBordersActive ? 'text-[#1e49e2] bg-blue-50' : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'}`} title="View Components">
             <SquareDashed className="w-4 h-4" />
           </button>
@@ -1115,17 +1197,17 @@ export default function Builder() {
           <button onClick={handlePreviewNewTab} className={`flex items-center justify-center w-8 h-8 rounded-lg transition-colors border border-transparent hover:border-blue-100 text-gray-500 hover:text-gray-800 hover:bg-gray-50`} title="Preview HTML Model (New Tab)">
             <Play className="w-4 h-4" />
           </button>
-          
+
           <button onClick={() => {
-             const ed = editorRef.current;
-             if (!ed) return;
-             if (ed.Commands.isActive('core:fullscreen')) {
-               ed.Commands.stop('core:fullscreen');
-               setIsFullscreenActive(false);
-             } else {
-               ed.Commands.run('core:fullscreen');
-               setIsFullscreenActive(true);
-             }
+            const ed = editorRef.current;
+            if (!ed) return;
+            if (ed.Commands.isActive('core:fullscreen')) {
+              ed.Commands.stop('core:fullscreen');
+              setIsFullscreenActive(false);
+            } else {
+              ed.Commands.run('core:fullscreen');
+              setIsFullscreenActive(true);
+            }
           }} className={`flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-800 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100`} title="Toggle Fullscreen">
             {isFullscreenActive ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
           </button>
@@ -1136,8 +1218,8 @@ export default function Builder() {
 
           <div className="relative flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Theme Color">
             <Palette className="w-4 h-4" />
-            <select 
-              value={themeColor} 
+            <select
+              value={themeColor}
               onChange={(e) => setThemeColor(e.target.value)}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               title="Theme Color"
@@ -1152,11 +1234,11 @@ export default function Builder() {
           <button onClick={handleCustomCode} className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Custom Code">
             <Code className="w-4 h-4" />
           </button>
-          
+
           <button onClick={handleExportZip} className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Export Website ZIP">
             <Download className="w-4 h-4" />
           </button>
-          
+
           {projectId !== 'guest' && (
             <button id="save-btn" onClick={handleSave} className="flex items-center justify-center w-8 h-8 bg-[#1e49e2] hover:bg-[#1a3fc0] text-white rounded-lg transition-colors shadow-sm ml-2" title="Save Project">
               <Save className="w-4 h-4" />
@@ -1774,13 +1856,12 @@ export default function Builder() {
 
       {/* Main Builder Area */}
       <div className="flex flex-1 overflow-hidden">
-        
-        {/* Unified Left Sidebar - Premium Apple-Like Layout */}
+        {/* Unified Left Sidebar — rendered inline (NOT memoized) to preserve GrapesJS DOM containers */}
         <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-gray-200 flex flex-col shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-20 overflow-hidden">
-          
+
           {/* Add Section Button (Sticky Top) */}
           <div className="p-4 border-b border-gray-100 bg-white/90 backdrop-blur-md z-30 shadow-sm">
-            <button 
+            <button
               onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); setInsertAfterCid(null); setIsLibraryOpen(true); }}
               className="w-full bg-[#1e49e2] text-white py-3 rounded-none shadow-md flex items-center justify-center font-semibold text-sm tracking-wide transition-colors"
             >
@@ -1788,103 +1869,136 @@ export default function Builder() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth p-3 space-y-4">
-            
+          {/* Tab Navigation */}
+          <div className="flex border-b border-gray-200 bg-gray-50/50 p-1 shrink-0">
+            <button
+              onClick={() => setActiveTab('layers')}
+              className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'layers' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              Layers
+            </button>
+            <button
+              onClick={() => setActiveTab('settings')}
+              className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'settings' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              <Cog className="w-3.5 h-3.5" />
+              Settings
+            </button>
+            <button
+              onClick={() => setActiveTab('style')}
+              className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'style' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              <Paintbrush className="w-3.5 h-3.5" />
+              Style
+            </button>
+          </div>
 
+          <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth">
 
-            {/* Structural Map (Replaces horizontal breadcrumbs and standard layers) */}
-
-
-
-
-            {/* Layers Manager */}
-            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
-                <Layers className="w-4 h-4 mr-2 text-[#1e49e2]" />
-                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Page Layers</span>
-              </div>
-              <div className="p-1 max-h-[450px] overflow-y-auto no-scrollbar">
-                {editorRef.current && (
-                  <StructuralMap 
-                    editor={editorRef.current} 
-                    onOpenLibrary={() => { 
-                      setLibraryMode('layouts'); 
-                      setSelectedCategory('Layout'); 
-                      setInsertAfterCid(null); 
-                      setIsLibraryOpen(true); 
-                    }}
-                  />
-                )}
+            {/* Tab 1: Layers — always in DOM, toggled via CSS hidden */}
+            <div className={`p-2 animate-tab-content ${activeTab === 'layers' ? '' : 'hidden'}`}>
+              <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+                <div className="p-1 max-h-[70vh] overflow-y-auto no-scrollbar">
+                  {editorRef.current && (
+                    <StructuralMap
+                      editor={editorRef.current}
+                      onOpenLibrary={() => {
+                        setLibraryMode('layouts');
+                        setSelectedCategory('Layout');
+                        setInsertAfterCid(null);
+                        setIsLibraryOpen(true);
+                      }}
+                    />
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Element Settings (Trait Manager) */}
-            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
-                <Cog className="w-4 h-4 mr-2 text-[#1e49e2]" />
-                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Element Settings</span>
+            {/* Tab 2: Settings (Trait Manager) — always in DOM */}
+            <div className={`p-4 animate-tab-content ${activeTab === 'settings' ? '' : 'hidden'}`}>
+              <div className={!hasSelection ? '' : 'hidden'}>
+                <div className="py-20 text-center flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
+                    <Cog className="w-6 h-6" />
+                  </div>
+                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-10">Select an element to edit its settings</p>
+                </div>
               </div>
-              <div className="p-3">
-                <div id="gjs-traits-container"></div>
+              
+              <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${hasSelection ? '' : 'hidden'}`}>
+                <div className="px-4 py-3 bg-gray-50 flex items-center border-b border-gray-100 shrink-0">
+                  <span className="text-[10px] font-black text-[#1e49e2] tracking-[0.15em] uppercase">Element Traits</span>
+                </div>
+                <div className="p-4">
+                  {/* GrapesJS injects trait UI here — this div MUST stay in DOM permanently */}
+                  <div id="gjs-traits-container"></div>
+                </div>
               </div>
             </div>
 
-            {/* Style Manager */}
-            <div className="bg-white rounded-none border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-              <div className="px-4 py-3 bg-[#eef2ff]/50 flex items-center border-b border-gray-100 shrink-0">
-                <Paintbrush className="w-4 h-4 mr-2 text-[#1e49e2]" />
-                <span className="text-[11px] font-bold text-[#1e49e2] tracking-[0.1em]">Style Manager</span>
+            {/* Tab 3: Style Manager — always in DOM */}
+            <div className={`p-3 animate-tab-content ${activeTab === 'style' ? '' : 'hidden'}`}>
+              <div className={!hasSelection ? '' : 'hidden'}>
+                <div className="py-20 text-center flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
+                    <Paintbrush className="w-6 h-6" />
+                  </div>
+                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-10">Select an element to customize style</p>
+                </div>
               </div>
-              <div className="relative">
-                {editorRef.current && (
-                  <>
-                    {/* State Selector (Hover/Normal) */}
-                    <div className="px-4 py-2 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
-                        <div className="flex bg-white border border-gray-200 rounded-md p-0.5 shadow-sm">
-                            <button 
-                                onClick={() => {
-                                    editorRef.current.SelectorManager.setState('');
-                                    editorRef.current.trigger('styleManager:state', '');
-                                }}
-                                className={`px-3 py-1 text-[10px] font-bold rounded ${!state || state === '' ? 'bg-[#1e49e2] text-white' : 'text-gray-400'}`}
-                            >
-                                Normal
-                            </button>
-                            <button 
-                                onClick={() => {
-                                    editorRef.current.SelectorManager.setState('hover');
-                                    editorRef.current.trigger('styleManager:state', 'hover');
-                                }}
-                                className={`px-3 py-1 text-[10px] font-bold rounded ${state === 'hover' ? 'bg-[#7213ea] text-white shadow-sm' : 'text-gray-400'}`}
-                            >
-                                Hover
-                            </button>
+
+              <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${hasSelection ? '' : 'hidden'}`}>
+                <div className="relative">
+                  {editorRef.current && (
+                    <>
+                      {/* State Selector (Hover/Normal) */}
+                      <div className="px-4 py-3 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
+                        <div className="flex bg-white border border-gray-200 rounded-lg p-1 shadow-sm">
+                          <button
+                            onClick={() => {
+                              editorRef.current.SelectorManager.setState('');
+                              editorRef.current.trigger('styleManager:state', '');
+                            }}
+                            className={`px-3 py-1.5 text-[10px] font-bold rounded-md transition-all ${!state || state === '' ? 'bg-[#0c233c] text-white shadow-md' : 'text-gray-400 hover:text-gray-600'}`}
+                          >
+                            Normal
+                          </button>
+                          <button
+                            onClick={() => {
+                              editorRef.current.SelectorManager.setState('hover');
+                              editorRef.current.trigger('styleManager:state', 'hover');
+                            }}
+                            className={`px-3 py-1.5 text-[10px] font-bold rounded-md transition-all ${state === 'hover' ? 'bg-[#7213ea] text-white shadow-md' : 'text-gray-400 hover:text-gray-600'}`}
+                          >
+                            Hover
+                          </button>
                         </div>
-                        {state === 'hover' && (
-                            <span className="text-[9px] font-black text-[#7213ea] animate-pulse tracking-widest">Editing Hover Effects</span>
-                        )}
-                    </div>
+                      </div>
 
-                    <BorderUI editor={editorRef.current} />
-                    <BoxModelUI editor={editorRef.current} />
-                  </>
-                )}
-                <div id="gjs-styles-container"></div>
+                      <div className="divide-y divide-gray-100">
+                        <BorderUI editor={editorRef.current} />
+                        <BoxModelUI editor={editorRef.current} />
+                      </div>
+                    </>
+                  )}
+                  {/* GrapesJS injects style UI here — this div MUST stay in DOM permanently */}
+                  <div id="gjs-styles-container" className="gjs-sm-custom"></div>
+                </div>
               </div>
             </div>
-
           </div>
         </aside>
 
         {/* Center Canvas - Takes up remaining width completely */}
         <main className="flex-1 relative bg-[#f5f5f7] flex flex-col overflow-hidden w-full h-full shadow-inner ring-1 ring-gray-900/5">
-           {editorRef.current && <TypographyUI editor={editorRef.current} />}
-           <div className="w-full h-full relative" id="gjs">
-             <div className="text-center text-gray-400 p-10 flex flex-col items-center justify-center h-full space-y-4">
-               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1e49e2]"></div>
-               <span className="font-medium">Initializing Workspace...</span>
-             </div>
-           </div>
+          {editorRef.current && <TypographyUI editor={editorRef.current} />}
+          <div className="w-full h-full relative" id="gjs">
+            <div className="text-center text-gray-400 p-10 flex flex-col items-center justify-center h-full space-y-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1e49e2]"></div>
+              <span className="font-medium">Initializing Workspace...</span>
+            </div>
+          </div>
         </main>
       </div>
 
@@ -1892,47 +2006,47 @@ export default function Builder() {
       {isLibraryOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm p-4">
           <div className="bg-white rounded-none shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            
+
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center bg-gray-50 gap-4">
               <div className="flex items-center space-x-4 flex-1">
-                 <div className="flex bg-gray-200 p-1 rounded-lg">
-                   <button 
-                     onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); }}
-                     className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${libraryMode === 'layouts' ? 'bg-white text-[#1e49e2] shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
-                   >
-                     Layouts
-                   </button>
-                   <button 
-                     onClick={() => { setLibraryMode('elements'); setSelectedCategory('Basic'); }}
-                     className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${libraryMode === 'elements' ? 'bg-white text-[#1e49e2] shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
-                   >
-                     Elements
-                   </button>
-                 </div>
-                 <div className="h-6 w-px bg-gray-300"></div>
-                 <h2 className="text-xl font-bold text-gray-900 hidden md:block">
-                   {libraryMode === 'layouts' ? 'Section Layouts' : 'UI Elements'}
-                 </h2>
+                <div className="flex bg-gray-200 p-1 rounded-lg">
+                  <button
+                    onClick={() => { setLibraryMode('layouts'); setSelectedCategory('Layout'); }}
+                    className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${libraryMode === 'layouts' ? 'bg-white text-[#1e49e2] shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
+                  >
+                    Layouts
+                  </button>
+                  <button
+                    onClick={() => { setLibraryMode('elements'); setSelectedCategory('Basic'); }}
+                    className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${libraryMode === 'elements' ? 'bg-white text-[#1e49e2] shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
+                  >
+                    Elements
+                  </button>
+                </div>
+                <div className="h-6 w-px bg-gray-300"></div>
+                <h2 className="text-xl font-bold text-gray-900 hidden md:block">
+                  {libraryMode === 'layouts' ? 'Section Layouts' : 'UI Elements'}
+                </h2>
               </div>
-              
+
               <div className="flex items-center space-x-4">
-                 <div className="relative">
-                   <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                   <input 
-                     type="text" 
-                     placeholder="Search..." 
-                     value={searchQuery}
-                     onChange={(e) => setSearchQuery(e.target.value)}
-                     className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent transition-all"
-                   />
-                 </div>
-                 <button 
-                   onClick={() => { setIsLibraryOpen(false); setInsertAfterCid(null); setSearchQuery(''); }}
-                   className="p-2 text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-full transition-colors"
-                 >
-                   <X className="w-5 h-5" />
-                 </button>
+                <div className="relative">
+                  <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent transition-all"
+                  />
+                </div>
+                <button
+                  onClick={() => { setIsLibraryOpen(false); setInsertAfterCid(null); setSearchQuery(''); }}
+                  className="p-2 text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
             </div>
 
@@ -1941,17 +2055,16 @@ export default function Builder() {
               {/* Category Sidebar */}
               <div className="w-64 border-r border-gray-100 bg-gray-50 flex flex-col py-4 overflow-y-auto shrink-0">
                 {categories.filter(cat => {
-                   const layouts = ['Layout', 'Sections', 'Navbar', 'Header', 'Introduction', 'Full Page Templates'];
-                   return libraryMode === 'layouts' ? layouts.includes(cat) : !layouts.includes(cat);
+                  const layouts = ['Layout', 'Sections', 'Navbar', 'Header', 'Introduction', 'Full Page Templates'];
+                  return libraryMode === 'layouts' ? layouts.includes(cat) : !layouts.includes(cat);
                 }).map(cat => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`text-left px-6 py-3 text-sm font-medium transition-colors ${
-                      selectedCategory === cat 
-                        ? 'bg-white text-[#1e49e2] border-r-2 border-[#1e49e2]' 
+                    className={`text-left px-6 py-3 text-sm font-medium transition-colors ${selectedCategory === cat
+                        ? 'bg-white text-[#1e49e2] border-r-2 border-[#1e49e2]'
                         : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                    }`}
+                      }`}
                   >
                     {cat}
                   </button>
@@ -1962,52 +2075,52 @@ export default function Builder() {
               <div className="flex-1 overflow-y-auto p-8 bg-white">
                 <div className={selectedCategory === 'Icons' ? "flex flex-wrap gap-3" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}>
                   {blocks.filter(b => {
-                     const catId = b.get('category').id || b.get('category');
-                     if (catId !== selectedCategory) return false;
-                     if (searchQuery) {
-                       return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
-                     }
-                     return true;
+                    const catId = b.get('category').id || b.get('category');
+                    if (catId !== selectedCategory) return false;
+                    if (searchQuery) {
+                      return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
+                    }
+                    return true;
                   }).map((block, idx) => selectedCategory === 'Icons' ? (
-                     <div 
-                        key={idx} 
-                        onClick={() => addBlockToCanvas(block)} 
-                        className="w-12 h-12 flex items-center justify-center border border-gray-200 rounded-lg hover:border-[#1e49e2] hover:bg-blue-50 cursor-pointer text-[#1e49e2] transition-colors shadow-sm bg-white" 
-                        title={block.get('label')}
-                     >
-                        <div dangerouslySetInnerHTML={{ __html: block.get('media') }} className="scale-75 pointer-events-none flex items-center justify-center" />
-                     </div>
+                    <div
+                      key={idx}
+                      onClick={() => addBlockToCanvas(block)}
+                      className="w-12 h-12 flex items-center justify-center border border-gray-200 rounded-lg hover:border-[#1e49e2] hover:bg-blue-50 cursor-pointer text-[#1e49e2] transition-colors shadow-sm bg-white"
+                      title={block.get('label')}
+                    >
+                      <div dangerouslySetInnerHTML={{ __html: block.get('media') }} className="scale-75 pointer-events-none flex items-center justify-center" />
+                    </div>
                   ) : (
-                    <div 
+                    <div
                       key={idx}
                       onClick={() => addBlockToCanvas(block)}
                       className="group border border-gray-200 rounded-none hover:border-[#1e49e2] hover:shadow-md cursor-pointer transition-all flex flex-col bg-gray-50 hover:bg-white overflow-hidden"
                     >
                       <div className="h-40 bg-slate-50 border-b border-gray-100 mb-0 flex flex-col items-center justify-center group-hover:border-[#1e49e2]/80 group-hover:scale-[1.02] shadow-sm transition-all overflow-hidden relative">
-                         {block.get('media') ? (
-                           <div className="w-full h-full opacity-80 group-hover:opacity-100 flex flex-col items-center justify-center p-2" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
-                         ) : (
-                           <div className="text-5xl font-light opacity-20 group-hover:opacity-40 mb-2">+</div>
-                         )}
-                         <div className="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 font-semibold text-xs text-gray-800 py-1.5 px-3 text-center truncate z-10 shadow-sm">{block.get('label')}</div>
+                        {block.get('media') ? (
+                          <div className="w-full h-full opacity-80 group-hover:opacity-100 flex flex-col items-center justify-center p-2" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
+                        ) : (
+                          <div className="text-5xl font-light opacity-20 group-hover:opacity-40 mb-2">+</div>
+                        )}
+                        <div className="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 font-semibold text-xs text-gray-800 py-1.5 px-3 text-center truncate z-10 shadow-sm">{block.get('label')}</div>
                       </div>
                     </div>
                   ))}
-                  
+
                   {blocks.filter(b => {
-                     const catId = b.get('category').id || b.get('category');
-                     if (catId !== selectedCategory) return false;
-                     if (searchQuery) {
-                       return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
-                     }
-                     return true;
+                    const catId = b.get('category').id || b.get('category');
+                    if (catId !== selectedCategory) return false;
+                    if (searchQuery) {
+                      return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
+                    }
+                    return true;
                   }).length === 0 && (
-                    <div className="col-span-full flex flex-col items-center justify-center py-20 text-gray-500">
-                       <Search className="w-12 h-12 mb-4 opacity-20" />
-                       <p className="font-medium">No components found matching "{searchQuery}"</p>
-                       <button onClick={() => setSearchQuery('')} className="mt-2 text-[#1e49e2] hover:underline text-sm">Clear Search</button>
-                    </div>
-                  )}
+                      <div className="col-span-full flex flex-col items-center justify-center py-20 text-gray-500">
+                        <Search className="w-12 h-12 mb-4 opacity-20" />
+                        <p className="font-medium">No components found matching "{searchQuery}"</p>
+                        <button onClick={() => setSearchQuery('')} className="mt-2 text-[#1e49e2] hover:underline text-sm">Clear Search</button>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
@@ -2019,12 +2132,12 @@ export default function Builder() {
       {isCustomCodeModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm p-4">
           <div className="bg-[#1e1e1e] rounded-none shadow-2xl w-full max-w-5xl h-[80vh] flex flex-col overflow-hidden border border-gray-700 animate-in fade-in zoom-in-95 duration-200">
-            
+
             <div className="px-4 py-3 border-b border-gray-700 flex justify-between items-center bg-[#252526]">
               <div className="flex space-x-1">
                 <span className="text-gray-300 font-semibold text-sm mr-4 flex items-center">Custom Code Editor</span>
               </div>
-              <button 
+              <button
                 onClick={() => setIsCustomCodeModalOpen(false)}
                 className="p-1 text-gray-400 hover:text-white rounded transition-colors"
                 title="Discard Changes"
@@ -2035,37 +2148,37 @@ export default function Builder() {
 
             <div className="flex-1 flex flex-col md:flex-row overflow-hidden bg-[#1e1e1e]">
               <div className="flex-1 border-r border-gray-700 flex flex-col">
-                 <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">HTML</div>
-                 <textarea 
-                   className="flex-1 w-full bg-[#1e1e1e] text-[#d4d4d4] p-4 font-mono text-sm outline-none resize-none"
-                   value={customHtml}
-                   onChange={(e) => setCustomHtml(e.target.value)}
-                   spellCheck="false"
-                 />
+                <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">HTML</div>
+                <textarea
+                  className="flex-1 w-full bg-[#1e1e1e] text-[#d4d4d4] p-4 font-mono text-sm outline-none resize-none"
+                  value={customHtml}
+                  onChange={(e) => setCustomHtml(e.target.value)}
+                  spellCheck="false"
+                />
               </div>
               <div className="flex-1 border-r border-gray-700 flex flex-col">
-                 <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">CSS</div>
-                 <textarea 
-                   className="flex-1 w-full bg-[#1e1e1e] text-[#d4d4d4] p-4 font-mono text-sm outline-none resize-none"
-                   value={customCss}
-                   onChange={(e) => setCustomCss(e.target.value)}
-                   spellCheck="false"
-                 />
+                <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">CSS</div>
+                <textarea
+                  className="flex-1 w-full bg-[#1e1e1e] text-[#d4d4d4] p-4 font-mono text-sm outline-none resize-none"
+                  value={customCss}
+                  onChange={(e) => setCustomCss(e.target.value)}
+                  spellCheck="false"
+                />
               </div>
               <div className="flex-1 flex flex-col">
-                 <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">JavaScript</div>
-                 <textarea 
-                   className="flex-1 w-full bg-[#1e1e1e] text-[#ce9178] p-4 font-mono text-sm outline-none resize-none"
-                   value={customJs}
-                   onChange={(e) => setCustomJs(e.target.value)}
-                   spellCheck="false"
-                   placeholder="// Runs only in preview & export"
-                 />
+                <div className="bg-[#2d2d2d] text-xs text-gray-400 px-3 py-1 font-mono uppercase tracking-wider border-b border-gray-700">JavaScript</div>
+                <textarea
+                  className="flex-1 w-full bg-[#1e1e1e] text-[#ce9178] p-4 font-mono text-sm outline-none resize-none"
+                  value={customJs}
+                  onChange={(e) => setCustomJs(e.target.value)}
+                  spellCheck="false"
+                  placeholder="// Runs only in preview & export"
+                />
               </div>
             </div>
 
             <div className="px-4 py-3 border-t border-gray-700 bg-[#252526] flex justify-end">
-              <button 
+              <button
                 onClick={saveCustomCode}
                 className="bg-[#0e639c] hover:bg-[#1177bb] text-white px-5 py-1.5 rounded font-medium text-sm transition-colors shadow-sm"
               >
