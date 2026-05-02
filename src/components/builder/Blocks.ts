@@ -480,7 +480,7 @@ export const registerBlocks = (editor: any) => {
       label: icon.label,
       category: 'Icons',
       media: `<i class="${icon.class} text-3xl"></i>`,
-      content: `<span class="inline-block m-2 text-[var(--color-primary)] hover:text-opacity-80 transition-opacity"><i class="\${icon.class} text-4xl"></i></span>`,
+      content: `<span class="inline-block m-2 text-[var(--color-primary)] hover:text-opacity-80 transition-opacity"><i data-gjs-type="icon" class="${icon.class} text-4xl"></i></span>`,
     });
   });
 };

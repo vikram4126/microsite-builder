@@ -151,6 +151,14 @@ export const registerStyles = (editor: any) => {
         btn.onclick = () => {
           property.upValue(c.value);
           updateActiveState(c.value);
+          
+          const model = editor.getSelected();
+          if (model && typeof model.getClasses === 'function') {
+             const classes = model.getClasses();
+             const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
+             if (toRemove.length > 0) model.removeClass(toRemove);
+          }
+          
           applyTextContrast();
         };
         el.appendChild(btn);
@@ -167,6 +175,14 @@ export const registerStyles = (editor: any) => {
       customInput.oninput = (e: any) => {
         property.upValue(e.target.value);
         updateActiveState(e.target.value);
+        
+        const model = editor.getSelected();
+        if (model && typeof model.getClasses === 'function') {
+           const classes = model.getClasses();
+           const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
+           if (toRemove.length > 0) model.removeClass(toRemove);
+        }
+        
         applyTextContrast();
       };
       
@@ -224,6 +240,14 @@ export const registerStyles = (editor: any) => {
          } else {
              property.upValue('');
          }
+         
+         const model = editor.getSelected();
+         if (model && typeof model.getClasses === 'function') {
+            const classes = model.getClasses();
+            const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
+            if (toRemove.length > 0) model.removeClass(toRemove);
+         }
+         
          applyTextContrast();
       };
       w.appendChild(presetSelect);
@@ -309,6 +333,14 @@ export const registerStyles = (editor: any) => {
          const v = `linear-gradient(${angleInp.value}, ${c1.getVal()}, ${c2.getVal()})`;
          property.upValue(v);
          presetSelect.value = 'none'; // reset
+         
+         const model = editor.getSelected();
+         if (model && typeof model.getClasses === 'function') {
+            const classes = model.getClasses();
+            const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
+            if (toRemove.length > 0) model.removeClass(toRemove);
+         }
+         
          applyTextContrast();
       };
       
@@ -347,6 +379,14 @@ export const registerStyles = (editor: any) => {
             const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
             property.upValue(`url('${src}')`);
             updatePreview();
+            
+            const model = editor.getSelected();
+            if (model && typeof model.getClasses === 'function') {
+               const classes = model.getClasses();
+               const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
+               if (toRemove.length > 0) model.removeClass(toRemove);
+            }
+            
             applyTextContrast();
             if (complete) editor.AssetManager.close();
           }

@@ -445,6 +445,19 @@ export default function Builder() {
         }
       });
 
+      // Icon component type - prevents <i> tags from collapsing or acting as editable text
+      domc.addType('icon', {
+        isComponent: (el: any) => el.tagName === 'I' || (el.getAttribute && el.getAttribute('data-gjs-type') === 'icon'),
+        model: {
+          defaults: {
+            tagName: 'i',
+            droppable: false,
+            editable: false,
+            traits: ['id', 'title', 'class']
+          }
+        }
+      });
+
       // Default component type - provides animation trait to all base elements
       domc.addType('default', {
         model: {

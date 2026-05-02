@@ -29,12 +29,12 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         setIsVisible(false);
         return;
       }
-      const isText = selected.is('text') || selected.is('textnode') || ['h1','h2','h3','h4','h5','h6','p','span','a','ul','ol'].includes(selected.get('tagName')?.toLowerCase());
+      const tagName = (selected.get('tagName') || (selected.getEl && selected.getEl()?.tagName) || '').toLowerCase();
+      const isText = selected.is('text') || selected.is('textnode') || selected.is('icon') || ['h1','h2','h3','h4','h5','h6','p','span','a','ul','ol','i'].includes(tagName);
       
       if (isText) {
         setIsVisible(true);
         const currentStyles = selected.getStyle();
-        const tagName = selected.get('tagName')?.toLowerCase();
         
         let headingMode = 'Body Text';
         if (tagName?.startsWith('h')) {
