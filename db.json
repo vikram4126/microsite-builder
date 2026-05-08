@@ -4603,14 +4603,1720 @@
       "userId": "1773754717785",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-03-17T13:38:48.955Z",
+      "lastEdited": "2026-05-03T06:35:34.923Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
           "id": "p_1773754728955sc34mjx",
           "title": "Home",
           "route": "/",
-          "layout": []
+          "layout": {
+            "dataSources": [],
+            "assets": [],
+            "styles": [],
+            "pages": [
+              {
+                "frames": [
+                  {
+                    "component": {
+                      "type": "wrapper",
+                      "stylable": [
+                        "background",
+                        "background-color",
+                        "background-image",
+                        "background-repeat",
+                        "background-attachment",
+                        "background-position",
+                        "background-size"
+                      ],
+                      "components": [
+                        {
+                          "type": "section",
+                          "name": "Navbar",
+                          "classes": [
+                            "w-full",
+                            "bg-white",
+                            "dark:bg-slate-900",
+                            "border-b-[3px]",
+                            "border-accent",
+                            "shadow-sm"
+                          ],
+                          "attributes": {
+                            "id": "business-nav",
+                            "layout-mode": "container"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container",
+                                "mx-auto"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "flex",
+                                    "flex-wrap",
+                                    "items-center",
+                                    "justify-between",
+                                    "p-4",
+                                    "lg:py-4",
+                                    "lg:px-6"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "link",
+                                      "editable": false,
+                                      "classes": [
+                                        "block"
+                                      ],
+                                      "attributes": {
+                                        "href": "#"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "image",
+                                          "resizable": {
+                                            "ratioDefault": 1
+                                          },
+                                          "classes": [
+                                            "h-8",
+                                            "w-auto",
+                                            "inline-block"
+                                          ],
+                                          "attributes": {
+                                            "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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",
+                                            "alt": "Brand Logo"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "nav",
+                                      "classes": [
+                                        "flex",
+                                        "flex-col",
+                                        "w-full",
+                                        "md:w-auto",
+                                        "md:flex",
+                                        "md:flex-row",
+                                        "items-center",
+                                        "gap-6",
+                                        "mt-4",
+                                        "md:mt-0",
+                                        "font-medium",
+                                        "text-sm"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-slate-600",
+                                            "dark:text-slate-300",
+                                            "hover:text-accent",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Home"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-slate-600",
+                                            "dark:text-slate-300",
+                                            "hover:text-accent",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Services"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-slate-600",
+                                            "dark:text-slate-300",
+                                            "hover:text-accent",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Features"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-slate-600",
+                                            "dark:text-slate-300",
+                                            "hover:text-accent",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "About"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "bg-primary",
+                                            "text-white",
+                                            "hover:bg-accent",
+                                            "px-5",
+                                            "py-2.5",
+                                            "rounded-lg",
+                                            "shadow",
+                                            "transition-all"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Get Started"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "default",
+                          "classes": [
+                            "template-wrapper",
+                            "w-full",
+                            "flex",
+                            "flex-col",
+                            "min-h-screen"
+                          ],
+                          "custom-name": "Template 2",
+                          "components": [
+                            {
+                              "type": "comment",
+                              "content": " 1. Navbar "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Navbar",
+                              "classes": [
+                                "w-full",
+                                "bg-white",
+                                "border-b",
+                                "border-gray-100"
+                              ],
+                              "attributes": {
+                                "id": "navbar-basic",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "flex",
+                                    "flex-col",
+                                    "md:flex-row",
+                                    "items-center",
+                                    "justify-between",
+                                    "p-4",
+                                    "lg:py-5",
+                                    "lg:px-6",
+                                    "gap-4"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "text",
+                                      "classes": [
+                                        "text-xl",
+                                        "font-bold",
+                                        "text-gray-900"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Brand"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "flex",
+                                        "flex-col",
+                                        "md:flex-row",
+                                        "items-center",
+                                        "gap-4",
+                                        "md:gap-8",
+                                        "font-medium",
+                                        "text-sm",
+                                        "w-full",
+                                        "md:w-auto"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-gray-600",
+                                            "hover:text-[var(--color-secondary)]"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Home"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-gray-600",
+                                            "hover:text-[var(--color-secondary)]"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "About"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "text-gray-600",
+                                            "hover:text-[var(--color-secondary)]"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Services"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "classes": [
+                                            "bg-[var(--color-secondary)]",
+                                            "text-white",
+                                            "px-5",
+                                            "py-2.5",
+                                            "rounded-lg",
+                                            "font-medium",
+                                            "inline-flex",
+                                            "hover:shadow-md",
+                                            "transition-all",
+                                            "text-center"
+                                          ],
+                                          "attributes": {
+                                            "href": "#"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Contact Us"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "comment",
+                              "content": " 2. Header Hero "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Hero Header",
+                              "classes": [
+                                "w-full",
+                                "bg-gray-900",
+                                "py-24"
+                              ],
+                              "attributes": {
+                                "id": "header-hero",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "text-white",
+                                    "text-center"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "mx-auto",
+                                        "flex",
+                                        "flex-col",
+                                        "items-center",
+                                        "w-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "h1",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-5xl",
+                                            "font-extrabold",
+                                            "mb-6"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Welcome to Our Platform"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-xl",
+                                            "text-gray-400",
+                                            "mb-8",
+                                            "max-w-2xl"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Discover how we can help you grow your business effortlessly with our powerful tools."
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "button",
+                                          "type": "text",
+                                          "classes": [
+                                            "bg-[var(--color-secondary)]",
+                                            "px-8",
+                                            "py-3",
+                                            "rounded-xl",
+                                            "font-bold",
+                                            "hover:bg-[#3b82f6]",
+                                            "transition-colors"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Get Started Now"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "comment",
+                              "content": " 3. Introduction "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Intro Section",
+                              "classes": [
+                                "w-full",
+                                "py-20",
+                                "bg-white"
+                              ],
+                              "attributes": {
+                                "id": "introduction-section",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "px-4"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "mx-auto",
+                                        "flex",
+                                        "flex-col",
+                                        "md:flex-row",
+                                        "items-center",
+                                        "gap-12",
+                                        "w-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "flex-1"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h2",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-3xl",
+                                                "font-bold",
+                                                "mb-4",
+                                                "text-gray-900"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Who We Are"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-600",
+                                                "leading-relaxed",
+                                                "mb-6"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "font-semibold",
+                                                "text-[var(--color-secondary)]",
+                                                "hover:underline"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Learn more about our mission →"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex-1"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "image",
+                                              "resizable": {
+                                                "ratioDefault": 1
+                                              },
+                                              "classes": [
+                                                "rounded-2xl",
+                                                "shadow-xl",
+                                                "w-full"
+                                              ],
+                                              "attributes": {
+                                                "src": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+                                                "alt": "Team"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "comment",
+                              "content": " 4. Features Grid "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Features Grid",
+                              "classes": [
+                                "w-full",
+                                "bg-slate-50",
+                                "py-20"
+                              ],
+                              "attributes": {
+                                "id": "features-grid",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "px-4"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "mx-auto",
+                                        "flex",
+                                        "flex-col",
+                                        "w-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "text-center",
+                                            "mb-16"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h2",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-3xl",
+                                                "font-bold",
+                                                "text-gray-900",
+                                                "mb-4"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Everything you need"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-500"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "All the features your team requires to succeed."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "responsive-grid",
+                                          "classes": [
+                                            "container",
+                                            "mx-auto",
+                                            "grid",
+                                            "grid-cols-1",
+                                            "md:grid-cols-3",
+                                            "gap-8",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "classes": [
+                                                "p-6",
+                                                "border",
+                                                "border-gray-100",
+                                                "rounded-xl",
+                                                "shadow-sm",
+                                                "hover:shadow-md",
+                                                "transition",
+                                                "bg-white",
+                                                "w-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "w-12",
+                                                    "h-12",
+                                                    "bg-[#e0e7ff]",
+                                                    "text-[var(--color-secondary)]",
+                                                    "rounded-lg",
+                                                    "flex",
+                                                    "items-center",
+                                                    "justify-center",
+                                                    "mb-6",
+                                                    "font-bold",
+                                                    "text-xl"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "🚀"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "h3",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-xl",
+                                                    "font-bold",
+                                                    "text-gray-900",
+                                                    "mb-3"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Lightning Fast"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "p",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-gray-500",
+                                                    "text-sm"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Optimized for speed to ensure your conversion rate stays high on all devices."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "p-6",
+                                                "border",
+                                                "border-[var(--color-secondary)]",
+                                                "rounded-xl",
+                                                "shadow-md",
+                                                "bg-white",
+                                                "relative",
+                                                "w-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "absolute",
+                                                    "-top-3",
+                                                    "left-1/2",
+                                                    "-translate-x-1/2",
+                                                    "bg-[var(--color-secondary)]",
+                                                    "text-white",
+                                                    "text-xs",
+                                                    "font-bold",
+                                                    "px-3",
+                                                    "py-1",
+                                                    "rounded-full"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "POPULAR"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "w-12",
+                                                    "h-12",
+                                                    "bg-[#e0e7ff]",
+                                                    "text-[var(--color-secondary)]",
+                                                    "rounded-lg",
+                                                    "flex",
+                                                    "items-center",
+                                                    "justify-center",
+                                                    "mb-6",
+                                                    "font-bold",
+                                                    "text-xl"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "📊"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "h3",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-xl",
+                                                    "font-bold",
+                                                    "text-gray-900",
+                                                    "mb-3"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Smart Analytics"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "p",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-gray-500",
+                                                    "text-sm"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Track every click and view with built-in real-time tracking dashboard."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "p-6",
+                                                "border",
+                                                "border-gray-100",
+                                                "rounded-xl",
+                                                "shadow-sm",
+                                                "hover:shadow-md",
+                                                "transition",
+                                                "bg-white",
+                                                "w-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "w-12",
+                                                    "h-12",
+                                                    "bg-[#e0e7ff]",
+                                                    "text-[var(--color-secondary)]",
+                                                    "rounded-lg",
+                                                    "flex",
+                                                    "items-center",
+                                                    "justify-center",
+                                                    "mb-6",
+                                                    "font-bold",
+                                                    "text-xl"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "🔗"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "h3",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-xl",
+                                                    "font-bold",
+                                                    "text-gray-900",
+                                                    "mb-3"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Seamless Integrations"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "tagName": "p",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "text-gray-500",
+                                                    "text-sm"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Connect with your favorite tools natively and securely via APIs."
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "comment",
+                              "content": " 5. Cards Grid "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Cards Grid",
+                              "classes": [
+                                "w-full",
+                                "py-16",
+                                "bg-white",
+                                "dark:bg-slate-900"
+                              ],
+                              "attributes": {
+                                "id": "cards-grid",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "px-4",
+                                    "sm:px-6",
+                                    "lg:px-8"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "responsive-grid",
+                                      "classes": [
+                                        "container",
+                                        "mx-auto",
+                                        "grid",
+                                        "grid-cols-1",
+                                        "md:grid-cols-3",
+                                        "gap-8"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "bg-white",
+                                            "dark:bg-slate-800",
+                                            "p-6",
+                                            "rounded-xl",
+                                            "border",
+                                            "border-gray-200",
+                                            "dark:border-gray-700",
+                                            "hover:border-[var(--color-secondary)]",
+                                            "transition-colors",
+                                            "shadow-sm",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "classes": [
+                                                "w-10",
+                                                "h-10",
+                                                "mb-4",
+                                                "bg-gray-100",
+                                                "dark:bg-slate-700",
+                                                "rounded-lg"
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "mb-2",
+                                                "dark:text-white"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Design Tools"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-600",
+                                                "dark:text-gray-400",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Create beautiful interfaces with ease using our drag-and-drop components."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "bg-white",
+                                            "dark:bg-slate-800",
+                                            "p-6",
+                                            "rounded-xl",
+                                            "border",
+                                            "border-gray-200",
+                                            "dark:border-gray-700",
+                                            "hover:border-[var(--color-secondary)]",
+                                            "transition-colors",
+                                            "shadow-sm",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "classes": [
+                                                "w-10",
+                                                "h-10",
+                                                "mb-4",
+                                                "bg-gray-100",
+                                                "dark:bg-slate-700",
+                                                "rounded-lg"
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "mb-2",
+                                                "dark:text-white"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Analytics Insights"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-600",
+                                                "dark:text-gray-400",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Track user behavior and optimize your funnel with real-time data metrics."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "bg-white",
+                                            "dark:bg-slate-800",
+                                            "p-6",
+                                            "rounded-xl",
+                                            "border",
+                                            "border-gray-200",
+                                            "dark:border-gray-700",
+                                            "hover:border-[var(--color-secondary)]",
+                                            "transition-colors",
+                                            "shadow-sm",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "classes": [
+                                                "w-10",
+                                                "h-10",
+                                                "mb-4",
+                                                "bg-gray-100",
+                                                "dark:bg-slate-700",
+                                                "rounded-lg"
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-xl",
+                                                "font-bold",
+                                                "mb-2",
+                                                "dark:text-white"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Cloud Storage"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-gray-600",
+                                                "dark:text-gray-400",
+                                                "text-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Keep all your assets secure and accessible anywhere in the world."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "comment",
+                              "content": " 6. Corporate Footer "
+                            },
+                            {
+                              "type": "section",
+                              "name": "Footer",
+                              "classes": [
+                                "w-full",
+                                "bg-slate-50",
+                                "py-16",
+                                "dark:bg-slate-900",
+                                "border-t",
+                                "border-slate-200",
+                                "dark:border-slate-800"
+                              ],
+                              "attributes": {
+                                "id": "business-footer",
+                                "layout-mode": "container"
+                              },
+                              "components": [
+                                {
+                                  "classes": [
+                                    "container",
+                                    "mx-auto",
+                                    "px-4",
+                                    "sm:px-6",
+                                    "lg:px-8",
+                                    "text-left"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "responsive-grid",
+                                      "classes": [
+                                        "container",
+                                        "mx-auto",
+                                        "grid",
+                                        "grid-cols-1",
+                                        "md:grid-cols-2",
+                                        "lg:grid-cols-4",
+                                        "gap-12",
+                                        "mb-16"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "gap-6",
+                                            "w-full",
+                                            "items-start"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "image",
+                                              "resizable": {
+                                                "ratioDefault": 1
+                                              },
+                                              "classes": [
+                                                "h-8",
+                                                "w-auto",
+                                                "inline-block"
+                                              ],
+                                              "attributes": {
+                                                "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmlsVUUUntdVhSKLWEDRujVGRLGgwa0aKEIrArEqGkw0KMEIVAFJFI2iuCRqrUX6g1gFjY1RtMUlRppaQEEq1RKk1oJbpSJY6lKhtIUunvF9Lx4PZ97Ov3uSL+/O3HvPzJw569znM2MLjaA5hIcIVYSTTOR0lDCKUEuYR3iXcDJhLyExCn5dhCsJ0zGftYQNhBOj4NVDyCDsI9xKKCaMJ3xLSIqCXyfhGkKp9vK5hDWEJ0z0NI4wlzCQ0IHN+SMGfs8TMgknECoIS2LgdSbhaUIKoZcwm/BNDPyWWZ4Jjl3rNrFRDxDQ0L4Y+XWDX1+c5mbn5GM8Y+XXrQnSZ+JLvjjwPB5ziiuvBONRXMgTpCdIT5CeID3yBOkJ0hOkJ0iPoiGt1u5l5V2sGb8tvw7FoaxrJxwh9DvO8rC1/GjC2cZ/0JKEg4lWwnZCcySCPEi4hfA74RTCqYRXCfXsmUvxzJ+oW9ON/2RmKeEvwgEcfjxKuJzwAOFvQjLeT4Rgmoz/lEkeaNxo/Cc+reA1kXAOxql2rMWeBt0LAXSIDR1EKCXsEu+04VnLfzEhO8RmfUkoIGwNR5BWEFmEl1nfK+z6IsLnyrur8K6BkK4gTEA7K4QmzCS8zdr2bC9DPJON33ccPBYSngoyxhvs2lpKF5Sk3oR/XDgOa88nlIfykcmi/an575jpPMJmRYgLCPewdg7MJFx6jTCcCSwjQpMcFUKI3xN2MNf1GzRrvkOIXXBJLno8nGBzrWh/hN/TIMQ0RYgrRV+uYhLj0T+NUKT4pqtwPSUK37YyxP3t7PpXmHKxw3QnE4bBHVjra1SeO59wejDTHghtktpiqQamwKlAWUQyM+kArSN8wdofEKZCw3mQM2L8PvjglCBCKhCbfxg+OJX11bLrCwljFT4vwj1w2kl4jPCW6O/AOE5B2gkNEAveT/ha7gDRfYSXlAlZ0xwh+jaJdqYQooGgfQhkXCjWtUxy+HPrAp4Tfe9hM4Y6NLJQ4bNWEWKAPiHcgQ3thStokQFSTu460a4jrEZKwOl+wgrHwDeIdjMcNKe5om2/5/xCuFn078Zm5jrGKhHaugoLv01oT8A/5ilrPIKswkU2e3k90jyS+6duLDhdEWJxEJ55ol2DnbQmPwSavMjhPvJF/2aRdgXM3dJdylhWIA8q5nkA13OU+dq0aI/wfzORGvUpMcWmR2uw8aogrVmfJe4NE4xmQ0NddJlisjnQuDQlUBloy8O4niTuVSGX5NSC3xdE/xJE2mmKVRn49zxl/ArRvhs5pYs6RGrYJ6N2bgjtPQQzC0aTlL5B8JmaEO2mjGEuYbAiSPnZ1fqqR4Qv32L8XxqHKm6ohuWAKUrxURfGGjhtRPrEBelLcjAIlIk8p+xPKEMEzBBlnw++ZIay6E4lzbLm8SPyu2eQ/lytlIXLkYJwKlKCWRu0KEdZeD5KPk0bO5F/pmKuA/DsUQQ6n9gwA1cX2DSrXNdbUw8I8gLCJezhRviTCpHy5CDqlYFhwIfsQ7RdqFQbJSg1jfC//eBKerBxNykp02IIM0f4ME52I5Yhz71Y3LN+7EnCD4QzoJVSkKVIl/pjXotgvrZKe9Yc+w29GCXiCGzAv+VzkiNANCDSvongwJ2tzcMqjf/fCZwmKEEh4ApaHaXoXlyPVtKr9/G7NYiZNaC+t/QT8mAZaLaxFOhOcX8ktO8rB/8xSgQvhyZ+p1U2Ux3VTCHSA05LcTAgaYbiS/aEWZlMURz6RlauuWgBu05FsDOORLzOwWO1SN4NC07Zom+bq3RMgspni7xqPcsBS4TJDkE1sTzEoB9GUOJNVur7FnZS5CoLq0W9na6UfDyV2qkEoyyUjWXIIBJZhZeqzMuZR040///nwSYw5s59noh486Gth1kiL6Prx2EKcaRS31eFeOdnJYnOUs5Vdyh55nqF32Ch3S7a4rphTXuW6KtUKpMVitrzE5BZyiFBQ5iCnK5o3YYgp1EBk+4KUZU1KK6lEopzMIqDkf3CVRyjkY2oGzugdeuU54ogvAREuuFi8bvhO9oQPcsimGAnNLAJvrdZaFITziDboTmfOfLZeqRRLZhDuWO8arin25G8Z6KdBhm0Yx0t0PxdOEasxVxV+keAAQCY6nFmNectUgAAAABJRU5ErkJggg==",
+                                                "alt": "Brand Logo"
+                                              }
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "leading-relaxed",
+                                                "font-medium"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "\n            Leading the future of digital business with specialized industry insights and strategic technology partnerships.\n          "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "flex",
+                                                "gap-4"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "link",
+                                                  "editable": false,
+                                                  "classes": [
+                                                    "w-10",
+                                                    "h-10",
+                                                    "rounded-full",
+                                                    "bg-white",
+                                                    "dark:bg-slate-800",
+                                                    "border",
+                                                    "border-slate-200",
+                                                    "dark:border-slate-700",
+                                                    "shadow-sm",
+                                                    "flex",
+                                                    "items-center",
+                                                    "justify-center",
+                                                    "text-primary",
+                                                    "dark:text-white",
+                                                    "hover:text-accent",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "#"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "attributes": {
+                                                        "width": "18",
+                                                        "height": "18",
+                                                        "viewBox": "0 0 24 24",
+                                                        "fill": "currentColor"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "d": "M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "link",
+                                                  "editable": false,
+                                                  "classes": [
+                                                    "w-10",
+                                                    "h-10",
+                                                    "rounded-full",
+                                                    "bg-white",
+                                                    "dark:bg-slate-800",
+                                                    "border",
+                                                    "border-slate-200",
+                                                    "dark:border-slate-700",
+                                                    "shadow-sm",
+                                                    "flex",
+                                                    "items-center",
+                                                    "justify-center",
+                                                    "text-primary",
+                                                    "dark:text-white",
+                                                    "hover:text-accent",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "#"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "attributes": {
+                                                        "width": "18",
+                                                        "height": "18",
+                                                        "viewBox": "0 0 24 24",
+                                                        "fill": "currentColor"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "d": "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "gap-4",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h4",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "font-bold",
+                                                "text-lg",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Company"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "About Us"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Careers"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Engineering Blog"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Press & Media"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "gap-4",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h4",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "font-bold",
+                                                "text-lg",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Products"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Cloud Platform"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Analytics Engine"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "AI Assistant"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "hover:text-accent",
+                                                "font-medium",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Integrations API"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "gap-4",
+                                            "w-full"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h4",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "font-bold",
+                                                "text-lg",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Subscribe"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-slate-600",
+                                                "dark:text-slate-400",
+                                                "font-medium",
+                                                "mb-2",
+                                                "w-full",
+                                                "max-w-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Get the latest business insights and updates delivered weekly."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "flex",
+                                                "flex-col",
+                                                "gap-3",
+                                                "w-full",
+                                                "max-w-sm"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "tagName": "input",
+                                                  "void": true,
+                                                  "classes": [
+                                                    "w-full",
+                                                    "bg-white",
+                                                    "dark:bg-slate-800",
+                                                    "border",
+                                                    "border-slate-300",
+                                                    "dark:border-slate-700",
+                                                    "rounded-lg",
+                                                    "px-4",
+                                                    "py-3",
+                                                    "focus:outline-none",
+                                                    "focus:border-accent",
+                                                    "shadow-sm"
+                                                  ],
+                                                  "attributes": {
+                                                    "type": "email",
+                                                    "placeholder": "Your work email"
+                                                  }
+                                                },
+                                                {
+                                                  "tagName": "button",
+                                                  "type": "text",
+                                                  "classes": [
+                                                    "w-full",
+                                                    "bg-primary",
+                                                    "text-white",
+                                                    "font-bold",
+                                                    "px-4",
+                                                    "py-3",
+                                                    "rounded-lg",
+                                                    "hover:bg-accent",
+                                                    "transition-colors",
+                                                    "shadow-sm"
+                                                  ],
+                                                  "components": [
+                                                    {
+                                                      "type": "textnode",
+                                                      "content": "Subscribe Now"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "pt-8",
+                                        "border-t",
+                                        "border-slate-200",
+                                        "dark:border-slate-800",
+                                        "flex",
+                                        "flex-col",
+                                        "md:flex-row",
+                                        "justify-between",
+                                        "items-center",
+                                        "text-center",
+                                        "md:text-left",
+                                        "gap-6",
+                                        "text-sm",
+                                        "text-slate-500",
+                                        "font-medium",
+                                        "w-full"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "© 2026 KPMG International Cooperative. All rights reserved."
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-wrap",
+                                            "justify-center",
+                                            "gap-6",
+                                            "items-center"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "hover:text-primary",
+                                                "dark:hover:text-white",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Privacy Policy"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "hover:text-primary",
+                                                "dark:hover:text-white",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Terms of Service"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "hover:text-primary",
+                                                "dark:hover:text-white",
+                                                "transition-colors"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Cookies Settings"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "head": {
+                        "type": "head"
+                      },
+                      "docEl": {
+                        "tagName": "html"
+                      }
+                    },
+                    "id": "rqVDpJj9SzFf5gli"
+                  }
+                ],
+                "type": "main",
+                "id": "0nO5lqr1KbzqcfaY"
+              }
+            ],
+            "symbols": []
+          }
         }
       ]
     }

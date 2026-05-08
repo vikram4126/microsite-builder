@@ -153,7 +153,7 @@ export default function Builder() {
         traitManager: { appendTo: '#gjs-traits-container' },
         layerManager: { appendTo: '#gjs-layers-container' },
         selectorManager: { componentFirst: true },
-        undoManager: { trackComponents: true, trackStyles: true },
+        undoManager: { trackSelection: false },
         panels: { defaults: [] },
         deviceManager: {
           devices: [
@@ -934,6 +934,14 @@ export default function Builder() {
         };
         setProjectData(dummyProject);
         projectDataRef.current = dummyProject;
+        
+        if (editorRef.current && !isProjectLoaded.current) {
+          const navBlock = editorRef.current.BlockManager.get('section-business-nav');
+          if (navBlock) {
+            editorRef.current.addComponents(navBlock.get('content'));
+          }
+          isProjectLoaded.current = true;
+        }
         return;
       }
 
@@ -946,6 +954,12 @@ export default function Builder() {
           const currentPage = data.pages.find((p: any) => p.id === pageId);
           if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0 && !isProjectLoaded.current) {
             editorRef.current.loadProjectData(currentPage.layout);
+            isProjectLoaded.current = true;
+          } else if (!isProjectLoaded.current) {
+            const navBlock = editorRef.current.BlockManager.get('section-business-nav');
+            if (navBlock) {
+              editorRef.current.addComponents(navBlock.get('content'));
+            }
             isProjectLoaded.current = true;
           }
         }
