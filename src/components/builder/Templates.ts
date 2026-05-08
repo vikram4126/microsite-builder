@@ -84,26 +84,20 @@ export const registerTemplates = (editor: any) => {
   <div id="cards-grid" data-gjs-type="section" data-gjs-name="Cards Grid" class="w-full py-16 bg-white dark:bg-slate-900" layout-mode="container">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-[#1e49e2] transition-all hover:shadow-xl hover:-translate-y-1 w-full group">
-           <div class="w-12 h-12 mb-6 bg-blue-50 dark:bg-[#1e49e2]/10 text-[#1e49e2] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-             <i class="fa-solid fa-palette text-xl"></i>
-           </div>
-           <h3 class="text-xl font-bold mb-3 dark:text-white">Design Tools</h3>
-           <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Create beautiful interfaces with ease using our premium drag-and-drop components and curated design system.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Design Tools</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-[#1e49e2] transition-all hover:shadow-xl hover:-translate-y-1 w-full group">
-           <div class="w-12 h-12 mb-6 bg-blue-50 dark:bg-[#1e49e2]/10 text-[#1e49e2] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-             <i class="fa-solid fa-chart-line text-xl"></i>
-           </div>
-           <h3 class="text-xl font-bold mb-3 dark:text-white">Analytics Insights</h3>
-           <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Track user behavior and optimize your funnel with real-time data metrics and intelligent performance tracking.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Analytics Insights</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-[#1e49e2] transition-all hover:shadow-xl hover:-translate-y-1 w-full group">
-           <div class="w-12 h-12 mb-6 bg-blue-50 dark:bg-[#1e49e2]/10 text-[#1e49e2] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-             <i class="fa-solid fa-server text-xl"></i>
-           </div>
-           <h3 class="text-xl font-bold mb-3 dark:text-white">Cloud Storage</h3>
-           <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">Keep all your digital assets secure and accessible anywhere in the world with our enterprise-grade infrastructure.</p>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <h3 class="text-xl font-bold mb-2 dark:text-white">Cloud Storage</h3>
+           <p class="text-gray-600 dark:text-gray-400 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
         </div>
       </div>
     </div>

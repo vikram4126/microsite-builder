@@ -85,8 +85,13 @@ export default function Builder() {
       if (!body || !iframe) return;
 
       // Dark Mode
-      if (themeMode === 'dark') body.classList.add('dark');
-      else body.classList.remove('dark');
+      if (themeMode === 'dark') {
+        body.classList.add('dark');
+        body.style.backgroundColor = '#0c233c';
+      } else {
+        body.classList.remove('dark');
+        body.style.backgroundColor = '#ffffff';
+      }
 
       // Inject theme variables
       let styleTag = iframe.contentDocument.getElementById('tailwind-theme-vars');
@@ -1022,6 +1027,7 @@ export default function Builder() {
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
       '<title>Preview</title>',
       '<style type="text/tailwindcss">',
+      '  @custom-variant dark (&:where(.dark, .dark *));',
       '  @theme {',
       '    --color-primary: #00338d; --color-secondary: #1e49e2; --color-accent: #1e49e2;',
       '    --color-dark: #0c233c; --color-light-accent: #aceaff; --color-cta: #00b8f5;',
@@ -1036,7 +1042,7 @@ export default function Builder() {
       '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />',
       '</head>',
-      '<body>',
+      '<body class="' + (themeMode === 'dark' ? 'dark bg-[#0c233c]' : 'bg-white') + '">',
       html,
       '<script>',
       'document.addEventListener("DOMContentLoaded", function() {',
