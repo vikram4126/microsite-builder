@@ -58,7 +58,7 @@ export default function Builder() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'layers' | 'settings' | 'style'>('layers');
   const activeTabRef = useRef(activeTab);
-  
+
   useEffect(() => {
     activeTabRef.current = activeTab;
   }, [activeTab]);
@@ -935,7 +935,7 @@ export default function Builder() {
         };
         setProjectData(dummyProject);
         projectDataRef.current = dummyProject;
-        
+
         if (editorRef.current && !isProjectLoaded.current) {
           const navBlock = editorRef.current.BlockManager.get('section-business-nav');
           if (navBlock) {
@@ -1954,7 +1954,7 @@ export default function Builder() {
                   <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-10">Select an element to edit its settings</p>
                 </div>
               </div>
-              
+
               <div className={`bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${hasSelection ? '' : 'hidden'}`}>
                 <div className="px-4 py-3 bg-gray-50 flex items-center border-b border-gray-100 shrink-0">
                   <span className="text-[10px] font-black text-[#1e49e2] tracking-[0.15em] uppercase">Element Traits</span>
@@ -2096,8 +2096,8 @@ export default function Builder() {
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
                     className={`text-left px-6 py-3 text-sm font-medium transition-colors ${selectedCategory === cat
-                        ? 'bg-white text-[#1e49e2] border-r-2 border-[#1e49e2]'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      ? 'bg-white text-[#1e49e2] border-r-2 border-[#1e49e2]'
+                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                       }`}
                   >
                     {cat}
@@ -2132,7 +2132,7 @@ export default function Builder() {
                     >
                       <div className="h-40 bg-slate-50 border-b border-gray-100 mb-0 flex flex-col items-center justify-center group-hover:border-[#1e49e2]/80 group-hover:scale-[1.02] shadow-sm transition-all overflow-hidden relative">
                         {block.get('media') ? (
-                          <div className="w-full h-full opacity-80 group-hover:opacity-100 flex flex-col items-center justify-center p-2" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
+                          <div className="w-full h-full opacity-80 group-hover:opacity-100 flex flex-col items-center justify-center" dangerouslySetInnerHTML={{ __html: block.get('media') }} />
                         ) : (
                           <div className="text-5xl font-light opacity-20 group-hover:opacity-40 mb-2">+</div>
                         )}

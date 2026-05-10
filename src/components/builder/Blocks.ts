@@ -126,7 +126,7 @@ export const registerBlocks = (editor: any) => {
   bm.add('header-hero', {
     label: 'Header Hero',
     category: 'Header',
-    media: svgs.header,
+    media: '<img src="/thumbs/header-hero.jpg" class="object-cover" />',
     content: `
       <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-24" layout-mode="container">
         <div class="container mx-auto text-white text-center">
@@ -165,9 +165,9 @@ export const registerBlocks = (editor: any) => {
 
   // 4. SECTIONS
   bm.add('hero-section', {
-    label: 'Hero Section',
+    label: 'Center White',
     category: 'Header',
-    media: svgs.section,
+    media: '<img src="/thumbs/center-white.jpg" class="object-cover" />',
     content: `
       <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
         <div class="container mx-auto text-center">
@@ -352,11 +352,11 @@ export const registerBlocks = (editor: any) => {
           </div>
         </div>
       `,
-      script: function(this: any) {
+      script: function (this: any) {
         const header = this.querySelector('.accordion-header');
         const content = this.querySelector('.accordion-content');
         if (header && content) {
-          header.addEventListener('click', function() {
+          header.addEventListener('click', function () {
             if (content.classList.contains('hidden')) {
               content.classList.remove('hidden');
             } else {
@@ -387,23 +387,23 @@ export const registerBlocks = (editor: any) => {
           </div>
         </div>
       `,
-      script: function(this: any) {
+      script: function (this: any) {
         const btns = this.querySelectorAll('.tab-btn');
         const contents = this.querySelectorAll('.tab-content');
-        
+
         btns.forEach((btn: any) => {
           btn.addEventListener('click', () => {
-             // Reset all
-             btns.forEach((b: any) => {
-               b.className = "tab-btn flex-1 py-3 px-4 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-transparent border-b-2 border-transparent";
-             });
-             contents.forEach((c: any) => c.classList.add('hidden'));
-             
-             // Active current
-             btn.className = "tab-btn flex-1 py-3 px-4 font-bold text-[var(--color-secondary)] dark:text-blue-400 border-b-2 border-[var(--color-secondary)] bg-white dark:bg-slate-800";
-             const targetId = btn.getAttribute('data-target');
-             const targetContent = this.querySelector('#' + targetId);
-             if (targetContent) targetContent.classList.remove('hidden');
+            // Reset all
+            btns.forEach((b: any) => {
+              b.className = "tab-btn flex-1 py-3 px-4 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-transparent border-b-2 border-transparent";
+            });
+            contents.forEach((c: any) => c.classList.add('hidden'));
+
+            // Active current
+            btn.className = "tab-btn flex-1 py-3 px-4 font-bold text-[var(--color-secondary)] dark:text-blue-400 border-b-2 border-[var(--color-secondary)] bg-white dark:bg-slate-800";
+            const targetId = btn.getAttribute('data-target');
+            const targetContent = this.querySelector('#' + targetId);
+            if (targetContent) targetContent.classList.remove('hidden');
           });
         });
       }

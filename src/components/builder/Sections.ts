@@ -10,8 +10,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-center-bg',
     category: 'Header',
-    label: 'Header Center Image',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#00338d" opacity="0.8"/><circle cx="50" cy="30" r="15" fill="white" opacity="0.2"/><rect x="35" y="25" width="30" height="2" fill="white"/><rect x="40" y="32" width="20" height="4" fill="var(--color-secondary)"/></svg>',
+    label: 'Background Image',
+    svg: '<img src="/thumbs/background-image-thumb.jpg" class="object-cover" />',
     html: `
       <style>
         #header-1-center {
@@ -21,7 +21,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Header Center Image" class="w-full relative overflow-hidden py-[100px] bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
+      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-[100px] bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference drop-shadow-md">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
@@ -41,8 +41,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-left-blue-bg',
     category: 'Header',
-    label: 'Header Left Blue Gradient',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="url(#grad2)"/><rect x="10" y="25" width="40" height="2" fill="white"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/><defs><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00338d"/><stop offset="100%" stop-color="#00338d" stop-opacity="0"/></linearGradient></defs></svg>',
+    label: 'Background + Blue Gradient',
+    svg: '<img src="/thumbs/background-blue-gradient-thumb.jpg" class="object-cover" />',
     html: `
       <style>
         #header-2-left-blue {
@@ -73,8 +73,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-left-white-bg',
     category: 'Header',
-    label: 'Header Left White Gradient',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="url(#grad3)"/><rect x="10" y="25" width="40" height="2" fill="#00338d"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/><defs><linearGradient id="grad3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs></svg>',
+    label: 'Backgound + White Gradient',
+    svg: '<img src="/thumbs/background-white-gradient-thumb.jpg" class="object-cover" />',
     html: `
       <style>
         #header-3-left-white {
@@ -84,7 +84,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Header Left White Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
+      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -106,7 +106,7 @@ export const sectionsLibrary: SectionDef[] = [
     id: 'section-header-left-solid',
     category: 'Header',
     label: 'Header Left Solid White',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="25" width="40" height="2" fill="#00338d"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/></svg>',
+    svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
       <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-[100px] bg-white" layout-mode="container">
         <div class="container mx-auto px-4 relative z-10">
@@ -170,8 +170,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-hero',
     category: 'Header',
-    label: 'Business Hero',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
+    label: 'Left Image',
+    svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
       <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
@@ -295,7 +295,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-business-cta',
-    category: 'Full Page Templates',
+    category: 'Introduction',
     label: 'Business CTA',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
     html: `
