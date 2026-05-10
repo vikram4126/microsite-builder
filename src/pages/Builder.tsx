@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BoxModelUI } from '../components/builder/BoxModelUI';
 import { TypographyUI } from '../components/builder/TypographyUI';
+import { MediaUI } from '../components/builder/MediaUI';
 import { BorderUI } from '../components/builder/BorderUI';
 import { StructuralMap } from '../components/builder/StructuralMap';
 
@@ -2025,7 +2026,12 @@ export default function Builder() {
 
         {/* Center Canvas - Takes up remaining width completely */}
         <main className="flex-1 relative bg-[#f5f5f7] flex flex-col overflow-hidden w-full h-full shadow-inner ring-1 ring-gray-900/5">
-          {editorRef.current && <TypographyUI editor={editorRef.current} />}
+          {editorRef.current && (
+            <>
+              <TypographyUI editor={editorRef.current} />
+              <MediaUI editor={editorRef.current} />
+            </>
+          )}
           <div className="w-full h-full relative" id="gjs">
             <div className="text-center text-gray-400 p-10 flex flex-col items-center justify-center h-full space-y-4">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1e49e2]"></div>

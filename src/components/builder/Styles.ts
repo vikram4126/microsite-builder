@@ -361,12 +361,26 @@ export const registerStyles = (editor: any) => {
       previewDiv.className = 'w-full h-20 rounded border border-gray-300 bg-gray-50 flex flex-col items-center justify-center overflow-hidden cursor-pointer relative group transition hover:border-blue-400 shadow-sm';
       
       const updatePreview = () => {
+         const model = editor.getSelected();
          const val = property.getValue();
-         if (val && val.includes('url(')) {
+         
+         // Support for both background-image and <img> src
+         if (model && model.is('image')) {
+            const src = model.get('src');
+            if (src) {
+                previewDiv.style.backgroundImage = `url('${src}')`;
+                previewDiv.style.backgroundSize = 'cover';
+                previewDiv.style.backgroundPosition = 'center';
+                previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Image</div>';
+            } else {
+                previewDiv.style.backgroundImage = 'none';
+                previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+            }
+         } else if (val && val.includes('url(')) {
              previewDiv.style.backgroundImage = val;
              previewDiv.style.backgroundSize = 'cover';
              previewDiv.style.backgroundPosition = 'center';
-             previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Image</div>';
+             previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Background</div>';
          } else {
              previewDiv.style.backgroundImage = 'none';
              previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
@@ -377,10 +391,16 @@ export const registerStyles = (editor: any) => {
         editor.AssetManager.open({
           select(asset: any, complete: boolean) {
             const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
-            property.upValue(`url('${src}')`);
+            const model = editor.getSelected();
+            
+            if (model && model.is('image')) {
+                model.set('src', src);
+            } else {
+                property.upValue(`url('${src}')`);
+            }
+            
             updatePreview();
             
-            const model = editor.getSelected();
             if (model && typeof model.getClasses === 'function') {
                const classes = model.getClasses();
                const toRemove = classes.filter((cls: string) => cls.startsWith('bg-') || cls.startsWith('dark:bg-'));
@@ -395,9 +415,14 @@ export const registerStyles = (editor: any) => {
       
       const clearBtn = document.createElement('button');
       clearBtn.className = 'text-[10px] font-bold text-red-500 hover:text-red-700 self-end uppercase mt-1 px-1';
-      clearBtn.innerText = 'Remove Image';
+      clearBtn.innerText = 'Remove';
       clearBtn.onclick = () => {
-         property.upValue('');
+         const model = editor.getSelected();
+         if (model && model.is('image')) {
+            model.set('src', '');
+         } else {
+            property.upValue('');
+         }
          updatePreview();
          applyTextContrast();
       };
@@ -405,6 +430,8 @@ export const registerStyles = (editor: any) => {
       wrapper.appendChild(previewDiv);
       wrapper.appendChild(clearBtn);
 
+      // Listen for selection changes to update preview correctly
+      editor.on('component:selected', updatePreview);
       setTimeout(updatePreview, 100);
 
       return wrapper;
@@ -414,27 +441,11 @@ export const registerStyles = (editor: any) => {
     }
   });
 
-  sm.addSector('layout', {
-    name: 'Layout & Dimensions',
+  // NEW SECTOR: Media & Backgrounds (TOP PRIORITY)
+  sm.addSector('media', {
+    name: 'Media & Backgrounds',
     open: true,
-    buildProps: ['display', 'position', 'top', 'right', 'bottom', 'left', 'flex-direction', 'justify-content', 'align-items', 'width', 'height', 'max-width', 'min-height', 'z-index']
-  });
-
-  sm.addSector('decorations', {
-    name: 'Decorations & Background',
-    open: false,
-    buildProps: ['opacity', 'box-shadow', 'cursor', 'overflow'],
     properties: [
-      {
-        property: 'background-color',
-        type: 'brand-color-picker',
-        defaults: 'transparent'
-      },
-      {
-        property: 'background',
-        name: 'Brand Gradient Mix',
-        type: 'brand-gradient'
-      },
       {
         property: 'background-image',
         type: 'bg-image-file',
@@ -443,7 +454,7 @@ export const registerStyles = (editor: any) => {
       {
         property: 'background-size',
         type: 'select',
-        defaults: 'auto',
+        defaults: 'cover',
         options: [
           { value: 'auto', name: 'Auto' },
           { value: 'cover', name: 'Cover' },
@@ -454,13 +465,26 @@ export const registerStyles = (editor: any) => {
       {
         property: 'background-position',
         type: 'select',
-        defaults: 'left top',
+        defaults: 'center center',
         options: [
           { value: 'left top', name: 'Top Left' },
           { value: 'center top', name: 'Top Center' },
           { value: 'right top', name: 'Top Right' },
           { value: 'center center', name: 'Center' },
+          { value: 'left center', name: 'Center Left' },
+          { value: 'right center', name: 'Center Right' },
           { value: 'center bottom', name: 'Bottom Center' }
+        ]
+      },
+      {
+        property: 'background-repeat',
+        type: 'select',
+        defaults: 'no-repeat',
+        options: [
+          { value: 'repeat', name: 'Repeat' },
+          { value: 'no-repeat', name: 'No Repeat' },
+          { value: 'repeat-x', name: 'Repeat X' },
+          { value: 'repeat-y', name: 'Repeat Y' }
         ]
       },
       {
@@ -472,17 +496,36 @@ export const registerStyles = (editor: any) => {
           { value: 'fixed', name: 'Fixed (Parallax)' },
           { value: 'local', name: 'Local' }
         ]
+      }
+    ]
+  });
+
+  sm.addSector('typography', {
+    name: 'Typography',
+    open: true,
+    buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration', 'text-transform', 'text-shadow']
+  });
+
+  sm.addSector('layout', {
+    name: 'Layout & Dimensions',
+    open: false,
+    buildProps: ['display', 'position', 'top', 'right', 'bottom', 'left', 'flex-direction', 'justify-content', 'align-items', 'width', 'height', 'max-width', 'min-height', 'z-index']
+  });
+
+  sm.addSector('decorations', {
+    name: 'Decorations & Effects',
+    open: false,
+    buildProps: ['opacity', 'border-radius', 'border', 'box-shadow', 'cursor', 'overflow'],
+    properties: [
+      {
+        property: 'background-color',
+        type: 'brand-color-picker',
+        defaults: 'transparent'
       },
       {
-        property: 'background-repeat',
-        type: 'select',
-        defaults: 'repeat',
-        options: [
-          { value: 'repeat', name: 'Repeat' },
-          { value: 'no-repeat', name: 'No Repeat' },
-          { value: 'repeat-x', name: 'Repeat X' },
-          { value: 'repeat-y', name: 'Repeat Y' }
-        ]
+        property: 'background',
+        name: 'Brand Gradient Mix',
+        type: 'brand-gradient'
       }
     ]
   });
