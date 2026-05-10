@@ -29,7 +29,7 @@ export const registerBlocks = (editor: any) => {
   sectionsLibrary.forEach(section => {
     bm.add(section.id, {
       label: section.label,
-      category: section.category || 'Template Sections', // Use section's own category
+      category: section.category || 'Services', // Use section's own category
       media: section.svg || svgs.section,
       content: section.html
     });
@@ -58,7 +58,7 @@ export const registerBlocks = (editor: any) => {
   // 1.5 FOOTER
   bm.add('footer-business', {
     label: 'Corporate Footer',
-    category: 'Sections',
+    category: 'Footer',
     media: svgs.footer,
     content: `
       <div id="business-footer" data-gjs-type="section" data-gjs-name="Footer" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
@@ -166,7 +166,7 @@ export const registerBlocks = (editor: any) => {
   // 4. SECTIONS
   bm.add('hero-section', {
     label: 'Hero Section',
-    category: 'Sections',
+    category: 'Header',
     media: svgs.section,
     content: `
       <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
@@ -186,7 +186,7 @@ export const registerBlocks = (editor: any) => {
 
   bm.add('features-grid', {
     label: 'Features Grid',
-    category: 'Sections',
+    category: 'Services',
     media: svgs.cards,
     content: `
       <div id="features-grid" data-gjs-type="section" class="w-full bg-white py-20" layout-mode="container">

@@ -2089,7 +2089,7 @@ export default function Builder() {
               {/* Category Sidebar */}
               <div className="w-64 border-r border-gray-100 bg-gray-50 flex flex-col py-4 overflow-y-auto shrink-0">
                 {categories.filter(cat => {
-                  const layouts = ['Layout', 'Sections', 'Navbar', 'Header', 'Introduction', 'Full Page Templates'];
+                  const layouts = ['Layout', 'Services', 'Navbar', 'Header', 'Introduction', 'Footer', 'Call to actions', 'Contacts', 'Full Page Templates'];
                   return libraryMode === 'layouts' ? layouts.includes(cat) : !layouts.includes(cat);
                 }).map(cat => (
                   <button

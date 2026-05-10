@@ -129,7 +129,7 @@ export const sectionsLibrary: SectionDef[] = [
 
   {
     id: 'section-business-nav',
-    category: 'Full Page Templates',
+    category: 'Navbar',
     label: 'Business Navbar',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
@@ -169,7 +169,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-business-hero',
-    category: 'Full Page Templates',
+    category: 'Header',
     label: 'Business Hero',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
     html: `
@@ -203,7 +203,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-business-features',
-    category: 'Full Page Templates',
+    category: 'Services',
     label: 'Business Features',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
@@ -245,7 +245,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-business-services',
-    category: 'Full Page Templates',
+    category: 'Services',
     label: 'Business Services',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
@@ -318,7 +318,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-business-footer',
-    category: 'Full Page Templates',
+    category: 'Footer',
     label: 'Business Footer',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
@@ -387,7 +387,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-dual-cta-pdf',
-    category: 'Template Sections',
+    category: 'Call to actions',
     label: 'Split CTA Card',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
@@ -408,7 +408,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-trust-impact',
-    category: 'Template Sections',
+    category: 'Introduction',
     label: 'Trust & Impact Hero',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="40" height="4" fill="var(--color-primary)"/><rect x="60" y="10" width="30" height="40" fill="#cbd5e1" opacity="0.5"/></svg>',
     html: `
@@ -431,7 +431,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-expert-profiles',
-    category: 'Template Sections',
+    category: 'Services',
     label: 'Expert Profiles',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="40" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="70" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/></svg>',
     html: `
@@ -511,7 +511,7 @@ export const sectionsLibrary: SectionDef[] = [
   },
   {
     id: 'section-functional-team',
-    category: 'Template Sections',
+    category: 'Contacts',
     label: 'Functional Team Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
