@@ -447,6 +447,11 @@ export const registerStyles = (editor: any) => {
     open: true,
     properties: [
       {
+        property: 'background-color',
+        type: 'brand-color-picker',
+        defaults: 'transparent'
+      },
+      {
         property: 'background-image',
         type: 'bg-image-file',
         name: 'Background Image'
@@ -511,17 +516,11 @@ export const registerStyles = (editor: any) => {
     open: false,
     buildProps: ['display', 'position', 'top', 'right', 'bottom', 'left', 'flex-direction', 'justify-content', 'align-items', 'width', 'height', 'max-width', 'min-height', 'z-index']
   });
-
   sm.addSector('decorations', {
     name: 'Decorations & Effects',
     open: false,
-    buildProps: ['opacity', 'border-radius', 'border', 'box-shadow', 'cursor', 'overflow'],
+    buildProps: ['opacity', 'cursor', 'overflow'],
     properties: [
-      {
-        property: 'background-color',
-        type: 'brand-color-picker',
-        defaults: 'transparent'
-      },
       {
         property: 'background',
         name: 'Brand Gradient Mix',

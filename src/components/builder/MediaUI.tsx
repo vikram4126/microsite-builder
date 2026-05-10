@@ -15,6 +15,7 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     bgPosition: 'center center',
     bgRepeat: 'no-repeat',
     bgAttachment: 'scroll',
+    bgColor: 'transparent',
     isImageTag: false
   });
 
@@ -50,6 +51,7 @@ export const MediaUI = ({ editor }: { editor: any }) => {
           bgPosition: style['background-position'] || 'center center',
           bgRepeat: style['background-repeat'] || 'no-repeat',
           bgAttachment: style['background-attachment'] || 'scroll',
+          bgColor: style['background-color'] || 'transparent',
           isImageTag: isImage
         });
       } else {
@@ -110,6 +112,8 @@ export const MediaUI = ({ editor }: { editor: any }) => {
         selected.addStyle({ 'background-repeat': value });
     } else if (key === 'bgAttachment') {
         selected.addStyle({ 'background-attachment': value });
+    } else if (key === 'bgColor') {
+        selected.addStyle({ 'background-color': value });
     }
   };
 
@@ -149,6 +153,46 @@ export const MediaUI = ({ editor }: { editor: any }) => {
 
         <div className="p-4 space-y-5">
             
+            {/* Background Color (New) */}
+            <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center">
+                   Background Color
+                </label>
+                <div className="flex flex-wrap gap-1.5 p-2 bg-gray-50 rounded-xl border border-gray-100">
+                    {[
+                        { value: 'transparent', label: 'None' },
+                        { value: '#00338d', label: 'Navy' },
+                        { value: '#1e49e2', label: 'Blue' },
+                        { value: '#00b894', label: 'Green' },
+                        { value: '#fd349c', label: 'Pink' },
+                        { value: '#0c233c', label: 'Dark' },
+                        { value: '#ffffff', label: 'White' }
+                    ].map(c => (
+                        <button
+                            key={c.value}
+                            title={c.label}
+                            onClick={() => updateMedia('bgColor', c.value)}
+                            className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 shadow-sm ${mediaState.bgColor === c.value ? 'ring-2 ring-offset-1 ring-blue-500 border-white' : 'border-transparent'}`}
+                            style={{ 
+                                background: c.value === 'transparent' 
+                                    ? 'linear-gradient(to top right, #fff calc(50% - 1px), #ef4444 calc(50% - 1px), #ef4444 calc(50% + 1px), #fff calc(50% + 1px))' 
+                                    : c.value 
+                            }}
+                        />
+                    ))}
+                    {/* Custom Color Picker */}
+                    <div className="relative w-6 h-6 rounded-full border border-gray-300 bg-white flex items-center justify-center overflow-hidden hover:bg-gray-50 cursor-pointer shadow-sm">
+                        <span className="text-gray-400 text-xs font-bold">+</span>
+                        <input 
+                            type="color" 
+                            value={mediaState.bgColor === 'transparent' ? '#ffffff' : mediaState.bgColor} 
+                            onChange={(e) => updateMedia('bgColor', e.target.value)}
+                            className="absolute inset-0 opacity-0 cursor-pointer" 
+                        />
+                    </div>
+                </div>
+            </div>
+
             {/* Image Preview / Selector */}
             <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center">

@@ -574,19 +574,14 @@ export default function Builder() {
           }
           /* Placeholder component styles */
           [data-gjs-type="default"]:empty, [data-gjs-type="responsive-grid"]:empty {
-             min-height: 50px;
-             background-color: #f8fafc;
-             border: 1px dashed #cbd5e1;
+             min-height: 10px;
+             border: 1px dashed rgba(0, 0, 0, 0.1);
              display: flex;
              align-items: center;
              justify-content: center;
           }
           [data-gjs-type="default"]:empty::before, [data-gjs-type="responsive-grid"]:empty::before {
-             content: 'Empty Block';
-             min-height: 50px;
-             color: #94a3b8;
-             font-size: 12px;
-             font-family: ui-sans-serif, system-ui, sans-serif;
+             content: '';
           }
 
           /* Tailwind Grid Dynamic Classes for GrapesJS Breakpoints */
@@ -2011,8 +2006,8 @@ export default function Builder() {
                       </div>
 
                       <div className="divide-y divide-gray-100">
-                        <BorderUI editor={editorRef.current} />
                         <BoxModelUI editor={editorRef.current} />
+                        <BorderUI editor={editorRef.current} />
                       </div>
                     </>
                   )}
