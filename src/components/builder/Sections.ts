@@ -15,7 +15,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <style>
         #header-1-center {
-          background-image: url('${window.location.origin}/background/background-1.jpg');
+          background-image: url('/background/background-1.jpg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -46,7 +46,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <style>
         #header-2-left-blue {
-          background-image: url('${window.location.origin}/background/background-5.jpg');
+          background-image: url('/background/background-5.jpg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -78,7 +78,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <style>
         #header-3-left-white {
-          background-image: url('${window.location.origin}/background/background-3.jpg');
+          background-image: url('/background/background-3.jpg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -194,7 +194,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div class="flex-1 relative z-10 hidden md:block w-full">
-              <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2850&auto=format&fit=crop" class="rounded-3xl shadow-2xl border-4 border-white dark:border-slate-800" alt="Office" />
+              <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-white dark:border-slate-800" alt="Office" />
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@ export const sectionsLibrary: SectionDef[] = [
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-shadow w-full">
-              <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Consulting" />
+              <img src="/images/image-2.png" class="h-56 w-full object-cover" alt="Consulting" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Consulting</div>
                 <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Strategic Planning</h4>
@@ -271,7 +271,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-shadow w-full">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Engineering" />
+              <img src="/images/image-3.png" class="h-56 w-full object-cover" alt="Engineering" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Engineering</div>
                 <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Custom Software</h4>
@@ -280,7 +280,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-shadow w-full">
-              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Security" />
+              <img src="/images/image-4.png" class="h-56 w-full object-cover" alt="Security" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Security</div>
                 <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Cyber Protection</h4>
@@ -395,7 +395,7 @@ export const sectionsLibrary: SectionDef[] = [
         <div class="container mx-auto px-4 lg:px-0">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
             <div class="flex-1 min-h-[400px]">
-              <img src="/src/assets/background/campaign-creators-gMsnXqILjp4-unsplash.jpg" class="w-full h-full object-cover" alt="Handshake" />
+              <img src="/background/background-1.jpg" class="w-full h-full object-cover" alt="Handshake" />
             </div>
             <div class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
               <h2 class="text-4xl font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
@@ -421,7 +421,7 @@ export const sectionsLibrary: SectionDef[] = [
           </div>
           <div class="flex-1 relative w-full">
             <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] md:aspect-auto md:h-[450px]">
-              <img src="/src/assets/background/dylan-gillis-KdeqA3aTnBY-unsplash.jpg" class="w-full h-full object-cover" alt="Team impact" />
+              <img src="/background/background-2.jpg" class="w-full h-full object-cover" alt="Team impact" />
               <div class="absolute inset-0 bg-gradient-to-tr from-[#0c233c]/20 to-transparent"></div>
             </div>
           </div>
@@ -444,7 +444,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
               <div class="p-8 pb-0 flex items-center gap-6 mb-6">
                 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
-                  <img src="/src/assets/team/team-member (1).jpg" class="w-full h-full object-cover" alt="Expert" />
+                  <img src="/team-member/member-1jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
                   <h3 class="text-2xl font-black text-[#00338d]">John Doe</h3>
@@ -465,7 +465,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
               <div class="p-8 pb-0 flex items-center gap-6 mb-6">
                 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
-                  <img src="/src/assets/team/team-member (2).jpg" class="w-full h-full object-cover" alt="Expert" />
+                  <img src="/team-member/member-2.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
                   <h3 class="text-2xl font-black text-[#00338d]">Jane Doe</h3>
@@ -486,7 +486,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
               <div class="p-8 pb-0 flex items-center gap-6 mb-6">
                 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
-                  <img src="/src/assets/team/team-member (3).jpg" class="w-full h-full object-cover" alt="Expert" />
+                  <img src="/team-member/member-3.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
                   <h3 class="text-2xl font-black text-[#00338d]">Michael Smith</h3>
@@ -522,7 +522,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (4).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-4.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -532,7 +532,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (5).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-5.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -542,7 +542,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (6).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-6.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -552,7 +552,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (7).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-7.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -562,7 +562,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (8).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-8.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -572,7 +572,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (9).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-9.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -582,7 +582,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (10).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-10.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -592,7 +592,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (11).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-11.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -602,7 +602,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (12).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-12.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
@@ -612,7 +612,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
-                  <img src="/src/assets/team/team-member (13).jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
+                  <img src="/team-member/member-13.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>

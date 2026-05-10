@@ -155,7 +155,7 @@ export const registerBlocks = (editor: any) => {
                <a href="#" class="font-semibold text-[var(--color-secondary)] hover:underline">Learn more about our mission &rarr;</a>
             </div>
             <div class="flex-1">
-               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
+               <img src="/images/image-5.png" alt="Team" class="rounded-2xl shadow-xl w-full" />
             </div>
           </div>
         </div>
@@ -326,7 +326,7 @@ export const registerBlocks = (editor: any) => {
     media: svgs.card,
     content: `
       <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden max-w-sm">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Card" class="w-full h-48 object-cover" />
+        <img src="/images/image-6.jpg" alt="Card" class="w-full h-48 object-cover" />
         <div class="p-6">
           <h3 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">Premium Quality</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Designed with precision to meet the highest standards of modern aesthetics.</p>
@@ -419,7 +419,7 @@ export const registerBlocks = (editor: any) => {
         <div class="text-6xl text-gray-200 dark:text-slate-700 absolute -top-2 left-4 font-serif">"</div>
         <p class="text-gray-700 dark:text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg">"This platform transformed how our entire agency builds landing pages. It's incredibly fast and easy to use. Highly recommended!"</p>
         <div class="flex items-center">
-          <img src="https://i.pravatar.cc/150?u=a042581f4e29026" class="w-12 h-12 rounded-full mr-4" />
+          <img src="/team-member/member-1jpg" class="w-12 h-12 rounded-full mr-4" />
           <div>
             <h4 class="font-bold text-gray-900 dark:text-white">Sarah Jenkins</h4>
             <span class="text-gray-500 dark:text-gray-400 text-sm">Marketing Director</span>

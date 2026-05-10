@@ -1022,6 +1022,7 @@ export default function Builder() {
       '<meta charset="utf-8">',
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
       '<title>Preview</title>',
+      '<base href="' + window.location.origin + '/">',
       '<style type="text/tailwindcss">',
       '  @custom-variant dark (&:where(.dark, .dark *));',
       '  @theme {',
