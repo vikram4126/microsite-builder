@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const users = await api.get('/users');
-      const user = users.find((u: any) => u.email === email && u.password === password);
+      const user = users.find((u: any) => u.email.toLowerCase() === email.trim().toLowerCase() && u.password === password);
       
       if (user) {
         // Strip password before saving to state

@@ -8,6 +8,126 @@ export interface SectionDef {
 
 export const sectionsLibrary: SectionDef[] = [
   {
+    id: 'section-header-center-bg',
+    category: 'Header',
+    label: 'Header Center Image',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#00338d" opacity="0.8"/><circle cx="50" cy="30" r="15" fill="white" opacity="0.2"/><rect x="35" y="25" width="30" height="2" fill="white"/><rect x="40" y="32" width="20" height="4" fill="var(--color-secondary)"/></svg>',
+    html: `
+      <style>
+        #header-1-center {
+          background-image: url('${window.location.origin}/background/background-1.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      </style>
+      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Header Center Image" class="w-full relative overflow-hidden py-[100px] bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference drop-shadow-md">
+            <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
+              OVERLINE
+            </span>
+            <h1 class="text-white text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+              Inspire trust and deliver impact
+            </h1>
+            <p class="text-white text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-header-left-blue-bg',
+    category: 'Header',
+    label: 'Header Left Blue Gradient',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="url(#grad2)"/><rect x="10" y="25" width="40" height="2" fill="white"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/><defs><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00338d"/><stop offset="100%" stop-color="#00338d" stop-opacity="0"/></linearGradient></defs></svg>',
+    html: `
+      <style>
+        #header-2-left-blue {
+          background-image: url('${window.location.origin}/background/background-5.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      </style>
+      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-[#00338d]" layout-mode="container">
+        <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="flex flex-col items-start text-left max-w-3xl">
+            <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
+              OVERLINE
+            </span>
+            <h1 class="text-white text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+              What we stand for
+            </h1>
+            <p class="text-white/90 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-header-left-white-bg',
+    category: 'Header',
+    label: 'Header Left White Gradient',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="url(#grad3)"/><rect x="10" y="25" width="40" height="2" fill="#00338d"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/><defs><linearGradient id="grad3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs></svg>',
+    html: `
+      <style>
+        #header-3-left-white {
+          background-image: url('${window.location.origin}/background/background-3.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      </style>
+      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Header Left White Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
+        <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#ffffff] via-[#ffffff]/90 to-transparent"></div>
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="flex flex-col items-start text-left max-w-3xl">
+            <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-primary)] mb-4 tracking-widest uppercase bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20">
+              OVERLINE
+            </span>
+            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+              Inspire trust and deliver impact
+            </h1>
+            <p class="text-slate-600 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-header-left-solid',
+    category: 'Header',
+    label: 'Header Left Solid White',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="25" width="40" height="2" fill="#00338d"/><rect x="10" y="32" width="25" height="4" fill="var(--color-secondary)"/></svg>',
+    html: `
+      <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-[100px] bg-white" layout-mode="container">
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="flex flex-col items-start text-left max-w-3xl">
+            <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
+              OVERLINE
+            </span>
+            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+              What we stand for
+            </h1>
+            <p class="text-slate-600 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+
+  {
     id: 'section-business-nav',
     category: 'Full Page Templates',
     label: 'Business Navbar',

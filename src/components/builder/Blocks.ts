@@ -29,7 +29,7 @@ export const registerBlocks = (editor: any) => {
   sectionsLibrary.forEach(section => {
     bm.add(section.id, {
       label: section.label,
-      category: 'Template Sections', // Keeping grouped in a specific category
+      category: section.category || 'Template Sections', // Use section's own category
       media: section.svg || svgs.section,
       content: section.html
     });
