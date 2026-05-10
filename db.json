@@ -31,7 +31,7 @@
       "userId": "1",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-05-10T14:23:17.525Z",
+      "lastEdited": "2026-05-10T14:26:20.265Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -1006,18 +1006,6 @@
             "styles": [
               {
                 "selectors": [
-                  "#header-1-center"
-                ],
-                "style": {
-                  "background-image": "url(\"http://localhost:5173/background/background-1.jpg\")",
-                  "background-size": "cover",
-                  "background-position-x": "center",
-                  "background-position-y": "center",
-                  "background-repeat": "no-repeat"
-                }
-              },
-              {
-                "selectors": [
                   "#business-nav"
                 ],
                 "style": {
@@ -1199,14 +1187,6 @@
                 ],
                 "style": {
                   "color": "#ffffff"
-                }
-              },
-              {
-                "selectors": [
-                  "#inral"
-                ],
-                "style": {
-                  "background-color": "#1e49e2"
                 }
               }
             ],
@@ -1588,158 +1568,6 @@
                                         }
                                       ]
                                     }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Header Center Image",
-                          "classes": [
-                            "w-full",
-                            "relative",
-                            "overflow-hidden",
-                            "py-[100px]",
-                            "bg-cover",
-                            "bg-center",
-                            "bg-no-repeat",
-                            "bg-slate-800"
-                          ],
-                          "attributes": {
-                            "id": "header-1-center",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "relative",
-                                "z-10"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex",
-                                    "flex-col",
-                                    "items-center",
-                                    "text-center",
-                                    "max-w-4xl",
-                                    "mx-auto",
-                                    "mix-blend-difference",
-                                    "drop-shadow-md"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "inline-block",
-                                        "rounded-full",
-                                        "px-4",
-                                        "py-1.5",
-                                        "text-xs",
-                                        "font-bold",
-                                        "text-white",
-                                        "mb-4",
-                                        "tracking-widest",
-                                        "uppercase",
-                                        "bg-white/20",
-                                        "backdrop-blur-sm",
-                                        "border",
-                                        "border-white/30"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              OVERLINE\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white",
-                                        "text-5xl",
-                                        "lg:text-7xl",
-                                        "font-bold",
-                                        "mb-6",
-                                        "tracking-tight",
-                                        "leading-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              Inspire trust and deliver impact\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white",
-                                        "text-lg",
-                                        "lg:text-xl",
-                                        "leading-relaxed",
-                                        "max-w-2xl",
-                                        "font-medium"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.\n            "
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "classes": [
-                            "w-full"
-                          ],
-                          "attributes": {
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "type": "responsive-grid",
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "grid",
-                                "grid-cols-3",
-                                "gap-4"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "min-h-[50px]"
-                                  ],
-                                  "attributes": {
-                                    "id": "inral"
-                                  }
-                                },
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "min-h-[50px]"
-                                  ]
-                                },
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "min-h-[50px]"
                                   ]
                                 }
                               ]

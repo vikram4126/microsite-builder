@@ -177,7 +177,7 @@ export const sectionsLibrary: SectionDef[] = [
       <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
         <div class="container mx-auto">
           <!-- Wrap interior in standard flex layout -->
-          <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-0">
             <div class="flex-1 flex flex-col gap-8 z-10 w-full object-cover">
               <div>
                 <span class="inline-flex items-center rounded-full bg-accent/10 px-4 py-1.5 text-sm font-bold text-accent mb-6 border border-accent/20 shadow-sm">New: Enterprise Cloud 2.0</span>
