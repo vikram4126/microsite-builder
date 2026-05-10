@@ -22,7 +22,7 @@ export const sectionsLibrary: SectionDef[] = [
         }
       </style>
       <div id="header-1-center" data-gjs-type="section" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference drop-shadow-md">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
               OVERLINE
@@ -54,7 +54,7 @@ export const sectionsLibrary: SectionDef[] = [
       </style>
       <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-[#00338d]" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
               OVERLINE
@@ -86,7 +86,7 @@ export const sectionsLibrary: SectionDef[] = [
       </style>
       <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-primary)] mb-4 tracking-widest uppercase bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20">
               OVERLINE
@@ -109,7 +109,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
       <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-white" layout-mode="container">
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
               OVERLINE
@@ -135,8 +135,8 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
       <div id="business-nav" data-gjs-type="section" data-gjs-name="Navbar" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-colors" layout-mode="container">
-        <div class="container mx-auto">
-          <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-6 relative">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative">
             <a href="#" class="block">
               <svg class="text-primary dark:text-white transition-colors" width="82" height="32" viewBox="0 0 77 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="m59.4297.0894165v14.8992835l-.1935.157-.1935.157-.1855.1649-.1773.1648-.1693.1649-.1693.1727-.1613.1727-.1612.1727v-16.2259835h-16.9549v13.5647835h-1.4028v-13.5647835h-16.9549v13.5883835h-1.4028v-13.5883835h-16.95487v15.4880835l-4.329426 14.0436h3.805376l1.91075-6.2172h.54823l3.16039 6.2172h4.59545l-3.0636-6.2172h6.9496l-1.9269 6.2172h4.1521l1.9027-6.2015h.9191v-.0157h1.306.1049 7.8445l-1.8382 6.2015h4.1924l1.7817-6.2015h1.8866l.0483 6.2015h3.5152l4.0391-6.2015h2.6444l-1.3705 6.2015h4.1278l1.3464-6.2015h2.3864l-.0161.3533.0086.3611.0161.3453.0322.3455.0242.1648.0241.1649.0322.1648.0323.1649.0402.1648.0403.157.0484.157.0483.157.0565.157.0565.1492.0644.1491.0646.1413.0726.1492.0725.1413.0807.1334.0807.1413.0887.1335.0967.1256.0968.1334.1048.1178.1048.1256.1048.1177.1209.1178.121.1099.1531.1256.1532.1256.1613.1177.1693.1099.1693.1099.1693.1021.1774.0863.1854.0942.1774.0785.1854.0784.1854.0707.1935.0707.1935.0628.1935.055.1935.0549.1935.0471.387.0863.395.0629.387.0549.387.0471.3789.0314.3709.0157.3628.0158h.3466l.4677-.0075.4676-.0074.4756-.0236.4757-.0236.4757-.0392.4757-.0393.4756-.0471.4757-.055.4837-.0628.4838-.0707.4837-.0785.4837-.0785.4838-.0863.4837-.0942.4837-.0942.4918-.1099 1.4351-5.6284h4.7084v-23.3145573h-16.9549zm-53.50905 22.7335835.02417-.0863.05649.0863zm14.77005-8.3524-.2419.7929-2.2574 7.3005-.0887.259h-7.4173l-.5724-1.1932 7.9897-7.952h-5.1357l-6.2482 6.5547 2.02361-6.5547h-3.78924v-12.999627h15.73743v13.792427zm4.3777 6.1701-.1209.0075-.1129.0074-.1209.0075h-.129-.1693-.1451l-.1371.0074h-.129l-1.0077-.0074.4676-1.6799.2176-.8321.5322-1.9547h.1693.1773l.1693-.0074h.1613.782l.4757.0074.4353.0158.1935.0074.1855.0157.1773.0236.1613.0236.1451.0235.1371.0393.129.0393.1128.0471.0968.0471.0887.0629.0806.0628.0645.0785.0403.0629.0322.0628.0322.0707.0242.0785.0161.0863.0085.0863v.0942.102l-.0085.1099-.0076.1099-.0242.1256-.0241.1256-.0726.2669-.0887.2983-.0887.2512-.0968.2434-.1048.2276-.1129.212-.0565.0942-.0564.0942-.0646.0942-.0726.0863-.0726.0863-.0726.0785-.0806.0785-.0807.0706-.0887.0629-.0887.0707-.0967.0549-.1049.0628-.1048.055-.1128.0471-.1129.0471-.1209.0393-.129.0471-.1371.0314-.1451.0314-.1451.0313-.1613.0236-.1612.0236-.1693.0157-.1774.0157zm11.4645 2.1823 1.6528-5.7305.0645 5.7305h-1.7172zm2.5155-9.1688h-3.9344l-2.7089 9.1688h-4.1763l.1935-.0784.1935-.0785.1855-.0785.1854-.0863.1774-.0864.1693-.102.1693-.0942.1612-.1021.1613-.1099.1531-.1099.1452-.1098.1451-.1257.137-.1177.129-.1335.129-.1256.121-.1413.1209-.1334.1129-.1492.1048-.1413.1048-.157.0967-.157.0887-.1569.0888-.1649.0806-.1727.0807-.1727.0726-.1727.0644-.1806.0645-.1884.0484-.1884.0565-.1884.0402-.2041.0403-.1962.0565-.314.0483-.2983.0323-.2826.0241-.2669.0086-.2669-.0086-.2434-.0075-.2433-.0323-.2277-.0322-.2119-.0565-.212-.0565-.1962-.0806-.1884-.0887-.1806-.0968-.1805-.1128-.1649-.129-.157-.1049-.1099-.1048-.1099-.1128-.0942-.121-.0863-.129-.0863-.129-.0785-.137-.0706-.1371-.0629-.1451-.0628-.1451-.0471-.1532-.0472-.1532-.0471-.1612-.0393-.1613-.0313-.1612-.0314-.1693-.0236-.3467-.0471-.3467-.0235-.3547-.0236-.3628-.0074h-.7256-.7175-.2258-.4031-.4999-.5563-.5401-.4596-.3225-.1209v-12.976108h15.7375v12.976108zm9.5617 9.1688h-2.3622l3.5796-5.495zm8.7959-8.9097-.0085 3.1792-.2015.2748-.1855.2826-.1854.2826-.1693.2826-.1613.2826-.1612.2904-.1371.2826-.137.2826-.129.2748-.1129.2826-.1129.2747-.0967.2669-.0887.2669-.0807.2591-.0726.2512-.0645.2512-.0403.1648-.0403.1727-.0402.1649-.0323.1727-.0322.1648-.0242.1649-.0241.1648-.0161.1727h-2.3139l1.9753-9.1452-6.6594-.0075-5.958 9.1531h-.4354v-22.144827h15.7455v13.235127zm9.0781 12.6542-.3305.0549-.3387.0471-.3386.0471-.3305.0393-.3306.0314-.3305.0236-.3225.0157h-.3225-.2096l-.2096-.0074-.2016-.0158-.2015-.0235-.1935-.0314-.1855-.0314-.1854-.0393-.1774-.0471-.1693-.0549-.1693-.055-.1612-.0706-.1532-.0707-.1532-.0863-.1451-.0863-.1371-.0942-.129-.0942-.129-.1099-.1128-.1178-.1129-.1177-.1048-.1335-.0968-.1334-.0887-.1492-.0806-.1491-.0807-.157-.0645-.1649-.0565-.1805-.0483-.1806-.0484-.1884-.0322-.1962-.0242-.2041-.0161-.212-.0085-.2198h7.3366l-.8062 3.1636zm9.3038-3.7445h-3.9666l.653-2.5591h-7.9493l-.6531 2.5591h-3.8456v-.5259l.0483-.2198.0403-.2198.0483-.2355.0483-.2355.0726-.2591.0726-.259.0807-.2591.0887-.2512.0967-.2512.1049-.2512.1128-.2433.1129-.2434.129-.2433.129-.2277.1371-.2355.1531-.2198.1532-.2198.1532-.2119.1693-.2041.1774-.1963.1854-.1884.1854-.1727.2016-.1727.2015-.1648.2097-.1492.2257-.1413.2258-.1256.2338-.1177.2418-.1099.2499-.0942.258-.0785.2661-.0629.2741-.0549.2822-.0393.2902-.0235.2983-.0075.2338.0075.2338.0157.2338.0314.2258.0471.1129.0314.1048.0313.1048.0314.0967.0471.0968.0393.0967.055.0887.0549.0887.0549.0807.0707.0806.0707.0726.0706.0726.0863.0646.0785.0565.0942.0483.1021.0483.102.0403.1099.0322.1178.0242.1177.0242.1335.0085.1334v.1413.1492l-.0161.157h4.7406l.0726-.3219.0645-.3689.0322-.1963.0162-.2119.0161-.212v-.2198l-.0076-.2276-.0242-.2355-.0241-.1099-.0162-.1178-.0322-.1177-.0322-.1178-.0403-.1256-.0403-.1177-.0483-.1178-.0565-.1177-.0565-.1178-.0726-.1177-.0726-.1178-.0806-.1177-.0968-.1256-.1048-.1178-.1048-.1177-.1129-.1099-.1209-.1099-.129-.1021-.129-.0942-.137-.0942-.1452-.0942-.1451-.0785-.1532-.0784-.1612-.0785-.1612-.0707-.1694-.0707-.1773-.0628-.1774-.0629-.1774-.0549-.1935-.0471-.1854-.0471-.2015-.0471-.2016-.0393-.2016-.0393-.2096-.0314-.2177-.0236-.4434-.0471-.4515-.0393-.4756-.0157-.4838-.0074-.3628.0074-.3789.0075-.395.0235-.4112.0314-.4273.0471-.4354.0549-.4434.0707-.4515.0942-.2257.0471-.2338.0549-.2258.0629-.2338.0628-.2338.0707-.2338.0785-.2338.0785-.2257.0863-.2338.0942-.2338.102-.2258.1021-.2338.1099-.2257.1177-.2258.1256-.2257.1256-.2258.1413v-13.894463h15.7617v22.144863z" fill="currentColor"/>
@@ -175,7 +175,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
       <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-10 md:py-[60px] lg:py-24 relative overflow-hidden" layout-mode="container">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-4 lg:px-0">
           <!-- Wrap interior in standard flex layout -->
           <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-0">
             <div class="flex-1 flex flex-col gap-8 z-10 w-full object-cover">
@@ -209,13 +209,13 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- Features (Using responsive-grid trait method) -->
       <div id="business-features" data-gjs-type="section" data-gjs-name="Features List" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-primary dark:text-white text-4xl font-black mb-4 tracking-tight">Our Core Capabilities</h2>
             <p class="text-slate-600 dark:text-slate-400 text-lg">Robust infrastructure designed to solve complex challenges seamlessly and efficiently.</p>
           </div>
           <!-- Replaced raw tailwind grid with native GrapesJS responsive-grid component -->
-          <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
               <div class="w-14 h-14 bg-accent/10 text-accent rounded-xl flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
@@ -251,7 +251,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- Services Grid -->
       <div id="business-services" data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div class="max-w-xl">
               <h2 class="text-4xl font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
@@ -260,7 +260,7 @@ export const sectionsLibrary: SectionDef[] = [
             <a href="#" class="text-accent font-bold hover:underline inline-flex items-center gap-2">View All Services &rarr;</a>
           </div>
           <!-- Responsive grid component trait -->
-          <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-shadow w-full">
               <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Consulting" />
               <div class="p-8">
@@ -301,7 +301,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
       <div id="business-cta" data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
             <div class="relative z-10 max-w-3xl mx-auto">
               <h2 class="text-white text-4xl lg:text-5xl font-black mb-6 tracking-tight">Ready to elevate your business?</h2>
@@ -324,9 +324,9 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <!-- KPMG Footer -->
       <div id="business-footer" data-gjs-type="section" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <!-- Responsive grid component trait -->
-          <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             
             <!-- Brand & Social Column -->
             <div class="flex flex-col gap-6 w-full items-start">
@@ -392,7 +392,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
       <div id="dual-cta-pdf" data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-[var(--color-secondary)] py-20" layout-mode="container">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 lg:px-0">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
             <div class="flex-1 min-h-[400px]">
               <img src="/src/assets/background/campaign-creators-gMsnXqILjp4-unsplash.jpg" class="w-full h-full object-cover" alt="Handshake" />
@@ -413,7 +413,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="40" height="4" fill="var(--color-primary)"/><rect x="60" y="10" width="30" height="40" fill="#cbd5e1" opacity="0.5"/></svg>',
     html: `
       <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Trust Hero" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+        <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
             <span class="text-xs font-bold uppercase tracking-widest text-[#1e49e2] mb-4">OVERLINE</span>
             <h1 class="text-4xl lg:text-5xl font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
@@ -436,7 +436,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="40" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="70" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/></svg>',
     html: `
       <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Expert Profiles" class="w-full py-24 bg-[#F5F7FA]" layout-mode="container">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 lg:px-0">
           <div class="text-center mb-20 max-w-3xl mx-auto">
             <p class="text-gray-600 text-lg leading-relaxed font-medium">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
           </div>
@@ -516,9 +516,9 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
       <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Grid" class="w-full py-24 bg-white" layout-mode="container">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 lg:px-0">
           <h2 class="text-4xl font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
-          <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
+          <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto px-4 lg:px-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
