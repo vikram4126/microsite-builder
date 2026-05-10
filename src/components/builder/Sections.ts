@@ -21,7 +21,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-[100px] bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
+      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference drop-shadow-md">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
@@ -52,7 +52,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-[#00338d]" layout-mode="container">
+      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-[#00338d]" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -84,7 +84,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
+      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -108,7 +108,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Header Left Solid White',
     svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
-      <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-[100px] bg-white" layout-mode="container">
+      <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
@@ -174,7 +174,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
-      <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 lg:py-32 relative overflow-hidden" layout-mode="container">
+      <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-10 md:py-[60px] lg:py-24 relative overflow-hidden" layout-mode="container">
         <div class="container mx-auto">
           <!-- Wrap interior in standard flex layout -->
           <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-0">

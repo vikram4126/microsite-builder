@@ -128,7 +128,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/header-hero.jpg" class="object-cover" />',
     content: `
-      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-24" layout-mode="container">
+      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-10 md:py-[60px] lg:py-24" layout-mode="container">
         <div class="container mx-auto text-white text-center">
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
@@ -169,7 +169,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/center-white.jpg" class="object-cover" />',
     content: `
-      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
+      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-10 md:py-[60px] lg:py-24" layout-mode="container">
         <div class="container mx-auto text-center">
           <div class="mx-auto flex flex-col items-center justify-center w-full">
             <h1 class="text-5xl font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
