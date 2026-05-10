@@ -85,7 +85,7 @@ export const sectionsLibrary: SectionDef[] = [
         }
       </style>
       <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Header Left White Gradient" class="w-full relative overflow-hidden py-[100px] bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
-        <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#ffffff] via-[#ffffff]/90 to-transparent"></div>
+        <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto px-4 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-primary)] mb-4 tracking-widest uppercase bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20">
