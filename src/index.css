@@ -20,6 +20,11 @@
   --color-background-dark: #071728;
 }
 
+/* Responsive Navbar Fix for GrapesJS ID collisions */
+[id^="mobile-menu-toggle"]:checked ~ nav {
+  display: flex !important;
+}
+
 @layer utilities {
   @keyframes fadeIn {
     from {
