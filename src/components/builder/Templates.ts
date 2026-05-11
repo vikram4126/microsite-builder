@@ -3,12 +3,20 @@ import { sectionsLibrary } from './Sections';
 export const registerTemplates = (editor: any) => {
   const bm = editor.BlockManager;
 
-  // Construct the template by combining only sections from 'Full Page Templates' category
+  // Explicitly define sections for the Business Landing Page template
+  const businessLandingPageSections = [
+    'section-business-hero',
+    'section-business-features',
+    'section-business-services',
+    'section-business-cta',
+    'section-business-footer'
+  ];
+
   const content = `
 <div data-gjs-type="default" data-gjs-droppable="true" data-gjs-custom-name="Page Block" class="template-wrapper w-full flex flex-col min-h-screen">
-  ${sectionsLibrary
-    .filter(section => section.category === 'Full Page Templates' && section.id !== 'section-business-nav')
-    .map(section => section.html)
+  ${businessLandingPageSections
+    .map(id => sectionsLibrary.find(s => s.id === id)?.html || '')
+    .filter(html => html !== '')
     .join('\n')}
 </div>
 `;
