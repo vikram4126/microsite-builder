@@ -92,12 +92,12 @@ export default function Builder() {
     const currentPage = pData.pages.find((p: any) => p.id === pageId);
     if (!currentPage) return;
 
-    if (currentPage.name === 'Home' || pData.pages.indexOf(currentPage) === 0) {
+    if (currentPage.name === 'Home' || currentPage.title === 'Home' || pData.pages.indexOf(currentPage) === 0) {
       toast.error('Cannot delete the Home page');
       return;
     }
 
-    if (!window.confirm(`Are you sure you want to delete the "${currentPage.name}" page?`)) return;
+    if (!window.confirm(`Are you sure you want to delete the "${currentPage.title || currentPage.name}" page?`)) return;
 
     const updatedPages = pData.pages.filter((p: any) => p.id !== pageId);
     const updatedProject = {
@@ -1064,8 +1064,17 @@ export default function Builder() {
       try {
         const data = await api.get(`/projects/${projectId}`);
         // Ensure first page is named Home if it's empty/untitled
-        if (data.pages && data.pages.length > 0 && (!data.pages[0].name || data.pages[0].name === 'Untitled Page')) {
-          data.pages[0].name = 'Home';
+        // Ensure first page has a display name if missing (Home)
+        if (data.pages && data.pages.length > 0) {
+          const firstPage = data.pages[0];
+          if (!firstPage.name && !firstPage.title) {
+            firstPage.name = 'Home';
+            firstPage.title = 'Home';
+          } else if (!firstPage.name) {
+            firstPage.name = firstPage.title;
+          } else if (!firstPage.title) {
+            firstPage.title = firstPage.name;
+          }
         }
         
         setProjectData(data);
@@ -1436,7 +1445,13 @@ export default function Builder() {
                       const newId = Math.random().toString(36).substring(2, 9);
                       const updatedProjectWithNew = {
                         ...projectDataRef.current,
-                        pages: [...projectDataRef.current.pages, { id: newId, name: newPageName, layout: {} }]
+                        pages: [...projectDataRef.current.pages, { 
+                          id: newId, 
+                          name: newPageName, 
+                          title: newPageName,
+                          route: `/${newPageName.toLowerCase().replace(/\s+/g, '-')}`,
+                          layout: {} 
+                        }]
                       };
                       if (projectId !== 'guest') {
                         api.put(`/projects/${projectId}`, updatedProjectWithNew).then(() => {
@@ -1457,7 +1472,7 @@ export default function Builder() {
                 className="bg-transparent text-[11px] font-bold text-gray-700 outline-none cursor-pointer pr-4 appearance-none"
               >
                 {projectData?.pages.map((p: any) => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
+                  <option key={p.id} value={p.id}>{p.title || p.name || 'Untitled Page'}</option>
                 ))}
                 <option value="add-new" className="text-[#1e49e2] font-bold">+ Add New Page</option>
               </select>
@@ -1465,7 +1480,10 @@ export default function Builder() {
             </div>
 
             {/* Delete Page Button */}
-            {projectData?.pages.length > 1 && projectData.pages.find((p: any) => p.id === pageId)?.name !== 'Home' && (
+            {projectData?.pages.length > 1 && (() => {
+              const currentPage = projectData.pages.find((p: any) => p.id === pageId);
+              return currentPage?.name !== 'Home' && currentPage?.title !== 'Home';
+            })() && (
               <button
                 onClick={handleDeletePage}
                 className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all"
