@@ -2,163 +2,396 @@ import JSZip from 'jszip';
 
 /**
  * Export the GrapesJS editor content as a fully functional static website ZIP.
+ * Handles: multi-page, base64 images, local /public/ images, background images.
  */
-export async function exportStaticWebsite(editor: any, projectName: string) {
-  // 1. Extract content from the editor
-  const htmlBody: string = editor.getHtml() || '';
-  const css: string = editor.getCss() || '';
-  let js = '';
-  try { js = editor.getJs?.() || ''; } catch (_e) { /* no JS */ }
-
-  const parser = new DOMParser();
-  const baseDoc = parser.parseFromString(htmlBody, 'text/html');
-  
-  // Process section-level custom code (Level 2)
-  const advancedEls = baseDoc.querySelectorAll('[data-custom-code]');
-  advancedEls.forEach(el => {
-    const rawCode = el.getAttribute('data-custom-code');
-    if (rawCode) {
-      // Inject the raw code at the end of the element
-      el.insertAdjacentHTML('beforeend', rawCode);
-      el.removeAttribute('data-custom-code');
-    }
-  });
-
-  // 2. Scan for base64 images and extract them via DOM for reliability
-  const imageMap = new Map<string, string>();
+export async function exportStaticWebsite(editor: any, projectData: any) {
+  const projectName = projectData.name || projectData.title || 'My Website';
+  const pages = projectData.pages || [];
+  const zip = new JSZip();
+  const imageMap = new Map<string, string>(); // dataUri/url -> local zip path
+  const fetchedImages = new Map<string, ArrayBuffer>(); // url -> fetched data
   let imgCounter = 0;
+  
+  // Save current editor state to restore later
+  const originalData = editor.getProjectData();
 
-  // Process <img> tags
-  baseDoc.querySelectorAll('img').forEach((img: any) => {
-    const src = img.getAttribute('src') || '';
-    if (src.startsWith('data:image/')) {
-      const match = src.match(/^data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,/);
-      if (match) {
-        if (imageMap.has(src)) {
-          img.setAttribute('src', imageMap.get(src)!);
+  // Helper to normalize page names to filenames
+  const getFilename = (name: string, index: number) => {
+    if (index === 0) return 'index.html';
+    return name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.html';
+  };
+
+  // Helper to detect local/public image paths (starts with / but not // or http)
+  const isLocalPath = (src: string) => {
+    if (!src) return false;
+    // Paths like /images/..., /background/..., /team-member/..., /thumbs/...
+    return (src.startsWith('/') && !src.startsWith('//') && !src.startsWith('/http'));
+  };
+
+  // Helper to get extension from a file path
+  const getExtFromPath = (filePath: string) => {
+    const parts = filePath.split('.');
+    return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : 'png';
+  };
+
+  // Helper to build the local ZIP path for a public asset
+  const getLocalImagePath = (src: string) => {
+    // src is like /images/image-1.png or /team-member/member-2.jpg or /background/bg.jpg
+    // We want: images/images/image-1.png -> just use the path without leading /
+    // All go into the images/ folder in the zip
+    const cleanSrc = src.startsWith('/') ? src.substring(1) : src;
+    return 'images/' + cleanSrc.replace(/\//g, '-'); // flatten to single folder
+  };
+
+  // Fetch a local image and cache it
+  const fetchLocalImage = async (src: string): Promise<string> => {
+    // Already mapped?
+    if (imageMap.has(src)) return imageMap.get(src)!;
+
+    const localPath = getLocalImagePath(src);
+    imageMap.set(src, localPath);
+
+    try {
+      // Fetch from dev server (images served from /public)
+      const url = window.location.origin + src;
+      const resp = await fetch(url);
+      if (resp.ok) {
+        const buf = await resp.arrayBuffer();
+        fetchedImages.set(localPath, buf);
+      }
+    } catch (e) {
+      console.warn('[Export] Failed to fetch image:', src, e);
+    }
+
+    return localPath;
+  };
+
+  // 1. Process each page
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i];
+    const filename = getFilename(page.name, i);
+    
+    // Load page into editor
+    editor.loadProjectData(page.layout || {});
+
+    // Update dynamic nav links to point to .html files for export
+    const navLinks = editor.DomComponents.getWrapper().find('[data-gjs-type="dynamic-nav-links"]');
+    navLinks.forEach((nav: any) => {
+      nav.components().reset();
+      pages.forEach((p: any, idx: number) => {
+        const pFilename = getFilename(p.name, idx);
+        nav.append({
+          tagName: 'a',
+          type: 'link',
+          classes: ['text-gray-600', 'hover:text-[var(--color-secondary)]', 'font-semibold', 'transition-colors'],
+          attributes: { href: pFilename },
+          content: p.name,
+        });
+      });
+    });
+
+    // Extract content
+    const htmlBody: string = editor.getHtml() || '';
+    let css: string = editor.getCss() || '';
+    
+    // Process global CSS for local images
+    if (css.includes('url(')) {
+      const bgMatches = css.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      for (const m of bgMatches) {
+        const rawPath = m[1];
+        if (isLocalPath(rawPath)) {
+          const localPath = await fetchLocalImage(rawPath);
+          css = css.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), localPath);
+        }
+      }
+    }
+    let js = '';
+    try { js = editor.getJs?.() || ''; } catch (_e) { /* no JS */ }
+
+    const parser = new DOMParser();
+    const baseDoc = parser.parseFromString(htmlBody, 'text/html');
+    
+    // Process section-level custom code
+    const advancedEls = baseDoc.querySelectorAll('[data-custom-code]');
+    advancedEls.forEach(el => {
+      const rawCode = el.getAttribute('data-custom-code');
+      if (rawCode) {
+        el.insertAdjacentHTML('beforeend', rawCode);
+        el.removeAttribute('data-custom-code');
+      }
+    });
+
+    // 2a. Process <img> tags
+    const imgEls = baseDoc.querySelectorAll('img');
+    for (const img of Array.from(imgEls)) {
+      const src = img.getAttribute('src') || '';
+      
+      // Base64 images
+      if (src.startsWith('data:image/')) {
+        const match = src.match(/^data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,/);
+        if (match) {
+          if (imageMap.has(src)) {
+            img.setAttribute('src', imageMap.get(src)!);
+          } else {
+            const ext = match[1].replace('+xml', '').replace('jpeg', 'jpg');
+            imgCounter++;
+            const localPath = `images/image-${imgCounter}.${ext}`;
+            imageMap.set(src, localPath);
+            img.setAttribute('src', localPath);
+          }
+        }
+      }
+      // Local /public/ paths
+      else if (isLocalPath(src)) {
+        const localPath = await fetchLocalImage(src);
+        img.setAttribute('src', localPath);
+      }
+    }
+
+    // 2b. Process background-image in style attributes (inline CSS)
+    const allEls = baseDoc.querySelectorAll('*');
+    for (const el of Array.from(allEls)) {
+      const style = el.getAttribute('style') || '';
+      if (!style.includes('url(')) continue;
+
+      let newStyle = style;
+
+      // Match base64 background images
+      const bgBase64Match = style.match(/url\(["']?(data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,[^"']+)["']?\)/i);
+      if (bgBase64Match) {
+        const fullDataUri = bgBase64Match[1];
+        if (imageMap.has(fullDataUri)) {
+          newStyle = newStyle.replace(fullDataUri, imageMap.get(fullDataUri)!);
         } else {
-          const ext = match[1].replace('+xml', '').replace('jpeg', 'jpg');
+          const ext = bgBase64Match[2].replace('+xml', '').replace('jpeg', 'jpg');
           imgCounter++;
           const localPath = `images/image-${imgCounter}.${ext}`;
-          imageMap.set(src, localPath);
-          img.setAttribute('src', localPath);
+          imageMap.set(fullDataUri, localPath);
+          newStyle = newStyle.replace(fullDataUri, localPath);
+        }
+      }
+
+      // Match local path background images: url('/images/...')  url(/background/...)
+      const bgLocalMatches = style.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      for (const m of bgLocalMatches) {
+        const rawPath = m[1];
+        if (isLocalPath(rawPath) && !rawPath.startsWith('/http')) {
+          const localPath = await fetchLocalImage(rawPath);
+          newStyle = newStyle.replace(rawPath, localPath);
+        }
+      }
+
+      if (newStyle !== style) {
+        el.setAttribute('style', newStyle);
+      }
+    }
+
+    // 2c. Process SVG <image> tags with href/xlink:href
+    const svgImages = baseDoc.querySelectorAll('image[href], image[xlink\\:href]');
+    for (const svgImg of Array.from(svgImages)) {
+      for (const attr of ['href', 'xlink:href']) {
+        const src = svgImg.getAttribute(attr) || '';
+        if (isLocalPath(src)) {
+          const localPath = await fetchLocalImage(src);
+          svgImg.setAttribute(attr, localPath);
         }
       }
     }
-  });
 
-  // Process background images in style attributes
-  baseDoc.querySelectorAll('[style*="background-image"]').forEach((el: any) => {
-    const style = el.getAttribute('style') || '';
-    const bgMatch = style.match(/url\(["']?(data:image\/(png|jpe?g|gif|webp|svg\+xml);base64,[^"']+)["']?\)/i);
-    if (bgMatch) {
-      const fullDataUri = bgMatch[1];
-      if (imageMap.has(fullDataUri)) {
-        el.setAttribute('style', style.replace(fullDataUri, imageMap.get(fullDataUri)!));
-      } else {
-        const ext = bgMatch[2].replace('+xml', '').replace('jpeg', 'jpg');
-        imgCounter++;
-        const localPath = `images/image-${imgCounter}.${ext}`;
-        imageMap.set(fullDataUri, localPath);
-        el.setAttribute('style', style.replace(fullDataUri, localPath));
-      }
-    }
-  });
+    // 2d. Process background-image in <style> tags
+    const styleTags = baseDoc.querySelectorAll('style');
+    for (const styleTag of Array.from(styleTags)) {
+      let cssContent = styleTag.textContent || '';
+      if (!cssContent.includes('url(')) continue;
 
-  let processedHtml = baseDoc.body.innerHTML;
-
-  // 3. Widget scripts for interactive elements
-  const widgetScripts = [
-    '(function(){',
-    'document.querySelectorAll(".accordion-header").forEach(function(h){',
-    '  h.addEventListener("click",function(){',
-    '    var c=this.nextElementSibling;',
-    '    if(c)c.style.display=c.style.display==="none"?"block":"none";',
-    '  });',
-    '});',
-    'document.querySelectorAll(".tab-btn").forEach(function(btn){',
-    '  btn.addEventListener("click",function(){',
-    '    var p=this.parentElement;if(!p)return;',
-    '    var root=p.parentElement;if(!root)return;',
-    '    p.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});',
-    '    this.classList.add("active");',
-    '    root.querySelectorAll(".tab-content").forEach(function(c){c.style.display="none";});',
-    '    var t=this.getAttribute("data-target");',
-    '    if(t){var el=root.querySelector("#"+t);if(el)el.style.display="block";}',
-    '  });',
-    '});',
-    '});',
-    'if(typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined"){',
-    '  gsap.registerPlugin(ScrollTrigger);',
-    '  document.querySelectorAll("[data-animation]").forEach(function(el){',
-    '    var animType=el.getAttribute("data-animation");',
-    '    if(!animType)return;',
-    '    var vars={scrollTrigger:{trigger:el,start:"top 85%"},duration:0.8,ease:"power2.out",opacity:0,clearProps:"all"};',
-    '    if(animType==="fade-in"){ gsap.from(el,vars); }',
-    '    else if(animType==="slide-up"){ vars.y=50; gsap.from(el,vars); }',
-    '    else if(animType==="zoom-in"){ vars.scale=0.8; gsap.from(el,vars); }',
-    '  });',
-    '}',
-    '})();',
-  ].join('\n');
-
-  let customExtractedJs = '';
-  try {
-    const wrapper = editor.getWrapper();
-    const extractCustomJs = (model: any) => {
-      if (model.get('type') === 'custom-code-block') {
-        const bJs = model.get('customJs');
-        if (bJs) {
-          customExtractedJs += `\n/* Custom Block Code */\n${bJs}\n`;
+      const bgMatches = cssContent.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      for (const m of bgMatches) {
+        const rawPath = m[1];
+        if (isLocalPath(rawPath)) {
+          const localPath = await fetchLocalImage(rawPath);
+          cssContent = cssContent.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), localPath);
         }
       }
-      const children = model.components();
-      if (children && typeof children.forEach === 'function') {
-        children.forEach((comp: any) => extractCustomJs(comp));
+      styleTag.textContent = cssContent;
+    }
+
+    const processedHtml = baseDoc.body.innerHTML;
+
+    // 3. Widget scripts
+    const widgetScripts = [
+      '(function(){',
+      'document.querySelectorAll(".accordion-header").forEach(function(h){',
+      '  h.addEventListener("click",function(){',
+      '    var c=this.nextElementSibling;',
+      '    if(c)c.style.display=c.style.display==="none"?"block":"none";',
+      '  });',
+      '});',
+      'document.querySelectorAll(".tab-btn").forEach(function(btn){',
+      '  btn.addEventListener("click",function(){',
+      '    var p=this.parentElement;if(!p)return;',
+      '    var root=p.parentElement;if(!root)return;',
+      '    p.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("active");});',
+      '    this.classList.add("active");',
+      '    root.querySelectorAll(".tab-content").forEach(function(c){c.style.display="none";});',
+      '    var t=this.getAttribute("data-target");',
+      '    if(t){var el=root.querySelector("#"+t);if(el)el.style.display="block";}',
+      '  });',
+      '});',
+      '})();',
+      'if(typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined"){',
+      '  gsap.registerPlugin(ScrollTrigger);',
+      '  document.querySelectorAll("[data-animation]").forEach(function(el){',
+      '    var animType=el.getAttribute("data-animation");',
+      '    if(!animType)return;',
+      '    var vars={scrollTrigger:{trigger:el,start:"top 85%"},duration:0.8,ease:"power2.out",opacity:0,clearProps:"all"};',
+      '    if(animType==="fade-in"){ gsap.from(el,vars); }',
+      '    else if(animType==="slide-up"){ vars.y=50; gsap.from(el,vars); }',
+      '    else if(animType==="zoom-in"){ vars.scale=0.8; gsap.from(el,vars); }',
+      '  });',
+      '}',
+    ].join('\n');
+
+    let customExtractedJs = '';
+    try {
+      const wrapper = editor.getWrapper();
+      const extractCustomJs = (model: any) => {
+        if (model.get('type') === 'custom-code-block') {
+          const bJs = model.get('customJs');
+          if (bJs) customExtractedJs += `\n/* Custom Block Code */\n${bJs}\n`;
+        }
+        const children = model.components();
+        if (children && typeof children.forEach === 'function') {
+          children.forEach((comp: any) => extractCustomJs(comp));
+        }
+      };
+      if (wrapper) extractCustomJs(wrapper);
+    } catch (e) {
+      console.error('Failed to extract custom JS', e);
+    }
+
+    const allJs = js ? widgetScripts + '\n\n' + js : widgetScripts;
+    const finalJs = allJs + '\n\n' + customExtractedJs;
+
+    // 4. Build page HTML
+    const sc = 'script';
+    const pageHtml = [
+      '<!DOCTYPE html>',
+      '<html lang="en">',
+      '<head>',
+      '  <meta charset="UTF-8">',
+      '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      '  <title>' + (page.name || 'Untitled Page') + ' | ' + projectName + '</title>',
+      '  <link rel="stylesheet" href="css/style.css">',
+      '  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />',
+      '  <link rel="preconnect" href="https://fonts.googleapis.com">',
+      '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+      '  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">',
+      '  <style>',
+      '    :root {',
+      '      --color-primary: #00338d;',
+      '      --color-secondary: #1e49e2;',
+      '      --color-accent: #1e49e2;',
+      '      --color-dark: #0c233c;',
+      '      --color-light-accent: #aceaff;',
+      '      --color-cta: #00b8f5;',
+      '      --color-purple: #7213ea;',
+      '      --color-pink: #fd349c;',
+      '      --color-success: #00b894;',
+      '      --color-background-dark: #071728;',
+      '      --theme-primary: #00338d;',
+      '      --theme-secondary: #1e49e2;',
+      '      --theme-accent: #1e49e2;',
+      '    }',
+      '    body { font-family: "Open Sans", sans-serif; }',
+      '    h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif; }',
+      '  </style>',
+      '  <' + sc + ' src="https://cdn.tailwindcss.com?plugins=forms"></' + sc + '>',
+      '  <' + sc + ' src="canvas-tailwind-config.js"></' + sc + '>',
+      '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></' + sc + '>',
+      '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></' + sc + '>',
+      '</head>',
+      `<body class="${editor.Canvas?.getBody?.().className || ''}" style="${editor.Canvas?.getBody?.().style.cssText || ''}">`,
+      processedHtml,
+      '  <' + sc + ' src="js/script.js"></' + sc + '>',
+      '</body>',
+      '</html>'
+    ].join('\n');
+
+    zip.file(filename, pageHtml);
+    
+    // Take CSS/JS from the first page (shared across pages)
+    if (i === 0) {
+      // Also process CSS for local image urls (background-image in CSS rules)
+      let processedCss = css;
+      const cssUrlMatches = css.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      for (const m of cssUrlMatches) {
+        const rawPath = m[1];
+        if (isLocalPath(rawPath)) {
+          const localPath = await fetchLocalImage(rawPath);
+          processedCss = processedCss.replace(rawPath, localPath);
+        }
       }
-    };
-    if (wrapper) extractCustomJs(wrapper);
-  } catch (e) {
-    console.error('Failed to extract custom JS', e);
+      zip.folder('css')!.file('style.css', processedCss || '');
+      zip.folder('js')!.file('script.js', finalJs);
+    }
   }
 
-  const allJs = js ? widgetScripts + '\n\n' + js : widgetScripts;
-  const finalJs = allJs + '\n\n' + customExtractedJs;
+  // Restore editor state
+  editor.loadProjectData(originalData);
 
-  // 4. Build index.html
-  // Use a variable for the tag name to prevent Vite from parsing it
-  const sc = 'script';
-  const indexParts: string[] = [];
-  indexParts.push('<!DOCTYPE html>');
-  indexParts.push('<html lang="en">');
-  indexParts.push('<head>');
-  indexParts.push('  <meta charset="UTF-8">');
-  indexParts.push('  <meta name="viewport" content="width=device-width, initial-scale=1.0">');
-  indexParts.push('  <title>' + (projectName || 'My Website') + '</title>');
-  indexParts.push('  <link rel="stylesheet" href="css/style.css">');
-  indexParts.push('  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />');
-  indexParts.push('  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
-  indexParts.push('  <' + sc + ' src="https://cdn.tailwindcss.com?plugins=forms"></' + sc + '>');
-  indexParts.push('  <' + sc + ' src="canvas-tailwind-config.js"></' + sc + '>');
-  indexParts.push('  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></' + sc + '>');
-  indexParts.push('  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></' + sc + '>');
-  indexParts.push('</head>');
-  const bodyEl = editor.Canvas?.getBody?.();
-  const themeStyles = bodyEl ? bodyEl.style.cssText : '';
-  const bodyClasses = bodyEl ? bodyEl.className : '';
-  
-  indexParts.push(`<body class="${bodyClasses}" style="${themeStyles}">`);
-  indexParts.push(processedHtml);
-  indexParts.push('  <' + sc + ' src="js/script.js"></' + sc + '>');
-  indexParts.push('</body>');
-  indexParts.push('</html>');
-  const indexHtml = indexParts.join('\n');
+  // Trigger stabilization to fix live preview styles after data swap
+  try {
+    const doc = editor.Canvas.getDocument();
+    const body = editor.Canvas.getBody();
+    const win = editor.Canvas.getWindow() as any;
+    if (doc && body) {
+      // 1. Re-inject Tailwind theme variables
+      const old = doc.getElementById('tw-canvas-theme');
+      if (old) old.remove();
+      const tailwindStyle = doc.createElement('style');
+      tailwindStyle.id = 'tw-canvas-theme';
+      tailwindStyle.setAttribute('type', 'text/tailwindcss');
+      tailwindStyle.innerHTML = `
+        @custom-variant dark (&:where(.dark, .dark *));
+        @theme {
+          --color-primary: var(--theme-primary, #00338d);
+          --color-secondary: var(--theme-secondary, #1e49e2);
+          --color-accent: var(--theme-accent, #1e49e2);
+          --color-dark: var(--theme-dark, #0c233c);
+          --color-light-accent: var(--theme-light-accent, #aceaff);
+          --color-cta: var(--theme-cta, #00b8f5);
+          --color-purple: var(--theme-purple, #7213ea);
+          --color-pink: var(--theme-pink, #fd349c);
+          --color-success: var(--theme-success, #00b894);
+          --color-background-dark: var(--theme-background-dark, #071728);
+          --font-sans: "Open Sans", sans-serif;
+          --font-display: "Open Sans Condensed", sans-serif;
+        }
+      `;
+      doc.head.appendChild(tailwindStyle);
 
-  // 5. Build ZIP archive
-  const zip = new JSZip();
-  zip.file('index.html', indexHtml);
-  zip.folder('css')!.file('style.css', css || '');
-  zip.folder('js')!.file('script.js', finalJs);
+      // 2. Purge empty GJS rules that might conflict
+      try {
+        const cssRules = editor.Css.getAll();
+        const emptyRules = cssRules.filter((rule: any) => {
+          const style = rule.getStyle();
+          return !style || Object.keys(style).length === 0;
+        });
+        if (emptyRules.length > 0) editor.Css.remove(emptyRules);
+      } catch (_) {}
+
+      // 3. Force Tailwind rescan
+      body.classList.add('__tw-rescan');
+      setTimeout(() => {
+        body.classList.remove('__tw-rescan');
+        if (win && win.__tailwindBrowser?.rebuild) {
+          win.__tailwindBrowser.rebuild();
+        }
+      }, 100);
+    }
+  } catch (e) {
+    console.warn('[Export] Failed to stabilize editor after restore:', e);
+  }
   
   // Embed tailwind configuration
   const tailwindConfigStr = `tailwind.config = {
@@ -176,22 +409,31 @@ export async function exportStaticWebsite(editor: any, projectName: string) {
         "pink-accent": "var(--theme-pink, #fd349c)"
       },
       fontFamily: {
-        "display": ["Public Sans", "Inter", "sans-serif"]
+        "sans": ["Open Sans", "sans-serif"],
+        "display": ["Open Sans Condensed", "sans-serif"]
       }
     }
   }
 };`;
   zip.file('canvas-tailwind-config.js', tailwindConfigStr);
 
-  if (imageMap.size > 0) {
-    const imgFolder = zip.folder('images')!;
-    for (const [dataUri, localPath] of imageMap.entries()) {
-      const fileName = localPath.replace('images/', '');
-      const base64Data = dataUri.split(',')[1];
-      if (base64Data) {
-        imgFolder.file(fileName, base64Data, { base64: true });
-      }
+  // 5. Write all collected images to ZIP
+  const imgFolder = zip.folder('images')!;
+  
+  // Base64 images
+  for (const [dataUri, localPath] of imageMap.entries()) {
+    if (!dataUri.startsWith('data:image/')) continue; // only base64
+    const fileName = localPath.replace('images/', '');
+    const base64Data = dataUri.split(',')[1];
+    if (base64Data) {
+      imgFolder.file(fileName, base64Data, { base64: true });
     }
+  }
+
+  // Fetched local images (from /public/)
+  for (const [localPath, buffer] of fetchedImages.entries()) {
+    const fileName = localPath.replace('images/', '');
+    imgFolder.file(fileName, buffer);
   }
 
   // 6. Generate ZIP blob and download

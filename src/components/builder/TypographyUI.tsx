@@ -11,7 +11,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
 
   const [styles, setStyles] = useState({
     headingMode: 'Body Text',
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: "'Open Sans', sans-serif",
     fontSize: 16,
     fontWeight: '400',
     letterSpacing: '0px',
@@ -43,7 +43,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         
         setStyles({
           headingMode,
-          fontFamily: currentStyles['font-family'] || 'Inter, sans-serif',
+          fontFamily: currentStyles['font-family'] || "'Open Sans', sans-serif",
           fontSize: parseInt(currentStyles['font-size'] || '16'),
           fontWeight: currentStyles['font-weight'] || '400',
           letterSpacing: currentStyles['letter-spacing'] || '0px',
@@ -225,7 +225,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     const currentStyles = selected.getStyle();
     setStyles(prev => ({
         ...prev,
-        fontFamily: currentStyles['font-family'] || 'Inter, sans-serif',
+        fontFamily: currentStyles['font-family'] || "'Open Sans', sans-serif",
         fontSize: parseInt(currentStyles['font-size'] || '16'),
         fontWeight: currentStyles['font-weight'] || '400',
         letterSpacing: currentStyles['letter-spacing'] || '0px',
@@ -298,9 +298,9 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                             onChange={(e) => updateStyle('fontFamily', e.target.value)}
                             className="w-full appearance-none outline-none border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 bg-[#F5F7FA] shadow-sm focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all"
                         >
-                            <option value="Inter, sans-serif">Inter</option>
-                            <option value="Roboto, sans-serif">Roboto</option>
                             <option value="'Open Sans', sans-serif">Open Sans</option>
+                            <option value="'Open Sans Condensed', sans-serif">Open Sans Condensed</option>
+                            <option value="Roboto, sans-serif">Roboto</option>
                             <option value="system-ui, sans-serif">System UI</option>
                             <option value="serif">Serif</option>
                         </select>

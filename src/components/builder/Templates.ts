@@ -27,9 +27,9 @@ export const registerTemplates = (editor: any) => {
   <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-24" layout-mode="container">
     <div class="container mx-auto text-white text-center">
       <div class="mx-auto flex flex-col items-center w-full">
-        <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
+        <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
         <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-        <button class="bg-[var(--color-secondary)] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+        <button class="bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
       </div>
     </div>
   </div>
@@ -39,9 +39,9 @@ export const registerTemplates = (editor: any) => {
     <div class="container mx-auto px-4">
       <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
         <div class="flex-1">
-           <h2 class="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
+           <h2 class="text-3xl font-display font-bold mb-4 text-gray-900">Who We Are</h2>
            <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
-           <a href="#" class="font-semibold text-[var(--color-secondary)] hover:underline">Learn more about our mission &rarr;</a>
+           <a href="#" class="font-semibold text-secondary hover:underline">Learn more about our mission &rarr;</a>
         </div>
         <div class="flex-1">
            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
@@ -55,24 +55,24 @@ export const registerTemplates = (editor: any) => {
     <div class="container mx-auto px-4">
       <div class="mx-auto flex flex-col w-full">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need</h2>
+          <h2 class="text-3xl font-display font-bold text-gray-900 mb-4">Everything you need</h2>
           <p class="text-gray-500">All the features your team requires to succeed.</p>
         </div>
         <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white w-full">
-            <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Lightning Fast</h3>
+            <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Lightning Fast</h3>
             <p class="text-gray-500 text-sm">Optimized for speed to ensure your conversion rate stays high on all devices.</p>
           </div>
-          <div class="p-6 border border-[var(--color-secondary)] rounded-xl shadow-md bg-white relative w-full">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--color-secondary)] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
-            <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
+          <div class="p-6 border border-secondary rounded-xl shadow-md bg-white relative w-full">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+            <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Smart Analytics</h3>
             <p class="text-gray-500 text-sm">Track every click and view with built-in real-time tracking dashboard.</p>
           </div>
           <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white w-full">
-            <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integrations</h3>
+            <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Seamless Integrations</h3>
             <p class="text-gray-500 text-sm">Connect with your favorite tools natively and securely via APIs.</p>
           </div>
         </div>
@@ -84,19 +84,19 @@ export const registerTemplates = (editor: any) => {
   <div id="cards-grid" data-gjs-type="section" data-gjs-name="Cards Grid" class="w-full py-16 bg-white dark:bg-slate-900" layout-mode="container">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm w-full">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Design Tools</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Design Tools</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm w-full">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Analytics Insights</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Analytics Insights</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm w-full">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm w-full">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Cloud Storage</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Cloud Storage</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
         </div>
       </div>
@@ -118,21 +118,21 @@ export const registerTemplates = (editor: any) => {
           </div>
         </div>
         <div class="flex flex-col gap-4 w-full">
-          <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Company</h4>
+          <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Company</h4>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">About Us</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Careers</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Engineering Blog</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Press & Media</a>
         </div>
         <div class="flex flex-col gap-4 w-full">
-          <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Products</h4>
+          <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Products</h4>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Cloud Platform</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Analytics Engine</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">AI Assistant</a>
           <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Integrations API</a>
         </div>
         <div class="flex flex-col gap-4 w-full">
-          <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Subscribe</h4>
+          <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Subscribe</h4>
           <p class="text-slate-600 dark:text-slate-400 font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
           <div class="flex flex-col gap-3 w-full max-w-sm">
             <input type="email" placeholder="Your work email" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-accent shadow-sm" />

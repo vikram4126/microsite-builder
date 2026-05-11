@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap');
+
 @theme {
   --color-brand-1: #00338d;
   --color-brand-2: #1e49e2;
@@ -18,6 +20,9 @@
   --color-pink: #fd349c;
   --color-success: #00b894;
   --color-background-dark: #071728;
+
+  --font-sans: "Open Sans", sans-serif;
+  --font-display: "Open Sans Condensed", sans-serif;
 }
 
 /* Responsive Navbar Fix for GrapesJS ID collisions */
@@ -79,5 +84,10 @@
 @layer base {
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: var(--font-sans) !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display) !important;
   }
 }

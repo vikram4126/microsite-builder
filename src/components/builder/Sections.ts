@@ -27,7 +27,7 @@ export const sectionsLibrary: SectionDef[] = [
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
               OVERLINE
             </span>
-            <h1 class="text-white text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            <h1 class="text-white text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
               Inspire trust and deliver impact
             </h1>
             <p class="text-white text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
@@ -59,7 +59,7 @@ export const sectionsLibrary: SectionDef[] = [
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
               OVERLINE
             </span>
-            <h1 class="text-white text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            <h1 class="text-white text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
               What we stand for
             </h1>
             <p class="text-white/90 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
@@ -91,7 +91,7 @@ export const sectionsLibrary: SectionDef[] = [
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-primary)] mb-4 tracking-widest uppercase bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20">
               OVERLINE
             </span>
-            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
               Inspire trust and deliver impact
             </h1>
             <p class="text-slate-600 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
@@ -108,13 +108,13 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Header Left Solid White',
     svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
-      <div id="header-4-left-solid" data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-white" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
               OVERLINE
             </span>
-            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
               What we stand for
             </h1>
             <p class="text-slate-600 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium">
@@ -134,7 +134,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
-      <div id="business-nav" data-gjs-type="section" data-gjs-name="Navbar" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-colors" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative">
             <a href="#" class="block">
@@ -164,6 +164,18 @@ export const sectionsLibrary: SectionDef[] = [
             </nav>
           </div>
         </div>
+        <script>
+          (function() {
+            const nav = document.currentScript.parentElement;
+            window.addEventListener('scroll', () => {
+              if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+              } else {
+                nav.classList.remove('shadow-md');
+              }
+            });
+          })();
+        </script>
       </div>
     `
   },
@@ -174,14 +186,14 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
-      <div id="business-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-10 md:py-[60px] lg:py-24 relative overflow-hidden" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-10 md:py-[60px] lg:py-24 relative overflow-hidden" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <!-- Wrap interior in standard flex layout -->
           <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-0">
             <div class="flex-1 flex flex-col gap-8 z-10 w-full object-cover">
               <div>
                 <span class="inline-flex items-center rounded-full bg-accent/10 px-4 py-1.5 text-sm font-bold text-accent mb-6 border border-accent/20 shadow-sm">New: Enterprise Cloud 2.0</span>
-                <h1 class="text-primary dark:text-white text-4xl lg:text-5xl font-black leading-tight tracking-tight">
+                <h1 class="text-primary dark:text-white text-4xl lg:text-5xl font-display font-black leading-tight tracking-tight">
                   Transform Your Business with <br/><span class="text-accent">Modern Solutions</span>
                 </h1>
               </div>
@@ -208,10 +220,10 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
       <!-- Features (Using responsive-grid trait method) -->
-      <div id="business-features" data-gjs-type="section" data-gjs-name="Features List" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Features List" class="w-full py-10 md:py-[60px] lg:py-24 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-primary dark:text-white text-4xl font-black mb-4 tracking-tight">Our Core Capabilities</h2>
+            <h2 class="text-primary dark:text-white text-4xl font-display font-black mb-4 tracking-tight">Our Core Capabilities</h2>
             <p class="text-slate-600 dark:text-slate-400 text-lg">Robust infrastructure designed to solve complex challenges seamlessly and efficiently.</p>
           </div>
           <!-- Replaced raw tailwind grid with native GrapesJS responsive-grid component -->
@@ -220,7 +232,7 @@ export const sectionsLibrary: SectionDef[] = [
               <div class="w-14 h-14 bg-accent/10 text-accent rounded-xl flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
               </div>
-              <h3 class="text-xl font-bold text-primary dark:text-white mb-3">Cloud Integration</h3>
+              <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">Cloud Integration</h3>
               <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Connect your legacy systems to modern cloud infrastructure with zero downtime.</p>
             </div>
             <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 border-b-4 border-b-accent relative shadow-xl shadow-accent/5 h-full w-full">
@@ -228,14 +240,14 @@ export const sectionsLibrary: SectionDef[] = [
               <div class="w-14 h-14 bg-accent text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-accent/20">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
               </div>
-              <h3 class="text-xl font-bold text-primary dark:text-white mb-3">Data Analytics</h3>
+              <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">Data Analytics</h3>
               <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Turn raw numbers into actionable business insights with our real-time processing engine.</p>
             </div>
             <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
               <div class="w-14 h-14 bg-accent/10 text-accent rounded-xl flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               </div>
-              <h3 class="text-xl font-bold text-primary dark:text-white mb-3">AI Automation</h3>
+              <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">AI Automation</h3>
               <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Reduce manual workloads by 40% using intelligent workflows and custom machine learning.</p>
             </div>
           </div>
@@ -250,11 +262,11 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
     html: `
       <!-- Services Grid -->
-      <div id="business-services" data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-10 md:py-[60px] lg:py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div class="max-w-xl">
-              <h2 class="text-4xl font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
+              <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
               <p class="text-slate-600 dark:text-slate-400 text-lg">Tailored expertise to help your business navigate digital transformation.</p>
             </div>
             <a href="#" class="text-accent font-bold hover:underline inline-flex items-center gap-2">View All Services &rarr;</a>
@@ -265,7 +277,7 @@ export const sectionsLibrary: SectionDef[] = [
               <img src="/images/image-2.png" class="h-56 w-full object-cover" alt="Consulting" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Consulting</div>
-                <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Strategic Planning</h4>
+                <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Strategic Planning</h4>
                 <p class="text-slate-600 dark:text-slate-400 mb-6">Expert guidance to scale your infrastructure and refine operations effectively.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
@@ -274,7 +286,7 @@ export const sectionsLibrary: SectionDef[] = [
               <img src="/images/image-3.png" class="h-56 w-full object-cover" alt="Engineering" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Engineering</div>
-                <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Custom Software</h4>
+                <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Custom Software</h4>
                 <p class="text-slate-600 dark:text-slate-400 mb-6">Bespoke web and mobile applications engineered to exactly fit your workflows.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
@@ -283,7 +295,7 @@ export const sectionsLibrary: SectionDef[] = [
               <img src="/images/image-4.png" class="h-56 w-full object-cover" alt="Security" />
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Security</div>
-                <h4 class="text-2xl font-bold text-primary dark:text-white mb-3">Cyber Protection</h4>
+                <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Cyber Protection</h4>
                 <p class="text-slate-600 dark:text-slate-400 mb-6">Advanced threat detection and comprehensive compliance auditing solutions.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
@@ -300,11 +312,11 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
-      <div id="business-cta" data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-24 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-10 md:py-[60px] lg:py-24 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
             <div class="relative z-10 max-w-3xl mx-auto">
-              <h2 class="text-white text-4xl lg:text-5xl font-black mb-6 tracking-tight">Ready to elevate your business?</h2>
+              <h2 class="text-white text-4xl lg:text-5xl font-display font-black mb-6 tracking-tight">Ready to elevate your business?</h2>
               <p class="text-white/80 text-xl lg:text-2xl mb-12">Join thousands of companies already using our platform to scale their operations securely.</p>
               <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
                 <a href="#" class="w-full sm:w-auto px-10 py-5 rounded-xl bg-white text-primary font-black text-lg hover:shadow-xl transition-all shadow-md">Try It Free Today</a>
@@ -323,7 +335,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
       <!-- KPMG Footer -->
-      <div id="business-footer" data-gjs-type="section" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-10 md:py-16 lg:py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -344,7 +356,7 @@ export const sectionsLibrary: SectionDef[] = [
       
             <!-- Links Column 1 -->
             <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Company</h4>
+              <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Company</h4>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">About Us</a>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Careers</a>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Engineering Blog</a>
@@ -353,7 +365,7 @@ export const sectionsLibrary: SectionDef[] = [
       
             <!-- Links Column 2 -->
             <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Products</h4>
+              <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Products</h4>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Cloud Platform</a>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Analytics Engine</a>
               <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">AI Assistant</a>
@@ -362,7 +374,7 @@ export const sectionsLibrary: SectionDef[] = [
       
             <!-- Subscribe Column -->
             <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Subscribe</h4>
+              <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Subscribe</h4>
               <p class="text-slate-600 dark:text-slate-400 font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
               <div class="flex flex-col gap-3 w-full max-w-sm">
                 <input type="email" placeholder="Your work email" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-accent shadow-sm" />
@@ -391,15 +403,15 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Split CTA Card',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
-      <div id="dual-cta-pdf" data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-[var(--color-secondary)] py-20" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-secondary py-10 md:py-16 lg:py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
             <div class="flex-1 min-h-[400px]">
               <img src="/background/background-1.jpg" class="w-full h-full object-cover" alt="Handshake" />
             </div>
             <div class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
-              <h2 class="text-4xl font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
-              <a href="#" data-gjs-type="link" class="bg-[var(--color-secondary)] text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
+              <h2 class="text-4xl font-display font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
+              <a href="#" data-gjs-type="link" class="bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
             </div>
           </div>
         </div>
@@ -416,7 +428,7 @@ export const sectionsLibrary: SectionDef[] = [
         <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
             <span class="text-xs font-bold uppercase tracking-widest text-[#1e49e2] mb-4">OVERLINE</span>
-            <h1 class="text-4xl lg:text-5xl font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
+            <h1 class="text-4xl lg:text-5xl font-display font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
             <p class="text-lg text-gray-600 leading-relaxed max-w-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
           </div>
           <div class="flex-1 relative w-full">
@@ -444,20 +456,20 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="bg-white rounded-[1.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
               <div class="p-8 pb-0 flex items-center gap-6 mb-6">
                 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-[#aceaff]/30">
-                  <img src="/team-member/member-1jpg" class="w-full h-full object-cover" alt="Expert" />
+                  <img src="/team-member/member-1.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-black text-[#00338d]">John Doe</h3>
+                  <h3 class="text-2xl font-display font-black text-[#00338d]">John Doe</h3>
                   <p class="text-[#1e49e2] font-bold text-sm">Head of Pursuit, Partner</p>
                 </div>
               </div>
               <div class="p-8 pt-0 flex flex-col gap-6">
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
               </div>
@@ -468,7 +480,7 @@ export const sectionsLibrary: SectionDef[] = [
                   <img src="/team-member/member-2.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-black text-[#00338d]">Jane Doe</h3>
+                  <h3 class="text-2xl font-display font-black text-[#00338d]">Jane Doe</h3>
                   <p class="text-[#1e49e2] font-bold text-sm">Director, Strategy</p>
                 </div>
               </div>
@@ -489,7 +501,7 @@ export const sectionsLibrary: SectionDef[] = [
                   <img src="/team-member/member-3.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-black text-[#00338d]">Michael Smith</h3>
+                  <h3 class="text-2xl font-display font-black text-[#00338d]">Michael Smith</h3>
                   <p class="text-[#1e49e2] font-bold text-sm">Chief Technology Officer</p>
                 </div>
               </div>
@@ -517,7 +529,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Grid" class="w-full py-24 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
-          <h2 class="text-4xl font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
+          <h2 class="text-4xl font-display font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
           <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto px-4 lg:px-0 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
             <div class="flex flex-col items-center text-center group">
               <div class="relative mb-6">
@@ -526,7 +538,7 @@ export const sectionsLibrary: SectionDef[] = [
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
-              <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
+              <h4 class="text-lg font-display font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
             </div>
             <div class="flex flex-col items-center text-center group">
@@ -536,7 +548,7 @@ export const sectionsLibrary: SectionDef[] = [
                 </div>
                 <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
-              <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
+              <h4 class="text-lg font-display font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
             </div>
             <div class="flex flex-col items-center text-center group">

@@ -13,7 +13,8 @@ tailwind.config = {
         "pink-accent": "var(--theme-pink, #fd349c)"
       },
       fontFamily: {
-        "display": ["Public Sans", "Inter", "sans-serif"]
+        "sans": ["Open Sans", "sans-serif"],
+        "display": ["Open Sans Condensed", "sans-serif"]
       }
     }
   }

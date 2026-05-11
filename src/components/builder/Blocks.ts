@@ -4,7 +4,6 @@ export const registerBlocks = (editor: any) => {
   const bm = editor.BlockManager;
 
   const svgs = {
-    navbar: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="45" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="58" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="71" y="8" width="8" height="3" rx="1.5" fill="#94a3b8"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     header: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="35" y="30" width="30" height="3" rx="1.5" fill="#94a3b8"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
     intro: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="35" height="4" rx="2" fill="var(--color-primary)"/><rect x="10" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="10" y="32" width="35" height="2" rx="1" fill="#94a3b8"/><rect x="55" y="10" width="35" height="40" rx="4" fill="#eef2ff"/><rect x="65" y="20" width="15" height="20" rx="2" fill="var(--color-secondary)" opacity="0.5"/></svg>',
     section: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="20" y="20" width="60" height="4" rx="2" fill="var(--color-primary)"/><rect x="30" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="38" y="36" width="24" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
@@ -35,24 +34,18 @@ export const registerBlocks = (editor: any) => {
     });
   });
 
-  // 1. NAVBAR
-  bm.add('navbar-basic', {
-    label: 'Simple Navbar',
-    category: 'Navbar',
-    media: svgs.navbar,
-    content: `
-      <div id="navbar-basic" data-gjs-type="section" data-gjs-name="Navbar" class="w-full bg-white border-b border-gray-100" layout-mode="container">
-        <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center justify-between p-4 lg:py-5 lg:px-0 gap-4">
-          <a href="#" class="block"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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" alt="Brand Logo" class="h-8 w-auto inline-block" /></a>
-          <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 font-medium text-sm w-full md:w-auto">
-            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">Home</a>
-            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">About</a>
-            <a href="#" class="text-gray-600 hover:text-[var(--color-secondary)]">Services</a>
-            <a href="#" class="bg-[var(--color-secondary)] text-white px-5 py-2.5 rounded-lg font-medium inline-flex hover:shadow-md transition-all text-center">Contact Us</a>
-          </div>
-        </div>
-      </div>
-    `
+  // Register dynamic nav links component type
+  editor.Components.addType('dynamic-nav-links', {
+    model: {
+      defaults: {
+        tagName: 'div',
+        draggable: false,
+        droppable: false,
+        removable: false,
+        copyable: false,
+        classes: ['flex', 'flex-col', 'md:flex-row', 'items-center', 'gap-4', 'md:gap-8', 'font-medium', 'text-sm', 'w-full', 'md:w-auto'],
+      }
+    }
   });
 
   // 1.5 FOOTER
@@ -131,9 +124,9 @@ export const registerBlocks = (editor: any) => {
       <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-10 md:py-[60px] lg:py-24" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-white text-center">
           <div class="mx-auto flex flex-col items-center w-full">
-            <h1 class="text-5xl font-extrabold mb-6">Welcome to Our Platform</h1>
+            <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
             <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-            <button class="bg-[var(--color-secondary)] px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+            <button class="bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
           </div>
         </div>
       </div>
@@ -150,9 +143,9 @@ export const registerBlocks = (editor: any) => {
         <div class="container mx-auto px-4 lg:px-0">
           <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
             <div class="flex-1">
-               <h2 class="text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
+               <h2 class="text-3xl font-display font-bold mb-4 text-gray-900">Who We Are</h2>
                <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
-               <a href="#" class="font-semibold text-[var(--color-secondary)] hover:underline">Learn more about our mission &rarr;</a>
+               <a href="#" class="font-semibold text-secondary hover:underline">Learn more about our mission &rarr;</a>
             </div>
             <div class="flex-1">
                <img src="/images/image-5.png" alt="Team" class="rounded-2xl shadow-xl w-full" />
@@ -172,10 +165,10 @@ export const registerBlocks = (editor: any) => {
       <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-10 md:py-[60px] lg:py-24" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-center">
           <div class="mx-auto flex flex-col items-center justify-center w-full">
-            <h1 class="text-5xl font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
+            <h1 class="text-5xl font-display font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
             <p class="text-lg text-gray-600 mb-10 max-w-2xl">The ultimate microsite builder for high-converting marketing campaigns. Drag, drop, and launch in minutes.</p>
             <div class="flex space-x-4">
-              <a href="#" class="bg-[var(--color-secondary)] text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-[var(--color-primary)]">Get Started Free</a>
+              <a href="#" class="bg-secondary text-white px-8 py-3 rounded-lg font-medium shadow hover:bg-primary">Get Started Free</a>
               <a href="#" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-medium border border-gray-200 shadow-sm hover:bg-gray-50">Book a Demo</a>
             </div>
           </div>
@@ -193,24 +186,24 @@ export const registerBlocks = (editor: any) => {
         <div class="container mx-auto">
           <div class="mx-auto flex flex-col w-full">
             <div class="text-center mb-16">
-              <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need</h2>
+              <h2 class="text-3xl font-display font-bold text-gray-900 mb-4">Everything you need</h2>
               <p class="text-gray-500">All the features your team requires to succeed.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Lightning Fast</h3>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🚀</div>
+                <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Lightning Fast</h3>
                 <p class="text-gray-500 text-sm">Optimized for speed to ensure your conversion rate stays high on all devices.</p>
               </div>
-              <div class="p-6 border border-[var(--color-secondary)] rounded-xl shadow-md bg-white relative">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--color-secondary)] text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
+              <div class="p-6 border border-secondary rounded-xl shadow-md bg-white relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">📊</div>
+                <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Smart Analytics</h3>
                 <p class="text-gray-500 text-sm">Track every click and view with built-in real-time tracking dashboard.</p>
               </div>
               <div class="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-                <div class="w-12 h-12 bg-[#e0e7ff] text-[var(--color-secondary)] rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integrations</h3>
+                <div class="w-12 h-12 bg-[#e0e7ff] text-secondary rounded-lg flex items-center justify-center mb-6 font-bold text-xl">🔗</div>
+                <h3 class="text-xl font-display font-bold text-gray-900 mb-3">Seamless Integrations</h3>
                 <p class="text-gray-500 text-sm">Connect with your favorite tools natively and securely via APIs.</p>
               </div>
             </div>
@@ -274,7 +267,7 @@ export const registerBlocks = (editor: any) => {
     label: 'Heading',
     category: 'Basic',
     media: svgs.heading,
-    content: '<h2 data-gjs-type="text" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
+    content: '<h2 data-gjs-type="text" class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
   });
 
   bm.add('text', {
@@ -288,7 +281,7 @@ export const registerBlocks = (editor: any) => {
     label: 'Button',
     category: 'Basic',
     media: svgs.button,
-    content: '<a href="#" data-gjs-type="link" class="inline-block bg-[var(--color-secondary)] dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-[var(--color-primary)] dark:hover:bg-blue-700 transition-colors">Click Here</a>',
+    content: '<a href="#" data-gjs-type="link" class="inline-block bg-secondary dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-primary dark:hover:bg-blue-700 transition-colors">Click Here</a>',
   });
 
   bm.add('image', {
@@ -328,9 +321,9 @@ export const registerBlocks = (editor: any) => {
       <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden max-w-sm">
         <img src="/images/image-6.jpg" alt="Card" class="w-full h-48 object-cover" />
         <div class="p-6">
-          <h3 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">Premium Quality</h3>
+          <h3 class="font-display font-bold text-xl mb-2 text-gray-900 dark:text-white">Premium Quality</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Designed with precision to meet the highest standards of modern aesthetics.</p>
-          <a href="#" class="text-[var(--color-secondary)] font-semibold hover:underline">Read more &rarr;</a>
+          <a href="#" class="text-secondary font-semibold hover:underline">Read more &rarr;</a>
         </div>
       </div>
     `
@@ -421,7 +414,7 @@ export const registerBlocks = (editor: any) => {
         <div class="flex items-center">
           <img src="/team-member/member-1jpg" class="w-12 h-12 rounded-full mr-4" />
           <div>
-            <h4 class="font-bold text-gray-900 dark:text-white">Sarah Jenkins</h4>
+            <h4 class="font-display font-bold text-gray-900 dark:text-white">Sarah Jenkins</h4>
             <span class="text-gray-500 dark:text-gray-400 text-sm">Marketing Director</span>
           </div>
         </div>
@@ -435,19 +428,19 @@ export const registerBlocks = (editor: any) => {
     media: svgs.cards,
     content: `
       <section class="py-16 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Design Tools</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Design Tools</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Analytics Insights</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Analytics Insights</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-secondary)] transition-colors shadow-sm">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
            <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
-           <h3 class="text-xl font-bold mb-2 dark:text-white">Cloud Storage</h3>
+           <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Cloud Storage</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
         </div>
       </section>

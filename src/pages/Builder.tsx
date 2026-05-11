@@ -7,7 +7,7 @@ import { registerBlocks } from '../components/builder/Blocks';
 import { registerTemplates } from '../components/builder/Templates';
 import { registerStyles } from '../components/builder/Styles';
 import {
-  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers
+  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, ChevronDown, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { ToastContainer, toast } from 'react-toastify';
@@ -67,6 +67,11 @@ export default function Builder() {
   const autoSaveRef = useRef(autoSave);
   const projectDataRef = useRef(projectData);
   const isProjectLoaded = useRef(false);
+  const pageIdRef = useRef(pageId);
+  const saveTimeoutRef = useRef<any>(null);
+  const isSyncingRef = useRef(false);
+  const injectTailwindThemeRef = useRef<(() => void) | null>(null);
+  const forceReScanRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     autoSaveRef.current = autoSave;
@@ -75,6 +80,43 @@ export default function Builder() {
   useEffect(() => {
     projectDataRef.current = projectData;
   }, [projectData]);
+
+  useEffect(() => {
+    pageIdRef.current = pageId;
+  }, [pageId]);
+
+  const handleDeletePage = async () => {
+    const pData = projectDataRef.current;
+    if (!pData || !pageId) return;
+    
+    const currentPage = pData.pages.find((p: any) => p.id === pageId);
+    if (!currentPage) return;
+
+    if (currentPage.name === 'Home' || pData.pages.indexOf(currentPage) === 0) {
+      toast.error('Cannot delete the Home page');
+      return;
+    }
+
+    if (!window.confirm(`Are you sure you want to delete the "${currentPage.name}" page?`)) return;
+
+    const updatedPages = pData.pages.filter((p: any) => p.id !== pageId);
+    const updatedProject = {
+      ...pData,
+      pages: updatedPages
+    };
+
+    try {
+      await api.put(`/projects/${projectId}`, updatedProject);
+      setProjectData(updatedProject);
+      projectDataRef.current = updatedProject;
+      toast.success('Page deleted');
+      // Navigate to home page
+      navigate(`/builder/${projectId}/${updatedPages[0].id}`);
+    } catch (err) {
+      console.error('Failed to delete page', err);
+      toast.error('Failed to delete page');
+    }
+  };
 
   // Sync Theme Settings to Canvas
   useEffect(() => {
@@ -136,7 +178,7 @@ export default function Builder() {
         editorRef.current.off('canvas:load', applyTheme);
       }
     };
-  }, [themeMode, themeColor]);
+  }, [themeMode, themeColor, pageId]);
 
   // Custom Code Editor Widget
   const [isCustomCodeModalOpen, setIsCustomCodeModalOpen] = useState(false);
@@ -158,7 +200,11 @@ export default function Builder() {
         styleManager: { appendTo: '#gjs-styles-container' },
         traitManager: { appendTo: '#gjs-traits-container' },
         layerManager: { appendTo: '#gjs-layers-container' },
-        selectorManager: { componentFirst: true },
+        selectorManager: { 
+          componentFirst: true,
+          escapeName: (name: string) => name // Preserve Tailwind classes like md:, dark:, []
+        },
+        avoidInlineStyle: false,
         undoManager: { trackSelection: false },
         panels: { defaults: [] },
         deviceManager: {
@@ -176,7 +222,7 @@ export default function Builder() {
         },
         canvas: {
           styles: [
-            'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+            'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap',
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
           ],
           scripts: [
@@ -503,7 +549,11 @@ export default function Builder() {
       // Make tailwind injection reusable to persist across canvas frame reloads
       const injectTailwindTheme = () => {
         const doc = editor.Canvas.getDocument();
-        if (!doc || doc.getElementById('tw-canvas-theme')) return;
+        if (!doc) return;
+        // Always remove old tag to force Tailwind to re-process when called after loadProjectData
+        const old = doc.getElementById('tw-canvas-theme');
+        if (old) old.remove();
+        
         const tailwindStyle = doc.createElement('style');
         tailwindStyle.id = 'tw-canvas-theme';
         tailwindStyle.setAttribute('type', 'text/tailwindcss');
@@ -520,10 +570,38 @@ export default function Builder() {
             --color-pink: var(--theme-pink, #fd349c);
             --color-success: var(--theme-success, #00b894);
             --color-background-dark: var(--theme-background-dark, #071728);
+            --font-sans: "Open Sans", sans-serif;
+            --font-display: "Open Sans Condensed", sans-serif;
           }
+          body { font-family: "Open Sans", sans-serif !important; }
+          h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif !important; }
         `;
         doc.head.appendChild(tailwindStyle);
       };
+
+      // Force Tailwind CDN to re-scan the entire canvas DOM.
+      // Tailwind @4 browser watches for DOM mutations, but a batch rebuild via
+      // loadProjectData can be missed. We trick it by toggling a class on the body.
+      const forceTailwindRescan = () => {
+        const win = editor.Canvas.getWindow() as any;
+        const body = editor.Canvas.getBody();
+        if (!body) return;
+        // First inject/re-inject the @theme style block
+        injectTailwindTheme();
+        // Toggle a harmless class to trigger MutationObserver in Tailwind CDN
+        body.classList.add('__tw-rescan');
+        requestAnimationFrame(() => {
+          body.classList.remove('__tw-rescan');
+          // If Tailwind exposes a programmatic API, use it
+          if (win && typeof win.__tailwindBrowser?.rebuild === 'function') {
+            win.__tailwindBrowser.rebuild();
+          }
+        });
+      };
+
+      // Store references so loadData useEffect can call them
+      injectTailwindThemeRef.current = injectTailwindTheme;
+      forceReScanRef.current = forceTailwindRescan;
 
       editor.on('load', () => {
         // Inject Tailwind theme mapping into Editor Canvas for live design consistency
@@ -547,7 +625,8 @@ export default function Builder() {
           
           /* Add a placeholder hint when columns are totally empty */
           body.gjs-dashed [data-gjs-type="responsive-grid"] > div:empty::after,
-          body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+          h1, h2, h3, h4, h5, h6 { font-family: 'Open Sans Condensed', sans-serif; }
           * { box-sizing: inherit; }
           .container-custom { width: 100%; max-width: 1200px; padding-left: 1rem; padding-right: 1rem; }
           img { max-width: 100%; height: auto; }
@@ -628,29 +707,44 @@ export default function Builder() {
 
         // Auto Save Listener
         editor.on('update', () => {
-          if (projectId === 'guest') return;
+          if (projectId === 'guest' || isSyncingRef.current) return;
 
           if (autoSaveRef.current && projectDataRef.current) {
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(async () => {
+            if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+            
+            saveTimeoutRef.current = setTimeout(async () => {
               try {
+                // Purge empty CSS rules before saving to prevent style corruption on reload
+                // GrapesJS generates empty placeholder rules for Tailwind classes — we must remove them
+                try {
+                  const cssRules = editor.Css.getAll();
+                  const emptyRules = cssRules.filter((rule: any) => {
+                    const style = rule.getStyle();
+                    return !style || Object.keys(style).length === 0;
+                  });
+                  if (emptyRules.length > 0) editor.Css.remove(emptyRules);
+                } catch (_) { /* ignore */ }
+
                 const editorData = editor.getProjectData();
                 const pData = projectDataRef.current;
+                const activeId = pageIdRef.current;
+                
                 const updatedProject = {
                   ...pData,
                   lastEdited: new Date().toISOString(),
                   pages: pData.pages.map((p: any) =>
-                    p.id === pageId ? { ...p, layout: editorData } : p
+                    p.id === activeId ? { ...p, layout: editorData } : p
                   )
                 };
                 await api.put(`/projects/${projectId}`, updatedProject);
-                // We update the ref but skip setProjectData to prevent a full React re-render of the Builder page
                 projectDataRef.current = updatedProject;
-                console.log('Autosaved project');
+                console.log('Autosaved project page:', activeId);
               } catch (err) {
                 console.error('Autosave failed', err);
+              } finally {
+                saveTimeoutRef.current = null;
               }
-            }, 1000); // Debounce 1s
+            }, 1000);
           }
         });
 
@@ -925,21 +1019,42 @@ export default function Builder() {
 
   // Load project data
   useEffect(() => {
-    isProjectLoaded.current = false;
     const loadData = async () => {
+      // 1. Cancel any pending autosaves from the previous page immediately
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+        saveTimeoutRef.current = null;
+      }
+
+      // Always reset loading flag when page changes to trigger hydration
+      isProjectLoaded.current = false;
+
+      // Ensure canvas body is clean before loading new page
+      if (editorRef.current) {
+        const body = editorRef.current.Canvas.getBody();
+        if (body) {
+          body.className = '';
+          body.style.cssText = '';
+        }
+      }
+
       if (projectId === 'guest') {
         const dummyProject = {
           id: 'guest',
           name: 'Guest Project',
-          pages: [{ id: 'new', layout: {} }]
+          pages: [{ id: 'new', name: 'Home', layout: {} }]
         };
         setProjectData(dummyProject);
         projectDataRef.current = dummyProject;
 
         if (editorRef.current && !isProjectLoaded.current) {
+          editorRef.current.DomComponents.clear(); // Ensure clean slate
           const navBlock = editorRef.current.BlockManager.get('section-business-nav');
           if (navBlock) {
-            editorRef.current.addComponents(navBlock.get('content'));
+            const comps = editorRef.current.addComponents(navBlock.get('content'));
+            if (comps && comps[0]) {
+              comps[0].set({ removable: false, copyable: false });
+            }
           }
           isProjectLoaded.current = true;
         }
@@ -948,21 +1063,77 @@ export default function Builder() {
 
       try {
         const data = await api.get(`/projects/${projectId}`);
+        // Ensure first page is named Home if it's empty/untitled
+        if (data.pages && data.pages.length > 0 && (!data.pages[0].name || data.pages[0].name === 'Untitled Page')) {
+          data.pages[0].name = 'Home';
+        }
+        
         setProjectData(data);
-        projectDataRef.current = data; // Immeidately hydrate ref for autosave
+        projectDataRef.current = data; 
 
         if (editorRef.current) {
+          isSyncingRef.current = true; // Block autosaves during hydration
           const currentPage = data.pages.find((p: any) => p.id === pageId);
-          if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0 && !isProjectLoaded.current) {
+
+          if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0) {
             editorRef.current.loadProjectData(currentPage.layout);
-            isProjectLoaded.current = true;
-          } else if (!isProjectLoaded.current) {
+            
+            // Ensure any navbar in existing layout is also non-removable
+            const wrapper = editorRef.current.DomComponents.getWrapper();
+            const existingNav = wrapper.find('[data-gjs-name="Navbar"]')[0];
+            if (existingNav) {
+              existingNav.set({ removable: false, copyable: false });
+            }
+
+            // Step 2: Immediately re-inject the Tailwind @theme block.
+            // loadProjectData rebuilds the canvas frame, clearing the <head>.
+            // Without this, brand colors like bg-background-dark are unknown to Tailwind.
+            if (injectTailwindThemeRef.current) injectTailwindThemeRef.current();
+
+            // Step 3: Apply theme to body immediately (before Tailwind rescans)
+            const bodyEl = editorRef.current.Canvas.getBody();
+            if (bodyEl) {
+              if (themeMode === 'dark') {
+                bodyEl.classList.add('dark');
+                bodyEl.style.backgroundColor = '#0c233c';
+              } else {
+                bodyEl.classList.remove('dark');
+                bodyEl.style.backgroundColor = '#ffffff';
+              }
+            }
+
+            // Step 4: Double-RAF: first frame = GJS finishes DOM render, second = browser paints.
+            // Then purge empty GJS rules and force Tailwind to rescan the new DOM.
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                try {
+                  const cssRules = editorRef.current.Css.getAll();
+                  const emptyRules = cssRules.filter((rule: any) => {
+                    const style = rule.getStyle();
+                    return !style || Object.keys(style).length === 0;
+                  });
+                  if (emptyRules.length > 0) editorRef.current.Css.remove(emptyRules);
+                } catch (_) { /* non-critical */ }
+
+                if (forceReScanRef.current) forceReScanRef.current();
+                isSyncingRef.current = false;
+              });
+            });
+          } else {
+            // New or empty page - start with JUST the navbar
+            editorRef.current.DomComponents.clear();
+            editorRef.current.Css.clear();
             const navBlock = editorRef.current.BlockManager.get('section-business-nav');
             if (navBlock) {
-              editorRef.current.addComponents(navBlock.get('content'));
+              const comps = editorRef.current.addComponents(navBlock.get('content'));
+              if (comps && comps[0]) {
+                comps[0].set({ removable: false, copyable: false });
+              }
             }
-            isProjectLoaded.current = true;
+            if (injectTailwindThemeRef.current) injectTailwindThemeRef.current();
+            isSyncingRef.current = false;
           }
+          isProjectLoaded.current = true;
         }
       } catch (err) {
         console.error('Error loading project', err);
@@ -970,6 +1141,54 @@ export default function Builder() {
     };
     loadData();
   }, [projectId, pageId]);
+
+  // Dynamic Navbar Update Logic
+  useEffect(() => {
+    if (!editorRef.current || !projectData) return;
+    const editor = editorRef.current;
+    
+    const updateNavLinks = () => {
+      const navContainers = editor.DomComponents.getWrapper().find('[data-gjs-type="dynamic-nav-links"]');
+      navContainers.forEach((nav: any) => {
+        // Clear existing links
+        nav.components().reset();
+        
+        // Add project pages
+        projectData.pages.forEach((p: any) => {
+          const isActive = p.id === pageId;
+          nav.append({
+            tagName: 'a',
+            type: 'link',
+            classes: [isActive ? 'text-[#1e49e2]' : 'text-gray-600', 'hover:text-[var(--color-secondary)]', 'font-semibold', 'transition-colors'],
+            attributes: { href: `/builder/${projectId}/${p.id}` },
+            content: p.name,
+          });
+        });
+
+        // Ensure "Contact Us" or other static links remain if they were part of the design
+        // Actually, the user might want a separate component for that, but let's stick to page links for now
+      });
+    };
+
+    updateNavLinks();
+
+    // Listen for new components being added
+    const handleComponentAdd = (model: any) => {
+      if (model.get('type') === 'dynamic-nav-links') {
+        setTimeout(updateNavLinks, 10);
+      }
+      
+      // Protect the Navbar from deletion if added manually
+      if (model.get('attributes') && model.get('attributes')['data-gjs-name'] === 'Navbar') {
+        model.set({ removable: false, copyable: false });
+      } else if (model.get('data-gjs-name') === 'Navbar') {
+        model.set({ removable: false, copyable: false });
+      }
+    };
+
+    editor.on('component:add', handleComponentAdd);
+    return () => editor.off('component:add', handleComponentAdd);
+  }, [editorRef.current, projectData, pageId, projectId]);
 
   const setDeviceMode = (mode: string) => {
     setDevice(mode);
@@ -991,6 +1210,16 @@ export default function Builder() {
     if (projectId === 'guest') return;
     if (!editorRef.current || !projectData) return;
     try {
+      // Purge empty CSS rules before saving to prevent style corruption on reload
+      try {
+        const cssRules = editorRef.current.Css.getAll();
+        const emptyRules = cssRules.filter((rule: any) => {
+          const style = rule.getStyle();
+          return !style || Object.keys(style).length === 0;
+        });
+        if (emptyRules.length > 0) editorRef.current.Css.remove(emptyRules);
+      } catch (_) { /* ignore */ }
+
       const editorData = editorRef.current.getProjectData();
       const updatedProject = {
         ...projectData,
@@ -1030,13 +1259,17 @@ export default function Builder() {
       '    --color-dark: #0c233c; --color-light-accent: #aceaff; --color-cta: #00b8f5;',
       '    --color-purple: #7213ea; --color-pink: #fd349c; --color-success: #00b894;',
       '    --color-background-dark: #071728;',
+      '    --font-sans: "Open Sans", sans-serif;',
+      '    --font-display: "Open Sans Condensed", sans-serif;',
       '  }',
+      '  body { font-family: "Open Sans", sans-serif !important; }',
+      '  h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif !important; }',
       '</style>',
       '<style>' + css + '</style>',
       '<script src="https://unpkg.com/@tailwindcss/browser@4"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></scr' + 'ipt>',
-      '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
+      '<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">',
       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />',
       '</head>',
       '<body class="' + (themeMode === 'dark' ? 'dark bg-[#0c233c]' : 'bg-white') + '">',
@@ -1095,9 +1328,8 @@ export default function Builder() {
   };
 
   const handleExportZip = async () => {
-    if (!editorRef.current) return;
-    const name = projectDataRef.current?.name || 'microsite';
-    await exportStaticWebsite(editorRef.current, name);
+    if (!editorRef.current || !projectData) return;
+    await exportStaticWebsite(editorRef.current, projectData);
   };
 
   const handleCustomCode = () => {
@@ -1170,6 +1402,79 @@ export default function Builder() {
             <ChevronLeft className="w-5 h-5 mr-1" />
             <span className="font-medium text-sm hidden sm:inline">Back</span>
           </button>
+
+          <div className="h-5 w-px bg-gray-200"></div>
+
+          {/* Page Switcher */}
+          <div className="flex items-center space-x-2">
+            <div className="relative flex items-center h-8 px-2 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors group">
+              <Layers className="w-3.5 h-3.5 mr-2 text-gray-400 group-hover:text-[#1e49e2]" />
+              <select
+                value={pageId}
+                onChange={(e) => {
+                  const targetPageId = e.target.value;
+                  const pData = projectDataRef.current;
+                  
+                  // Force save current page layout before leaving
+                  if (editorRef.current && pData && pageId) {
+                    const currentLayout = editorRef.current.getProjectData();
+                    const updatedPages = pData.pages.map((p: any) => 
+                      p.id === pageId ? { ...p, layout: currentLayout } : p
+                    );
+                    const updatedProject = { ...pData, pages: updatedPages };
+                    projectDataRef.current = updatedProject;
+                    
+                    // Don't wait for it, just fire and forget so UI is snappy
+                    if (projectId !== 'guest') {
+                      api.put(`/projects/${projectId}`, updatedProject).catch(console.error);
+                    }
+                  }
+
+                  if (targetPageId === 'add-new') {
+                    const newPageName = prompt('Enter page name:');
+                    if (newPageName && pData) {
+                      const newId = Math.random().toString(36).substring(2, 9);
+                      const updatedProjectWithNew = {
+                        ...projectDataRef.current,
+                        pages: [...projectDataRef.current.pages, { id: newId, name: newPageName, layout: {} }]
+                      };
+                      if (projectId !== 'guest') {
+                        api.put(`/projects/${projectId}`, updatedProjectWithNew).then(() => {
+                          setProjectData(updatedProjectWithNew);
+                          projectDataRef.current = updatedProjectWithNew;
+                          navigate(`/builder/${projectId}/${newId}`);
+                        });
+                      } else {
+                        setProjectData(updatedProjectWithNew);
+                        projectDataRef.current = updatedProjectWithNew;
+                        navigate(`/builder/${projectId}/${newId}`);
+                      }
+                    }
+                    return;
+                  }
+                  navigate(`/builder/${projectId}/${targetPageId}`);
+                }}
+                className="bg-transparent text-[11px] font-bold text-gray-700 outline-none cursor-pointer pr-4 appearance-none"
+              >
+                {projectData?.pages.map((p: any) => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+                <option value="add-new" className="text-[#1e49e2] font-bold">+ Add New Page</option>
+              </select>
+              <ChevronDown className="w-3 h-3 absolute right-2 text-gray-400 pointer-events-none" />
+            </div>
+
+            {/* Delete Page Button */}
+            {projectData?.pages.length > 1 && projectData.pages.find((p: any) => p.id === pageId)?.name !== 'Home' && (
+              <button
+                onClick={handleDeletePage}
+                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all"
+                title="Delete Current Page"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            )}
+          </div>
 
           <div className="h-5 w-px bg-gray-200"></div>
 
