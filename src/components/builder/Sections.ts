@@ -52,7 +52,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-[#00338d]" layout-mode="container">
+      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-cover bg-right bg-no-repeat bg-primary" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto px-4 lg:px-0 relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -146,7 +146,7 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- CSS Checkbox Hack for Mobile Menu -->
             <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
             
-            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu">
+            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-white hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -156,10 +156,10 @@ export const sectionsLibrary: SectionDef[] = [
 
             <!-- Navigation Links -->
             <nav data-nav-type="dynamic" class="hidden peer-checked:flex md:flex flex-col w-full md:w-auto md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
-              <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Home</a>
-              <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Services</a>
-              <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Features</a>
-              <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">About</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Home</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Services</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Features</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">About</a>
               <a href="#" class="bg-primary text-white hover:bg-accent px-5 py-2.5 rounded-lg shadow transition-all w-full md:w-auto text-center mt-2 md:mt-0">Get Started</a>
             </nav>
           </div>
@@ -197,7 +197,7 @@ export const sectionsLibrary: SectionDef[] = [
                   Transform Your Business with <br/><span class="text-accent">Modern Solutions</span>
                 </h1>
               </div>
-              <p class="text-slate-700 dark:text-slate-300 text-lg lg:text-xl leading-relaxed max-w-xl">
+              <p class="text-slate-700 dark:text-white text-lg lg:text-xl leading-relaxed max-w-xl">
                 Empowering teams with the tools they need to scale faster and work smarter in a digital-first world. Built for modern enterprises.
               </p>
               <div class="flex flex-wrap gap-4">
@@ -224,7 +224,7 @@ export const sectionsLibrary: SectionDef[] = [
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-primary dark:text-white text-4xl font-display font-black mb-4 tracking-tight">Our Core Capabilities</h2>
-            <p class="text-slate-600 dark:text-slate-400 text-lg">Robust infrastructure designed to solve complex challenges seamlessly and efficiently.</p>
+            <p class="text-slate-600 dark:text-white text-lg">Robust infrastructure designed to solve complex challenges seamlessly and efficiently.</p>
           </div>
           <!-- Replaced raw tailwind grid with native GrapesJS responsive-grid component -->
           <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -233,7 +233,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
               </div>
               <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">Cloud Integration</h3>
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Connect your legacy systems to modern cloud infrastructure with zero downtime.</p>
+              <p class="text-slate-600 dark:text-white leading-relaxed">Connect your legacy systems to modern cloud infrastructure with zero downtime.</p>
             </div>
             <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 border-b-4 border-b-accent relative shadow-xl shadow-accent/5 h-full w-full">
               <div class="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
@@ -241,14 +241,14 @@ export const sectionsLibrary: SectionDef[] = [
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
               </div>
               <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">Data Analytics</h3>
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Turn raw numbers into actionable business insights with our real-time processing engine.</p>
+              <p class="text-slate-600 dark:text-white leading-relaxed">Turn raw numbers into actionable business insights with our real-time processing engine.</p>
             </div>
             <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
               <div class="w-14 h-14 bg-accent/10 text-accent rounded-xl flex items-center justify-center mb-6">
                 <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               </div>
               <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">AI Automation</h3>
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Reduce manual workloads by 40% using intelligent workflows and custom machine learning.</p>
+              <p class="text-slate-600 dark:text-white leading-relaxed">Reduce manual workloads by 40% using intelligent workflows and custom machine learning.</p>
             </div>
           </div>
         </div>
@@ -267,7 +267,7 @@ export const sectionsLibrary: SectionDef[] = [
           <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div class="max-w-xl">
               <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
-              <p class="text-slate-600 dark:text-slate-400 text-lg">Tailored expertise to help your business navigate digital transformation.</p>
+              <p class="text-slate-600 dark:text-white text-lg">Tailored expertise to help your business navigate digital transformation.</p>
             </div>
             <a href="#" class="text-accent font-bold hover:underline inline-flex items-center gap-2">View All Services &rarr;</a>
           </div>
@@ -278,7 +278,7 @@ export const sectionsLibrary: SectionDef[] = [
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Consulting</div>
                 <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Strategic Planning</h4>
-                <p class="text-slate-600 dark:text-slate-400 mb-6">Expert guidance to scale your infrastructure and refine operations effectively.</p>
+                <p class="text-slate-600 dark:text-white mb-6">Expert guidance to scale your infrastructure and refine operations effectively.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
             </div>
@@ -287,7 +287,7 @@ export const sectionsLibrary: SectionDef[] = [
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Engineering</div>
                 <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Custom Software</h4>
-                <p class="text-slate-600 dark:text-slate-400 mb-6">Bespoke web and mobile applications engineered to exactly fit your workflows.</p>
+                <p class="text-slate-600 dark:text-white mb-6">Bespoke web and mobile applications engineered to exactly fit your workflows.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
             </div>
@@ -296,7 +296,7 @@ export const sectionsLibrary: SectionDef[] = [
               <div class="p-8">
                 <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Security</div>
                 <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Cyber Protection</h4>
-                <p class="text-slate-600 dark:text-slate-400 mb-6">Advanced threat detection and comprehensive compliance auditing solutions.</p>
+                <p class="text-slate-600 dark:text-white mb-6">Advanced threat detection and comprehensive compliance auditing solutions.</p>
                 <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center rounded-lg py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
               </div>
             </div>
@@ -345,7 +345,7 @@ export const sectionsLibrary: SectionDef[] = [
               <svg class="text-primary dark:text-white transition-colors" width="82" height="32" viewBox="0 0 77 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="m59.4297.0894165v14.8992835l-.1935.157-.1935.157-.1855.1649-.1773.1648-.1693.1649-.1693.1727-.1613.1727-.1612.1727v-16.2259835h-16.9549v13.5647835h-1.4028v-13.5647835h-16.9549v13.5883835h-1.4028v-13.5883835h-16.95487v15.4880835l-4.329426 14.0436h3.805376l1.91075-6.2172h.54823l3.16039 6.2172h4.59545l-3.0636-6.2172h6.9496l-1.9269 6.2172h4.1521l1.9027-6.2015h.9191v-.0157h1.306.1049 7.8445l-1.8382 6.2015h4.1924l1.7817-6.2015h1.8866l.0483 6.2015h3.5152l4.0391-6.2015h2.6444l-1.3705 6.2015h4.1278l1.3464-6.2015h2.3864l-.0161.3533.0086.3611.0161.3453.0322.3455.0242.1648.0241.1649.0322.1648.0323.1649.0402.1648.0403.157.0484.157.0483.157.0565.157.0565.1492.0644.1491.0646.1413.0726.1492.0725.1413.0807.1334.0807.1413.0887.1335.0967.1256.0968.1334.1048.1178.1048.1256.1048.1177.1209.1178.121.1099.1531.1256.1532.1256.1613.1177.1693.1099.1693.1099.1693.1021.1774.0863.1854.0942.1774.0785.1854.0784.1854.0707.1935.0707.1935.0628.1935.055.1935.0549.1935.0471.387.0863.395.0629.387.0549.387.0471.3789.0314.3709.0157.3628.0158h.3466l.4677-.0075.4676-.0074.4756-.0236.4757-.0236.4757-.0392.4757-.0393.4756-.0471.4757-.055.4837-.0628.4838-.0707.4837-.0785.4837-.0785.4838-.0863.4837-.0942.4837-.0942.4918-.1099 1.4351-5.6284h4.7084v-23.3145573h-16.9549zm-53.50905 22.7335835.02417-.0863.05649.0863zm14.77005-8.3524-.2419.7929-2.2574 7.3005-.0887.259h-7.4173l-.5724-1.1932 7.9897-7.952h-5.1357l-6.2482 6.5547 2.02361-6.5547h-3.78924v-12.999627h15.73743v13.792427zm4.3777 6.1701-.1209.0075-.1129.0074-.1209.0075h-.129-.1693-.1451l-.1371.0074h-.129l-1.0077-.0074.4676-1.6799.2176-.8321.5322-1.9547h.1693.1773l.1693-.0074h.1613.782l.4757.0074.4353.0158.1935.0074.1855.0157.1773.0236.1613.0236.1451.0235.1371.0393.129.0393.1128.0471.0968.0471.0887.0629.0806.0628.0645.0785.0403.0629.0322.0628.0322.0707.0242.0785.0161.0863.0085.0863v.0942.102l-.0085.1099-.0076.1099-.0242.1256-.0241.1256-.0726.2669-.0887.2983-.0887.2512-.0968.2434-.1048.2276-.1129.212-.0565.0942-.0564.0942-.0646.0942-.0726.0863-.0726.0863-.0726.0785-.0806.0785-.0807.0706-.0887.0629-.0887.0707-.0967.0549-.1049.0628-.1048.055-.1128.0471-.1129.0471-.1209.0393-.129.0471-.1371.0314-.1451.0314-.1451.0313-.1613.0236-.1612.0236-.1693.0157-.1774.0157zm11.4645 2.1823 1.6528-5.7305.0645 5.7305h-1.7172zm2.5155-9.1688h-3.9344l-2.7089 9.1688h-4.1763l.1935-.0784.1935-.0785.1855-.0785.1854-.0863.1774-.0864.1693-.102.1693-.0942.1612-.1021.1613-.1099.1531-.1099.1452-.1098.1451-.1257.137-.1177.129-.1335.129-.1256.121-.1413.1209-.1334.1129-.1492.1048-.1413.1048-.157.0967-.157.0887-.1569.0888-.1649.0806-.1727.0807-.1727.0726-.1727.0644-.1806.0645-.1884.0484-.1884.0565-.1884.0402-.2041.0403-.1962.0565-.314.0483-.2983.0323-.2826.0241-.2669.0086-.2669-.0086-.2434-.0075-.2433-.0323-.2277-.0322-.2119-.0565-.212-.0565-.1962-.0806-.1884-.0887-.1806-.0968-.1805-.1128-.1649-.129-.157-.1049-.1099-.1048-.1099-.1128-.0942-.121-.0863-.129-.0863-.129-.0785-.137-.0706-.1371-.0629-.1451-.0628-.1451-.0471-.1532-.0472-.1532-.0471-.1612-.0393-.1613-.0313-.1612-.0314-.1693-.0236-.3467-.0471-.3467-.0235-.3547-.0236-.3628-.0074h-.7256-.7175-.2258-.4031-.4999-.5563-.5401-.4596-.3225-.1209v-12.976108h15.7375v12.976108zm9.5617 9.1688h-2.3622l3.5796-5.495zm8.7959-8.9097-.0085 3.1792-.2015.2748-.1855.2826-.1854.2826-.1693.2826-.1613.2826-.1612.2904-.1371.2826-.137.2826-.129.2748-.1129.2826-.1129.2747-.0967.2669-.0887.2669-.0807.2591-.0726.2512-.0645.2512-.0403.1648-.0403.1727-.0402.1649-.0323.1727-.0322.1648-.0242.1649-.0241.1648-.0161.1727h-2.3139l1.9753-9.1452-6.6594-.0075-5.958 9.1531h-.4354v-22.144827h15.7443v13.235127zm9.0781 12.6542-.3305.0549-.3387.0471-.3386.0471-.3305.0393-.3306.0314-.3305.0236-.3225.0157h-.3225-.2096l-.2096-.0074-.2016-.0158-.2015-.0235-.1935-.0314-.1855-.0314-.1854-.0393-.1774-.0471-.1693-.0549-.1693-.055-.1612-.0706-.1532-.0707-.1532-.0863-.1451-.0863-.1371-.0942-.129-.0942-.129-.1099-.1128-.1178-.1129-.1177-.1048-.1335-.0968-.1334-.0887-.1492-.0806-.1491-.0807-.157-.0645-.1649-.0565-.1805-.0483-.1806-.0484-.1884-.0322-.1962-.0242-.2041-.0161-.212-.0085-.2198h7.3366l-.8062 3.1636zm9.3038-3.7445h-3.9666l.653-2.5591h-7.9493l-.6531 2.5591h-3.8456v-.5259l.0483-.2198.0403-.2198.0483-.2355.0483-.2355.0726-.2591.0726-.259.0807-.2591.0887-.2512.0967-.2512.1049-.2512.1128-.2433.1129-.2434.129-.2433.129-.2277.1371-.2355.1531-.2198.1532-.2198.1532-.2119.1693-.2041.1774-.1963.1854-.1884.1854-.1727.2016-.1727.2015-.1648.2097-.1492.2257-.1413.2258-.1256.2338-.1177.2418-.1099.2499-.0942.258-.0785.2661-.0629.2741-.0549.2822-.0393.2902-.0235.2983-.0075.2338.0075.2338.0157.2338.0314.2258.0471.1129.0314.1048.0313.1048.0314.0967.0471.0968.0393.0967.055.0887.0549.0887.0549.0807.0707.0806.0707.0726.0706.0726.0863.0646.0785.0565.0942.0483.1021.0483.102.0403.1099.0322.1178.0242.1177.0242.1335.0085.1334v.1413.1492l-.0161.157h4.7406l.0726-.3219.0645-.3689.0322-.1963.0162-.2119.0161-.212v-.2198l-.0076-.2276-.0242-.2355-.0241-.1099-.0162-.1178-.0322-.1177-.0322-.1178-.0403-.1256-.0403-.1177-.0483-.1178-.0565-.1177-.0565-.1178-.0726-.1177-.0726-.1178-.0806-.1177-.0968-.1256-.1048-.1178-.1048-.1177-.1129-.1099-.1209-.1099-.129-.1021-.129-.0942-.137-.0942-.1452-.0942-.1451-.0785-.1532-.0784-.1612-.0785-.1612-.0707-.1694-.0707-.1773-.0628-.1774-.0629-.1774-.0549-.1935-.0471-.1854-.0471-.2015-.0471-.2016-.0393-.2016-.0393-.2096-.0314-.2177-.0236-.4434-.0471-.4515-.0393-.4756-.0157-.4838-.0074-.3628.0074-.3789.0075-.395.0235-.4112.0314-.4273.0471-.4354.0549-.4434.0707-.4515.0942-.2257.0471-.2338.0549-.2258.0629-.2338.0628-.2338.0707-.2338.0785-.2338.0785-.2257.0863-.2338.0942-.2338.102-.2258.1021-.2338.1099-.2257.1177-.2258.1256-.2257.1256-.2258.1413v-13.894463h15.7617v22.144863z" fill="currentColor"/>
               </svg>
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+              <p class="text-slate-600 dark:text-white leading-relaxed font-medium">
                 Leading the future of digital business with specialized industry insights and strategic technology partnerships.
               </p>
               <div class="flex gap-4">
@@ -357,25 +357,25 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- Links Column 1 -->
             <div class="flex flex-col gap-4 w-full">
               <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Company</h4>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">About Us</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Careers</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Engineering Blog</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Press & Media</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">About Us</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Careers</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Engineering Blog</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Press & Media</a>
             </div>
       
             <!-- Links Column 2 -->
             <div class="flex flex-col gap-4 w-full">
               <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Products</h4>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Cloud Platform</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Analytics Engine</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">AI Assistant</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Integrations API</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Cloud Platform</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Analytics Engine</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">AI Assistant</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent font-medium transition-colors">Integrations API</a>
             </div>
       
             <!-- Subscribe Column -->
             <div class="flex flex-col gap-4 w-full">
               <h4 class="text-primary dark:text-white font-display font-bold text-lg mb-2">Subscribe</h4>
-              <p class="text-slate-600 dark:text-slate-400 font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
+              <p class="text-slate-600 dark:text-white font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
               <div class="flex flex-col gap-3 w-full max-w-sm">
                 <input type="email" placeholder="Your work email" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-accent shadow-sm" />
                 <button class="w-full bg-primary text-white font-bold px-4 py-3 rounded-lg hover:bg-accent transition-colors shadow-sm">Subscribe Now</button>
@@ -427,7 +427,7 @@ export const sectionsLibrary: SectionDef[] = [
       <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Trust Hero" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
-            <span class="text-xs font-bold uppercase tracking-widest text-[#1e49e2] mb-4">OVERLINE</span>
+            <span class="text-xs font-bold uppercase tracking-widest text-secondary mb-4">OVERLINE</span>
             <h1 class="text-4xl lg:text-5xl font-display font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
             <p class="text-lg text-gray-600 leading-relaxed max-w-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
           </div>
@@ -459,17 +459,17 @@ export const sectionsLibrary: SectionDef[] = [
                   <img src="/team-member/member-1.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-display font-black text-[#00338d]">John Doe</h3>
-                  <p class="text-[#1e49e2] font-bold text-sm">Head of Pursuit, Partner</p>
+                  <h3 class="text-2xl font-display font-black text-primary">John Doe</h3>
+                  <p class="text-secondary font-bold text-sm">Head of Pursuit, Partner</p>
                 </div>
               </div>
               <div class="p-8 pt-0 flex flex-col gap-6">
                 <div>
-                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Area of Expertise</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
                 <div>
-                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <h4 class="text-xs font-display font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Background</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
               </div>
@@ -480,17 +480,17 @@ export const sectionsLibrary: SectionDef[] = [
                   <img src="/team-member/member-2.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-display font-black text-[#00338d]">Jane Doe</h3>
-                  <p class="text-[#1e49e2] font-bold text-sm">Director, Strategy</p>
+                  <h3 class="text-2xl font-display font-black text-primary">Jane Doe</h3>
+                  <p class="text-secondary font-bold text-sm">Director, Strategy</p>
                 </div>
               </div>
               <div class="p-8 pt-0 flex flex-col gap-6">
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Area of Expertise</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Background</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
               </div>
@@ -501,17 +501,17 @@ export const sectionsLibrary: SectionDef[] = [
                   <img src="/team-member/member-3.jpg" class="w-full h-full object-cover" alt="Expert" />
                 </div>
                 <div>
-                  <h3 class="text-2xl font-display font-black text-[#00338d]">Michael Smith</h3>
-                  <p class="text-[#1e49e2] font-bold text-sm">Chief Technology Officer</p>
+                  <h3 class="text-2xl font-display font-black text-primary">Michael Smith</h3>
+                  <p class="text-secondary font-bold text-sm">Chief Technology Officer</p>
                 </div>
               </div>
               <div class="p-8 pt-0 flex flex-col gap-6">
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Area of Expertise</h4>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Area of Expertise</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
                 <div>
-                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-[#00b8f5] pl-3">Background</h4>
+                  <h4 class="text-xs font-black text-[#0c233c] mb-3 uppercase tracking-widest border-l-4 border-accent pl-3">Background</h4>
                   <p class="text-gray-500 text-sm leading-relaxed">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
               </div>
@@ -536,7 +536,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-4.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-display font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -546,7 +546,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-5.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-display font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -556,7 +556,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-6.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -566,7 +566,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-7.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -576,7 +576,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-8.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -586,7 +586,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-9.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -596,7 +596,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-10.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -606,7 +606,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-11.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -616,7 +616,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-12.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">Jane Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
@@ -626,7 +626,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <div class="w-24 h-24 rounded-full shadow-lg overflow-hidden border-4 border-white group-hover:scale-110 transition-transform duration-500">
                   <img src="/team-member/member-13.jpg" class="w-full h-full object-cover aspect-square" alt="Team member" />
                 </div>
-                <div class="absolute inset-0 rounded-full border-4 border-[#1e49e2] opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-secondary opacity-0 group-hover:opacity-100 transition-all scale-110 duration-500 pointer-events-none"></div>
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>

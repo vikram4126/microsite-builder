@@ -361,29 +361,39 @@ export const registerStyles = (editor: any) => {
       previewDiv.className = 'w-full h-20 rounded border border-gray-300 bg-gray-50 flex flex-col items-center justify-center overflow-hidden cursor-pointer relative group transition hover:border-blue-400 shadow-sm';
       
       const updatePreview = () => {
-         const model = editor.getSelected();
-         const val = property.getValue();
-         
-         // Support for both background-image and <img> src
-         if (model && model.is('image')) {
-            const src = model.get('src');
-            if (src) {
-                previewDiv.style.backgroundImage = `url('${src}')`;
-                previewDiv.style.backgroundSize = 'cover';
-                previewDiv.style.backgroundPosition = 'center';
-                previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Image</div>';
-            } else {
-                previewDiv.style.backgroundImage = 'none';
-                previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
-            }
-         } else if (val && val.includes('url(')) {
-             previewDiv.style.backgroundImage = val;
-             previewDiv.style.backgroundSize = 'cover';
-             previewDiv.style.backgroundPosition = 'center';
-             previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Background</div>';
-         } else {
-             previewDiv.style.backgroundImage = 'none';
-             previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+         try {
+           const model = editor.getSelected();
+           const val = property.getValue();
+           
+           if (!model) {
+               previewDiv.style.backgroundImage = 'none';
+               previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+               return;
+           }
+           
+           // Support for both background-image and <img> src
+           if (model.is && model.is('image')) {
+              const src = model.get('src');
+              if (src) {
+                  previewDiv.style.backgroundImage = `url('${src}')`;
+                  previewDiv.style.backgroundSize = 'cover';
+                  previewDiv.style.backgroundPosition = 'center';
+                  previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Image</div>';
+              } else {
+                  previewDiv.style.backgroundImage = 'none';
+                  previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+              }
+           } else if (val && val.includes('url(')) {
+               previewDiv.style.backgroundImage = val;
+               previewDiv.style.backgroundSize = 'cover';
+               previewDiv.style.backgroundPosition = 'center';
+               previewDiv.innerHTML = '<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-white text-[10px] font-bold uppercase tracking-wider">Change Background</div>';
+           } else {
+               previewDiv.style.backgroundImage = 'none';
+               previewDiv.innerHTML = '<i class="fa fa-image text-gray-400 text-xl mb-1"></i><span class="text-[10px] text-gray-500 font-bold uppercase">Click to Choose</span>';
+           }
+         } catch (e) {
+           console.warn('Background preview update failed gracefully', e);
          }
       };
 

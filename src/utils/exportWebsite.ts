@@ -4,7 +4,7 @@ import JSZip from 'jszip';
  * Export the GrapesJS editor content as a fully functional static website ZIP.
  * Handles: multi-page, base64 images, local /public/ images, background images.
  */
-export async function exportStaticWebsite(editor: any, projectData: any) {
+export async function exportStaticWebsite(editor: any, projectData: any, themeSettings?: { mode: string; color: string }) {
   const projectName = projectData.name || projectData.title || 'My Website';
   const pages = projectData.pages || [];
   const zip = new JSZip();
@@ -74,6 +74,16 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
     
     // Load page into editor
     editor.loadProjectData(page.layout || {});
+    
+    // Re-apply theme to body after load
+    const body = editor.Canvas.getBody();
+    if (themeSettings?.mode === 'dark') {
+      body.classList.add('dark');
+      body.style.backgroundColor = '#0c233c';
+    } else {
+      body.classList.remove('dark');
+      body.style.backgroundColor = '#ffffff';
+    }
 
     // Update dynamic nav links to point to .html files for export
     const navLinks = editor.DomComponents.getWrapper().find('[data-nav-type="dynamic"]');
@@ -283,6 +293,14 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
 
     // 4. Build page HTML
     const sc = 'script';
+    const themePresets: any = {
+      default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
+      purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
+      dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
+      pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
+    };
+    const colors = themePresets[themeSettings?.color || 'default'];
+
     const pageHtml = [
       '<!DOCTYPE html>',
       '<html lang="en">',
@@ -297,9 +315,9 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
       '  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">',
       '  <style>',
       '    :root {',
-      '      --color-primary: #00338d;',
-      '      --color-secondary: #1e49e2;',
-      '      --color-accent: #1e49e2;',
+      '      --color-primary: ${colors.primary};',
+      '      --color-secondary: ${colors.secondary};',
+      '      --color-accent: ${colors.accent};',
       '      --color-dark: #0c233c;',
       '      --color-light-accent: #aceaff;',
       '      --color-cta: #00b8f5;',
@@ -307,9 +325,9 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
       '      --color-pink: #fd349c;',
       '      --color-success: #00b894;',
       '      --color-background-dark: #071728;',
-      '      --theme-primary: #00338d;',
-      '      --theme-secondary: #1e49e2;',
-      '      --theme-accent: #1e49e2;',
+      '      --theme-primary: ${colors.primary};',
+      '      --theme-secondary: ${colors.secondary};',
+      '      --theme-accent: ${colors.accent};',
       '    }',
       '    body { font-family: "Open Sans", sans-serif; }',
       '    h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif; }',

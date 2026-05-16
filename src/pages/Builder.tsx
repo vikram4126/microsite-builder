@@ -248,6 +248,14 @@ export default function Builder() {
     if (!editorRef.current) return;
 
     const applyTheme = () => {
+      const themePresets: any = {
+        default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
+        purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
+        dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
+        pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
+      };
+      const colors = themePresets[themeColor];
+
       const body = editorRef.current.Canvas.getBody();
       const iframe = editorRef.current.Canvas.getFrameEl();
       if (!body || !iframe) return;
@@ -270,20 +278,12 @@ export default function Builder() {
       }
       styleTag.textContent = `
         :root {
-          --theme-primary: ${themeColor === 'default' ? '#00338d' : themeColor === 'purple' ? '#7213ea' : themeColor === 'pink' ? '#fd349c' : '#0f172a'};
-          --theme-secondary: ${themeColor === 'default' ? '#1e49e2' : themeColor === 'purple' ? '#aceaff' : themeColor === 'pink' ? '#00b8f5' : '#334155'};
+          --theme-primary: ${colors.primary};
+          --theme-secondary: ${colors.secondary};
+          --theme-accent: ${colors.accent};
         }
       `;
 
-      // Colors
-      const themePresets: any = {
-        default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
-        purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
-        dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
-        pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
-      };
-
-      const colors = themePresets[themeColor];
       if (colors) {
         body.style.setProperty('--theme-primary', colors.primary);
         body.style.setProperty('--color-primary', colors.primary);
@@ -295,6 +295,16 @@ export default function Builder() {
     };
 
     applyTheme();
+
+    // Notify preview window of theme change
+    if (previewWindowRef.current && !previewWindowRef.current.closed) {
+      previewWindowRef.current.postMessage({
+        type: 'UPDATE_THEME',
+        themeMode,
+        themeColor
+      }, '*');
+    }
+
     // Also apply whenever the canvas loads
     editorRef.current.on('canvas:load', applyTheme);
 
@@ -1427,6 +1437,14 @@ export default function Builder() {
     toast.info('Generating preview...', { position: 'bottom-right', autoClose: 2000 });
     const html = editorRef.current.getHtml();
     const css = editorRef.current.getCss();
+    const themePresets: any = {
+      default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
+      purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
+      dark: { primary: '#0f172a', secondary: '#334155', accent: '#38bdf8' },
+      pink: { primary: '#be185d', secondary: '#db2777', accent: '#f472b6' }
+    };
+    const colors = themePresets[themeColor];
+
     const previewHtml = [
       '<!doctype html>',
       '<html lang="en">',
@@ -1438,7 +1456,7 @@ export default function Builder() {
       '<style type="text/tailwindcss">',
       '  @custom-variant dark (&:where(.dark, .dark *));',
       '  @theme {',
-      '    --color-primary: #00338d; --color-secondary: #1e49e2; --color-accent: #1e49e2;',
+      `    --color-primary: ${colors.primary}; --color-secondary: ${colors.secondary}; --color-accent: ${colors.accent};`,
       '    --color-dark: #0c233c; --color-light-accent: #aceaff; --color-cta: #00b8f5;',
       '    --color-purple: #7213ea; --color-pink: #fd349c; --color-success: #00b894;',
       '    --color-background-dark: #071728;',
@@ -1494,6 +1512,14 @@ export default function Builder() {
       '      window.scrollTo(0, 0);',
       '      setTimeout(initAnimations, 100);',
       '      if (window.__tailwindBrowser) window.__tailwindBrowser.rebuild();',
+      '    } else if (event.data.type === "UPDATE_THEME") {',
+      '      if (event.data.themeMode === "dark") {',
+      '        document.body.classList.add("dark");',
+      '        document.body.style.backgroundColor = "#0c233c";',
+      '      } else {',
+      '        document.body.classList.remove("dark");',
+      '        document.body.style.backgroundColor = "#ffffff";',
+      '      }',
       '    }',
       '  });',
       '});',
@@ -1538,7 +1564,7 @@ export default function Builder() {
 
   const handleExportZip = async () => {
     if (!editorRef.current || !projectData) return;
-    await exportStaticWebsite(editorRef.current, projectData);
+    await exportStaticWebsite(editorRef.current, projectData, { mode: themeMode, color: themeColor });
   };
 
   const handleCustomCode = () => {
