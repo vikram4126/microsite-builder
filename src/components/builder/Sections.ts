@@ -155,7 +155,7 @@ export const sectionsLibrary: SectionDef[] = [
             </label>
 
             <!-- Navigation Links -->
-            <nav class="hidden peer-checked:flex md:flex flex-col w-full md:w-auto md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
+            <nav data-nav-type="dynamic" class="hidden peer-checked:flex md:flex flex-col w-full md:w-auto md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
               <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Home</a>
               <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Services</a>
               <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Features</a>

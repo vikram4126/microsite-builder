@@ -25,7 +25,7 @@ function App() {
           <Route path="/assets" element={<Assets />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/project/:projectId" element={<ProjectDetails />} />
-          <Route path="/builder/:projectId/:pageId" element={<Builder />} />
+          <Route path="/builder/:projectId/:pageSlug" element={<Builder />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

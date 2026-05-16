@@ -3,7 +3,7 @@ const API_URL = 'http://localhost:5001';
 export const api = {
   async get(endpoint: string) {
     const res = await fetch(`${API_URL}${endpoint}`);
-    if (!res.ok) throw new Error('API Error');
+    if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
     return res.json();
   },
 
@@ -13,7 +13,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('API Error');
+    if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
     return res.json();
   },
 
@@ -23,7 +23,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('API Error');
+    if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
     return res.json();
   },
 
@@ -33,7 +33,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('API Error');
+    if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
     return res.json();
   },
 
@@ -41,7 +41,7 @@ export const api = {
     const res = await fetch(`${API_URL}${endpoint}`, {
       method: 'DELETE',
     });
-    if (!res.ok) throw new Error('API Error');
+    if (!res.ok) throw new Error(`API Error: ${res.status} ${res.statusText}`);
     return res.json();
   },
 };

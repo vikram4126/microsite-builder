@@ -16,8 +16,9 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
   const originalData = editor.getProjectData();
 
   // Helper to normalize page names to filenames
-  const getFilename = (name: string, index: number) => {
+  const getFilename = (nameOrTitle: string, index: number) => {
     if (index === 0) return 'index.html';
+    const name = nameOrTitle || 'page';
     return name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.html';
   };
 
@@ -69,24 +70,32 @@ export async function exportStaticWebsite(editor: any, projectData: any) {
   // 1. Process each page
   for (let i = 0; i < pages.length; i++) {
     const page = pages[i];
-    const filename = getFilename(page.name, i);
+    const filename = getFilename(page.title || page.name, i);
     
     // Load page into editor
     editor.loadProjectData(page.layout || {});
 
     // Update dynamic nav links to point to .html files for export
-    const navLinks = editor.DomComponents.getWrapper().find('[data-gjs-type="dynamic-nav-links"]');
+    const navLinks = editor.DomComponents.getWrapper().find('[data-nav-type="dynamic"]');
     navLinks.forEach((nav: any) => {
       nav.components().reset();
       pages.forEach((p: any, idx: number) => {
-        const pFilename = getFilename(p.name, idx);
+        const pFilename = getFilename(p.title || p.name, idx);
         nav.append({
           tagName: 'a',
           type: 'link',
-          classes: ['text-gray-600', 'hover:text-[var(--color-secondary)]', 'font-semibold', 'transition-colors'],
+          classes: ['text-slate-600', 'dark:text-slate-300', 'hover:text-accent', 'transition-colors', 'w-full', 'md:w-auto', 'text-center', 'py-2', 'md:py-0', 'border-b', 'border-gray-100', 'md:border-none'],
           attributes: { href: pFilename },
-          content: p.name,
+          content: p.title || p.name,
         });
+      });
+      // Add a standard CTA button at the end
+      nav.append({
+        tagName: 'a',
+        type: 'link',
+        classes: ['bg-primary', 'text-white', 'hover:bg-accent', 'px-5', 'py-2.5', 'rounded-lg', 'shadow', 'transition-all', 'w-full', 'md:w-auto', 'text-center', 'mt-2', 'md:mt-0'],
+        attributes: { href: '#' },
+        content: 'Get Started',
       });
     });
 

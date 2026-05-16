@@ -1,0 +1,8 @@
+src/pages/Builder.tsx(850,64): error TS2345: Argument of type 'CssRule[]' is not assignable to parameter of type 'string | CssRule'.
+  Type 'CssRule[]' is missing the following properties from type 'CssRule': config, opt, views, defaults, and 78 more.
+src/utils/exportWebsite.ts(109,23): error TS2802: Type 'RegExpStringIterator<RegExpExecArray>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/utils/exportWebsite.ts(185,23): error TS2802: Type 'RegExpStringIterator<RegExpExecArray>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/utils/exportWebsite.ts(217,23): error TS2802: Type 'RegExpStringIterator<RegExpExecArray>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/utils/exportWebsite.ts(336,23): error TS2802: Type 'RegExpStringIterator<RegExpExecArray>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/utils/exportWebsite.ts(433,38): error TS2802: Type 'MapIterator<[string, string]>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/utils/exportWebsite.ts(443,37): error TS2802: Type 'MapIterator<[string, ArrayBuffer]>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.

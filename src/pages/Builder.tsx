@@ -33,9 +33,11 @@ function getBreadcrumb(model: any): { name: string; cid: string }[] {
 }
 
 export default function Builder() {
-  const { projectId, pageId } = useParams();
+  const { projectId, pageSlug } = useParams();
   const navigate = useNavigate();
+  const [pageId, setPageId] = useState<string | null>(null);
   const editorRef = useRef<any>(null);
+  const previewWindowRef = useRef<Window | null>(null);
 
   const [device, setDevice] = useState('desktop');
   const [autoSave, setAutoSave] = useState(true);
@@ -57,6 +59,10 @@ export default function Builder() {
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'layers' | 'settings' | 'style'>('layers');
+  const [isAddPageModalOpen, setIsAddPageModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [newPageName, setNewPageName] = useState('');
+  const [pageToDelete, setPageToDelete] = useState<any>(null);
   const activeTabRef = useRef(activeTab);
 
   useEffect(() => {
@@ -85,7 +91,82 @@ export default function Builder() {
     pageIdRef.current = pageId;
   }, [pageId]);
 
-  const handleDeletePage = async () => {
+  // Handle messages from preview tab
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'NAVIGATE_PAGE' && event.data?.pageId) {
+        // Find slug for this pageId
+        const pData = projectDataRef.current;
+        if (pData) {
+          const targetPage = pData.pages.find((p: any) => p.id === event.data.pageId);
+          if (targetPage) {
+            const slug = pData.pages.indexOf(targetPage) === 0 ? 'home' : (targetPage.title || targetPage.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+            navigate(`/builder/${projectId}/${slug}`);
+          }
+        }
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [projectId, navigate]);
+
+  const handleAddPage = async () => {
+    if (!newPageName.trim()) {
+      toast.error('Page name cannot be empty');
+      return;
+    }
+
+    const pData = projectDataRef.current;
+    if (pData) {
+      const newId = Math.random().toString(36).substring(2, 9);
+      const newSlug = newPageName.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      
+      // Check if slug already exists
+      const exists = pData.pages.some((p: any, idx: number) => {
+        const s = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        return s === newSlug;
+      });
+
+      if (exists) {
+        toast.error('A page with this name already exists');
+        return;
+      }
+
+      const updatedProjectWithNew = {
+        ...pData,
+        pages: [...pData.pages, { 
+          id: newId, 
+          name: newPageName, 
+          title: newPageName,
+          route: `/${newSlug}`,
+          layout: {} 
+        }]
+      };
+
+      try {
+        if (projectId !== 'guest') {
+          await api.put(`/projects/${projectId}`, updatedProjectWithNew);
+        }
+        setProjectData(updatedProjectWithNew);
+        projectDataRef.current = updatedProjectWithNew;
+        setIsAddPageModalOpen(false);
+        setNewPageName('');
+        toast.success(`Page "${newPageName}" added successfully`);
+        
+        // Update pageId ref immediately before navigation
+        pageIdRef.current = newId;
+        setPageId(newId);
+
+        navigate(`/builder/${projectId}/${newSlug}`);
+        setTimeout(syncNavLinks, 500);
+      } catch (err) {
+        console.error('Failed to add page', err);
+        toast.error('Failed to add page');
+      }
+    }
+  };
+
+  const handleDeletePage = () => {
     const pData = projectDataRef.current;
     if (!pData || !pageId) return;
     
@@ -97,25 +178,69 @@ export default function Builder() {
       return;
     }
 
-    if (!window.confirm(`Are you sure you want to delete the "${currentPage.title || currentPage.name}" page?`)) return;
+    setPageToDelete(currentPage);
+    setIsDeleteModalOpen(true);
+  };
 
-    const updatedPages = pData.pages.filter((p: any) => p.id !== pageId);
+  const handleConfirmDelete = async () => {
+    if (!pageToDelete || !projectDataRef.current) return;
+    
+    const updatedPages = projectDataRef.current.pages.filter((p: any) => p.id !== pageToDelete.id);
     const updatedProject = {
-      ...pData,
+      ...projectDataRef.current,
       pages: updatedPages
     };
 
     try {
-      await api.put(`/projects/${projectId}`, updatedProject);
+      if (projectId !== 'guest') {
+        await api.put(`/projects/${projectId}`, updatedProject);
+      }
       setProjectData(updatedProject);
       projectDataRef.current = updatedProject;
-      toast.success('Page deleted');
+      setIsDeleteModalOpen(false);
+      setPageToDelete(null);
+      toast.success(`Page "${pageToDelete.title || pageToDelete.name}" deleted successfully`);
+      
       // Navigate to home page
-      navigate(`/builder/${projectId}/${updatedPages[0].id}`);
+      navigate(`/builder/${projectId}/home`);
+      setTimeout(syncNavLinks, 100);
     } catch (err) {
       console.error('Failed to delete page', err);
       toast.error('Failed to delete page');
     }
+  };
+
+  const syncNavLinks = () => {
+    if (!editorRef.current || !projectDataRef.current) return;
+    const pages = projectDataRef.current.pages;
+    const wrapper = editorRef.current.getWrapper();
+    const navContainers = wrapper.find('[data-nav-type="dynamic"]');
+    
+    navContainers.forEach((nav: any) => {
+      nav.components().reset();
+      pages.forEach((p: any, idx: number) => {
+        const slug = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        nav.append({
+          tagName: 'a',
+          type: 'link',
+          classes: ['text-slate-600', 'dark:text-slate-300', 'hover:text-accent', 'transition-colors', 'w-full', 'md:w-auto', 'text-center', 'py-2', 'md:py-0', 'border-b', 'border-gray-100', 'md:border-none'],
+          attributes: { 
+            href: idx === 0 ? 'index.html' : `${slug}.html`, // Relative paths for better compatibility
+            'data-page-id': p.id,
+            'data-slug': slug
+          },
+          content: p.title || p.name,
+        });
+      });
+      // Add standard CTA button at the end
+      nav.append({
+        tagName: 'a',
+        type: 'link',
+        classes: ['bg-primary', 'text-white', 'hover:bg-accent', 'px-5', 'py-2.5', 'rounded-lg', 'shadow', 'transition-all', 'w-full', 'md:w-auto', 'text-center', 'mt-2', 'md:mt-0'],
+        attributes: { href: '#' },
+        content: 'Get Started',
+      });
+    });
   };
 
   // Sync Theme Settings to Canvas
@@ -722,7 +847,9 @@ export default function Builder() {
                     const style = rule.getStyle();
                     return !style || Object.keys(style).length === 0;
                   });
-                  if (emptyRules.length > 0) editor.Css.remove(emptyRules);
+                  if (emptyRules.length > 0) {
+                    emptyRules.forEach((rule: any) => editor.Css.remove(rule));
+                  }
                 } catch (_) { /* ignore */ }
 
                 const editorData = editor.getProjectData();
@@ -738,6 +865,7 @@ export default function Builder() {
                 };
                 await api.put(`/projects/${projectId}`, updatedProject);
                 projectDataRef.current = updatedProject;
+                setProjectData(updatedProject);
                 console.log('Autosaved project page:', activeId);
               } catch (err) {
                 console.error('Autosave failed', err);
@@ -1080,9 +1208,23 @@ export default function Builder() {
         setProjectData(data);
         projectDataRef.current = data; 
 
+        // Find pageId from slug
+        let targetPage = data.pages.find((p: any, idx: number) => {
+          const slug = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+          return slug === pageSlug;
+        });
+
+        if (!targetPage) targetPage = data.pages[0];
+        const activePageId = targetPage.id;
+        setPageId(activePageId);
+        pageIdRef.current = activePageId;
+
         if (editorRef.current) {
           isSyncingRef.current = true; // Block autosaves during hydration
-          const currentPage = data.pages.find((p: any) => p.id === pageId);
+          const currentPage = targetPage;
+
+          // Force sync nav links on load
+          setTimeout(syncNavLinks, 500);
 
           if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0) {
             editorRef.current.loadProjectData(currentPage.layout);
@@ -1143,13 +1285,26 @@ export default function Builder() {
             isSyncingRef.current = false;
           }
           isProjectLoaded.current = true;
+
+          // Push update to preview window if it's open
+          if (previewWindowRef.current && !previewWindowRef.current.closed) {
+            setTimeout(() => {
+              if (editorRef.current) {
+                previewWindowRef.current?.postMessage({
+                  type: 'UPDATE_PREVIEW_CONTENT',
+                  html: editorRef.current.getHtml(),
+                  css: editorRef.current.getCss()
+                }, '*');
+              }
+            }, 1000);
+          }
         }
       } catch (err) {
-        console.error('Error loading project', err);
+        console.error('Failed to load project', err);
       }
     };
     loadData();
-  }, [projectId, pageId]);
+  }, [pageSlug, projectId]);
 
   // Dynamic Navbar Update Logic
   useEffect(() => {
@@ -1217,7 +1372,19 @@ export default function Builder() {
 
   const handleSave = async () => {
     if (projectId === 'guest') return;
-    if (!editorRef.current || !projectData) return;
+    if (!projectId) {
+      toast.error('Project ID is missing from URL');
+      return;
+    }
+
+    const pData = projectDataRef.current;
+    const activeId = pageIdRef.current;
+    
+    if (!editorRef.current || !pData || !activeId) {
+      console.warn('Save skipped: missing editor, project data, or page ID', { pData, activeId });
+      return;
+    }
+    
     try {
       // Purge empty CSS rules before saving to prevent style corruption on reload
       try {
@@ -1226,25 +1393,32 @@ export default function Builder() {
           const style = rule.getStyle();
           return !style || Object.keys(style).length === 0;
         });
-        if (emptyRules.length > 0) editorRef.current.Css.remove(emptyRules);
+        if (emptyRules.length > 0) {
+          emptyRules.forEach((rule: any) => editorRef.current.Css.remove(rule));
+        }
       } catch (_) { /* ignore */ }
 
       const editorData = editorRef.current.getProjectData();
       const updatedProject = {
-        ...projectData,
+        ...pData,
         lastEdited: new Date().toISOString(),
-        pages: projectData.pages.map((p: any) =>
-          p.id === pageId ? { ...p, layout: editorData } : p
+        pages: pData.pages.map((p: any) =>
+          p.id === activeId ? { ...p, layout: editorData } : p
         )
       };
+      
       await api.put(`/projects/${projectId}`, updatedProject);
-      // Update ref but skip state update to prevent re-render flicker
+      
+      // Update both ref and state
       projectDataRef.current = updatedProject;
+      setProjectData(updatedProject);
 
-      toast.success('Project saved successfully', { position: 'bottom-right', autoClose: 2000 });
+      const savedTitle = pData.title || 'Project';
+      toast.success(`"${savedTitle}" saved successfully`, { position: 'bottom-right', autoClose: 2000 });
       console.log('Project saved successfully');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to save', err);
+      toast.error(`Failed to save: ${err.message || 'Unknown error'}`);
     }
   };
 
@@ -1274,7 +1448,7 @@ export default function Builder() {
       '  body { font-family: "Open Sans", sans-serif !important; }',
       '  h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif !important; }',
       '</style>',
-      '<style>' + css + '</style>',
+      '<style id="gjs-css">' + css + '</style>',
       '<script src="https://unpkg.com/@tailwindcss/browser@4"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></scr' + 'ipt>',
@@ -1282,27 +1456,53 @@ export default function Builder() {
       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />',
       '</head>',
       '<body class="' + (themeMode === 'dark' ? 'dark bg-[#0c233c]' : 'bg-white') + '">',
-      html,
+      '<div id="preview-content">' + html + '</div>',
       '<script>',
       'document.addEventListener("DOMContentLoaded", function() {',
-      '  if(typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){',
-      '    gsap.registerPlugin(ScrollTrigger);',
-      '    document.querySelectorAll("[data-animation]").forEach(function(el){',
-      '      var animType = el.getAttribute("data-animation");',
-      '      if(!animType) return;',
-      '      var vars = { scrollTrigger: { trigger: el, start: "top 85%" }, duration: 0.8, ease: "power2.out", opacity: 0, clearProps: "all" };',
-      '      if(animType === "fade-in"){ gsap.from(el, vars); }',
-      '      else if(animType === "slide-up"){ vars.y = 50; gsap.from(el, vars); }',
-      '      else if(animType === "zoom-in"){ vars.scale = 0.8; gsap.from(el, vars); }',
-      '    });',
+      '  function initAnimations() {',
+      '    if(typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){',
+      '      gsap.registerPlugin(ScrollTrigger);',
+      '      document.querySelectorAll("[data-animation]").forEach(function(el){',
+      '        var animType = el.getAttribute("data-animation");',
+      '        if(!animType) return;',
+      '        var vars = { scrollTrigger: { trigger: el, start: "top 85%" }, duration: 0.8, ease: "power2.out", opacity: 0, clearProps: "all" };',
+      '        if(animType === "fade-in"){ gsap.from(el, vars); }',
+      '        else if(animType === "slide-up"){ vars.y = 50; gsap.from(el, vars); }',
+      '        else if(animType === "zoom-in"){ vars.scale = 0.8; gsap.from(el, vars); }',
+      '      });',
+      '    }',
       '  }',
+      '  initAnimations();',
+      '  ',
+      '  // Handle page switching in preview',
+      '  document.addEventListener("click", function(e) {',
+      '    const link = e.target.closest("a");',
+      '    if (link && link.getAttribute("data-page-id")) {',
+      '      e.preventDefault();',
+      '      const pageId = link.getAttribute("data-page-id");',
+      '      if (window.opener) {',
+      '        window.opener.postMessage({ type: "NAVIGATE_PAGE", pageId: pageId }, "*");',
+      '      }',
+      '    }',
+      '  });',
+      '  ',
+      '  window.addEventListener("message", function(event) {',
+      '    if (event.data.type === "UPDATE_PREVIEW_CONTENT") {',
+      '      document.getElementById("preview-content").innerHTML = event.data.html;',
+      '      document.getElementById("gjs-css").textContent = event.data.css;',
+      '      // Re-init animations and scroll to top',
+      '      window.scrollTo(0, 0);',
+      '      setTimeout(initAnimations, 100);',
+      '      if (window.__tailwindBrowser) window.__tailwindBrowser.rebuild();',
+      '    }',
+      '  });',
       '});',
       '</scr' + 'ipt>',
       '</body>',
       '</html>'
     ].join('\n');
     const blob = new Blob([previewHtml], { type: 'text/html' });
-    window.open(URL.createObjectURL(blob), '_blank');
+    previewWindowRef.current = window.open(URL.createObjectURL(blob), '_blank');
   };
 
   const addBlockToCanvas = (block: any) => {
@@ -1419,9 +1619,9 @@ export default function Builder() {
             <div className="relative flex items-center h-8 px-2 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors group">
               <Layers className="w-3.5 h-3.5 mr-2 text-gray-400 group-hover:text-[#1e49e2]" />
               <select
-                value={pageId}
+                value={pageSlug}
                 onChange={(e) => {
-                  const targetPageId = e.target.value;
+                  const targetSlug = e.target.value;
                   const pData = projectDataRef.current;
                   
                   // Force save current page layout before leaving
@@ -1439,41 +1639,18 @@ export default function Builder() {
                     }
                   }
 
-                  if (targetPageId === 'add-new') {
-                    const newPageName = prompt('Enter page name:');
-                    if (newPageName && pData) {
-                      const newId = Math.random().toString(36).substring(2, 9);
-                      const updatedProjectWithNew = {
-                        ...projectDataRef.current,
-                        pages: [...projectDataRef.current.pages, { 
-                          id: newId, 
-                          name: newPageName, 
-                          title: newPageName,
-                          route: `/${newPageName.toLowerCase().replace(/\s+/g, '-')}`,
-                          layout: {} 
-                        }]
-                      };
-                      if (projectId !== 'guest') {
-                        api.put(`/projects/${projectId}`, updatedProjectWithNew).then(() => {
-                          setProjectData(updatedProjectWithNew);
-                          projectDataRef.current = updatedProjectWithNew;
-                          navigate(`/builder/${projectId}/${newId}`);
-                        });
-                      } else {
-                        setProjectData(updatedProjectWithNew);
-                        projectDataRef.current = updatedProjectWithNew;
-                        navigate(`/builder/${projectId}/${newId}`);
-                      }
-                    }
+                  if (targetSlug === 'add-new') {
+                    setIsAddPageModalOpen(true);
                     return;
                   }
-                  navigate(`/builder/${projectId}/${targetPageId}`);
+                  navigate(`/builder/${projectId}/${targetSlug}`);
                 }}
                 className="bg-transparent text-[11px] font-bold text-gray-700 outline-none cursor-pointer pr-4 appearance-none"
               >
-                {projectData?.pages.map((p: any) => (
-                  <option key={p.id} value={p.id}>{p.title || p.name || 'Untitled Page'}</option>
-                ))}
+                {projectData?.pages.map((p: any, idx: number) => {
+                  const slug = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                  return <option key={p.id} value={slug}>{p.title || p.name || 'Untitled Page'}</option>;
+                })}
                 <option value="add-new" className="text-[#1e49e2] font-bold">+ Add New Page</option>
               </select>
               <ChevronDown className="w-3 h-3 absolute right-2 text-gray-400 pointer-events-none" />
@@ -2542,6 +2719,113 @@ export default function Builder() {
               >
                 Apply Code
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Page Modal */}
+      {isAddPageModalOpen && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-[#1e1e1e] w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 transform transition-all">
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50/50 dark:bg-black/20">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center">
+                <Plus className="w-5 h-5 mr-2 text-[#1e49e2]" />
+                Create New Page
+              </h3>
+              <button 
+                onClick={() => setIsAddPageModalOpen(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-8">
+              <div className="mb-6">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  Page Name
+                </label>
+                <input
+                  autoFocus
+                  type="text"
+                  placeholder="e.g., About Us, Services, Contact"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#252526] text-gray-900 dark:text-white focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent outline-none transition-all placeholder:text-gray-400"
+                  value={newPageName}
+                  onChange={(e) => setNewPageName(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleAddPage();
+                    if (e.key === 'Escape') setIsAddPageModalOpen(false);
+                  }}
+                />
+                <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                  <Cog className="w-3 h-3 mr-1" />
+                  URL slug will be generated automatically based on the name.
+                </p>
+              </div>
+
+              <div className="flex gap-3 mt-8">
+                <button
+                  onClick={() => setIsAddPageModalOpen(false)}
+                  className="flex-1 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddPage}
+                  className="flex-[2] bg-gradient-to-r from-[#00338d] to-[#1e49e2] text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
+                >
+                  Create Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && pageToDelete && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-[#1e1e1e] w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 transform transition-all animate-in fade-in zoom-in duration-200">
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-red-50/30 dark:bg-red-900/10">
+              <h3 className="text-lg font-bold text-red-600 dark:text-red-400 flex items-center">
+                <Trash2 className="w-5 h-5 mr-2" />
+                Delete Page
+              </h3>
+              <button 
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-8">
+              <div className="mb-6 text-center">
+                <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Trash2 className="w-8 h-8" />
+                </div>
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Are you sure?</h4>
+                <p className="text-gray-500 dark:text-gray-400">
+                  You are about to delete <span className="font-bold text-gray-900 dark:text-white">"{pageToDelete.title || pageToDelete.name}"</span>. 
+                  This action cannot be undone and all content on this page will be permanently removed.
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setIsDeleteModalOpen(false)}
+                  className="flex-1 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-bold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmDelete}
+                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
+                >
+                  Delete Page
+                </button>
+              </div>
             </div>
           </div>
         </div>
