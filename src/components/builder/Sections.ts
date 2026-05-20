@@ -442,6 +442,55 @@ export const sectionsLibrary: SectionDef[] = [
     `
   },
   {
+    id: 'section-intro-letter',
+    category: 'Introduction',
+    label: 'Introduction Letter',
+    svg: '<img src="/team-member/member-1.jpg" class="object-cover w-full h-full rounded" />',
+    html: `
+      <div id="intro-letter" data-gjs-type="section" data-gjs-name="Introduction Letter" class="w-full py-16 md:py-24 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-col md:flex-row gap-8 lg:gap-16">
+            <!-- 30% Left Side -->
+            <div class="w-full md:w-[30%]">
+              <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4">Dear Sir or Madame,</h2>
+            </div>
+            
+            <!-- 70% Right Side -->
+            <div class="w-full md:w-[70%]">
+              <p class="text-gray-600 dark:text-white leading-relaxed mb-6 font-medium">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+              </p>
+              <p class="text-gray-600 dark:text-white leading-relaxed mb-8 font-medium">
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+              </p>
+              
+              <div class="mb-8">
+                <p class="text-gray-600 dark:text-white mb-2">Kind regards,</p>
+                <img src="/images/signature-image.png" alt="Signature" class="h-16 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-80" />
+              </div>
+              
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20">
+                  <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-primary dark:text-white font-bold text-lg leading-tight">John Doe</span>
+                  <span class="text-gray-500 text-sm">Head of Pursuit</span>
+                </div>
+                <a href="mailto:johndoe@example.com" class="ml-2 w-8 h-8 rounded-full border border-gray-200 dark:border-slate-700 flex items-center justify-center text-primary dark:text-white hover:bg-primary hover:text-white transition-colors group">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 'section-expert-profiles',
     category: 'Services',
     label: 'Expert Profiles',
