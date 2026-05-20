@@ -411,7 +411,7 @@ export const sectionsLibrary: SectionDef[] = [
             </div>
             <div class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
               <h2 class="text-4xl font-display font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
-              <a href="#" data-gjs-type="link" class="bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
+              <a href="#" data-gjs-type="link" class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
             </div>
           </div>
         </div>

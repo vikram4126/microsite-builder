@@ -313,11 +313,12 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       '  <link rel="preconnect" href="https://fonts.googleapis.com">',
       '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
       '  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap" rel="stylesheet">',
-      '  <style>',
-      '    :root {',
-      '      --color-primary: ${colors.primary};',
-      '      --color-secondary: ${colors.secondary};',
-      '      --color-accent: ${colors.accent};',
+      '  <style type="text/tailwindcss">',
+      '    @custom-variant dark (&:where(.dark, .dark *));',
+      '    @theme {',
+      `      --color-primary: ${colors.primary};`,
+      `      --color-secondary: ${colors.secondary};`,
+      `      --color-accent: ${colors.accent};`,
       '      --color-dark: #0c233c;',
       '      --color-light-accent: #aceaff;',
       '      --color-cta: #00b8f5;',
@@ -325,15 +326,13 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       '      --color-pink: #fd349c;',
       '      --color-success: #00b894;',
       '      --color-background-dark: #071728;',
-      '      --theme-primary: ${colors.primary};',
-      '      --theme-secondary: ${colors.secondary};',
-      '      --theme-accent: ${colors.accent};',
+      '      --font-sans: "Open Sans", sans-serif;',
+      '      --font-display: "Open Sans Condensed", sans-serif;',
       '    }',
       '    body { font-family: "Open Sans", sans-serif; }',
       '    h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif; }',
       '  </style>',
-      '  <' + sc + ' src="https://cdn.tailwindcss.com?plugins=forms"></' + sc + '>',
-      '  <' + sc + ' src="canvas-tailwind-config.js"></' + sc + '>',
+      '  <' + sc + ' src="https://unpkg.com/@tailwindcss/browser@4"></' + sc + '>',
       '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></' + sc + '>',
       '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></' + sc + '>',
       '</head>',
@@ -420,30 +419,6 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     console.warn('[Export] Failed to stabilize editor after restore:', e);
   }
   
-  // Embed tailwind configuration
-  const tailwindConfigStr = `tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "primary": "var(--theme-primary, #00338d)",
-        "accent": "var(--theme-accent, #00b8f5)",
-        "secondary": "var(--theme-secondary, #1e49e2)",
-        "background-light": "var(--theme-bg-light, #f5f6f8)",
-        "background-dark": "var(--theme-bg-dark, #0c233c)",
-        "brand-navy": "var(--theme-navy, #0c233c)",
-        "purple-accent": "var(--theme-purple, #7213ea)",
-        "pink-accent": "var(--theme-pink, #fd349c)"
-      },
-      fontFamily: {
-        "sans": ["Open Sans", "sans-serif"],
-        "display": ["Open Sans Condensed", "sans-serif"]
-      }
-    }
-  }
-};`;
-  zip.file('canvas-tailwind-config.js', tailwindConfigStr);
-
   // 5. Write all collected images to ZIP
   const imgFolder = zip.folder('images')!;
   

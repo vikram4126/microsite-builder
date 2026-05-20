@@ -398,8 +398,9 @@ export const registerStyles = (editor: any) => {
       };
 
       previewDiv.onclick = () => {
-        editor.AssetManager.open({
-          select(asset: any, complete: boolean) {
+        editor.runCommand('open-assets', {
+          target: editor.getSelected(),
+          onSelect(asset: any) {
             const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
             const model = editor.getSelected();
             
@@ -418,7 +419,7 @@ export const registerStyles = (editor: any) => {
             }
             
             applyTextContrast();
-            if (complete) editor.AssetManager.close();
+            editor.Modal.close();
           }
         });
       };

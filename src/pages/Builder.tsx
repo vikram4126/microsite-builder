@@ -330,6 +330,18 @@ export default function Builder() {
         width: '100%',
         fromElement: true,
         storageManager: false,
+        assetManager: {
+          assets: [
+            '/images/finance-1.jpg', '/images/finance-2.jpg', '/images/finance-3.jpg', '/images/finance-4.jpg', '/images/finance-5.jpg',
+            '/images/business-1.jpg', '/images/business-2.jpg', '/images/business-3.jpg', '/images/business-4.jpg', '/images/business-5.jpg',
+            '/images/audit-1.jpg', '/images/audit-2.jpg', '/images/audit-3.jpg', '/images/audit-4.jpg', '/images/audit-5.jpg',
+            '/images/tax-1.jpg', '/images/tax-2.jpg', '/images/tax-3.jpg', '/images/tax-4.jpg', '/images/tax-5.jpg',
+            '/images/team-1.jpg', '/images/team-2.jpg', '/images/team-3.jpg', '/images/team-4.jpg', '/images/team-5.jpg',
+            '/images/banner-background-1.jpg', '/images/banner-background-2.jpg', '/images/banner-background-3.jpg', '/images/banner-background-4.jpg', '/images/banner-background-5.jpg',
+            '/images/image-1.png', '/images/image-2.png', '/images/image-3.png', '/images/image-4.png', '/images/image-5.png', '/images/image-6.jpg',
+            '/images/signature-image.png', '/images/signature.png'
+          ]
+        },
         plugins: [],
         blockManager: { appendTo: '#gjs-blocks' },
         styleManager: { appendTo: '#gjs-styles-container' },

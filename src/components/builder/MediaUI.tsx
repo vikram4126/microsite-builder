@@ -118,11 +118,12 @@ export const MediaUI = ({ editor }: { editor: any }) => {
   };
 
   const openAssetManager = () => {
-    editor.AssetManager.open({
-      select(asset: any, complete: boolean) {
+    editor.runCommand('open-assets', {
+      target: editor.getSelected(),
+      onSelect(asset: any) {
         const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
         updateMedia('src', src);
-        if (complete) editor.AssetManager.close();
+        editor.Modal.close();
       }
     });
   };
