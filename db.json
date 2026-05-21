@@ -7594,7 +7594,7 @@
       "userId": "1",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-05-20T06:01:38.278Z",
+      "lastEdited": "2026-05-21T06:17:39.964Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -8206,7 +8206,7 @@
                                             "object-cover"
                                           ],
                                           "attributes": {
-                                            "src": "/background/background-1.jpg",
+                                            "src": "/images/finance-4.jpg",
                                             "alt": "Handshake"
                                           }
                                         }

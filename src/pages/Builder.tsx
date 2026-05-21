@@ -2463,6 +2463,9 @@ export default function Builder() {
           </div>
 
           <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth">
+            <div className="px-3 pt-3">
+              {editorRef.current && <MediaUI editor={editorRef.current} />}
+            </div>
 
             {/* Tab 1: Layers — always in DOM, toggled via CSS hidden */}
             <div className={`p-2 animate-tab-content ${activeTab === 'layers' ? '' : 'hidden'}`}>
@@ -2563,7 +2566,6 @@ export default function Builder() {
           {editorRef.current && (
             <>
               <TypographyUI editor={editorRef.current} />
-              <MediaUI editor={editorRef.current} />
             </>
           )}
           <div className="w-full h-full relative" id="gjs">

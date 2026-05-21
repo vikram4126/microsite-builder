@@ -3,11 +3,8 @@ import { Image, X, Maximize, Move, Repeat, Anchor, Trash2 } from 'lucide-react';
 
 export const MediaUI = ({ editor }: { editor: any }) => {
   const [isVisible, setIsVisible] = useState(false);
-  
-  // Dragging State
-  const [position, setPosition] = useState({ x: typeof window !== 'undefined' ? window.innerWidth - 380 : 800, y: 450 });
-  const [isDragging, setIsDragging] = useState(false);
-  const dragRef = useRef({ startX: 0, startY: 0, initialX: 0, initialY: 0 });
+  const [showGallery, setShowGallery] = useState(false);
+  const [assets, setAssets] = useState<any[]>([]);
 
   const [mediaState, setMediaState] = useState({
     src: '',
@@ -24,8 +21,11 @@ export const MediaUI = ({ editor }: { editor: any }) => {
       const selected = editor.getSelected();
       if (!selected) {
         setIsVisible(false);
+        setShowGallery(false);
         return;
       }
+
+      setShowGallery(false);
 
       const tagName = (selected.get('tagName') || (selected.getEl && selected.getEl()?.tagName) || '').toLowerCase();
       const isImage = selected.is('image') || tagName === 'img';
@@ -68,29 +68,6 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     };
   }, [editor]);
 
-  // Window Drag Handlers
-  useEffect(() => {
-    if (!isDragging) return;
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({
-        x: dragRef.current.initialX + (e.clientX - dragRef.current.startX),
-        y: Math.max(0, dragRef.current.initialY + (e.clientY - dragRef.current.startY))
-      });
-    };
-    const handleMouseUp = () => setIsDragging(false);
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    dragRef.current = { startX: e.clientX, startY: e.clientY, initialX: position.x, initialY: position.y };
-  };
 
   const updateMedia = (key: string, value: string) => {
     const selected = editor.getSelected();
@@ -117,39 +94,31 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     }
   };
 
-  const openAssetManager = () => {
-    editor.runCommand('open-assets', {
-      target: editor.getSelected(),
-      onSelect(asset: any) {
-        const src = typeof asset.getSrc === 'function' ? asset.getSrc() : asset.src;
-        updateMedia('src', src);
-        editor.Modal.close();
-      }
-    });
+  const toggleGallery = () => {
+    if (!showGallery) {
+      const allAssets = editor.AssetManager.getAll().models.map((m: any) => m.attributes);
+      setAssets(allAssets);
+      setShowGallery(true);
+    } else {
+      setShowGallery(false);
+    }
+  };
+
+  const selectAsset = (src: string) => {
+    updateMedia('src', src);
+    setShowGallery(false);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div 
-      className="fixed w-[320px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[100] font-sans"
-      style={{ left: position.x, top: position.y }}
-    >
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col mb-4 font-sans">
         {/* Header */}
-        <div 
-          onMouseDown={handleMouseDown}
-          className="bg-[#0c233c] text-white p-3 flex items-center justify-between cursor-move select-none active:cursor-grabbing"
-        >
-            <div className="flex items-center space-x-2">
-                <Image size={16} className="text-[#00b8f5]" />
-                <span className="font-bold tracking-widest text-[11px] pointer-events-none uppercase">Media & Background</span>
-            </div>
-            <button 
-                onClick={() => setIsVisible(false)}
-                className="p-1 hover:bg-white/10 rounded-md transition-colors text-gray-400 hover:text-white"
-            >
-                <X size={14} />
-            </button>
+        <div className="px-4 py-3 bg-gray-50 flex items-center justify-between border-b border-gray-100 shrink-0">
+            <span className="text-[10px] font-black text-[#1e49e2] tracking-[0.15em] uppercase flex items-center">
+                <Image size={12} className="mr-2 inline-block" />
+                Media Settings
+            </span>
         </div>
 
         <div className="p-4 space-y-5">
@@ -196,35 +165,57 @@ export const MediaUI = ({ editor }: { editor: any }) => {
 
             {/* Image Preview / Selector */}
             <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center">
-                   {mediaState.isImageTag ? 'Image Source' : 'Background Image'}
-                </label>
-                <div 
-                    onClick={openAssetManager}
-                    className="w-full h-32 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center overflow-hidden cursor-pointer group hover:border-[#1e49e2] transition-all relative shadow-inner"
-                >
-                    {mediaState.src ? (
-                        <>
-                            <img src={mediaState.src} alt="Preview" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <span className="text-white text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30">Change Image</span>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <Image size={24} className="text-gray-300 mb-2" />
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Click to Upload</span>
-                        </>
-                    )}
-                </div>
-                {mediaState.src && (
-                    <button 
-                        onClick={(e) => { e.stopPropagation(); updateMedia('src', ''); }}
-                        className="w-full mt-2 flex items-center justify-center space-x-1.5 py-1.5 text-[10px] font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
-                    >
-                        <Trash2 size={12} />
-                        <span>REMOVE IMAGE</span>
+                <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center">
+                       {mediaState.isImageTag ? 'Image Source' : 'Background Image'}
+                    </label>
+                    <button onClick={toggleGallery} className="text-[9px] font-bold text-[#1e49e2] uppercase tracking-widest hover:underline">
+                        {showGallery ? 'Close Gallery' : 'Open Gallery'}
                     </button>
+                </div>
+                
+                {showGallery ? (
+                    <div className="grid grid-cols-3 gap-2 p-2 bg-gray-50 rounded-xl border border-gray-100 max-h-48 overflow-y-auto no-scrollbar shadow-inner">
+                        {assets.map((asset, idx) => (
+                            <div 
+                                key={idx} 
+                                onClick={() => selectAsset(asset.src)}
+                                className="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-[#1e49e2] cursor-pointer transition-all shadow-sm bg-white"
+                            >
+                                <img src={asset.src} className="w-full h-full object-cover" />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <>
+                        <div 
+                            onClick={toggleGallery}
+                            className="w-full h-32 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center overflow-hidden cursor-pointer group hover:border-[#1e49e2] transition-all relative shadow-inner"
+                        >
+                            {mediaState.src ? (
+                                <>
+                                    <img src={mediaState.src} alt="Preview" className="w-full h-full object-cover" />
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                        <span className="text-white text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30">Change Image</span>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <Image size={24} className="text-gray-300 mb-2" />
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Click to Upload</span>
+                                </>
+                            )}
+                        </div>
+                        {mediaState.src && (
+                            <button 
+                                onClick={(e) => { e.stopPropagation(); updateMedia('src', ''); }}
+                                className="w-full mt-2 flex items-center justify-center space-x-1.5 py-1.5 text-[10px] font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
+                            >
+                                <Trash2 size={12} />
+                                <span>REMOVE IMAGE</span>
+                            </button>
+                        )}
+                    </>
                 )}
             </div>
 
