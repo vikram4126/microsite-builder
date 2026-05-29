@@ -7,7 +7,7 @@ import { registerBlocks } from '../components/builder/Blocks';
 import { registerTemplates } from '../components/builder/Templates';
 import { registerStyles } from '../components/builder/Styles';
 import {
-  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, ChevronDown, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers
+  Monitor, Smartphone, Tablet, Save, Undo, Redo, Play, ChevronLeft, Trash2, Plus, X, Download, Code, Paintbrush, ChevronRight, ChevronDown, Maximize, Minimize, SquareDashed, Search, Cog, Moon, Sun, Palette, Layers, Image
 } from 'lucide-react';
 import { api } from '../utils/api';
 import { ToastContainer, toast } from 'react-toastify';
@@ -58,7 +58,11 @@ export default function Builder() {
   // Library State
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'layers' | 'settings' | 'style'>('layers');
+  const [activeTab, setActiveTab] = useState<'elements' | 'layers' | 'settings' | 'style' | 'media'>('elements');
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    Layout: true,
+    Basic: true,
+  });
   const [isAddPageModalOpen, setIsAddPageModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newPageName, setNewPageName] = useState('');
@@ -109,6 +113,13 @@ export default function Builder() {
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, [projectId, navigate]);
+
+  const toggleCategory = (catName: string) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [catName]: !prev[catName]
+    }));
+  };
 
   const handleAddPage = async () => {
     if (!newPageName.trim()) {
@@ -1025,8 +1036,12 @@ export default function Builder() {
         });
         setHasSelection(true);
 
-        // Auto-switch to style tab ONLY on fresh selection from layers (not on property changes)
-        if (activeTabRef.current === 'layers') {
+        // Auto-switch to media tab when image selected, style tab on fresh selection from layers
+        const selTag = (model.get('tagName') || '').toLowerCase();
+        const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
+        if (isImgSel) {
+          setActiveTab('media');
+        } else if (activeTabRef.current === 'layers' || activeTabRef.current === 'media') {
           setActiveTab('style');
         }
 
@@ -2440,11 +2455,25 @@ export default function Builder() {
           {/* Tab Navigation */}
           <div className="flex border-b border-gray-200 bg-gray-50/50 p-1 shrink-0">
             <button
+              onClick={() => setActiveTab('elements')}
+              className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'elements' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              <Plus className="w-3.5 h-3.5" />
+              Elements
+            </button>
+            <button
               onClick={() => setActiveTab('layers')}
               className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'layers' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
             >
               <Layers className="w-3.5 h-3.5" />
               Layers
+            </button>
+            <button
+              onClick={() => setActiveTab('media')}
+              className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 text-[9px] font-black uppercase tracking-[0.1em] rounded-lg transition-all ${activeTab === 'media' ? 'bg-white text-[#1e49e2] shadow-sm ring-1 ring-black/5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              <Image className="w-3.5 h-3.5" />
+              Media
             </button>
             <button
               onClick={() => setActiveTab('settings')}
@@ -2463,8 +2492,105 @@ export default function Builder() {
           </div>
 
           <div className="flex-1 overflow-y-auto no-scrollbar scroll-smooth">
-            <div className="px-3 pt-3">
-              {editorRef.current && <MediaUI editor={editorRef.current} />}
+
+            {/* Tab 0: Elements (Accordion of Layouts & basic/advanced elements) — always in DOM, toggled via CSS hidden */}
+            <div className={`p-3 animate-tab-content ${activeTab === 'elements' ? '' : 'hidden'}`}>
+              <div className="space-y-3">
+                {/* Search bar inside Elements tab */}
+                <div className="relative">
+                  <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search elements..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent bg-gray-50/50 hover:bg-white focus:bg-white transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Accordion container */}
+                <div className="divide-y divide-gray-100 border border-gray-100 bg-white rounded-xl shadow-sm overflow-hidden">
+                  {categories.map((cat) => {
+                    const isOpen = !!expandedCategories[cat];
+                    const blocksInCat = blocks.filter(b => {
+                      const catId = b.get('category').id || b.get('category');
+                      if (catId !== cat) return false;
+                      if (searchQuery) {
+                        return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
+                      }
+                      return true;
+                    });
+
+                    // Hide empty categories in search
+                    if (blocksInCat.length === 0) return null;
+
+                    return (
+                      <div key={cat} className="flex flex-col border-b border-gray-100 last:border-b-0">
+                        {/* Accordion Header */}
+                        <button
+                          onClick={() => toggleCategory(cat)}
+                          className="w-full px-4 py-3 bg-gray-50/50 hover:bg-[#1e49e2]/5 text-left flex items-center justify-between transition-all group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-black text-[#0c233c] tracking-[0.12em] uppercase group-hover:text-[#1e49e2] transition-colors">
+                              {cat}
+                            </span>
+                            <span className="bg-gray-200/60 text-gray-500 rounded-full px-2 py-0.5 text-[9px] font-black">
+                              {blocksInCat.length}
+                            </span>
+                          </div>
+                          {isOpen ? (
+                            <ChevronDown className="w-3.5 h-3.5 text-[#1e49e2]" />
+                          ) : (
+                            <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600" />
+                          )}
+                        </button>
+
+                        {/* Accordion Content */}
+                        {isOpen && (
+                          <div className="p-3 bg-white grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-1 duration-150 max-h-[300px] overflow-y-auto no-scrollbar border-t border-gray-50 shadow-inner">
+                            {blocksInCat.map((block, idx) => (
+                              <div
+                                key={idx}
+                                draggable
+                                onDragStart={(e) => {
+                                  if (editorRef.current) {
+                                    // Required for Firefox
+                                    e.dataTransfer.setData('text/plain', block.get('label'));
+                                    editorRef.current.BlockManager.startDrag(block, e.nativeEvent);
+                                  }
+                                }}
+                                onDragEnd={(e) => {
+                                  if (editorRef.current) {
+                                    editorRef.current.BlockManager.endDrag(e.nativeEvent);
+                                  }
+                                }}
+                                className="group p-2.5 border border-gray-100 rounded-xl hover:border-[#1e49e2] hover:bg-[#1e49e2]/5 cursor-grab active:cursor-grabbing transition-all flex flex-col items-center justify-center bg-gray-50/20 hover:scale-[1.02] hover:shadow-md relative select-none"
+                                title={`Drag to add ${block.get('label')}`}
+                              >
+                                {/* Media Thumbnail */}
+                                <div className="h-16 w-full bg-white rounded-lg border border-gray-100 flex items-center justify-center overflow-hidden relative mb-2 shadow-sm group-hover:border-[#1e49e2]/20 transition-colors">
+                                  {block.get('media') ? (
+                                    <div
+                                      className="w-full h-full opacity-80 group-hover:opacity-100 flex items-center justify-center select-none pointer-events-none scale-[0.6] transition-all"
+                                      dangerouslySetInnerHTML={{ __html: block.get('media') }}
+                                    />
+                                  ) : (
+                                    <SquareDashed className="w-5 h-5 text-gray-300 group-hover:text-[#1e49e2]/40 transition-colors" />
+                                  )}
+                                </div>
+                                <span className="text-[9px] font-black text-gray-600 group-hover:text-[#0c233c] truncate w-full text-center px-1">
+                                  {block.get('label')}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {/* Tab 1: Layers — always in DOM, toggled via CSS hidden */}
@@ -2484,6 +2610,19 @@ export default function Builder() {
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* Tab: Media Settings — always in DOM, toggled via CSS hidden */}
+            <div className={`p-3 animate-tab-content ${activeTab === 'media' ? '' : 'hidden'}`}>
+              {editorRef.current && <MediaUI editor={editorRef.current} />}
+              {!hasSelection && (
+                <div className="py-20 text-center flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-300">
+                    <Image className="w-6 h-6" />
+                  </div>
+                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-10">Select an element to edit media settings</p>
+                </div>
+              )}
             </div>
 
             {/* Tab 2: Settings (Trait Manager) — always in DOM */}
