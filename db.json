@@ -8300,7 +8300,7 @@
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-05-29T06:55:56.557Z",
+      "lastEdited": "2026-05-30T06:12:18.460Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -10528,22 +10528,26 @@
               },
               {
                 "selectors": [
-                  "#header-2-left-blue"
-                ],
-                "style": {
-                  "background-image": "url(\"/background/background-5.jpg\")",
-                  "background-size": "cover",
-                  "background-position-x": "center",
-                  "background-position-y": "center",
-                  "background-repeat": "no-repeat"
-                }
-              },
-              {
-                "selectors": [
                   "c8940"
                 ],
                 "style": {
                   "background": "linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%)"
+                }
+              },
+              {
+                "selectors": [
+                  "c6007"
+                ],
+                "style": {
+                  "max-width": "150px"
+                }
+              },
+              {
+                "selectors": [
+                  "c11736"
+                ],
+                "style": {
+                  "max-width": "150px"
                 }
               }
             ],
@@ -10845,1338 +10849,39 @@
                         },
                         {
                           "type": "section",
-                          "name": "Header Left Blue Gradient",
+                          "name": "Navbar",
+                          "removable": false,
+                          "copyable": false,
                           "classes": [
                             "w-full",
-                            "relative",
-                            "overflow-hidden",
-                            "py-10",
-                            "md:py-[60px]",
-                            "lg:py-24",
-                            "bg-cover",
-                            "bg-right",
-                            "bg-no-repeat",
-                            "bg-primary"
-                          ],
-                          "attributes": {
-                            "id": "header-2-left-blue",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "removable": false,
-                              "draggable": false,
-                              "selectable": false,
-                              "hoverable": false,
-                              "classes": [
-                                "absolute",
-                                "inset-0",
-                                "z-0",
-                                "pointer-events-none",
-                                "c8940"
-                              ]
-                            },
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0",
-                                "relative",
-                                "z-10"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex",
-                                    "flex-col",
-                                    "items-start",
-                                    "text-left",
-                                    "max-w-3xl"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "inline-block",
-                                        "rounded-full",
-                                        "px-4",
-                                        "py-1.5",
-                                        "text-xs",
-                                        "font-bold",
-                                        "text-white",
-                                        "mb-4",
-                                        "tracking-widest",
-                                        "uppercase",
-                                        "bg-white/20",
-                                        "backdrop-blur-sm",
-                                        "border",
-                                        "border-white/30"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              OVERLINE\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white",
-                                        "text-5xl",
-                                        "lg:text-7xl",
-                                        "font-display",
-                                        "font-bold",
-                                        "mb-6",
-                                        "tracking-tight",
-                                        "leading-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              What we stand for\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white/90",
-                                        "text-lg",
-                                        "lg:text-xl",
-                                        "leading-relaxed",
-                                        "max-w-2xl",
-                                        "font-medium"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.\n            "
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Features List",
-                          "classes": [
-                            "w-full",
-                            "py-10",
-                            "md:py-[60px]",
-                            "lg:py-24",
                             "bg-white",
-                            "dark:bg-background-dark"
+                            "dark:bg-dark",
+                            "border-b-[3px]",
+                            "border-accent",
+                            "shadow-sm",
+                            "transition-all",
+                            "duration-300",
+                            "sticky",
+                            "top-0",
+                            "z-[100]"
                           ],
                           "attributes": {
                             "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "sm:px-6",
-                                "lg:px-0"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "text-center",
-                                    "max-w-3xl",
-                                    "mx-auto",
-                                    "mb-16"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "h2",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-primary",
-                                        "dark:text-white",
-                                        "text-4xl",
-                                        "font-display",
-                                        "font-black",
-                                        "mb-4",
-                                        "tracking-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Our Core Capabilities"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-slate-600",
-                                        "dark:text-white",
-                                        "text-lg"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Robust infrastructure designed to solve complex challenges seamlessly and efficiently."
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "comment",
-                                  "content": " Replaced raw tailwind grid with native GrapesJS responsive-grid component "
-                                },
-                                {
-                                  "type": "responsive-grid",
-                                  "classes": [
-                                    "container",
-                                    "mx-auto",
-                                    "px-4",
-                                    "lg:px-0",
-                                    "grid",
-                                    "grid-cols-1",
-                                    "md:grid-cols-3",
-                                    "gap-8"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "p-8",
-                                        "rounded-2xl",
-                                        "border",
-                                        "border-slate-200",
-                                        "dark:border-slate-800",
-                                        "bg-slate-50",
-                                        "dark:bg-slate-900",
-                                        "hover:border-accent/50",
-                                        "transition-colors",
-                                        "h-full",
-                                        "w-full"
-                                      ],
-                                      "components": [
-                                        {
-                                          "classes": [
-                                            "w-14",
-                                            "h-14",
-                                            "bg-accent/10",
-                                            "text-accent",
-                                            "rounded-xl",
-                                            "flex",
-                                            "items-center",
-                                            "justify-center",
-                                            "mb-6"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "svg",
-                                              "resizable": {
-                                                "ratioDefault": true
-                                              },
-                                              "classes": [
-                                                "fill-none"
-                                              ],
-                                              "attributes": {
-                                                "viewBox": "0 0 24 24",
-                                                "width": "28",
-                                                "height": "28",
-                                                "stroke": "currentColor",
-                                                "stroke-width": "2"
-                                              },
-                                              "components": [
-                                                {
-                                                  "tagName": "path",
-                                                  "type": "svg-in",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "attributes": {
-                                                    "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "h3",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xl",
-                                            "font-display",
-                                            "font-bold",
-                                            "text-primary",
-                                            "dark:text-white",
-                                            "mb-3"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Cloud Integration"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-slate-600",
-                                            "dark:text-white",
-                                            "leading-relaxed"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Connect your legacy systems to modern cloud infrastructure with zero downtime."
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "classes": [
-                                        "p-8",
-                                        "rounded-2xl",
-                                        "border",
-                                        "border-slate-200",
-                                        "dark:border-slate-800",
-                                        "bg-slate-50",
-                                        "dark:bg-slate-900",
-                                        "border-b-4",
-                                        "border-b-accent",
-                                        "relative",
-                                        "shadow-xl",
-                                        "shadow-accent/5",
-                                        "h-full",
-                                        "w-full"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "text",
-                                          "classes": [
-                                            "absolute",
-                                            "top-4",
-                                            "right-4",
-                                            "bg-accent",
-                                            "text-white",
-                                            "text-xs",
-                                            "font-bold",
-                                            "px-3",
-                                            "py-1",
-                                            "rounded-full"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "POPULAR"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "w-14",
-                                            "h-14",
-                                            "bg-accent",
-                                            "text-white",
-                                            "rounded-xl",
-                                            "flex",
-                                            "items-center",
-                                            "justify-center",
-                                            "mb-6",
-                                            "shadow-lg",
-                                            "shadow-accent/20"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "svg",
-                                              "resizable": {
-                                                "ratioDefault": true
-                                              },
-                                              "classes": [
-                                                "fill-none"
-                                              ],
-                                              "attributes": {
-                                                "viewBox": "0 0 24 24",
-                                                "width": "28",
-                                                "height": "28",
-                                                "stroke": "currentColor",
-                                                "stroke-width": "2"
-                                              },
-                                              "components": [
-                                                {
-                                                  "tagName": "path",
-                                                  "type": "svg-in",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "attributes": {
-                                                    "d": "M12 20V10M18 20V4M6 20v-4"
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "h3",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xl",
-                                            "font-display",
-                                            "font-bold",
-                                            "text-primary",
-                                            "dark:text-white",
-                                            "mb-3"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Data Analytics"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-slate-600",
-                                            "dark:text-white",
-                                            "leading-relaxed"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Turn raw numbers into actionable business insights with our real-time processing engine."
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "classes": [
-                                        "p-8",
-                                        "rounded-2xl",
-                                        "border",
-                                        "border-slate-200",
-                                        "dark:border-slate-800",
-                                        "bg-slate-50",
-                                        "dark:bg-slate-900",
-                                        "hover:border-accent/50",
-                                        "transition-colors",
-                                        "h-full",
-                                        "w-full"
-                                      ],
-                                      "components": [
-                                        {
-                                          "classes": [
-                                            "w-14",
-                                            "h-14",
-                                            "bg-accent/10",
-                                            "text-accent",
-                                            "rounded-xl",
-                                            "flex",
-                                            "items-center",
-                                            "justify-center",
-                                            "mb-6"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "svg",
-                                              "resizable": {
-                                                "ratioDefault": true
-                                              },
-                                              "classes": [
-                                                "fill-none"
-                                              ],
-                                              "attributes": {
-                                                "viewBox": "0 0 24 24",
-                                                "width": "28",
-                                                "height": "28",
-                                                "stroke": "currentColor",
-                                                "stroke-width": "2"
-                                              },
-                                              "components": [
-                                                {
-                                                  "tagName": "rect",
-                                                  "type": "svg-in",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "attributes": {
-                                                    "x": "2",
-                                                    "y": "3",
-                                                    "width": "20",
-                                                    "height": "14",
-                                                    "rx": "2",
-                                                    "ry": "2"
-                                                  }
-                                                },
-                                                {
-                                                  "tagName": "line",
-                                                  "type": "svg-in",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "attributes": {
-                                                    "x1": "8",
-                                                    "y1": "21",
-                                                    "x2": "16",
-                                                    "y2": "21"
-                                                  }
-                                                },
-                                                {
-                                                  "tagName": "line",
-                                                  "type": "svg-in",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "attributes": {
-                                                    "x1": "12",
-                                                    "y1": "17",
-                                                    "x2": "12",
-                                                    "y2": "21"
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "h3",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xl",
-                                            "font-display",
-                                            "font-bold",
-                                            "text-primary",
-                                            "dark:text-white",
-                                            "mb-3"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "AI Automation"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-slate-600",
-                                            "dark:text-white",
-                                            "leading-relaxed"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Reduce manual workloads by 40% using intelligent workflows and custom machine learning."
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
+                          }
                         },
                         {
                           "type": "section",
-                          "name": "Call to Action",
+                          "name": "Simple Footer",
                           "classes": [
                             "w-full",
-                            "py-10",
-                            "md:py-[60px]",
-                            "lg:py-24",
-                            "bg-white",
-                            "dark:bg-background-dark"
-                          ],
-                          "attributes": {
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "sm:px-6",
-                                "lg:px-0"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "bg-gradient-to-br",
-                                    "from-primary",
-                                    "via-primary",
-                                    "to-accent",
-                                    "dark:from-slate-800",
-                                    "dark:to-slate-900",
-                                    "rounded-[2.5rem]",
-                                    "p-12",
-                                    "lg:p-24",
-                                    "text-center",
-                                    "shadow-2xl",
-                                    "relative",
-                                    "overflow-hidden",
-                                    "text-white",
-                                    "border",
-                                    "border-primary/20"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "relative",
-                                        "z-10",
-                                        "max-w-3xl",
-                                        "mx-auto"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "h2",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-white",
-                                            "text-4xl",
-                                            "lg:text-5xl",
-                                            "font-display",
-                                            "font-black",
-                                            "mb-6",
-                                            "tracking-tight"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Ready to elevate your business?"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-white/80",
-                                            "text-xl",
-                                            "lg:text-2xl",
-                                            "mb-12"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Join thousands of companies already using our platform to scale their operations securely."
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "flex",
-                                            "flex-col",
-                                            "sm:flex-row",
-                                            "justify-center",
-                                            "items-center",
-                                            "gap-6"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "link",
-                                              "classes": [
-                                                "w-full",
-                                                "sm:w-auto",
-                                                "px-10",
-                                                "py-5",
-                                                "rounded-xl",
-                                                "bg-white",
-                                                "text-primary",
-                                                "font-black",
-                                                "text-lg",
-                                                "hover:shadow-xl",
-                                                "transition-all",
-                                                "shadow-md"
-                                              ],
-                                              "attributes": {
-                                                "href": "#"
-                                              },
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Try It Free Today"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "link",
-                                              "classes": [
-                                                "w-full",
-                                                "sm:w-auto",
-                                                "px-10",
-                                                "py-5",
-                                                "rounded-xl",
-                                                "border",
-                                                "border-white/40",
-                                                "text-white",
-                                                "font-bold",
-                                                "text-lg",
-                                                "backdrop-blur",
-                                                "hover:bg-white/10",
-                                                "transition-all"
-                                              ],
-                                              "attributes": {
-                                                "href": "#"
-                                              },
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Contact Sales Team"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Call to Action",
-                          "classes": [
-                            "w-full",
-                            "py-10",
-                            "md:py-[60px]",
-                            "lg:py-24",
-                            "bg-white",
-                            "dark:bg-background-dark"
-                          ],
-                          "attributes": {
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "sm:px-6",
-                                "lg:px-0"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "bg-gradient-to-br",
-                                    "from-primary",
-                                    "via-primary",
-                                    "to-accent",
-                                    "dark:from-slate-800",
-                                    "dark:to-slate-900",
-                                    "rounded-[2.5rem]",
-                                    "p-12",
-                                    "lg:p-24",
-                                    "text-center",
-                                    "shadow-2xl",
-                                    "relative",
-                                    "overflow-hidden",
-                                    "text-white",
-                                    "border",
-                                    "border-primary/20"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "relative",
-                                        "z-10",
-                                        "max-w-3xl",
-                                        "mx-auto"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "h2",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-white",
-                                            "text-4xl",
-                                            "lg:text-5xl",
-                                            "font-display",
-                                            "font-black",
-                                            "mb-6",
-                                            "tracking-tight"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Ready to elevate your business?"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-white/80",
-                                            "text-xl",
-                                            "lg:text-2xl",
-                                            "mb-12"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Join thousands of companies already using our platform to scale their operations securely."
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "flex",
-                                            "flex-col",
-                                            "sm:flex-row",
-                                            "justify-center",
-                                            "items-center",
-                                            "gap-6"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "link",
-                                              "classes": [
-                                                "w-full",
-                                                "sm:w-auto",
-                                                "px-10",
-                                                "py-5",
-                                                "rounded-xl",
-                                                "bg-white",
-                                                "text-primary",
-                                                "font-black",
-                                                "text-lg",
-                                                "hover:shadow-xl",
-                                                "transition-all",
-                                                "shadow-md"
-                                              ],
-                                              "attributes": {
-                                                "href": "#"
-                                              },
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Try It Free Today"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "link",
-                                              "classes": [
-                                                "w-full",
-                                                "sm:w-auto",
-                                                "px-10",
-                                                "py-5",
-                                                "rounded-xl",
-                                                "border",
-                                                "border-white/40",
-                                                "text-white",
-                                                "font-bold",
-                                                "text-lg",
-                                                "backdrop-blur",
-                                                "hover:bg-white/10",
-                                                "transition-all"
-                                              ],
-                                              "attributes": {
-                                                "href": "#"
-                                              },
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Contact Sales Team"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Trust Hero",
-                          "classes": [
-                            "w-full",
-                            "py-20",
-                            "lg:py-32",
-                            "bg-white"
-                          ],
-                          "attributes": {
-                            "id": "trust-impact-hero",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0",
-                                "flex",
-                                "flex-col",
-                                "md:flex-row",
-                                "items-center",
-                                "gap-12"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex-[1.2]",
-                                    "flex",
-                                    "flex-col",
-                                    "items-start",
-                                    "text-left"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-xs",
-                                        "font-bold",
-                                        "uppercase",
-                                        "tracking-widest",
-                                        "text-secondary",
-                                        "mb-4"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "OVERLINE"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-4xl",
-                                        "lg:text-5xl",
-                                        "font-display",
-                                        "font-black",
-                                        "text-[#0c233c]",
-                                        "mb-6",
-                                        "leading-tight",
-                                        "tracking-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Inspire trust and deliver "
-                                        },
-                                        {
-                                          "tagName": "br",
-                                          "void": true
-                                        },
-                                        {
-                                          "type": "textnode",
-                                          "content": "impact for your brand"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-lg",
-                                        "text-gray-600",
-                                        "leading-relaxed",
-                                        "max-w-xl"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "relative",
-                                    "w-full"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "relative",
-                                        "rounded-[2rem]",
-                                        "overflow-hidden",
-                                        "shadow-2xl",
-                                        "aspect-[4/3]",
-                                        "md:aspect-auto",
-                                        "md:h-[450px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "image",
-                                          "resizable": {
-                                            "ratioDefault": 1
-                                          },
-                                          "classes": [
-                                            "w-full",
-                                            "h-full",
-                                            "object-cover"
-                                          ],
-                                          "attributes": {
-                                            "src": "/background/background-2.jpg",
-                                            "alt": "Team impact"
-                                          }
-                                        },
-                                        {
-                                          "classes": [
-                                            "absolute",
-                                            "inset-0",
-                                            "bg-gradient-to-tr",
-                                            "from-[#0c233c]/20",
-                                            "to-transparent"
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Trust Hero",
-                          "classes": [
-                            "w-full",
-                            "py-20",
-                            "lg:py-32",
-                            "bg-white"
-                          ],
-                          "attributes": {
-                            "id": "trust-impact-hero-2",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0",
-                                "flex",
-                                "flex-col",
-                                "md:flex-row",
-                                "items-center",
-                                "gap-12"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex-[1.2]",
-                                    "flex",
-                                    "flex-col",
-                                    "items-start",
-                                    "text-left"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-xs",
-                                        "font-bold",
-                                        "uppercase",
-                                        "tracking-widest",
-                                        "text-secondary",
-                                        "mb-4"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "OVERLINE"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-4xl",
-                                        "lg:text-5xl",
-                                        "font-display",
-                                        "font-black",
-                                        "text-[#0c233c]",
-                                        "mb-6",
-                                        "leading-tight",
-                                        "tracking-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Inspire trust and deliver "
-                                        },
-                                        {
-                                          "tagName": "br",
-                                          "void": true
-                                        },
-                                        {
-                                          "type": "textnode",
-                                          "content": "impact for your brand"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-lg",
-                                        "text-gray-600",
-                                        "leading-relaxed",
-                                        "max-w-xl"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "relative",
-                                    "w-full"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "relative",
-                                        "rounded-[2rem]",
-                                        "overflow-hidden",
-                                        "shadow-2xl",
-                                        "aspect-[4/3]",
-                                        "md:aspect-auto",
-                                        "md:h-[450px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "image",
-                                          "resizable": {
-                                            "ratioDefault": 1
-                                          },
-                                          "classes": [
-                                            "w-full",
-                                            "h-full",
-                                            "object-cover"
-                                          ],
-                                          "attributes": {
-                                            "src": "/background/background-2.jpg",
-                                            "alt": "Team impact"
-                                          }
-                                        },
-                                        {
-                                          "classes": [
-                                            "absolute",
-                                            "inset-0",
-                                            "bg-gradient-to-tr",
-                                            "from-[#0c233c]/20",
-                                            "to-transparent"
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Trust Hero",
-                          "classes": [
-                            "w-full",
-                            "py-20",
-                            "lg:py-32",
-                            "bg-white"
-                          ],
-                          "attributes": {
-                            "id": "trust-impact-hero-3",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0",
-                                "flex",
-                                "flex-col",
-                                "md:flex-row",
-                                "items-center",
-                                "gap-12"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex-[1.2]",
-                                    "flex",
-                                    "flex-col",
-                                    "items-start",
-                                    "text-left"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-xs",
-                                        "font-bold",
-                                        "uppercase",
-                                        "tracking-widest",
-                                        "text-secondary",
-                                        "mb-4"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "OVERLINE"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-4xl",
-                                        "lg:text-5xl",
-                                        "font-display",
-                                        "font-black",
-                                        "text-[#0c233c]",
-                                        "mb-6",
-                                        "leading-tight",
-                                        "tracking-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Inspire trust and deliver "
-                                        },
-                                        {
-                                          "tagName": "br",
-                                          "void": true
-                                        },
-                                        {
-                                          "type": "textnode",
-                                          "content": "impact for your brand"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-lg",
-                                        "text-gray-600",
-                                        "leading-relaxed",
-                                        "max-w-xl"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua."
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "classes": [
-                                    "flex-1",
-                                    "relative",
-                                    "w-full"
-                                  ],
-                                  "components": [
-                                    {
-                                      "classes": [
-                                        "relative",
-                                        "rounded-[2rem]",
-                                        "overflow-hidden",
-                                        "shadow-2xl",
-                                        "aspect-[4/3]",
-                                        "md:aspect-auto",
-                                        "md:h-[450px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "image",
-                                          "resizable": {
-                                            "ratioDefault": 1
-                                          },
-                                          "classes": [
-                                            "w-full",
-                                            "h-full",
-                                            "object-cover"
-                                          ],
-                                          "attributes": {
-                                            "src": "/background/background-2.jpg",
-                                            "alt": "Team impact"
-                                          }
-                                        },
-                                        {
-                                          "classes": [
-                                            "absolute",
-                                            "inset-0",
-                                            "bg-gradient-to-tr",
-                                            "from-[#0c233c]/20",
-                                            "to-transparent"
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Introduction Letter",
-                          "classes": [
-                            "w-full",
-                            "py-16",
-                            "md:py-24",
-                            "bg-white",
-                            "dark:bg-background-dark",
-                            "border-y",
-                            "border-gray-100",
+                            "bg-slate-50",
+                            "py-6",
+                            "dark:bg-slate-900",
+                            "border-t",
+                            "border-slate-200",
                             "dark:border-slate-800"
                           ],
                           "attributes": {
-                            "id": "intro-letter",
                             "layout-mode": "container"
                           },
                           "components": [
@@ -12190,365 +10895,337 @@
                               "components": [
                                 {
                                   "classes": [
-                                    "flex",
-                                    "flex-col",
-                                    "md:flex-row",
-                                    "gap-8",
-                                    "lg:gap-16"
-                                  ],
-                                  "components": [
-                                    {
-                                      "type": "comment",
-                                      "content": " 30% Left Side "
-                                    },
-                                    {
-                                      "classes": [
-                                        "w-full",
-                                        "md:w-[30%]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "h2",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xl",
-                                            "md:text-2xl",
-                                            "font-bold",
-                                            "text-gray-900",
-                                            "dark:text-white",
-                                            "mb-4"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Dear Sir or Madame,"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " 70% Right Side "
-                                    },
-                                    {
-                                      "classes": [
-                                        "w-full",
-                                        "md:w-[70%]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-gray-600",
-                                            "dark:text-white",
-                                            "leading-relaxed",
-                                            "mb-6",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "\n                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.\n              "
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "p",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-gray-600",
-                                            "dark:text-white",
-                                            "leading-relaxed",
-                                            "mb-8",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "\n                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\n              "
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "mb-8"
-                                          ],
-                                          "components": [
-                                            {
-                                              "tagName": "p",
-                                              "type": "text",
-                                              "classes": [
-                                                "text-gray-600",
-                                                "dark:text-white",
-                                                "mb-2"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "textnode",
-                                                  "content": "Kind regards,"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "image",
-                                              "resizable": {
-                                                "ratioDefault": 1
-                                              },
-                                              "classes": [
-                                                "h-16",
-                                                "w-auto",
-                                                "object-contain",
-                                                "mix-blend-multiply",
-                                                "dark:mix-blend-screen",
-                                                "opacity-80"
-                                              ],
-                                              "attributes": {
-                                                "src": "/images/signature-image.png",
-                                                "alt": "Signature"
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "classes": [
-                                            "flex",
-                                            "items-center",
-                                            "gap-4"
-                                          ],
-                                          "components": [
-                                            {
-                                              "classes": [
-                                                "w-12",
-                                                "h-12",
-                                                "rounded-full",
-                                                "overflow-hidden",
-                                                "border-2",
-                                                "border-primary/20"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "type": "image",
-                                                  "resizable": {
-                                                    "ratioDefault": 1
-                                                  },
-                                                  "classes": [
-                                                    "w-full",
-                                                    "h-full",
-                                                    "object-cover"
-                                                  ],
-                                                  "attributes": {
-                                                    "src": "/team-member/member-1.jpg",
-                                                    "alt": "John Doe"
-                                                  }
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [
-                                                "flex",
-                                                "flex-col"
-                                              ],
-                                              "components": [
-                                                {
-                                                  "tagName": "span",
-                                                  "type": "text",
-                                                  "classes": [
-                                                    "text-primary",
-                                                    "dark:text-white",
-                                                    "font-bold",
-                                                    "text-lg",
-                                                    "leading-tight"
-                                                  ],
-                                                  "components": [
-                                                    {
-                                                      "type": "textnode",
-                                                      "content": "John Doe"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "tagName": "span",
-                                                  "type": "text",
-                                                  "classes": [
-                                                    "text-gray-500",
-                                                    "text-sm"
-                                                  ],
-                                                  "components": [
-                                                    {
-                                                      "type": "textnode",
-                                                      "content": "Head of Pursuit"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "link",
-                                              "editable": false,
-                                              "classes": [
-                                                "ml-2",
-                                                "w-8",
-                                                "h-8",
-                                                "rounded-full",
-                                                "border",
-                                                "border-gray-200",
-                                                "dark:border-slate-700",
-                                                "flex",
-                                                "items-center",
-                                                "justify-center",
-                                                "text-primary",
-                                                "dark:text-white",
-                                                "hover:bg-primary",
-                                                "hover:text-white",
-                                                "transition-colors",
-                                                "group"
-                                              ],
-                                              "attributes": {
-                                                "href": "mailto:johndoe@example.com"
-                                              },
-                                              "components": [
-                                                {
-                                                  "type": "svg",
-                                                  "resizable": {
-                                                    "ratioDefault": true
-                                                  },
-                                                  "classes": [
-                                                    "group-hover:scale-110",
-                                                    "transition-transform"
-                                                  ],
-                                                  "attributes": {
-                                                    "width": "14",
-                                                    "height": "14",
-                                                    "viewBox": "0 0 24 24",
-                                                    "fill": "none",
-                                                    "stroke": "currentColor",
-                                                    "stroke-width": "2",
-                                                    "stroke-linecap": "round",
-                                                    "stroke-linejoin": "round"
-                                                  },
-                                                  "components": [
-                                                    {
-                                                      "tagName": "rect",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "width": "20",
-                                                        "height": "16",
-                                                        "x": "2",
-                                                        "y": "4",
-                                                        "rx": "2"
-                                                      }
-                                                    },
-                                                    {
-                                                      "tagName": "path",
-                                                      "type": "svg-in",
-                                                      "resizable": {
-                                                        "ratioDefault": true
-                                                      },
-                                                      "attributes": {
-                                                        "d": "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
-                                                      }
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Intro Section",
-                          "classes": [
-                            "w-full",
-                            "py-20"
-                          ],
-                          "attributes": {
-                            "id": "introduction-section",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "mx-auto",
                                     "flex",
                                     "flex-col",
                                     "md:flex-row",
                                     "items-center",
-                                    "gap-12",
-                                    "w-full"
+                                    "justify-between",
+                                    "gap-4"
                                   ],
                                   "components": [
                                     {
                                       "classes": [
-                                        "flex-1"
+                                        "w-full",
+                                        "md:w-[70%]",
+                                        "text-sm",
+                                        "text-slate-500",
+                                        "font-medium",
+                                        "text-center",
+                                        "md:text-left",
+                                        "space-y-2"
                                       ],
                                       "components": [
                                         {
-                                          "tagName": "h2",
+                                          "tagName": "p",
                                           "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "font-display",
-                                            "font-bold",
-                                            "mb-4",
-                                            "text-gray-900"
-                                          ],
                                           "components": [
                                             {
                                               "type": "textnode",
-                                              "content": "Who We Are"
+                                              "content": "© 2026 KPMG Assurance and Consulting Services LLP, an Indian Limited Liability Partnership and a member firm of the KPMG global organization of independent member firms affiliated with KPMG International Limited, a private English company limited by guarantee. All rights reserved."
                                             }
                                           ]
                                         },
                                         {
                                           "tagName": "p",
                                           "type": "text",
-                                          "classes": [
-                                            "text-gray-600",
-                                            "leading-relaxed",
-                                            "mb-6"
-                                          ],
                                           "components": [
                                             {
                                               "type": "textnode",
-                                              "content": "We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe."
+                                              "content": "For more detail about the structure of the KPMG global organization please visit "
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "hover:underline"
+                                              ],
+                                              "attributes": {
+                                                "href": "https://kpmg.com/governance",
+                                                "target": "_blank"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "https://kpmg.com/governance"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "textnode",
+                                              "content": "."
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classes": [
+                                        "w-full",
+                                        "md:w-[30%]",
+                                        "flex",
+                                        "justify-center",
+                                        "md:justify-end",
+                                        "gap-4"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "link",
+                                          "editable": false,
+                                          "classes": [
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "https://www.linkedin.com/company/kpmgindia",
+                                            "target": "_blank",
+                                            "title": "LinkedIn"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                                  }
+                                                }
+                                              ]
                                             }
                                           ]
                                         },
                                         {
                                           "type": "link",
+                                          "editable": false,
                                           "classes": [
-                                            "font-semibold",
-                                            "text-secondary",
-                                            "hover:underline"
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
                                           ],
                                           "attributes": {
-                                            "href": "#"
+                                            "href": "https://x.com/kpmgindia",
+                                            "target": "_blank",
+                                            "title": "Twitter"
                                           },
                                           "components": [
                                             {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "editable": false,
+                                          "classes": [
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "https://www.youtube.com/user/kpmgindia",
+                                            "target": "_blank",
+                                            "title": "YouTube"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "editable": false,
+                                          "classes": [
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "https://www.facebook.com/KPMGIndia",
+                                            "target": "_blank",
+                                            "title": "Facebook"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "section",
+                          "name": "Simple Footer UK",
+                          "classes": [
+                            "w-full",
+                            "bg-slate-50",
+                            "py-6",
+                            "dark:bg-slate-900",
+                            "border-t",
+                            "border-slate-200",
+                            "dark:border-slate-800"
+                          ],
+                          "attributes": {
+                            "layout-mode": "container"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container",
+                                "mx-auto",
+                                "px-4",
+                                "lg:px-0"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "flex",
+                                    "flex-col",
+                                    "md:flex-row",
+                                    "items-center",
+                                    "justify-between",
+                                    "gap-4"
+                                  ],
+                                  "components": [
+                                    {
+                                      "classes": [
+                                        "w-full",
+                                        "md:w-[70%]",
+                                        "text-sm",
+                                        "text-slate-500",
+                                        "font-medium",
+                                        "text-center",
+                                        "md:text-left",
+                                        "space-y-2"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "components": [
+                                            {
                                               "type": "textnode",
-                                              "content": "Learn more about our mission →"
+                                              "content": "© 2026 KPMG LLP a UK limited liability partnership and a member firm of the KPMG global organisation of independent member firms affiliated with KPMG International Limited, a private English company limited by guarantee. All rights reserved."
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "For more detail about the structure of the KPMG global organisation please visit "
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "text-primary",
+                                                "dark:text-white",
+                                                "hover:underline"
+                                              ],
+                                              "attributes": {
+                                                "href": "https://kpmg.com/governance",
+                                                "target": "_blank"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "https://kpmg.com/governance"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "textnode",
+                                              "content": "."
                                             }
                                           ]
                                         }
@@ -12556,23 +11233,136 @@
                                     },
                                     {
                                       "classes": [
-                                        "flex-1"
+                                        "w-full",
+                                        "md:w-[30%]",
+                                        "flex",
+                                        "justify-center",
+                                        "md:justify-end",
+                                        "gap-4"
                                       ],
                                       "components": [
                                         {
-                                          "type": "image",
-                                          "resizable": {
-                                            "ratioDefault": 1
-                                          },
+                                          "type": "link",
+                                          "editable": false,
                                           "classes": [
-                                            "rounded-2xl",
-                                            "shadow-xl",
-                                            "w-full"
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
                                           ],
                                           "attributes": {
-                                            "src": "/images/image-5.png",
-                                            "alt": "Team"
-                                          }
+                                            "href": "https://www.linkedin.com/company/kpmg-uk/",
+                                            "target": "_blank",
+                                            "title": "LinkedIn"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "editable": false,
+                                          "classes": [
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "https://x.com/kpmguk",
+                                            "target": "_blank",
+                                            "title": "Twitter"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "link",
+                                          "editable": false,
+                                          "classes": [
+                                            "text-slate-400",
+                                            "hover:text-primary",
+                                            "dark:hover:text-white",
+                                            "transition-colors"
+                                          ],
+                                          "attributes": {
+                                            "href": "https://www.youtube.com/user/KPMGUK",
+                                            "target": "_blank",
+                                            "title": "YouTube"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "svg",
+                                              "resizable": {
+                                                "ratioDefault": true
+                                              },
+                                              "attributes": {
+                                                "width": "24",
+                                                "height": "24",
+                                                "viewBox": "0 0 24 24",
+                                                "fill": "currentColor"
+                                              },
+                                              "components": [
+                                                {
+                                                  "tagName": "path",
+                                                  "type": "svg-in",
+                                                  "resizable": {
+                                                    "ratioDefault": true
+                                                  },
+                                                  "attributes": {
+                                                    "d": "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }

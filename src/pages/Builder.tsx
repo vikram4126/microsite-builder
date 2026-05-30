@@ -60,8 +60,7 @@ export default function Builder() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'elements' | 'layers' | 'settings' | 'style' | 'media'>('elements');
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
-    Layout: true,
-    Basic: true,
+    Header: true,
   });
   const [isAddPageModalOpen, setIsAddPageModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -860,6 +859,12 @@ export default function Builder() {
         setBlocks(allBlocks);
 
         const cats = Array.from(new Set(allBlocks.map((b: any) => b.get('category').id || b.get('category')))) as string[];
+        // Sort: push Footer to the end
+        cats.sort((a, b) => {
+          if (a === 'Footer') return 1;
+          if (b === 'Footer') return -1;
+          return 0;
+        });
         setCategories(cats);
         if (cats.length > 0) setSelectedCategory(cats[0]);
 
@@ -1724,8 +1729,10 @@ export default function Builder() {
             )}
           </div>
 
-          <div className="h-5 w-px bg-gray-200"></div>
+        </div>
 
+        {/* Center Section: Responsive & Actions */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center space-x-4">
           <div className="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200">
             <button onClick={() => setDeviceMode('desktop')} className={`p-1.5 rounded-md ${device === 'desktop' ? 'bg-white shadow-sm text-[#1e49e2]' : 'text-gray-500 hover:text-gray-900'}`}>
               <Monitor className="w-4 h-4" />
@@ -2532,7 +2539,7 @@ export default function Builder() {
                           className="w-full px-4 py-3 bg-gray-50/50 hover:bg-[#1e49e2]/5 text-left flex items-center justify-between transition-all group"
                         >
                           <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-black text-[#0c233c] tracking-[0.12em] uppercase group-hover:text-[#1e49e2] transition-colors">
+                            <span className="text-[11px] font-black text-[#0c233c] tracking-wider group-hover:text-[#1e49e2] transition-colors">
                               {cat}
                             </span>
                             <span className="bg-gray-200/60 text-gray-500 rounded-full px-2 py-0.5 text-[9px] font-black">
@@ -2565,8 +2572,15 @@ export default function Builder() {
                                     editorRef.current.BlockManager.endDrag(e.nativeEvent);
                                   }
                                 }}
+                                onDoubleClick={() => {
+                                  if (editorRef.current) {
+                                    const content = block.get('content');
+                                    editorRef.current.addComponents(content);
+                                    toast.success(`"${block.get('label')}" block added to canvas`);
+                                  }
+                                }}
                                 className="group p-2.5 border border-gray-100 rounded-xl hover:border-[#1e49e2] hover:bg-[#1e49e2]/5 cursor-grab active:cursor-grabbing transition-all flex flex-col items-center justify-center bg-gray-50/20 hover:scale-[1.02] hover:shadow-md relative select-none"
-                                title={`Drag to add ${block.get('label')}`}
+                                title={`Double-click or Drag to add ${block.get('label')}`}
                               >
                                 {/* Media Thumbnail */}
                                 <div className="h-16 w-full bg-white rounded-lg border border-gray-100 flex items-center justify-center overflow-hidden relative mb-2 shadow-sm group-hover:border-[#1e49e2]/20 transition-colors">

@@ -10,7 +10,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-center-bg',
     category: 'Header',
-    label: 'Background Image',
+    label: 'Full-Width Hero Image',
     svg: '<img src="/thumbs/background-image-thumb.jpg" class="object-cover" />',
     html: `
       <style>
@@ -41,7 +41,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-left-blue-bg',
     category: 'Header',
-    label: 'Background + Blue Gradient',
+    label: 'Hero Image with Blue Overlay',
     svg: '<img src="/thumbs/background-blue-gradient-thumb.jpg" class="object-cover" />',
     html: `
       <style>
@@ -73,7 +73,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-left-white-bg',
     category: 'Header',
-    label: 'Backgound + White Gradient',
+    label: 'Hero Image with White Overlay',
     svg: '<img src="/thumbs/background-white-gradient-thumb.jpg" class="object-cover" />',
     html: `
       <style>
@@ -105,7 +105,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-header-left-solid',
     category: 'Header',
-    label: 'Header Left Solid White',
+    label: 'Left-Aligned Hero (White Background)',
     svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
       <div data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-10 md:py-[60px] lg:py-24 bg-white" layout-mode="container">
@@ -130,7 +130,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-nav',
     category: 'Navbar',
-    label: 'Business Navbar',
+    label: 'Sticky Navigation Bar',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
@@ -182,7 +182,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-hero',
     category: 'Header',
-    label: 'Left Image',
+    label: 'Split Banner (Right Image + Left CTA)',
     svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
@@ -216,8 +216,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-features',
     category: 'Services',
-    label: 'Business Features',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
+    label: 'Core Capabilities Grid (3 Cards)',
+    svg: '<img src="/thumbs/services-thumb-2.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Features (Using responsive-grid trait method) -->
       <div data-gjs-type="section" data-gjs-name="Features List" class="w-full py-10 md:py-[60px] lg:py-24 bg-white dark:bg-background-dark" layout-mode="container">
@@ -258,17 +258,15 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-services',
     category: 'Services',
-    label: 'Business Services',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/></svg>',
+    label: 'Professional Services Grid (3 Images)',
+    svg: '<img src="/thumbs/services-thumb-3.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Services Grid -->
       <div data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-10 md:py-[60px] lg:py-24 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
         <div class="container mx-auto px-4 sm:px-6 lg:px-0">
-          <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div class="max-w-xl">
-              <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
-              <p class="text-slate-600 dark:text-white text-lg">Tailored expertise to help your business navigate digital transformation.</p>
-            </div>
+          <div class="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center">
+            <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
+            <p class="text-slate-600 dark:text-white text-lg mb-4">Tailored expertise to help your business navigate digital transformation.</p>
             <a href="#" class="text-accent font-bold hover:underline inline-flex items-center gap-2">View All Services &rarr;</a>
           </div>
           <!-- Responsive grid component trait -->
@@ -308,8 +306,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-cta',
     category: 'Introduction',
-    label: 'Business CTA',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
+    label: 'Vibrant Call-to-Action Block',
+    svg: '<img src="/thumbs/Call-to-Action-thumb.png" class="object-cover w-full h-full" />',
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
       <div data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-10 md:py-[60px] lg:py-24 bg-white dark:bg-background-dark" layout-mode="container">
@@ -331,7 +329,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-footer',
     category: 'Footer',
-    label: 'Business Footer',
+    label: 'Corporate Footer with Links',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
       <!-- KPMG Footer -->
@@ -386,7 +384,7 @@ export const sectionsLibrary: SectionDef[] = [
       
           <!-- Bottom Row -->
           <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 text-sm text-slate-500 font-medium w-full">
-            <p>&copy; 2026 KPMG International Cooperative. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} KPMG International Cooperative. All rights reserved.</p>
             <div class="flex flex-wrap justify-center gap-6 items-center">
               <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</a>
@@ -398,9 +396,56 @@ export const sectionsLibrary: SectionDef[] = [
     `
   },
   {
+    id: 'section-simple-footer',
+    category: 'Footer',
+    label: 'India',
+    svg: '<svg viewBox="0 0 100 30" class="w-full h-full" fill="none"><rect width="100" height="30" fill="#f8fafc"/><rect x="10" y="13" width="50" height="4" fill="var(--color-primary)"/><rect x="70" y="13" width="20" height="4" fill="var(--color-primary)"/></svg>',
+    html: `
+      <div data-gjs-type="section" data-gjs-name="Simple Footer" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="w-full md:w-[70%] text-sm text-slate-500 font-medium text-center md:text-left space-y-2">
+              <p>&copy; ${new Date().getFullYear()} KPMG Assurance and Consulting Services LLP, an Indian Limited Liability Partnership and a member firm of the KPMG global organization of independent member firms affiliated with KPMG International Limited, a private English company limited by guarantee. All rights reserved.</p>
+              <p>For more detail about the structure of the KPMG global organization please visit <a href="https://kpmg.com/governance" target="_blank" class="text-primary dark:text-white hover:underline">https://kpmg.com/governance</a>.</p>
+            </div>
+            <div class="w-full md:w-[30%] flex justify-center md:justify-end gap-4">
+              <a href="https://www.linkedin.com/company/kpmgindia" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+              <a href="https://x.com/kpmgindia" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="Twitter"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+              <a href="https://www.youtube.com/user/kpmgindia" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="YouTube"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+              <a href="https://www.facebook.com/KPMGIndia" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-simple-footer-uk',
+    category: 'Footer',
+    label: 'UK',
+    svg: '<svg viewBox="0 0 100 30" class="w-full h-full" fill="none"><rect width="100" height="30" fill="#f8fafc"/><rect x="10" y="13" width="50" height="4" fill="var(--color-primary)"/><rect x="70" y="13" width="20" height="4" fill="var(--color-primary)"/></svg>',
+    html: `
+      <div data-gjs-type="section" data-gjs-name="Simple Footer UK" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="w-full md:w-[70%] text-sm text-slate-500 font-medium text-center md:text-left space-y-2">
+              <p>&copy; ${new Date().getFullYear()} KPMG LLP a UK limited liability partnership and a member firm of the KPMG global organisation of independent member firms affiliated with KPMG International Limited, a private English company limited by guarantee. All rights reserved.</p>
+              <p>For more detail about the structure of the KPMG global organisation please visit <a href="https://kpmg.com/governance" target="_blank" class="text-primary dark:text-white hover:underline">https://kpmg.com/governance</a>.</p>
+            </div>
+            <div class="w-full md:w-[30%] flex justify-center md:justify-end gap-4">
+              <a href="https://www.linkedin.com/company/kpmg-uk/" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+              <a href="https://x.com/kpmguk" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="Twitter"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+              <a href="https://www.youtube.com/user/KPMGUK" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-white transition-colors" title="YouTube"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 'section-dual-cta-pdf',
     category: 'Call to actions',
-    label: 'Split CTA Card',
+    label: 'Split Card Banner with Download PDF',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
       <div data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-secondary py-10 md:py-16 lg:py-20" layout-mode="container">
@@ -421,8 +466,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-trust-impact',
     category: 'Introduction',
-    label: 'Trust & Impact Hero',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="40" height="4" fill="var(--color-primary)"/><rect x="60" y="10" width="30" height="40" fill="#cbd5e1" opacity="0.5"/></svg>',
+    label: 'Trust & Impact Banner (Text + Large Image)',
+    svg: '<img src="/thumbs/trust-and-impact-thumb.png" class="object-cover w-full h-full" />',
     html: `
       <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Trust Hero" class="w-full py-20 lg:py-32 bg-white" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row items-center gap-12">
@@ -444,8 +489,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-intro-letter',
     category: 'Introduction',
-    label: 'Introduction Letter',
-    svg: '<img src="/team-member/member-1.jpg" class="object-cover w-full h-full rounded" />',
+    label: 'CEO Welcome Letter with Signature',
+    svg: '<img src="/thumbs/welcome-letter-thumb.png" class="object-cover w-full h-full" />',
     html: `
       <div id="intro-letter" data-gjs-type="section" data-gjs-name="Introduction Letter" class="w-full py-16 md:py-24 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
@@ -466,7 +511,7 @@ export const sectionsLibrary: SectionDef[] = [
               
               <div class="mb-8">
                 <p class="text-gray-600 dark:text-white mb-2">Kind regards,</p>
-                <img src="/images/signature-image.png" alt="Signature" class="h-16 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-80" />
+                <img src="/images/signature-image.png" alt="Signature" style="max-width: 150px;" class="h-16 w-auto object-contain mix-blend-multiply dark:mix-blend-screen opacity-80" />
               </div>
               
               <div class="flex items-center gap-4">
@@ -493,8 +538,8 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-expert-profiles',
     category: 'Services',
-    label: 'Expert Profiles',
-    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#F5F7FA"/><rect x="10" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="40" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/><rect x="70" y="20" width="25" height="30" fill="white" stroke="#e2e8f0"/></svg>',
+    label: 'Expert Team Profiles (3 Members)',
+    svg: '<img src="/thumbs/services-thumb-4.png" class="object-cover w-full h-full" />',
     html: `
       <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Expert Profiles" class="w-full py-24 bg-[#F5F7FA]" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
@@ -573,7 +618,7 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-functional-team',
     category: 'Contacts',
-    label: 'Functional Team Grid',
+    label: 'Functional Team Directory (10 Avatars)',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
       <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Grid" class="w-full py-24 bg-white" layout-mode="container">

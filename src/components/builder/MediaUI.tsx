@@ -221,6 +221,20 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                         )}
                     </>
                 )}
+
+                {/* External URL Input */}
+                <div className="pt-2">
+                    <label className="text-[9px] font-bold text-gray-400 tracking-widest uppercase flex items-center mb-1.5">
+                       Or Paste Image URL
+                    </label>
+                    <input 
+                        type="text" 
+                        placeholder="https://example.com/image.jpg" 
+                        value={mediaState.src}
+                        onChange={(e) => updateMedia('src', e.target.value)}
+                        className="w-full px-3 py-2 text-[11px] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#1e49e2] bg-white shadow-sm transition-colors"
+                    />
+                </div>
             </div>
 
             {/* Background Controls (Only if not just an <img> tag) */}

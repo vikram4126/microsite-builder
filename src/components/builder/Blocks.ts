@@ -4,24 +4,24 @@ export const registerBlocks = (editor: any) => {
   const bm = editor.BlockManager;
 
   const svgs = {
-    header: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><rect x="25" y="20" width="50" height="5" rx="2" fill="#ffffff"/><rect x="35" y="30" width="30" height="3" rx="1.5" fill="#94a3b8"/><rect x="40" y="40" width="20" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
-    intro: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="35" height="4" rx="2" fill="var(--color-primary)"/><rect x="10" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="10" y="32" width="35" height="2" rx="1" fill="#94a3b8"/><rect x="55" y="10" width="35" height="40" rx="4" fill="#eef2ff"/><rect x="65" y="20" width="15" height="20" rx="2" fill="var(--color-secondary)" opacity="0.5"/></svg>',
-    section: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="20" y="20" width="60" height="4" rx="2" fill="var(--color-primary)"/><rect x="30" y="28" width="40" height="2" rx="1" fill="#94a3b8"/><rect x="38" y="36" width="24" height="6" rx="3" fill="var(--color-secondary)"/></svg>',
-    columns: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/><rect x="55" y="10" width="35" height="40" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/></svg>',
-    heading: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="25" width="60" height="10" rx="3" fill="#0c233c"/></svg>',
-    text: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="20" width="80" height="4" rx="1" fill="#64748b"/><rect x="10" y="28" width="70" height="4" rx="1" fill="#64748b"/><rect x="10" y="36" width="50" height="4" rx="1" fill="#64748b"/></svg>',
-    button: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="20" width="40" height="20" rx="6" fill="var(--color-secondary)"/></svg>',
-    image: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f1f5f9"/><rect x="25" y="10" width="50" height="40" rx="4" fill="#e2e8f0"/><circle cx="45" cy="25" r="5" fill="#cbd5e1"/><path d="M25 45 Q 40 30 50 40 T 75 25 V 50 H 25 Z" fill="#94a3b8" opacity="0.5"/></svg>',
-    divider: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><line x1="10" y1="30" x2="90" y2="30" stroke="#cbd5e1" stroke-width="2"/></svg>',
-    spacer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="15" width="80" height="30" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="2"/></svg>',
-    card: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="30" y="5" width="40" height="50" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/><rect x="30" y="5" width="40" height="20" fill="#e2e8f0" rx="3"/><rect x="35" y="30" width="20" height="3" rx="1.5" fill="var(--color-primary)"/><rect x="35" y="38" width="30" height="2" rx="1" fill="#94a3b8"/><rect x="35" y="47" width="10" height="2" rx="1" fill="var(--color-secondary)"/></svg>',
-    accordion: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="10" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="20" y="25" width="60" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1"/><rect x="25" y="31" width="30" height="2" fill="#0c233c"/><rect x="25" y="38" width="45" height="1.5" fill="#64748b"/><rect x="80" y="20" width="0" height="0"/></svg>',
-    tabs: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="3" fill="#ffffff" stroke="#cbd5e1"/><rect x="20" y="10" width="60" height="12" fill="#f8fafc"/><rect x="25" y="14" width="15" height="8" rx="1" fill="#ffffff"/><rect x="45" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/><rect x="60" y="15" width="10" height="4" rx="1" fill="#cbd5e1"/></svg>',
-    testimonial: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="20" y="10" width="60" height="40" rx="4" fill="#f8fafc" stroke="#e2e8f0"/><rect x="25" y="20" width="50" height="2" fill="#94a3b8"/><rect x="25" y="25" width="40" height="2" fill="#94a3b8"/><circle cx="35" cy="40" r="5" fill="#cbd5e1"/><rect x="45" y="38" width="20" height="2" fill="var(--color-primary)"/></svg>',
-    cards: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><rect x="10" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="15" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="15" y="30" width="12" height="2" fill="var(--color-secondary)"/><rect x="39" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="44" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="44" y="30" width="12" height="2" fill="var(--color-secondary)"/><rect x="68" y="10" width="22" height="40" rx="2" fill="#ffffff" stroke="#cbd5e1"/><rect x="73" y="15" width="12" height="8" rx="1" fill="#e2e8f0"/><rect x="73" y="30" width="12" height="2" fill="var(--color-secondary)"/></svg>',
-    icons: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="50" cy="30" r="15" fill="var(--color-secondary)" opacity="0.2"/><path d="M50 20 L 53 27 L 60 27 L 55 32 L 57 39 L 50 35 L 43 39 L 45 32 L 40 27 L 47 27 Z" fill="var(--color-secondary)"/></svg>',
-    list: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#ffffff"/><circle cx="25" cy="20" r="2" fill="var(--color-secondary)"/><rect x="35" y="19" width="40" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="30" r="2" fill="var(--color-secondary)"/><rect x="35" y="29" width="30" height="2" rx="1" fill="#64748b"/><circle cx="25" cy="40" r="2" fill="var(--color-secondary)"/><rect x="35" y="39" width="35" height="2" rx="1" fill="#64748b"/></svg>',
-    footer: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/><rect x="10" y="25" width="20" height="2" fill="#94a3b8"/><rect x="40" y="15" width="10" height="3" fill="#0c233c"/><rect x="40" y="22" width="12" height="2" fill="#94a3b8"/><rect x="55" y="15" width="10" height="3" fill="#0c233c"/><rect x="55" y="22" width="12" height="2" fill="#94a3b8"/><rect x="70" y="15" width="10" height="3" fill="#0c233c"/><rect x="70" y="22" width="20" height="8" rx="2" fill="#e2e8f0"/></svg>'
+    header: '<div class="flex flex-col items-center justify-center p-2 bg-[#0c233c] text-white h-full w-full rounded"><span class="text-[10px] font-bold">HERO BANNER</span><div class="w-6 h-0.5 bg-secondary my-1"></div><span class="text-[7px] text-slate-400">Main tagline & CTA</span></div>',
+    intro: '<div class="flex items-center justify-between p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex flex-col gap-1 w-1/2"><div class="h-2 w-3/4 bg-primary rounded"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div><div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center"><svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div></div>',
+    section: '<div class="flex flex-col items-center justify-center p-2 bg-[#f8fafc] border border-slate-200 h-full w-full rounded"><div class="h-2 w-3/4 bg-primary rounded mb-1"></div><div class="h-1.5 w-1/2 bg-slate-400 rounded"></div></div>',
+    columns: '<div class="flex gap-2 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex-1 bg-slate-50 border border-slate-200 rounded min-h-[30px]"></div><div class="flex-1 bg-slate-50 border border-slate-200 rounded min-h-[30px]"></div></div>',
+    heading: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><span class="text-xs font-bold text-[#0c233c] border-b-2 border-secondary pb-0.5">Heading Tag</span></div>',
+    text: '<div class="flex flex-col gap-1 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="h-1.5 w-full bg-slate-300 rounded"></div><div class="h-1.5 w-5/6 bg-slate-300 rounded"></div><div class="h-1.5 w-2/3 bg-slate-300 rounded"></div></div>',
+    button: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><span class="px-3 py-1 bg-secondary text-white text-[9px] font-bold rounded shadow-sm">Click Button</span></div>',
+    image: '<div class="flex items-center justify-center p-2 bg-[#f1f5f9] border border-slate-200 h-full w-full rounded"><svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>',
+    divider: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="w-full border-t border-slate-300 border-dashed"></div></div>',
+    spacer: '<div class="flex items-center justify-center p-2 bg-[#f8fafc] border border-slate-200 border-dashed h-full w-full rounded"><span class="text-[8px] text-slate-400 font-mono">Empty Spacer</span></div>',
+    card: '<div class="flex flex-col bg-white border border-slate-200 h-full w-full rounded overflow-hidden"><div class="h-1/2 bg-slate-100 flex items-center justify-center"><svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><div class="p-1 flex flex-col gap-0.5"><div class="h-1.5 w-3/4 bg-slate-800 rounded"></div><div class="h-1 w-full bg-slate-400 rounded"></div></div></div>',
+    accordion: '<div class="flex flex-col gap-1 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex items-center justify-between p-1 bg-slate-50 rounded border border-slate-100"><span class="text-[8px] font-bold text-slate-700">FAQ Question</span><span class="text-[8px] text-slate-400">▼</span></div></div>',
+    tabs: '<div class="flex flex-col bg-white border border-slate-200 h-full w-full rounded"><div class="flex border-b border-slate-200 bg-slate-50"><span class="flex-1 text-center py-0.5 text-[8px] font-bold text-primary border-b border-primary bg-white">Tab 1</span><span class="flex-1 text-center py-0.5 text-[8px] text-slate-400">Tab 2</span></div><div class="p-1 h-full bg-white"></div></div>',
+    testimonial: '<div class="flex flex-col p-1.5 bg-slate-50 border border-slate-200 h-full w-full rounded justify-between"><span class="text-[7px] italic text-slate-600">"Excellent service!"</span><div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-slate-300"></div><span class="text-[7px] font-bold text-slate-800">Sarah J.</span></div></div>',
+    cards: '<div class="grid grid-cols-3 gap-1 p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div></div>',
+    icons: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center"><svg class="w-3 h-3 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div></div>',
+    list: '<div class="flex flex-col gap-1 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex items-center gap-1"><div class="w-1 h-1 rounded-full bg-secondary"></div><div class="h-1 w-3/4 bg-slate-500 rounded"></div></div><div class="flex items-center gap-1"><div class="w-1 h-1 rounded-full bg-secondary"></div><div class="h-1 w-2/3 bg-slate-500 rounded"></div></div></div>',
+    footer: '<div class="flex flex-col justify-between p-2 bg-slate-900 border border-slate-700 h-full w-full rounded"><div class="flex justify-between items-center"><span class="text-[8px] font-bold text-white">Footer</span><div class="flex gap-1"><span class="text-[6px] text-slate-400">Terms</span></div></div><div class="border-t border-slate-800 pt-0.5 text-center"><span class="text-[5px] text-slate-500">© 2026. All rights reserved.</span></div></div>'
   };
 
   // REGISTER DYNAMIC SECTIONS LIBRARY
@@ -48,76 +48,10 @@ export const registerBlocks = (editor: any) => {
     }
   });
 
-  // 1.5 FOOTER
-  bm.add('footer-business', {
-    label: 'Corporate Footer',
-    category: 'Footer',
-    media: svgs.footer,
-    content: `
-      <div id="business-footer" data-gjs-type="section" data-gjs-name="Footer" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-0 text-left">
-          <!-- Responsive grid component trait -->
-          <div data-gjs-type="responsive-grid" class="container mx-auto px-4 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            
-            <!-- Brand & Social Column -->
-            <div class="flex flex-col gap-6 w-full items-start">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAgCAYAAACBxi9RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDExNi4xNjQ3NjYsIDIwMjEvMDIvMTktMjM6MTA6MDcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4yIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozN0Y2RTdFMzIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozN0Y2RTdFNDIzOTIxMUYxQjEzMEU2OTE3NkNDNkU4NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM3RjZFN0UxMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjM3RjZFN0UyMjM5MjExRjFCMTMwRTY5MTc2Q0M2RTg1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+FtnFTAAABj9JREFUeNrsWmls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" alt="Brand Logo" class="h-8 w-auto inline-block" />
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                Leading the future of digital business with specialized industry insights and strategic technology partnerships.
-              </p>
-              <div class="flex gap-4">
-                <a href="#" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center text-primary dark:text-white hover:text-accent transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center text-primary dark:text-white hover:text-accent transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-              </div>
-            </div>
-      
-            <!-- Links Column 1 -->
-            <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Company</h4>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">About Us</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Careers</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Engineering Blog</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Press & Media</a>
-            </div>
-      
-            <!-- Links Column 2 -->
-            <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Products</h4>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Cloud Platform</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Analytics Engine</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">AI Assistant</a>
-              <a href="#" class="text-slate-600 dark:text-slate-400 hover:text-accent font-medium transition-colors">Integrations API</a>
-            </div>
-      
-            <!-- Subscribe Column -->
-            <div class="flex flex-col gap-4 w-full">
-              <h4 class="text-primary dark:text-white font-bold text-lg mb-2">Subscribe</h4>
-              <p class="text-slate-600 dark:text-slate-400 font-medium mb-2 w-full max-w-sm">Get the latest business insights and updates delivered weekly.</p>
-              <div class="flex flex-col gap-3 w-full max-w-sm">
-                <input type="email" placeholder="Your work email" class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-accent shadow-sm" />
-                <button class="w-full bg-primary text-white font-bold px-4 py-3 rounded-lg hover:bg-accent transition-colors shadow-sm">Subscribe Now</button>
-              </div>
-            </div>
-            
-          </div>
-      
-          <!-- Bottom Row -->
-          <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 text-sm text-slate-500 font-medium w-full">
-            <p>&copy; 2026 KPMG International Cooperative. All rights reserved.</p>
-            <div class="flex flex-wrap justify-center gap-6 items-center">
-              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" class="hover:text-primary dark:hover:text-white transition-colors">Cookies Settings</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-  });
 
   // 2. HEADER
   bm.add('header-hero', {
-    label: 'Header Hero',
+    label: 'Dark Hero Banner',
     category: 'Header',
     media: '<img src="/thumbs/header-hero.jpg" class="object-cover" />',
     content: `
@@ -135,9 +69,9 @@ export const registerBlocks = (editor: any) => {
 
   // 3. INTRODUCTION
   bm.add('introduction', {
-    label: 'Introduction',
+    label: 'CEO Intro & Mission Section',
     category: 'Introduction',
-    media: svgs.intro,
+    media: '<img src="/thumbs/ceo intro thumb.png" class="object-cover w-full h-full" />',
     content: `
       <div id="introduction-section" data-gjs-type="section" data-gjs-name="Intro Section" class="w-full py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
@@ -158,7 +92,7 @@ export const registerBlocks = (editor: any) => {
 
   // 4. SECTIONS
   bm.add('hero-section', {
-    label: 'Center White',
+    label: 'Light Hero Banner',
     category: 'Header',
     media: '<img src="/thumbs/center-white.jpg" class="object-cover" />',
     content: `
@@ -178,9 +112,9 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('features-grid', {
-    label: 'Features Grid',
+    label: 'Services Grid with Icons',
     category: 'Services',
-    media: svgs.cards,
+    media: '<img src="/thumbs/services-thumb-1.png" class="object-cover w-full h-full" />',
     content: `
       <div id="features-grid" data-gjs-type="section" class="w-full bg-white py-20" layout-mode="container">
         <div class="container mx-auto">
@@ -264,28 +198,28 @@ export const registerBlocks = (editor: any) => {
   // REST OF CATEGORIES
   // BASIC WIDGETS
   bm.add('heading', {
-    label: 'Heading',
+    label: 'Heading Title',
     category: 'Basic',
     media: svgs.heading,
     content: '<h2 data-gjs-type="text" class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
   });
 
   bm.add('text', {
-    label: 'Text Box',
+    label: 'Rich Text Box',
     category: 'Basic',
     media: svgs.text,
     content: '<p data-gjs-type="text" class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
   });
 
   bm.add('button', {
-    label: 'Button',
+    label: 'CTA Button',
     category: 'Basic',
     media: svgs.button,
     content: '<a href="#" data-gjs-type="link" class="inline-block bg-secondary dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-primary dark:hover:bg-blue-700 transition-colors">Click Here</a>',
   });
 
   bm.add('image', {
-    label: 'Image',
+    label: 'Responsive Image',
     category: 'Basic',
     media: svgs.image,
     content: { type: 'image', classes: ['w-full', 'h-auto', 'rounded-lg', 'shadow-sm'] },
@@ -314,7 +248,7 @@ export const registerBlocks = (editor: any) => {
 
   // ADVANCED WIDGETS
   bm.add('card', {
-    label: 'Card Block',
+    label: 'Content Card with Image',
     category: 'Advanced',
     media: svgs.card,
     content: `
@@ -330,7 +264,7 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('accordion', {
-    label: 'Accordion',
+    label: 'Collapsible FAQ Accordion',
     category: 'Advanced',
     media: svgs.accordion,
     content: {
@@ -362,7 +296,7 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('tabs', {
-    label: 'Tabs',
+    label: 'Switchable Tab Content',
     category: 'Advanced',
     media: svgs.tabs,
     content: {
@@ -404,7 +338,7 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('testimonial-card', {
-    label: 'Testimonial',
+    label: 'Customer Testimonial',
     category: 'Testimonials',
     media: svgs.testimonial,
     content: `
@@ -423,7 +357,7 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('cards-grid', {
-    label: 'Cards Grid',
+    label: 'Feature Cards Grid',
     category: 'Cards',
     media: svgs.cards,
     content: `
