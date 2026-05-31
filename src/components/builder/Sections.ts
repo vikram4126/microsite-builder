@@ -805,5 +805,679 @@ export const sectionsLibrary: SectionDef[] = [
         </div>
       </div>
     `
+  },
+  {
+    id: 'section-data-visualization-stats',
+    category: 'Data Visualization',
+    label: 'Circle Statistics Row',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="30" r="8" fill="var(--color-secondary)"/><circle cx="38" cy="30" r="10" fill="var(--color-primary)"/><circle cx="58" cy="30" r="12" fill="var(--color-purple)"/><circle cx="76" cy="30" r="7" fill="var(--color-accent)"/><circle cx="90" cy="30" r="5" fill="var(--color-light-accent)"/></svg>',
+    html: `
+      <div id="data-visualization-stats" data-gjs-type="section" data-gjs-name="Stats Section" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis in eros pharetra tincidunt. Nullam vestibulum at sapien et sagittis. In accumsan erat ex.
+            </p>
+          </div>
+          
+          <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16 w-full">
+            <!-- 25% Circle -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-32 h-32 md:w-36 md:h-36 rounded-full bg-[#1e49e2] shadow-lg flex items-center justify-center transition-transform hover:scale-105 duration-300">
+                <span class="text-white text-3xl md:text-4xl font-display font-bold">25%</span>
+              </div>
+              <span class="text-slate-800 dark:text-slate-200 font-bold text-sm md:text-base">Lorem Ipsum</span>
+            </div>
+
+            <!-- 45% Circle -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-36 h-36 md:w-40 md:h-40 rounded-full bg-[#00338d] shadow-lg flex items-center justify-center transition-transform hover:scale-105 duration-300">
+                <span class="text-white text-3xl md:text-4xl font-display font-bold">45%</span>
+              </div>
+              <span class="text-slate-800 dark:text-slate-200 font-bold text-sm md:text-base">Lorem Ipsum</span>
+            </div>
+
+            <!-- 50% Circle -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-40 h-40 md:w-44 md:h-44 rounded-full bg-[#7213ea] shadow-lg flex items-center justify-center transition-transform hover:scale-105 duration-300">
+                <span class="text-white text-3xl md:text-4xl font-display font-bold">50%</span>
+              </div>
+              <span class="text-slate-800 dark:text-slate-200 font-bold text-sm md:text-base">Lorem Ipsum</span>
+            </div>
+
+            <!-- 20% Circle -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#00b8f5] shadow-lg flex items-center justify-center transition-transform hover:scale-105 duration-300">
+                <span class="text-white text-2xl md:text-3xl font-display font-bold">20%</span>
+              </div>
+              <span class="text-slate-800 dark:text-slate-200 font-bold text-sm md:text-base">Lorem Ipsum</span>
+            </div>
+
+            <!-- 15% Circle -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-[#aceaff] shadow-lg flex items-center justify-center transition-transform hover:scale-105 duration-300">
+                <span class="text-[#0c233c] text-xl md:text-2xl font-display font-bold">15%</span>
+              </div>
+              <span class="text-slate-800 dark:text-slate-200 font-bold text-sm md:text-base">Lorem Ipsum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-data-visualization-number-cards',
+    category: 'Data Visualization',
+    label: 'Number Stat Cards',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="5" y1="15" x2="5" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="28" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="28" y1="15" x2="28" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="51" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="51" y1="15" x2="51" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="74" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="74" y1="15" x2="74" y2="45" stroke="#7213ea" stroke-width="2"/></svg>',
+    html: `
+      <div id="data-visualization-number-cards" data-gjs-type="section" data-gjs-name="Number Cards Section" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full">
+            <!-- Card 1 -->
+            <div class="bg-slate-100 dark:bg-slate-800 border-l-4 border-[#7213ea] p-6 md:p-8 flex flex-col justify-center items-center h-full w-full shadow-sm hover:shadow-md transition-shadow">
+              <span class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">5,900+</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Place for a subtitle</span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-slate-100 dark:bg-slate-800 border-l-4 border-[#7213ea] p-6 md:p-8 flex flex-col justify-center items-center h-full w-full shadow-sm hover:shadow-md transition-shadow">
+              <span class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">30+</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Place for a subtitle</span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-slate-100 dark:bg-slate-800 border-l-4 border-[#7213ea] p-6 md:p-8 flex flex-col justify-center items-center h-full w-full shadow-sm hover:shadow-md transition-shadow">
+              <span class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">3,000+</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Place for a subtitle</span>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-slate-100 dark:bg-slate-800 border-l-4 border-[#7213ea] p-6 md:p-8 flex flex-col justify-center items-center h-full w-full shadow-sm hover:shadow-md transition-shadow">
+              <span class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">6,500+</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Place for a subtitle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-data-visualization-divided-stats',
+    category: 'Data Visualization',
+    label: 'Divided Stats Row',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="90" height="30" rx="2" fill="white" stroke="#e2e8f0"/><line x1="23" y1="15" x2="23" y2="45" stroke="#e2e8f0"/><line x1="41" y1="15" x2="41" y2="45" stroke="#e2e8f0"/><line x1="59" y1="15" x2="59" y2="45" stroke="#e2e8f0"/><line x1="77" y1="15" x2="77" y2="45" stroke="#e2e8f0"/></svg>',
+    html: `
+      <div id="data-visualization-divided-stats" data-gjs-type="section" data-gjs-name="Divided Stats Section" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="grid grid-cols-1 md:grid-cols-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-700 shadow-sm">
+            <!-- Column 1 -->
+            <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">
+              <span class="text-3xl lg:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">265,000 +</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Employees</span>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Supporting clients</span>
+              <span class="text-xs text-slate-400 dark:text-slate-500 mb-2">across</span>
+              <span class="text-3xl lg:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">143</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">countries</span>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">
+              <span class="text-2xl lg:text-3xl font-display font-bold text-[#00338d] dark:text-white mb-2">$34bn/ $15bn</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Total firm/total</span>
+              <span class="text-xs text-slate-400 dark:text-slate-500">revenue for FY 2022</span>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">
+              <span class="text-3xl lg:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">50,000 +</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium font-semibold leading-snug">Technology and<br/>transformation<br/>specialists</span>
+            </div>
+
+            <!-- Column 5 -->
+            <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">Providing advisory</span>
+              <span class="text-xs text-slate-400 dark:text-slate-500 mb-2">services to</span>
+              <span class="text-3xl lg:text-4xl font-display font-black text-[#00338d] dark:text-white mb-2">48%</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">of Forbes Global 1000</span>
+              <span class="text-xs text-slate-400 dark:text-slate-500">companies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-case-studies-numbered-questions',
+    category: 'Case Studies',
+    label: 'Numbered Questions List',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="8" width="42" height="44" rx="1" fill="white" stroke="#e2e8f0"/><rect x="53" y="8" width="42" height="44" rx="1" fill="white" stroke="#e2e8f0"/><line x1="5" y1="20" x2="47" y2="20" stroke="#e2e8f0"/><line x1="5" y1="30" x2="47" y2="30" stroke="#e2e8f0"/><line x1="5" y1="40" x2="47" y2="40" stroke="#e2e8f0"/><line x1="53" y1="20" x2="95" y2="20" stroke="#e2e8f0"/><line x1="53" y1="30" x2="95" y2="30" stroke="#e2e8f0"/><line x1="53" y1="40" x2="95" y2="40" stroke="#e2e8f0"/><text x="8" y="17" font-size="4" fill="var(--color-secondary)" font-weight="bold">01</text><text x="8" y="27" font-size="4" fill="var(--color-secondary)" font-weight="bold">02</text><text x="8" y="37" font-size="4" fill="var(--color-secondary)" font-weight="bold">03</text><text x="56" y="17" font-size="4" fill="var(--color-secondary)" font-weight="bold">06</text><text x="56" y="27" font-size="4" fill="var(--color-secondary)" font-weight="bold">07</text><text x="56" y="37" font-size="4" fill="var(--color-secondary)" font-weight="bold">08</text></svg>',
+    html: `
+      <div id="section-case-studies-numbered-questions" data-gjs-type="section" data-gjs-name="Numbered Questions" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+
+          <!-- Centered heading block -->
+          <div class="max-w-3xl mx-auto text-center mb-14">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 tracking-tight">Ten questions for yourself</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Justo eget magna fermentum iaculis eu. Morbi enim nunc faucibus a pellentesque sit. Lacus luctus accumsan tortor posuere ac ut.
+            </p>
+          </div>
+
+          <!-- Two-column questions grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+
+            <!-- Left Column -->
+            <div class="border border-slate-200 dark:border-slate-700 flex flex-col divide-y divide-slate-200 dark:divide-slate-700">
+              <!-- Q01 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">01</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">What is the company's strategy?</p>
+              </div>
+              <!-- Q02 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">02</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Where are the skills gaps in relation to strategy?</p>
+              </div>
+              <!-- Q03 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">03</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Does the board have the right combination of skills, backgrounds, experiences, and perspectives to probe management's strategic assumptions?</p>
+              </div>
+              <!-- Q04 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">04</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Has sufficient attention been given to recruiting directors with backgrounds in academia, government, civil society, as well as entrepreneurs and those from family businesses?</p>
+              </div>
+              <!-- Q05 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">05</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Is the 20th century paradigm of filling boards with directors with 'big company' experience still relevant?</p>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="border border-slate-200 dark:border-slate-700 flex flex-col divide-y divide-slate-200 dark:divide-slate-700">
+              <!-- Q06 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">06</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Is there a robust board evaluation process that focuses not only on what the board does, but how it does it, and how it can improve?</p>
+              </div>
+              <!-- Q07 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">07</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">How robust is your formal succession plan to achieve the 'right board composition'?</p>
+              </div>
+              <!-- Q08 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">08</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Are your underperforming directors being removed in an efficient and effective manner?</p>
+              </div>
+              <!-- Q09 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">09</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Are matrices identifying any missing knowledge, skills and expertise being applied without fear or favour when recruiting new board members?</p>
+              </div>
+              <!-- Q10 -->
+              <div class="flex items-start gap-4 p-5">
+                <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">10</span>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">What is the leadership style of your board chair?</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-case-study-details',
+    category: 'Case Studies',
+    label: 'Case Study Details',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="3" fill="#7213ea">CASE STUDY</text><text x="5" y="15" font-size="5" fill="#0c233c" font-weight="bold">Case study name</text><rect x="5" y="20" width="90" height="10" fill="#0c233c"/><rect x="5" y="35" width="50" height="20" fill="#e2e8f0"/><rect x="60" y="35" width="35" height="20" fill="white" stroke="#e2e8f0"/></svg>',
+    html: `
+      <div id="section-case-study-details" data-gjs-type="section" data-gjs-name="Case Study Details" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          
+          <!-- Top Section -->
+          <div class="mb-10">
+            <p class="text-sm font-bold text-[#7213ea] uppercase tracking-wider mb-2">CASE STUDY</p>
+            <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white max-w-3xl leading-tight">
+              Case study name should be placed here
+            </h2>
+          </div>
+
+          <!-- Banner without border radius -->
+          <div class="w-full bg-[#0c233c] text-white flex flex-col md:flex-row mb-16">
+            <div class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">CLIENT</h3>
+              <p class="text-sm font-medium">A global payments and financial services technology provider</p>
+            </div>
+            <div class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">SECTOR</h3>
+              <p class="text-sm font-medium">A global payments and financial services technology provider</p>
+            </div>
+            <div class="flex-1 p-6 md:p-8">
+              <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">PROJECT</h3>
+              <p class="text-sm font-medium">A global payments and financial services technology provider</p>
+            </div>
+          </div>
+
+          <!-- Bottom Section -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Column -->
+            <div class="lg:col-span-7">
+              <h3 class="text-2xl font-bold text-[#00338d] dark:text-white mb-6">Project at a glance</h3>
+              <p class="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+              </p>
+              <!-- Image without border radius -->
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Abstract visualization" class="w-full h-64 object-cover">
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-5 bg-white dark:bg-slate-800 p-8 border border-slate-200 dark:border-slate-700">
+              
+              <!-- Challenge Item -->
+              <div class="mb-10">
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center text-[#7213ea]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  </div>
+                  <span class="text-sm font-bold text-[#7213ea] uppercase tracking-wider">THE CHALLENGE</span>
+                </div>
+                <div class="relative">
+                  <h4 class="text-xl font-bold text-[#0c233c] dark:text-white mb-4 pl-4 border-l-[3px] border-[#00b8f5]">Title should be placed here</h4>
+                  <p class="text-slate-600 dark:text-slate-300 text-sm mb-4 leading-relaxed">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                  </p>
+                  <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                  </p>
+                </div>
+              </div>
+
+              <!-- Opportunity Item -->
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 flex items-center justify-center text-[#7213ea]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                  </div>
+                  <span class="text-sm font-bold text-[#7213ea] uppercase tracking-wider">THE OPPORTUNITY</span>
+                </div>
+                <div class="relative">
+                  <h4 class="text-xl font-bold text-[#0c233c] dark:text-white mb-4 pl-4 border-l-[3px] border-[#00b8f5]">Title should be placed here</h4>
+                  <p class="text-slate-600 dark:text-slate-300 text-sm mb-4 leading-relaxed">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                  </p>
+                  <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-case-studies-discover',
+    category: 'Case Studies',
+    label: 'Discover Grid',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="20" width="18" height="35" fill="#e2e8f0"/><rect x="30" y="20" width="18" height="15" fill="#1e49e2"/><rect x="50" y="20" width="38" height="15" fill="#e2e8f0"/><rect x="30" y="37" width="18" height="18" fill="#cbd5e1"/><rect x="10" y="57" width="38" height="2" fill="#94a3b8"/><rect x="50" y="37" width="18" height="20" fill="#94a3b8"/><rect x="70" y="37" width="18" height="20" fill="#64748b"/></svg>',
+    html: `
+      <div id="section-case-studies-discover" data-gjs-type="section" data-gjs-name="Discover Case Studies" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          
+          <!-- Heading -->
+          <div class="max-w-3xl mx-auto text-center mb-14">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 tracking-tight">Discover our Case Studies</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+
+          <!-- Complex Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:auto-rows-[200px] lg:auto-rows-[240px]">
+            
+            <!-- Code editor (tall) -->
+            <div class="md:col-start-1 md:row-start-1 md:col-span-1 md:row-span-2 relative h-72 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Code" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Blue Box -->
+            <div class="md:col-start-2 md:row-start-1 md:col-span-1 md:row-span-1 bg-[#1e49e2] text-white p-6 flex flex-col justify-center relative h-60 md:h-auto">
+              <h3 class="font-bold text-2xl mb-4 leading-snug">Case Study number<br>two title</h3>
+              <p class="text-sm border-t border-white/30 pt-4 mt-auto">Company | Category</p>
+              <a href="#" class="text-sm font-bold mt-2 flex items-center gap-2 group hover:text-white/80 transition-colors">
+                View case study 
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </a>
+            </div>
+
+            <!-- Plasma Globe (wide) -->
+            <div class="md:col-start-3 md:row-start-1 md:col-span-2 md:row-span-1 relative h-48 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Plasma Globe" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Purple Blur -->
+            <div class="md:col-start-2 md:row-start-2 md:col-span-1 md:row-span-1 relative h-48 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Abstract Blur" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Woman (large) -->
+            <div class="md:col-start-1 md:row-start-3 md:col-span-2 md:row-span-2 relative h-80 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1000&q=80" alt="Tech Woman" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Laptop -->
+            <div class="md:col-start-3 md:row-start-3 md:col-span-1 md:row-span-1 relative h-60 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80" alt="Laptop" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Phone (tall) -->
+            <div class="md:col-start-4 md:row-start-3 md:col-span-1 md:row-span-2 relative h-80 md:h-auto">
+              <img src="https://images.unsplash.com/photo-1526406915894-7bcd65f60845?auto=format&fit=crop&w=600&q=80" alt="Phone" class="w-full h-full object-cover">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-case-studies-cards-quote',
+    category: 'Case Studies',
+    label: 'Cards with Quote',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#00338d"/><rect x="30" y="8" width="40" height="4" fill="white"/><rect x="20" y="14" width="60" height="2" fill="#cbd5e1"/><rect x="5" y="22" width="28" height="30" fill="white"/><rect x="36" y="22" width="28" height="30" fill="white"/><rect x="67" y="22" width="28" height="30" fill="transparent" stroke="white"/></svg>',
+    html: `
+      <div id="section-case-studies-cards-quote" data-gjs-type="section" data-gjs-name="Cards with Quote" class="w-full py-16 md:py-24 bg-[#00338d]" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          
+          <!-- Heading -->
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-white mb-6 tracking-tight">Discover our Case Studies</h2>
+            <p class="text-slate-200 text-sm md:text-base leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis in eros pharetra tincidunt. Nullam vestibulum at sapien et sagittis. In accumsan erat ex.
+            </p>
+          </div>
+
+          <!-- 3-Column Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            
+            <!-- Card 1 -->
+            <div class="bg-slate-50 flex flex-col">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Code" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-400 mb-5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  <span class="text-xs uppercase tracking-wider font-semibold">Case Study</span>
+                </div>
+                <h3 class="text-xl font-bold text-[#0c233c] mb-4 pl-3 border-l-[3px] border-[#00b8f5]">Implementing X at company</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                </p>
+                <a href="#" class="mt-auto text-sm font-bold text-[#1e49e2] flex items-center gap-2 group hover:text-[#00338d] transition-colors">
+                  View case study 
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-slate-50 flex flex-col">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80" alt="Laptop" class="w-full h-full object-cover">
+              </div>
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-400 mb-5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  <span class="text-xs uppercase tracking-wider font-semibold">Case Study</span>
+                </div>
+                <h3 class="text-xl font-bold text-[#0c233c] mb-4 pl-3 border-l-[3px] border-[#00b8f5]">Implementing X in company X</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                </p>
+                <a href="#" class="mt-auto text-sm font-bold text-[#1e49e2] flex items-center gap-2 group hover:text-[#00338d] transition-colors">
+                  View case study 
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quote Block -->
+            <div class="border border-white/20 p-8 flex flex-col">
+              <svg class="w-12 h-12 text-[#7213ea] mb-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+              <h3 class="text-xl font-bold text-white mb-8 leading-snug">
+                This is a quote text placeholder to include quote text. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+              </h3>
+              <div class="flex items-center gap-3 mt-auto">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" alt="John Doe" class="w-12 h-12 min-w-12 min-h-12 max-w-12 max-h-12 rounded-full border-2 border-[#00b8f5] object-cover flex-shrink-0">
+                <span class="text-white text-sm"><strong class="font-bold">John Doe</strong> | Head of Pursuit</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-documents-grid-sidebar',
+    category: 'Documents',
+    label: 'Documents Grid with Sidebar',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Documents</text><rect x="5" y="15" width="25" height="18" fill="#1e49e2"/><rect x="32" y="15" width="25" height="18" fill="#1e49e2"/><rect x="5" y="35" width="25" height="18" fill="#1e49e2"/><rect x="32" y="35" width="25" height="18" fill="#1e49e2"/><text x="62" y="15" font-size="3" fill="#7213ea">DOCUMENTS</text><text x="62" y="22" font-size="4" fill="#0c233c" font-weight="bold">Lorem ipsum</text><rect x="62" y="28" width="30" height="2" fill="#cbd5e1"/><rect x="62" y="32" width="30" height="2" fill="#cbd5e1"/><rect x="62" y="36" width="30" height="2" fill="#cbd5e1"/></svg>',
+    html: `
+      <div id="section-documents-grid-sidebar" data-gjs-type="section" data-gjs-name="Documents Grid with Sidebar" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            <!-- Left Side: Document Cards -->
+            <div class="lg:col-span-7 xl:col-span-8 flex flex-col">
+              <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-8 tracking-tight">Documents</h2>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 flex-grow">
+                <!-- Card 1 -->
+                <div class="bg-[#1e49e2] text-white p-6 md:p-8 flex flex-col h-full">
+                  <svg class="w-10 h-10 mb-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  </svg>
+                  <h3 class="font-bold text-xl mb-3 leading-snug">Lorem Ipsum dolor</h3>
+                  <p class="text-white/80 text-sm leading-relaxed mb-8">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+                  </p>
+                  <div class="mt-auto flex justify-end">
+                    <button class="flex items-center gap-2 px-5 py-2 border border-white/40 rounded-full text-sm font-semibold hover:bg-white hover:text-[#1e49e2] transition-colors group">
+                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-[#1e49e2] text-white p-6 md:p-8 flex flex-col h-full">
+                  <svg class="w-10 h-10 mb-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  </svg>
+                  <h3 class="font-bold text-xl mb-3 leading-snug">Lorem Ipsum dolor</h3>
+                  <p class="text-white/80 text-sm leading-relaxed mb-8">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+                  </p>
+                  <div class="mt-auto flex justify-end">
+                    <button class="flex items-center gap-2 px-5 py-2 border border-white/40 rounded-full text-sm font-semibold hover:bg-white hover:text-[#1e49e2] transition-colors group">
+                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-[#1e49e2] text-white p-6 md:p-8 flex flex-col h-full">
+                  <svg class="w-10 h-10 mb-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  </svg>
+                  <h3 class="font-bold text-xl mb-3 leading-snug">Lorem Ipsum dolor</h3>
+                  <p class="text-white/80 text-sm leading-relaxed mb-8">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+                  </p>
+                  <div class="mt-auto flex justify-end">
+                    <button class="flex items-center gap-2 px-5 py-2 border border-white/40 rounded-full text-sm font-semibold hover:bg-white hover:text-[#1e49e2] transition-colors group">
+                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-[#1e49e2] text-white p-6 md:p-8 flex flex-col h-full">
+                  <svg class="w-10 h-10 mb-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                  </svg>
+                  <h3 class="font-bold text-xl mb-3 leading-snug">Lorem Ipsum dolor</h3>
+                  <p class="text-white/80 text-sm leading-relaxed mb-8">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+                  </p>
+                  <div class="mt-auto flex justify-end">
+                    <button class="flex items-center gap-2 px-5 py-2 border border-white/40 rounded-full text-sm font-semibold hover:bg-white hover:text-[#1e49e2] transition-colors group">
+                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right Side: Text Sidebar -->
+            <div class="lg:col-span-5 xl:col-span-4 flex flex-col lg:pt-14">
+              <span class="text-xs font-bold text-[#7213ea] uppercase tracking-wider mb-3">DOCUMENTS</span>
+              <h3 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 leading-tight">Lorem ipsum dolor sit</h3>
+              
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-6">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
+              
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi. Sed ut perspiciatis unde omnis iste natus error sit
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-documents-grid-4-col',
+    category: 'Documents',
+    label: '4-Column Document Grid',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Documents</text><rect x="5" y="12" width="60" height="2" fill="#cbd5e1"/><rect x="5" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="5" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="28" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="28" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="51" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="51" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="74" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="74" y="18" width="20" height="20" fill="#cbd5e1"/></svg>',
+    html: `
+      <div id="section-documents-grid-4-col" data-gjs-type="section" data-gjs-name="4-Column Documents" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          
+          <!-- Header -->
+          <div class="max-w-3xl mb-12">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 tracking-tight">Documents</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+          
+          <!-- 4-Column Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Card 1 -->
+            <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Meeting" class="w-full h-full object-cover">
+              </div>
+              <div class="p-5 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span class="text-xs font-semibold">10 May 2023</span>
+                </div>
+                <div class="flex items-start justify-between mt-1 gap-2 mt-auto">
+                  <h3 class="font-bold text-[#0c233c] dark:text-white text-lg leading-snug">Lorem Ipsum dolor</h3>
+                  <a href="#" class="w-10 h-10 shrink-0 bg-[#1e49e2] text-white rounded-full flex items-center justify-center hover:bg-[#00338d] transition-colors mt-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Meeting" class="w-full h-full object-cover">
+              </div>
+              <div class="p-5 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span class="text-xs font-semibold">10 May 2023</span>
+                </div>
+                <div class="flex items-start justify-between mt-1 gap-2 mt-auto">
+                  <h3 class="font-bold text-[#0c233c] dark:text-white text-lg leading-snug">Lorem Ipsum dolor</h3>
+                  <a href="#" class="w-10 h-10 shrink-0 bg-[#1e49e2] text-white rounded-full flex items-center justify-center hover:bg-[#00338d] transition-colors mt-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Meeting" class="w-full h-full object-cover">
+              </div>
+              <div class="p-5 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span class="text-xs font-semibold">10 May 2023</span>
+                </div>
+                <div class="flex items-start justify-between mt-1 gap-2 mt-auto">
+                  <h3 class="font-bold text-[#0c233c] dark:text-white text-lg leading-snug">Lorem Ipsum dolor</h3>
+                  <a href="#" class="w-10 h-10 shrink-0 bg-[#1e49e2] text-white rounded-full flex items-center justify-center hover:bg-[#00338d] transition-colors mt-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700">
+              <div class="h-48 w-full shrink-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Meeting" class="w-full h-full object-cover">
+              </div>
+              <div class="p-5 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span class="text-xs font-semibold">10 May 2023</span>
+                </div>
+                <div class="flex items-start justify-between mt-1 gap-2 mt-auto">
+                  <h3 class="font-bold text-[#0c233c] dark:text-white text-lg leading-snug">Lorem Ipsum dolor</h3>
+                  <a href="#" class="w-10 h-10 shrink-0 bg-[#1e49e2] text-white rounded-full flex items-center justify-center hover:bg-[#00338d] transition-colors mt-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
   }
 ];

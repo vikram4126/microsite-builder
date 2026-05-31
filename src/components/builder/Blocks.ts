@@ -14,14 +14,15 @@ export const registerBlocks = (editor: any) => {
     image: '<div class="flex items-center justify-center p-2 bg-[#f1f5f9] border border-slate-200 h-full w-full rounded"><svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>',
     divider: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="w-full border-t border-slate-300 border-dashed"></div></div>',
     spacer: '<div class="flex items-center justify-center p-2 bg-[#f8fafc] border border-slate-200 border-dashed h-full w-full rounded"><span class="text-[8px] text-slate-400 font-mono">Empty Spacer</span></div>',
-    card: '<div class="flex flex-col bg-white border border-slate-200 h-full w-full rounded overflow-hidden"><div class="h-1/2 bg-slate-100 flex items-center justify-center"><svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><div class="p-1 flex flex-col gap-0.5"><div class="h-1.5 w-3/4 bg-slate-800 rounded"></div><div class="h-1 w-full bg-slate-400 rounded"></div></div></div>',
+    card: '<div class="flex flex-col bg-white border border-slate-200 h-full w-full rounded p-1.5 gap-1 justify-between"><div class="flex gap-0.5"><div class="h-2 w-7 rounded border border-[#7213ea]/40 text-[4px] scale-[0.7] origin-left text-[#7213ea]/60 flex items-center justify-center font-bold">15.07.2023</div><div class="h-2 w-8 rounded border border-[#7213ea]/40 text-[4px] scale-[0.7] origin-left text-[#7213ea]/60 flex items-center justify-center font-bold">13:00-14:00</div></div><div class="flex items-center gap-1 my-0.5"><div class="w-4 h-4 rounded-full border border-[#7213ea] bg-slate-100 flex-shrink-0"></div><div class="flex flex-col gap-0.5"><div class="h-1.5 w-8 bg-slate-800 rounded"></div><div class="h-1 w-10 bg-slate-400 rounded"></div></div></div><div class="h-1.5 w-full bg-slate-200 rounded"></div><div class="h-1 w-11/12 bg-slate-200 rounded mb-0.5"></div><div class="h-1.5 w-6 bg-secondary/80 rounded"></div></div>',
     accordion: '<div class="flex flex-col gap-1 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex items-center justify-between p-1 bg-slate-50 rounded border border-slate-100"><span class="text-[8px] font-bold text-slate-700">FAQ Question</span><span class="text-[8px] text-slate-400">▼</span></div></div>',
     tabs: '<div class="flex flex-col bg-white border border-slate-200 h-full w-full rounded"><div class="flex border-b border-slate-200 bg-slate-50"><span class="flex-1 text-center py-0.5 text-[8px] font-bold text-primary border-b border-primary bg-white">Tab 1</span><span class="flex-1 text-center py-0.5 text-[8px] text-slate-400">Tab 2</span></div><div class="p-1 h-full bg-white"></div></div>',
     testimonial: '<div class="flex flex-col p-1.5 bg-slate-50 border border-slate-200 h-full w-full rounded justify-between"><span class="text-[7px] italic text-slate-600">"Excellent service!"</span><div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-slate-300"></div><span class="text-[7px] font-bold text-slate-800">Sarah J.</span></div></div>',
     cards: '<div class="grid grid-cols-3 gap-1 p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div><div class="border border-slate-100 rounded p-0.5 bg-slate-50"><div class="h-1.5 w-3/4 bg-slate-700 rounded mb-0.5"></div><div class="h-1 w-full bg-slate-300 rounded"></div></div></div>',
     icons: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center"><svg class="w-3 h-3 text-secondary" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div></div>',
     list: '<div class="flex flex-col gap-1 p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="flex items-center gap-1"><div class="w-1 h-1 rounded-full bg-secondary"></div><div class="h-1 w-3/4 bg-slate-500 rounded"></div></div><div class="flex items-center gap-1"><div class="w-1 h-1 rounded-full bg-secondary"></div><div class="h-1 w-2/3 bg-slate-500 rounded"></div></div></div>',
-    footer: '<div class="flex flex-col justify-between p-2 bg-slate-900 border border-slate-700 h-full w-full rounded"><div class="flex justify-between items-center"><span class="text-[8px] font-bold text-white">Footer</span><div class="flex gap-1"><span class="text-[6px] text-slate-400">Terms</span></div></div><div class="border-t border-slate-800 pt-0.5 text-center"><span class="text-[5px] text-slate-500">© 2026. All rights reserved.</span></div></div>'
+    footer: '<div class="flex flex-col justify-between p-2 bg-slate-900 border border-slate-700 h-full w-full rounded"><div class="flex justify-between items-center"><span class="text-[8px] font-bold text-white">Footer</span><div class="flex gap-1"><span class="text-[6px] text-slate-400">Terms</span></div></div><div class="border-t border-slate-800 pt-0.5 text-center"><span class="text-[5px] text-slate-500">© 2026. All rights reserved.</span></div></div>',
+    partnerMessage: '<div class="flex flex-col justify-between p-2 bg-white border border-slate-200 h-full w-full rounded"><div class="h-2 w-3/4 bg-[#00338d] rounded mb-2"></div><div class="flex gap-2 h-full"><div class="flex-1 flex flex-col gap-1"><div class="h-1 w-full bg-slate-300 rounded"></div><div class="h-1 w-full bg-slate-300 rounded"></div><div class="h-1 w-5/6 bg-slate-300 rounded"></div></div><div class="w-10 flex flex-col gap-1 flex-shrink-0"><div class="h-8 w-full bg-slate-200 rounded"></div><div class="h-4 w-full bg-[#7213ea] rounded"></div></div></div></div>'
   };
 
   // REGISTER DYNAMIC SECTIONS LIBRARY
@@ -83,6 +84,56 @@ export const registerBlocks = (editor: any) => {
             </div>
             <div class="flex-1">
                <img src="/images/image-5.png" alt="Team" class="rounded-2xl shadow-xl w-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  });
+
+  bm.add('partner-message', {
+    label: 'Global Lead Partner Message',
+    category: 'Introduction',
+    media: svgs.partnerMessage,
+    content: `
+      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Partner Message Section" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-10 tracking-tight">A message from our Global Lead Partner</h2>
+          <div class="flex flex-col lg:flex-row gap-12 w-full items-start">
+            <!-- Left Column (Message text & signature) -->
+            <div class="flex-1 lg:w-7/12 flex flex-col gap-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-base">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae congue eu consequat ac. Augue interdum velit euismod in pellentesque massa.</p>
+              <p>Sed tempus urna et pharetra pharetra massa massa ultricies. Duis ut diam quam nulla porttitor massa id neque.</p>
+              <p>Diam volutpat commodo sed egestas egestas fringilla. Aenean et tortor at risus viverra adipiscing at. Proin nibh nisl condimentum id venenatis a condimentum. Eu ultrices vitae auctor eu augue ut. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies.</p>
+              <p>Condimentum lacinia quis vel eros donec ac odio.</p>
+              <p>Eros in cursus turpis massa. Auctor neque vitae tempus quam pellentesque. Interdum varius sit amet mattis vulputate enim nulla.</p>
+              <p>Ipsum dolor sit amet consectetur. Netus et malesuada fames ac turpis. Eu non diam phasellus vestibulum. Urna molestie at elementum eu.</p>
+              
+              <div class="mt-8">
+                <p class="text-slate-500 dark:text-slate-400 font-medium">Sincerely,</p>
+                <p class="text-xl font-display font-bold text-[#0c233c] dark:text-white mt-1">John Doe</p>
+              </div>
+            </div>
+
+            <!-- Right Column (Avatar & Name Card) -->
+            <div class="w-full lg:w-5/12 flex flex-col gap-6 max-w-md mx-auto lg:mx-0">
+              <!-- Partner image -->
+              <div class="w-full aspect-[4/3] overflow-hidden shadow-lg border border-slate-100 dark:border-slate-800">
+                <img src="/team-member/member-11.jpg" alt="John Doe" class="w-full h-full object-cover" />
+              </div>
+              
+              <!-- Purple Name Card -->
+              <div class="bg-[#7213ea] text-white p-6 shadow-lg flex flex-col justify-between min-h-[140px] relative overflow-hidden">
+                <div class="flex flex-col gap-1">
+                  <h4 class="text-2xl font-display font-bold">John Doe</h4>
+                  <p class="text-white/90 text-sm font-medium">Global Lead Partner</p>
+                </div>
+                <div class="flex items-center mt-6">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -248,16 +299,43 @@ export const registerBlocks = (editor: any) => {
 
   // ADVANCED WIDGETS
   bm.add('card', {
-    label: 'Content Card with Image',
-    category: 'Advanced',
+    label: 'Profile Card',
+    category: 'Cards',
     media: svgs.card,
     content: `
-      <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden max-w-sm">
-        <img src="/images/image-6.jpg" alt="Card" class="w-full h-48 object-cover" />
-        <div class="p-6">
-          <h3 class="font-display font-bold text-xl mb-2 text-gray-900 dark:text-white">Premium Quality</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Designed with precision to meet the highest standards of modern aesthetics.</p>
-          <a href="#" class="text-secondary font-semibold hover:underline">Read more &rarr;</a>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 w-full flex flex-col gap-5">
+        <!-- Top Badges Row -->
+        <div class="flex gap-2">
+          <span class="inline-flex items-center rounded-lg border border-[#7213ea] px-3 py-1.5 text-xs font-semibold text-[#7213ea] bg-[#7213ea]/5 tracking-wide">
+            15.07.2023
+          </span>
+          <span class="inline-flex items-center rounded-lg border border-[#7213ea] px-3 py-1.5 text-xs font-semibold text-[#7213ea] bg-[#7213ea]/5 tracking-wide">
+            13:00-14:00
+          </span>
+        </div>
+
+        <!-- Profile Row -->
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-full border-2 border-[#7213ea] p-0.5 overflow-hidden flex items-center justify-center bg-white flex-shrink-0">
+            <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full rounded-full object-cover" />
+          </div>
+          <div class="flex flex-col">
+            <h3 class="font-display font-bold text-xl text-[#0c233c] dark:text-white leading-tight">John Doe</h3>
+            <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Partner Strategy</span>
+          </div>
+        </div>
+
+        <!-- Description Text -->
+        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis in eros pharetra tincidunt. Nullam vestibulum at sapien et sagittis. In accumsan erat ex.
+        </p>
+
+        <!-- More Information Link -->
+        <div class="pt-2">
+          <a href="#" class="text-[#1e49e2] hover:text-[#00338d] dark:text-[#aceaff] dark:hover:text-white font-bold text-sm inline-flex items-center gap-1 group transition-colors">
+            <span>More information</span>
+            <span class="font-sans">&gt;</span>
+          </a>
         </div>
       </div>
     `

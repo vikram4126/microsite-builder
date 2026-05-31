@@ -428,23 +428,32 @@ export default function Builder() {
         createInput({ trait }: any) {
           const el = document.createElement('div');
           el.innerHTML = `
-            <div class="flex items-center gap-2 mt-2 w-full text-xs">
-              <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Desktop Columns">
-                <i class="fa fa-desktop text-gray-400 mr-2 ml-1"></i>
-                <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="desktop">
-                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;width:100%;">
+              <div style="display:flex;flex-direction:column;background:#f8fafc;padding:8px;border:1px solid #e2e8f0;border-radius:4px;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <i class="fa fa-desktop" style="color:#94a3b8;font-size:13px;"></i>
+                  <span style="font-size:11px;font-weight:600;color:#475569;">Desktop</span>
+                </div>
+                <select style="width:100%;background:white;border:1px solid #e2e8f0;border-radius:4px;padding:4px 6px;font-size:12px;color:#1e293b;outline:none;" data-bp="desktop">
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} Column${n > 1 ? 's' : ''}</option>`).join('')}
                 </select>
               </div>
-              <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Tablet Columns">
-                <i class="fa fa-tablet text-gray-400 mr-2 ml-1"></i>
-                <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="tablet">
-                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
+              <div style="display:flex;flex-direction:column;background:#f8fafc;padding:8px;border:1px solid #e2e8f0;border-radius:4px;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <i class="fa fa-tablet" style="color:#94a3b8;font-size:13px;"></i>
+                  <span style="font-size:11px;font-weight:600;color:#475569;">Tablet</span>
+                </div>
+                <select style="width:100%;background:white;border:1px solid #e2e8f0;border-radius:4px;padding:4px 6px;font-size:12px;color:#1e293b;outline:none;" data-bp="tablet">
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} Column${n > 1 ? 's' : ''}</option>`).join('')}
                 </select>
               </div>
-              <div class="flex items-center flex-1 bg-gray-50 p-1 rounded border border-gray-200" title="Mobile Columns">
-                <i class="fa fa-mobile text-gray-400 mr-2 ml-1"></i>
-                <select class="w-full bg-transparent border-none outline-none text-gray-800" data-bp="mobile">
-                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n}</option>`).join('')}
+              <div style="display:flex;flex-direction:column;background:#f8fafc;padding:8px;border:1px solid #e2e8f0;border-radius:4px;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <i class="fa fa-mobile" style="color:#94a3b8;font-size:13px;"></i>
+                  <span style="font-size:11px;font-weight:600;color:#475569;">Mobile</span>
+                </div>
+                <select style="width:100%;background:white;border:1px solid #e2e8f0;border-radius:4px;padding:4px 6px;font-size:12px;color:#1e293b;outline:none;" data-bp="mobile">
+                  ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<option value="${n}">${n} Column${n > 1 ? 's' : ''}</option>`).join('')}
                 </select>
               </div>
             </div>
