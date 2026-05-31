@@ -31,7 +31,7 @@
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-05-31T15:44:56.986Z",
+      "lastEdited": "2026-05-31T15:56:59.437Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -629,6 +629,10 @@
                                       "content": " Column 1 "
                                     },
                                     {
+                                      "style": {
+                                        "opacity": "1",
+                                        "__p": true
+                                      },
                                       "classes": [
                                         "flex",
                                         "flex-col",
@@ -638,6 +642,9 @@
                                         "p-6",
                                         "min-h-[160px]"
                                       ],
+                                      "attributes": {
+                                        "style": "opacity:1;"
+                                      },
                                       "components": [
                                         {
                                           "tagName": "span",
@@ -864,6 +871,10 @@
                                         {
                                           "tagName": "span",
                                           "type": "text",
+                                          "style": {
+                                            "font-weight": "800",
+                                            "font-family": "'Open Sans', sans-serif"
+                                          },
                                           "classes": [
                                             "text-sm",
                                             "text-slate-500",
@@ -872,6 +883,9 @@
                                             "font-semibold",
                                             "leading-snug"
                                           ],
+                                          "attributes": {
+                                            "style": "font-weight:800;font-family:'Open Sans', sans-serif;"
+                                          },
                                           "components": [
                                             {
                                               "type": "textnode",

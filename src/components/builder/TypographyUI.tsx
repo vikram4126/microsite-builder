@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket, List, X } from 'lucide-react';
+import { Type, ChevronDown, AlignLeft, AlignCenter, AlignRight, AlignJustify, Palette, Heading1, CaseSensitive, ArrowLeftRight, Bold, Monitor, PaintBucket, List, X, Underline, Strikethrough, Baseline, CaseUpper, CaseLower } from 'lucide-react';
 
 export const TypographyUI = ({ editor }: { editor: any }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,7 +18,9 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     color: '#1E293B',
     backgroundColor: 'transparent',
     textAlign: 'left',
-    listStyleType: ''
+    listStyleType: '',
+    textDecoration: 'none',
+    textTransform: 'none'
   });
 
   useEffect(() => {
@@ -50,7 +52,9 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
           color: currentStyles['color'] || '#1E293B',
           backgroundColor: currentStyles['background-color'] || 'transparent',
           textAlign: currentStyles['text-align'] || 'left',
-          listStyleType: currentStyles['list-style-type'] || ''
+          listStyleType: currentStyles['list-style-type'] || '',
+          textDecoration: currentStyles['text-decoration'] || 'none',
+          textTransform: currentStyles['text-transform'] || 'none'
         });
       } else {
         setIsVisible(false);
@@ -177,6 +181,10 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         if (targetComp !== selected) {
             editor.select(targetComp);
         }
+    } else if (key === 'textDecoration') {
+        selected.addStyle({ 'text-decoration': value });
+    } else if (key === 'textTransform') {
+        selected.addStyle({ 'text-transform': value });
     }
   };
 
@@ -220,6 +228,8 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
     selected.removeStyle('text-align');
     selected.removeStyle('background-color');
     selected.removeStyle('list-style-type');
+    selected.removeStyle('text-decoration');
+    selected.removeStyle('text-transform');
     
     // Force UI refresh by triggering update manually
     const currentStyles = selected.getStyle();
@@ -232,7 +242,9 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
         color: currentStyles['color'] || '#1E293B',
         backgroundColor: currentStyles['background-color'] || 'transparent',
         textAlign: currentStyles['text-align'] || 'left',
-        listStyleType: currentStyles['list-style-type'] || ''
+        listStyleType: currentStyles['list-style-type'] || '',
+        textDecoration: 'none',
+        textTransform: 'none'
     }));
   };
 
@@ -499,6 +511,66 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                         <option value="lower-roman">Roman (i, ii, iii)</option>
                     </select>
                     <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                </div>
+            </div>
+
+            {/* Row 7: Text Decoration & Text Transform */}
+            <div className="flex space-x-4 pt-2 pb-1">
+                {/* Text Decoration */}
+                <div className="flex-1 space-y-1.5">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
+                        <span className="mr-1.5 text-gray-400"><Underline size={12} strokeWidth={2.5} /></span> DECORATION
+                    </label>
+                    <div className="flex bg-gray-50 p-1 rounded-lg border border-gray-100 shadow-sm">
+                        {[
+                          { val: 'none', icon: <span className="text-[10px] font-bold">—</span>, title: 'None' },
+                          { val: 'underline', icon: <Underline size={13} />, title: 'Underline' },
+                          { val: 'line-through', icon: <Strikethrough size={13} />, title: 'Strikethrough' },
+                          { val: 'overline', icon: <Baseline size={13} />, title: 'Overline' },
+                        ].map(({ val, icon, title }) => (
+                          <button
+                            key={val}
+                            title={title}
+                            onClick={() => updateStyle('textDecoration', val)}
+                            className={`flex-1 py-1 flex items-center justify-center rounded transition-colors ${
+                              styles.textDecoration === val
+                                ? 'bg-white shadow-sm border border-gray-200 text-[#1e49e2]'
+                                : 'text-gray-400 hover:text-gray-600'
+                            }`}
+                          >
+                            {icon}
+                          </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Text Transform */}
+                <div className="flex-1 space-y-1.5">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
+                        <span className="mr-1.5 text-gray-400"><CaseUpper size={12} strokeWidth={2.5} /></span> TRANSFORM
+                    </label>
+                    <div className="flex bg-gray-50 p-1 rounded-lg border border-gray-100 shadow-sm">
+                        {[
+                          { val: 'none', label: 'Ag', title: 'None' },
+                          { val: 'uppercase', label: 'AG', title: 'Uppercase' },
+                          { val: 'lowercase', label: 'ag', title: 'Lowercase' },
+                          { val: 'capitalize', label: 'Ag', title: 'Capitalize', italic: true },
+                        ].map(({ val, label, title, italic }) => (
+                          <button
+                            key={val}
+                            title={title}
+                            onClick={() => updateStyle('textTransform', val)}
+                            className={`flex-1 py-1 flex items-center justify-center rounded transition-colors text-[11px] font-bold ${
+                              styles.textTransform === val
+                                ? 'bg-white shadow-sm border border-gray-200 text-[#1e49e2]'
+                                : 'text-gray-400 hover:text-gray-600'
+                            }`}
+                            style={italic ? { fontStyle: 'italic' } : {}}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
