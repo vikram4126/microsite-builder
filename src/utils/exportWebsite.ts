@@ -15,6 +15,17 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
   // Save current editor state to restore later
   const originalData = editor.getProjectData();
 
+  // Save canvas body state so we can restore it exactly after export
+  const canvasBody = editor.Canvas.getBody();
+  const savedBodyClass = canvasBody ? canvasBody.className : '';
+  const savedBodyStyle = canvasBody ? canvasBody.getAttribute('style') || '' : '';
+
+  // Hide the iframe visually during export to mask the DOM flickering
+  const iframe = editor.Canvas.getFrameEl();
+  if (iframe) {
+    iframe.style.opacity = '0';
+  }
+
   // Helper to normalize page names to filenames
   const getFilename = (nameOrTitle: string, index: number) => {
     if (index === 0) return 'index.html';
@@ -72,18 +83,11 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     const page = pages[i];
     const filename = getFilename(page.title || page.name, i);
     
-    // Load page into editor
+    // Load page into editor (for HTML/CSS extraction only)
     editor.loadProjectData(page.layout || {});
     
-    // Re-apply theme to body after load
-    const body = editor.Canvas.getBody();
-    if (themeSettings?.mode === 'dark') {
-      body.classList.add('dark');
-      body.style.backgroundColor = '#0c233c';
-    } else {
-      body.classList.remove('dark');
-      body.style.backgroundColor = '#ffffff';
-    }
+    // Give Tailwind CDN time to process the DOM and apply styles cleanly
+    await new Promise(resolve => setTimeout(resolve, 150));
 
     // Update dynamic nav links to point to .html files for export
     const navLinks = editor.DomComponents.getWrapper().find('[data-nav-type="dynamic"]');
@@ -202,6 +206,34 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
 
       if (newStyle !== style) {
         el.setAttribute('style', newStyle);
+      }
+
+      // Process Tailwind class attributes for bg-[url(...)] and dark mode forcing
+      const className = el.getAttribute('class') || '';
+      if (className) {
+        let newClassName = className;
+
+        // Fix paths in arbitrary URL classes like bg-[url('/images/photo.jpg')]
+        const classUrlMatches = newClassName.matchAll(/\[url\(["']?(\/[^"')\]]+)["']?\)\]/gi);
+        for (const m of classUrlMatches) {
+          const fullMatch = m[0]; // e.g. [url('/images/bg.jpg')]
+          const rawPath = m[1];   // e.g. /images/bg.jpg
+          if (isLocalPath(rawPath) && !rawPath.startsWith('/http')) {
+            const localPath = await fetchLocalImage(rawPath);
+            // Replace fullMatch with the correct path
+            newClassName = newClassName.replace(fullMatch, fullMatch.replace(rawPath, localPath));
+          }
+        }
+
+        // Force Light/Dark mode by stripping classes if necessary
+        // This guarantees the OS preference won't override the user's chosen theme
+        if (themeSettings?.mode === 'light') {
+           newClassName = newClassName.split(' ').filter(c => !c.startsWith('dark:')).join(' ');
+        }
+
+        if (newClassName !== className) {
+          el.setAttribute('class', newClassName);
+        }
       }
     }
 
@@ -354,7 +386,8 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         const rawPath = m[1];
         if (isLocalPath(rawPath)) {
           const localPath = await fetchLocalImage(rawPath);
-          processedCss = processedCss.replace(rawPath, localPath);
+          // Prepend ../ for paths inside the css/ folder to reach images/ folder correctly
+          processedCss = processedCss.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '../' + localPath);
         }
       }
       zip.folder('css')!.file('style.css', processedCss || '');
@@ -364,6 +397,24 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
 
   // Restore editor state
   editor.loadProjectData(originalData);
+
+  // Give GrapesJS and Tailwind ample time to rebuild the DOM and process mutations
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  // Restore the canvas body to exactly what it was before export started
+  try {
+    const body = editor.Canvas.getBody();
+    if (body) {
+      body.className = savedBodyClass;
+      if (savedBodyStyle) {
+        body.setAttribute('style', savedBodyStyle);
+      } else {
+        body.removeAttribute('style');
+      }
+    }
+  } catch (e) {
+    console.warn('[Export] Failed to restore body state:', e);
+  }
 
   // Trigger stabilization to fix live preview styles after data swap
   try {
@@ -405,15 +456,6 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         });
         if (emptyRules.length > 0) editor.Css.remove(emptyRules);
       } catch (_) {}
-
-      // 3. Force Tailwind rescan
-      body.classList.add('__tw-rescan');
-      setTimeout(() => {
-        body.classList.remove('__tw-rescan');
-        if (win && win.__tailwindBrowser?.rebuild) {
-          win.__tailwindBrowser.rebuild();
-        }
-      }, 100);
     }
   } catch (e) {
     console.warn('[Export] Failed to stabilize editor after restore:', e);
@@ -450,6 +492,11 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
   } catch (err) {
     console.error('ZIP generation failed:', err);
     alert('Export failed. Please try again.');
+  }
+
+  // Restore iframe visibility
+  if (iframe) {
+    iframe.style.opacity = '1';
   }
 }
 

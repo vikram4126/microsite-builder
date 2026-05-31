@@ -47,6 +47,7 @@ export default function Builder() {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Layout');
   const [hasSelection, setHasSelection] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
   const [themeColor, setThemeColor] = useState<string>('default');
   const [projectData, setProjectData] = useState<any>(null);
@@ -279,6 +280,38 @@ export default function Builder() {
         body.style.backgroundColor = '#ffffff';
       }
 
+      // Inject @custom-variant dark FIRST so Tailwind uses class-based dark mode,
+      // never OS prefers-color-scheme. This must run on every canvas reload.
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (iframeDoc) {
+        let darkVariantStyle = iframeDoc.getElementById('tw-dark-variant-config');
+        if (!darkVariantStyle) {
+          darkVariantStyle = iframeDoc.createElement('style');
+          darkVariantStyle.id = 'tw-dark-variant-config';
+          darkVariantStyle.setAttribute('type', 'text/tailwindcss');
+          iframeDoc.head.insertBefore(darkVariantStyle, iframeDoc.head.firstChild);
+        }
+        darkVariantStyle.textContent = `
+          @custom-variant dark (&:where(.dark, .dark *));
+          @theme {
+            --color-primary: #00338d;
+            --color-secondary: #1e49e2;
+            --color-accent: #00b8f5;
+            --color-dark: #0c233c;
+            --color-light-accent: #aceaff;
+            --color-cta: #00b8f5;
+            --color-purple: #7213ea;
+            --color-pink: #fd349c;
+            --color-success: #00b894;
+            --color-background-dark: #071728;
+            --font-sans: "Open Sans", sans-serif;
+            --font-display: "Open Sans Condensed", sans-serif;
+          }
+          body { font-family: "Open Sans", sans-serif; }
+          h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif; }
+        `;
+      }
+
       // Inject theme variables
       let styleTag = iframe.contentDocument.getElementById('tailwind-theme-vars');
       if (!styleTag) {
@@ -380,7 +413,8 @@ export default function Builder() {
         canvas: {
           styles: [
             'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap',
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+            `data:text/css;base64,${btoa('@custom-variant dark (&:where(.dark, .dark *));')}`
           ],
           scripts: [
             'https://unpkg.com/@tailwindcss/browser@4'
@@ -659,6 +693,51 @@ export default function Builder() {
                 });
               }
             }
+          }
+        }
+      });
+
+      // Custom Video Background component type with pre-loaded options dropdown
+      domc.addType('video-bg', {
+        extend: 'video',
+        isComponent: (el: any) => {
+          if (el.tagName !== 'VIDEO') return false;
+          return (
+            (el.classList && el.classList.contains('video-bg-element')) ||
+            el.getAttribute?.('data-gjs-type') === 'video-bg'
+          );
+        },
+        model: {
+          defaults: {
+            traits: [
+              {
+                type: 'select',
+                name: 'src',
+                label: 'Video File',
+                options: [
+                  { id: '/videos/video-1.mp4', name: 'Video 1' },
+                  { id: '/videos/video-2.mp4', name: 'Video 2' },
+                  { id: '/videos/video-3.mp4', name: 'Video 3' },
+                  { id: '/videos/video-4.mp4', name: 'Video 4' },
+                  { id: '/videos/video-5.mp4', name: 'Video 5' }
+                ]
+              }
+            ]
+          },
+          init() {
+            this.on('change:attributes:src', () => {
+              const src = this.getAttributes()['src'];
+              if (!src) return;
+              // Force the real DOM video element to reload with the new src
+              setTimeout(() => {
+                const el = this.getEl() as HTMLVideoElement | null;
+                if (el) {
+                  el.src = src;
+                  el.load();
+                  el.play().catch(() => {});
+                }
+              }, 50);
+            });
           }
         }
       });
@@ -1050,10 +1129,24 @@ export default function Builder() {
         });
         setHasSelection(true);
 
-        // Auto-switch to media tab when image selected, style tab on fresh selection from layers
+        // Auto-switch to media tab when image or video selected, style tab on fresh selection from layers
         const selTag = (model.get('tagName') || '').toLowerCase();
         const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
-        if (isImgSel) {
+        const isVideoSel = (typeof model.is === 'function' && model.is('video')) || model.get('type') === 'video' || model.get('type') === 'video-bg' || selTag === 'video';
+        
+        // Also check if any ancestor or child has a video — to auto-show media tab for entire video hero sections
+        const hasVideoChild = !isVideoSel && typeof model.find === 'function' && model.find('video').length > 0;
+        const hasVideoAncestor = (() => {
+          if (isVideoSel || hasVideoChild) return false;
+          let p = typeof model.parent === 'function' ? model.parent() : null;
+          while (p) {
+            if (typeof p.find === 'function' && p.find('video').length > 0) return true;
+            p = typeof p.parent === 'function' ? p.parent() : null;
+          }
+          return false;
+        })();
+
+        if (isImgSel || isVideoSel || hasVideoChild || hasVideoAncestor) {
           setActiveTab('media');
         } else if (activeTabRef.current === 'layers' || activeTabRef.current === 'media') {
           setActiveTab('style');
@@ -1603,9 +1696,19 @@ export default function Builder() {
     setIsLibraryOpen(false);
   };
 
-  const handleExportZip = async () => {
+  const handleExportZip = () => {
     if (!editorRef.current || !projectData) return;
-    await exportStaticWebsite(editorRef.current, projectData, { mode: themeMode, color: themeColor });
+    setIsExporting(true);
+    
+    // Yield to browser rendering engine so the overlay can actually paint
+    // before the heavy synchronous DOM manipulations block the main thread
+    setTimeout(async () => {
+      try {
+        await exportStaticWebsite(editorRef.current, projectData, { mode: themeMode, color: themeColor });
+      } finally {
+        setIsExporting(false);
+      }
+    }, 50);
   };
 
   const handleCustomCode = () => {
@@ -1810,11 +1913,6 @@ export default function Builder() {
           }} className={`flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-800 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100`} title="Toggle Fullscreen">
             {isFullscreenActive ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
           </button>
-
-          <button onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')} className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Toggle Theme Mode">
-            {themeMode === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-          </button>
-
           <div className="relative flex items-center justify-center w-8 h-8 text-gray-500 hover:text-[#1e49e2] hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-blue-100" title="Theme Color">
             <Palette className="w-4 h-4" />
             <select

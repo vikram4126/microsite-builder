@@ -31,7 +31,7 @@
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-05-31T15:56:59.437Z",
+      "lastEdited": "2026-05-31T19:09:57.691Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -308,7 +308,69 @@
                 "width": 0
               }
             ],
-            "styles": [],
+            "styles": [
+              {
+                "selectors": [
+                  "c4832"
+                ],
+                "style": {
+                  "font-weight": "800",
+                  "font-family": "'Open Sans', sans-serif"
+                }
+              },
+              {
+                "selectors": [
+                  "c4566"
+                ],
+                "style": {
+                  "opacity": "1"
+                }
+              },
+              {
+                "selectors": [
+                  "c5981"
+                ],
+                "style": {
+                  "background-image": "url('/images/image-5.png')",
+                  "background-color": "#fd349c",
+                  "background-position": "left top"
+                }
+              },
+              {
+                "selectors": [
+                  "c6795"
+                ],
+                "style": {
+                  "background-color": "#00b894"
+                }
+              },
+              {
+                "selectors": [
+                  "c4546"
+                ],
+                "style": {
+                  "background": "linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%)"
+                }
+              },
+              {
+                "selectors": [
+                  "c4778"
+                ],
+                "style": {
+                  "background-image": "none",
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "c4175"
+                ],
+                "style": {
+                  "background-image": "none",
+                  "background-color": "#fd349c"
+                }
+              }
+            ],
             "pages": [
               {
                 "frames": [
@@ -584,450 +646,25 @@
                         },
                         {
                           "type": "section",
-                          "name": "Divided Stats Section",
                           "classes": [
-                            "w-full",
-                            "py-16",
-                            "md:py-24",
-                            "bg-slate-50",
-                            "dark:bg-slate-900"
+                            "w-full"
                           ],
                           "attributes": {
-                            "id": "data-visualization-divided-stats",
                             "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "px-4",
-                                "lg:px-0"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "grid",
-                                    "grid-cols-1",
-                                    "md:grid-cols-5",
-                                    "bg-white",
-                                    "dark:bg-slate-800",
-                                    "border",
-                                    "border-slate-200",
-                                    "dark:border-slate-700",
-                                    "rounded-2xl",
-                                    "divide-y",
-                                    "md:divide-y-0",
-                                    "md:divide-x",
-                                    "divide-slate-200",
-                                    "dark:divide-slate-700",
-                                    "shadow-sm"
-                                  ],
-                                  "components": [
-                                    {
-                                      "type": "comment",
-                                      "content": " Column 1 "
-                                    },
-                                    {
-                                      "style": {
-                                        "opacity": "1",
-                                        "__p": true
-                                      },
-                                      "classes": [
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "text-center",
-                                        "p-6",
-                                        "min-h-[160px]"
-                                      ],
-                                      "attributes": {
-                                        "style": "opacity:1;"
-                                      },
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "lg:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "265,000 +"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Employees"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Column 2 "
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Column 3 "
-                                    },
-                                    {
-                                      "classes": [
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "text-center",
-                                        "p-6",
-                                        "min-h-[160px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-2xl",
-                                            "lg:text-3xl",
-                                            "font-display",
-                                            "font-bold",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "$34bn/ $15bn"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Total firm/total"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xs",
-                                            "text-slate-400",
-                                            "dark:text-slate-500"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "revenue for FY 2022"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Column 4 "
-                                    },
-                                    {
-                                      "classes": [
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "text-center",
-                                        "p-6",
-                                        "min-h-[160px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Supporting clients"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xs",
-                                            "text-slate-400",
-                                            "dark:text-slate-500",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "across"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "lg:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "143"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "countries"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "classes": [
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "text-center",
-                                        "p-6",
-                                        "min-h-[160px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "lg:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "50,000 +"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "style": {
-                                            "font-weight": "800",
-                                            "font-family": "'Open Sans', sans-serif"
-                                          },
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium",
-                                            "font-semibold",
-                                            "leading-snug"
-                                          ],
-                                          "attributes": {
-                                            "style": "font-weight:800;font-family:'Open Sans', sans-serif;"
-                                          },
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Technology and"
-                                            },
-                                            {
-                                              "tagName": "br",
-                                              "void": true
-                                            },
-                                            {
-                                              "type": "textnode",
-                                              "content": "transformation"
-                                            },
-                                            {
-                                              "tagName": "br",
-                                              "void": true
-                                            },
-                                            {
-                                              "type": "textnode",
-                                              "content": "specialists"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Column 5 "
-                                    },
-                                    {
-                                      "classes": [
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "text-center",
-                                        "p-6",
-                                        "min-h-[160px]"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Providing advisory"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xs",
-                                            "text-slate-400",
-                                            "dark:text-slate-500",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "services to"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "lg:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "48%"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "of Forbes Global 1000"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-xs",
-                                            "text-slate-400",
-                                            "dark:text-slate-500"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "companies"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
+                          }
                         },
                         {
                           "type": "section",
-                          "name": "Number Cards Section",
+                          "name": "Split Banner Video",
                           "classes": [
                             "w-full",
-                            "py-16",
-                            "md:py-24",
-                            "bg-white",
-                            "dark:bg-slate-900"
+                            "bg-[#0c233c]",
+                            "py-10",
+                            "md:py-[60px]",
+                            "lg:py-24",
+                            "overflow-hidden"
                           ],
                           "attributes": {
-                            "id": "data-visualization-number-cards",
                             "layout-mode": "container"
                           },
                           "components": [
@@ -1040,78 +677,175 @@
                               ],
                               "components": [
                                 {
-                                  "type": "responsive-grid",
                                   "classes": [
-                                    "container",
-                                    "mx-auto",
-                                    "grid",
-                                    "gap-6",
-                                    "w-full",
-                                    "grid-cols-1",
-                                    "sm:grid-cols-2",
-                                    "md:grid-cols-4"
+                                    "flex",
+                                    "flex-col",
+                                    "md:flex-row",
+                                    "items-center",
+                                    "gap-10",
+                                    "lg:gap-16"
                                   ],
-                                  "attributes": {
-                                    "data-cols-desktop": "4",
-                                    "data-cols-tablet": "2",
-                                    "data-cols-mobile": "1"
-                                  },
                                   "components": [
                                     {
                                       "type": "comment",
-                                      "content": " Card 1 "
+                                      "content": " Left: CTA Content "
                                     },
                                     {
                                       "classes": [
-                                        "bg-slate-100",
-                                        "dark:bg-slate-800",
-                                        "border-l-4",
-                                        "border-[#7213ea]",
-                                        "p-6",
-                                        "md:p-8",
+                                        "flex-1",
                                         "flex",
                                         "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "h-full",
-                                        "w-full",
-                                        "shadow-sm",
-                                        "hover:shadow-md",
-                                        "transition-shadow"
+                                        "gap-6",
+                                        "z-10"
                                       ],
                                       "components": [
                                         {
                                           "tagName": "span",
-                                          "type": "text",
                                           "classes": [
-                                            "text-3xl",
-                                            "md:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
+                                            "inline-flex",
+                                            "items-center",
+                                            "gap-2",
+                                            "px-4",
+                                            "py-1.5",
+                                            "rounded-full",
+                                            "bg-[#1e49e2]/30",
+                                            "border",
+                                            "border-[#aceaff]/20",
+                                            "text-[#aceaff]",
+                                            "text-xs",
+                                            "font-bold",
+                                            "uppercase",
+                                            "tracking-wider",
+                                            "w-fit"
                                           ],
                                           "components": [
                                             {
+                                              "tagName": "span",
+                                              "classes": [
+                                                "h-2",
+                                                "w-2",
+                                                "rounded-full",
+                                                "bg-[#00b8f5]"
+                                              ]
+                                            },
+                                            {
                                               "type": "textnode",
-                                              "content": "5,900+"
+                                              "content": " New: Enterprise Cloud 2.0\n              "
                                             }
                                           ]
                                         },
                                         {
-                                          "tagName": "span",
+                                          "tagName": "h1",
                                           "type": "text",
                                           "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
+                                            "text-white",
+                                            "text-4xl",
+                                            "lg:text-5xl",
+                                            "font-display",
+                                            "font-black",
+                                            "leading-tight",
+                                            "tracking-tight"
                                           ],
                                           "components": [
                                             {
                                               "type": "textnode",
-                                              "content": "Place for a subtitle"
+                                              "content": "\n                Transform Your Business with "
+                                            },
+                                            {
+                                              "tagName": "span",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-[#00b8f5]"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Modern Solutions"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "p",
+                                          "type": "text",
+                                          "classes": [
+                                            "text-slate-300",
+                                            "text-lg",
+                                            "leading-relaxed",
+                                            "max-w-xl"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "\n                Empowering teams with the tools they need to scale faster and work smarter in a digital-first world. Built for modern enterprises.\n              "
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-wrap",
+                                            "gap-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "h-14",
+                                                "px-8",
+                                                "bg-[#00b8f5]",
+                                                "text-[#0c233c]",
+                                                "hover:bg-[#aceaff]",
+                                                "rounded-xl",
+                                                "font-bold",
+                                                "text-lg",
+                                                "flex",
+                                                "items-center",
+                                                "justify-center",
+                                                "shadow-lg",
+                                                "shadow-[#00b8f5]/30",
+                                                "transition-all",
+                                                "hover:-translate-y-0.5"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Get Started Today"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "link",
+                                              "classes": [
+                                                "h-14",
+                                                "px-8",
+                                                "bg-white/10",
+                                                "hover:bg-white/20",
+                                                "border",
+                                                "border-white/20",
+                                                "text-white",
+                                                "rounded-xl",
+                                                "font-bold",
+                                                "text-lg",
+                                                "flex",
+                                                "items-center",
+                                                "justify-center",
+                                                "transition-all",
+                                                "backdrop-blur-sm"
+                                              ],
+                                              "attributes": {
+                                                "href": "#"
+                                              },
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Watch Demo"
+                                                }
+                                              ]
                                             }
                                           ]
                                         }
@@ -1119,180 +853,62 @@
                                     },
                                     {
                                       "type": "comment",
-                                      "content": " Card 2 "
+                                      "content": " Right: Video "
                                     },
                                     {
                                       "classes": [
-                                        "bg-slate-100",
-                                        "dark:bg-slate-800",
-                                        "border-l-4",
-                                        "border-[#7213ea]",
-                                        "p-6",
-                                        "md:p-8",
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "h-full",
-                                        "w-full",
-                                        "shadow-sm",
-                                        "hover:shadow-md",
-                                        "transition-shadow"
+                                        "flex-1",
+                                        "relative",
+                                        "rounded-2xl",
+                                        "overflow-hidden",
+                                        "shadow-2xl",
+                                        "shadow-[#1e49e2]/20",
+                                        "min-h-[300px]",
+                                        "md:min-h-[400px]",
+                                        "hidden",
+                                        "md:block"
                                       ],
                                       "components": [
                                         {
-                                          "tagName": "span",
-                                          "type": "text",
+                                          "type": "video-bg",
+                                          "name": "Hero Video",
+                                          "resizable": {
+                                            "ratioDefault": 1
+                                          },
                                           "classes": [
-                                            "text-3xl",
-                                            "md:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
+                                            "w-full",
+                                            "h-full",
+                                            "object-cover",
+                                            "absolute",
+                                            "inset-0"
                                           ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "30+"
-                                            }
-                                          ]
+                                          "attributes": {
+                                            "allowfullscreen": "allowfullscreen",
+                                            "autoplay": "autoplay",
+                                            "loop": "loop",
+                                            "muted": "muted",
+                                            "playsinline": "playsinline",
+                                            "src": "/videos/video-1.mp4"
+                                          },
+                                          "src": "/videos/video-4.mp4",
+                                          "loop": true,
+                                          "muted": true,
+                                          "autoplay": true,
+                                          "sources": []
                                         },
                                         {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Place for a subtitle"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Card 3 "
-                                    },
-                                    {
-                                      "classes": [
-                                        "bg-slate-100",
-                                        "dark:bg-slate-800",
-                                        "border-l-4",
-                                        "border-[#7213ea]",
-                                        "p-6",
-                                        "md:p-8",
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "h-full",
-                                        "w-full",
-                                        "shadow-sm",
-                                        "hover:shadow-md",
-                                        "transition-shadow"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "md:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "3,000+"
-                                            }
-                                          ]
+                                          "type": "comment",
+                                          "content": " Blue overlay on video "
                                         },
                                         {
-                                          "tagName": "span",
-                                          "type": "text",
                                           "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Place for a subtitle"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "comment",
-                                      "content": " Card 4 "
-                                    },
-                                    {
-                                      "classes": [
-                                        "bg-slate-100",
-                                        "dark:bg-slate-800",
-                                        "border-l-4",
-                                        "border-[#7213ea]",
-                                        "p-6",
-                                        "md:p-8",
-                                        "flex",
-                                        "flex-col",
-                                        "justify-center",
-                                        "items-center",
-                                        "h-full",
-                                        "w-full",
-                                        "shadow-sm",
-                                        "hover:shadow-md",
-                                        "transition-shadow"
-                                      ],
-                                      "components": [
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-3xl",
-                                            "md:text-4xl",
-                                            "font-display",
-                                            "font-black",
-                                            "text-[#00338d]",
-                                            "dark:text-white",
-                                            "mb-2"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "6,500+"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "tagName": "span",
-                                          "type": "text",
-                                          "classes": [
-                                            "text-sm",
-                                            "text-slate-500",
-                                            "dark:text-slate-400",
-                                            "font-medium"
-                                          ],
-                                          "components": [
-                                            {
-                                              "type": "textnode",
-                                              "content": "Place for a subtitle"
-                                            }
+                                            "absolute",
+                                            "inset-0",
+                                            "bg-gradient-to-tr",
+                                            "from-[#00338d]/60",
+                                            "via-transparent",
+                                            "to-transparent",
+                                            "pointer-events-none"
                                           ]
                                         }
                                       ]

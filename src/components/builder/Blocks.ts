@@ -68,6 +68,101 @@ export const registerBlocks = (editor: any) => {
     `
   });
 
+  bm.add('header-video', {
+    label: 'Video Hero Banner',
+    category: 'Header',
+    media: `
+      <div class="flex flex-col items-center justify-center p-2 bg-[#0c233c] text-white h-full w-full rounded border border-gray-700/30">
+        <span class="text-[9px] font-bold text-[#00b8f5]">VIDEO BANNER</span>
+        <div class="w-6 h-0.5 bg-[#1e49e2] my-1"></div>
+        <span class="text-[7px] text-[#aceaff]/70">Premium video background</span>
+      </div>
+    `,
+    content: `
+      <div id="video-hero-section" data-gjs-type="section" data-gjs-name="Video Hero Header" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20 lg:py-32" layout-mode="container">
+        <!-- Video Background Element -->
+        <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
+        
+        <!-- Dark Premium Overlay -->
+        <div class="absolute inset-0 bg-[#0c233c]/75 mix-blend-multiply z-10 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0c233c] via-transparent to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Content Container -->
+        <div class="container mx-auto px-4 lg:px-0 text-white text-center relative z-20">
+          <div class="max-w-4xl mx-auto flex flex-col items-center gap-6">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1e49e2]/30 border border-[#aceaff]/20 text-[#aceaff] text-xs font-bold uppercase tracking-wider animate-pulse">
+              <span class="h-2 w-2 rounded-full bg-[#00b8f5]"></span> Next Generation Platform
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-display font-black leading-tight tracking-tight text-white">
+              Revolutionize Your <span class="bg-gradient-to-r from-[#00b8f5] to-[#aceaff] bg-clip-text text-transparent">Digital Future</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed font-medium">
+              Experience the power of real-time cloud data, automated workflows, and premium intelligent insights.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-4 justify-center items-center">
+              <a href="#" class="h-14 px-8 bg-[#00b8f5] text-[#0c233c] hover:bg-[#aceaff] rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#00b8f5]/20 hover:shadow-[#aceaff]/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                Get Started Free
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="#" class="h-14 px-8 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-bold flex items-center justify-center transition-all duration-300 backdrop-blur-sm">
+                Watch Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  });
+
+  bm.add('header-video-split', {
+    label: 'Split Banner — Video Right',
+    category: 'Header',
+    media: `
+      <div style="display:flex;height:100%;width:100%;border-radius:4px;overflow:hidden;background:#0c233c;">
+        <div style="flex:1;padding:6px;display:flex;flex-direction:column;justify-content:center;gap:3px;">
+          <div style="width:70%;height:6px;background:#1e49e2;border-radius:2px;"></div>
+          <div style="width:90%;height:4px;background:#aceaff40;border-radius:2px;"></div>
+          <div style="width:80%;height:4px;background:#aceaff40;border-radius:2px;"></div>
+          <div style="width:40%;height:8px;background:#00b8f5;border-radius:3px;margin-top:4px;"></div>
+        </div>
+        <div style="flex:1;background:#1e49e2;display:flex;align-items:center;justify-content:center;font-size:8px;color:#aceaff;font-weight:700;letter-spacing:1px;">▶ VIDEO</div>
+      </div>
+    `,
+    content: `
+      <div data-gjs-type="section" data-gjs-name="Split Banner Video" class="w-full bg-[#0c233c] py-10 md:py-[60px] lg:py-24 overflow-hidden" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+
+            <!-- Left: CTA Content -->
+            <div class="flex-1 flex flex-col gap-6 z-10">
+              <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1e49e2]/30 border border-[#aceaff]/20 text-[#aceaff] text-xs font-bold uppercase tracking-wider w-fit">
+                <span class="h-2 w-2 rounded-full bg-[#00b8f5]"></span> New: Enterprise Cloud 2.0
+              </span>
+              <h1 class="text-white text-4xl lg:text-5xl font-display font-black leading-tight tracking-tight">
+                Transform Your Business with <span class="text-[#00b8f5]">Modern Solutions</span>
+              </h1>
+              <p class="text-slate-300 text-lg leading-relaxed max-w-xl">
+                Empowering teams with the tools they need to scale faster and work smarter in a digital-first world. Built for modern enterprises.
+              </p>
+              <div class="flex flex-wrap gap-4">
+                <a href="#" class="h-14 px-8 bg-[#00b8f5] text-[#0c233c] hover:bg-[#aceaff] rounded-xl font-bold text-lg flex items-center justify-center shadow-lg shadow-[#00b8f5]/30 transition-all hover:-translate-y-0.5">Get Started Today</a>
+                <a href="#" class="h-14 px-8 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-bold text-lg flex items-center justify-center transition-all backdrop-blur-sm">Watch Demo</a>
+              </div>
+            </div>
+
+            <!-- Right: Video -->
+            <div class="flex-1 relative rounded-2xl overflow-hidden shadow-2xl shadow-[#1e49e2]/20 min-h-[300px] md:min-h-[400px] hidden md:block">
+              <video data-gjs-type="video-bg" data-gjs-name="Hero Video" class="w-full h-full object-cover absolute inset-0" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
+              <!-- Blue overlay on video -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-[#00338d]/60 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  });
+
   // 3. INTRODUCTION
   bm.add('introduction', {
     label: 'CEO Intro & Mission Section',

@@ -1479,5 +1479,51 @@ export const sectionsLibrary: SectionDef[] = [
         </div>
       </div>
     `
+  },
+  {
+    id: 'section-documents-text-content',
+    category: 'Documents',
+    label: 'Text Content Document',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="10" width="80" height="4" fill="#0c233c"/><rect x="10" y="18" width="50" height="3" fill="#0c233c"/><rect x="10" y="24" width="80" height="2" fill="#94a3b8"/><rect x="10" y="28" width="75" height="2" fill="#94a3b8"/><rect x="10" y="34" width="50" height="3" fill="#0c233c"/><rect x="10" y="40" width="80" height="2" fill="#94a3b8"/><rect x="10" y="44" width="75" height="2" fill="#94a3b8"/></svg>',
+    html: `
+      <div id="section-documents-text-content" data-gjs-type="section" data-gjs-name="Text Content Document" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-display font-black text-[#0c233c] dark:text-white mb-10 tracking-tight">Lorem ipsum dolor sit</h2>
+            
+            <div class="mb-10">
+              <h3 class="text-xl md:text-2xl font-bold text-[#0c233c] dark:text-white mb-4">Sed ut perspiciatis unde omnis iste natus</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+              </p>
+            </div>
+
+            <div class="mb-10">
+              <h3 class="text-xl md:text-2xl font-bold text-[#0c233c] dark:text-white mb-4">Sed ut perspiciatis unde omnis iste natus</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+              </p>
+            </div>
+
+            <div class="mb-10">
+              <h3 class="text-xl md:text-2xl font-bold text-[#0c233c] dark:text-white mb-4">Sed ut perspiciatis unde omnis iste natus</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
   }
 ];

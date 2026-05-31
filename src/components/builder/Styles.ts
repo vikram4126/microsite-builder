@@ -516,11 +516,6 @@ export const registerStyles = (editor: any) => {
     ]
   });
 
-  sm.addSector('typography', {
-    name: 'Typography',
-    open: true,
-    buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration', 'text-transform', 'text-shadow']
-  });
 
   sm.addSector('layout', {
     name: 'Layout & Dimensions',

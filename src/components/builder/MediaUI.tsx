@@ -5,6 +5,7 @@ export const MediaUI = ({ editor }: { editor: any }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [assets, setAssets] = useState<any[]>([]);
+  const targetCompRef = useRef<any>(null);
 
   const [mediaState, setMediaState] = useState({
     src: '',
@@ -13,8 +14,17 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     bgRepeat: 'no-repeat',
     bgAttachment: 'scroll',
     bgColor: 'transparent',
-    isImageTag: false
+    isImageTag: false,
+    isVideoTag: false
   });
+
+  const videoAssets = [
+    { src: '/videos/video-1.mp4', label: 'Tech Concept (Video 1)' },
+    { src: '/videos/video-2.mp4', label: 'Business Growth (Video 2)' },
+    { src: '/videos/video-3.mp4', label: 'Data Abstract (Video 3)' },
+    { src: '/videos/video-4.mp4', label: 'Corporate Office (Video 4)' },
+    { src: '/videos/video-5.mp4', label: 'Particle Loop (Video 5)' }
+  ];
 
   useEffect(() => {
     const updateUI = () => {
@@ -22,24 +32,46 @@ export const MediaUI = ({ editor }: { editor: any }) => {
       if (!selected) {
         setIsVisible(false);
         setShowGallery(false);
+        targetCompRef.current = null;
         return;
       }
 
       setShowGallery(false);
 
+      let targetComponent = selected;
       const tagName = (selected.get('tagName') || (selected.getEl && selected.getEl()?.tagName) || '').toLowerCase();
       const isImage = (typeof selected.is === 'function' && selected.is('image')) || selected.get('type') === 'image' || tagName === 'img';
-      const style = selected.getStyle() || {};
+      
+      let isVideo = (typeof selected.is === 'function' && selected.is('video')) || selected.get('type') === 'video' || selected.get('type') === 'video-bg' || tagName === 'video';
+
+      // Advanced UX: Traverse up the component hierarchy to find closest parent container that contains a video child!
+      if (!isVideo) {
+        let current = selected;
+        while (current) {
+          if (typeof current.find === 'function') {
+            const foundVideo = current.find('video')[0];
+            if (foundVideo) {
+              isVideo = true;
+              targetComponent = foundVideo;
+              break;
+            }
+          }
+          current = typeof current.parent === 'function' ? current.parent() : null;
+        }
+      }
+
+      targetCompRef.current = targetComponent;
+
+      const style = targetComponent.getStyle() || {};
       const hasBgImage = style['background-image'] && style['background-image'] !== 'none';
 
-      // Show panel if it's an image tag OR a section/div (usually sections/divs are for backgrounds)
-      // We'll show it for any component that has a background image OR is an <img>
-      if (isImage || hasBgImage || selected.get('type') === 'section' || tagName === 'div') {
+      // Show panel if it's an image tag, a video tag, OR a section/div (usually sections/divs are for backgrounds)
+      if (isImage || isVideo || hasBgImage || selected.get('type') === 'section' || tagName === 'div') {
         setIsVisible(true);
         
         let currentSrc = '';
-        if (isImage) {
-            currentSrc = selected.get('src') || '';
+        if (isImage || isVideo) {
+            currentSrc = targetComponent.get('src') || '';
         } else if (hasBgImage) {
             const match = style['background-image'].match(/url\(['"]?([^'"]+)['"]?\)/);
             if (match) currentSrc = match[1];
@@ -52,7 +84,8 @@ export const MediaUI = ({ editor }: { editor: any }) => {
           bgRepeat: style['background-repeat'] || 'no-repeat',
           bgAttachment: style['background-attachment'] || 'scroll',
           bgColor: style['background-color'] || 'transparent',
-          isImageTag: isImage
+          isImageTag: isImage,
+          isVideoTag: isVideo
         });
       } else {
         setIsVisible(false);
@@ -75,31 +108,47 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     const selected = editor.getSelected();
     if (!selected) return;
 
+    const target = targetCompRef.current || selected;
     setMediaState(prev => ({ ...prev, [key]: value }));
 
     if (key === 'src') {
-        if (mediaState.isImageTag) {
-            selected.set('src', value);
+        if (mediaState.isImageTag || mediaState.isVideoTag) {
+            target.set('src', value);
+            // If it's a video tag, force trigger load & play so it updates in real time inside GrapesJS iframe
+            if (mediaState.isVideoTag) {
+              setTimeout(() => {
+                const el = target.getEl() as HTMLVideoElement;
+                if (el) {
+                  el.load();
+                  el.play().catch(() => {});
+                }
+              }, 50);
+            }
         } else {
-            selected.addStyle({ 'background-image': value ? `url('${value}')` : 'none' });
+            target.addStyle({ 'background-image': value ? `url('${value}')` : 'none' });
         }
     } else if (key === 'bgSize') {
-        selected.addStyle({ 'background-size': value });
+        target.addStyle({ 'background-size': value });
     } else if (key === 'bgPosition') {
-        selected.addStyle({ 'background-position': value });
+        target.addStyle({ 'background-position': value });
     } else if (key === 'bgRepeat') {
-        selected.addStyle({ 'background-repeat': value });
+        target.addStyle({ 'background-repeat': value });
     } else if (key === 'bgAttachment') {
-        selected.addStyle({ 'background-attachment': value });
+        target.addStyle({ 'background-attachment': value });
     } else if (key === 'bgColor') {
-        selected.addStyle({ 'background-color': value });
+        target.addStyle({ 'background-color': value });
     }
   };
 
   const toggleGallery = () => {
     if (!showGallery) {
-      const allAssets = editor.AssetManager.getAll().models.map((m: any) => m.attributes);
-      setAssets(allAssets);
+      if (mediaState.isVideoTag) {
+        // Videos don't load from general GrapesJS asset manager, we use our curated list
+        setAssets(videoAssets);
+      } else {
+        const allAssets = editor.AssetManager.getAll().models.map((m: any) => m.attributes);
+        setAssets(allAssets);
+      }
       setShowGallery(true);
     } else {
       setShowGallery(false);
@@ -167,11 +216,11 @@ export const MediaUI = ({ editor }: { editor: any }) => {
               </div>
             )}
 
-            {/* Image Preview / Selector */}
+            {/* Image/Video Preview / Selector */}
             <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                     <label className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center">
-                       {mediaState.isImageTag ? 'Image Source' : 'Background Image'}
+                       {mediaState.isVideoTag ? 'Video Source' : mediaState.isImageTag ? 'Image Source' : 'Background Image'}
                     </label>
                     <button onClick={toggleGallery} className="text-[9px] font-bold text-[#1e49e2] uppercase tracking-widest hover:underline">
                         {showGallery ? 'Close Gallery' : 'Open Gallery'}
@@ -179,16 +228,31 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                 </div>
                 
                 {showGallery ? (
-                    <div className="grid grid-cols-3 gap-2 p-2 bg-gray-50 rounded-xl border border-gray-100 max-h-48 overflow-y-auto no-scrollbar shadow-inner">
-                        {assets.map((asset, idx) => (
-                            <div 
-                                key={idx} 
-                                onClick={() => selectAsset(asset.src)}
-                                className="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-[#1e49e2] cursor-pointer transition-all shadow-sm bg-white"
-                            >
-                                <img src={asset.src} className="w-full h-full object-cover" />
-                            </div>
-                        ))}
+                    <div className="grid grid-cols-2 gap-2 p-2 bg-gray-50 rounded-xl border border-gray-100 max-h-48 overflow-y-auto no-scrollbar shadow-inner">
+                        {mediaState.isVideoTag ? (
+                          videoAssets.map((video, idx) => (
+                              <div 
+                                  key={idx} 
+                                  onClick={() => selectAsset(video.src)}
+                                  className="aspect-video rounded-lg overflow-hidden border-2 border-transparent hover:border-[#1e49e2] cursor-pointer transition-all shadow-sm bg-black relative group"
+                              >
+                                  <video src={video.src} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                                  <div className="absolute inset-x-0 bottom-0 bg-black/60 p-1 text-[8px] font-bold text-white text-center truncate">
+                                      {video.label}
+                                  </div>
+                              </div>
+                          ))
+                        ) : (
+                          assets.map((asset, idx) => (
+                              <div 
+                                  key={idx} 
+                                  onClick={() => selectAsset(asset.src)}
+                                  className="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-[#1e49e2] cursor-pointer transition-all shadow-sm bg-white"
+                              >
+                                  <img src={asset.src} className="w-full h-full object-cover" />
+                              </div>
+                          ))
+                        )}
                     </div>
                 ) : (
                     <>
@@ -198,15 +262,23 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                         >
                             {mediaState.src ? (
                                 <>
-                                    <img src={mediaState.src} alt="Preview" className="w-full h-full object-cover" />
+                                    {mediaState.isVideoTag ? (
+                                        <video src={mediaState.src} muted loop autoPlay playsInline className="w-full h-full object-cover" />
+                                    ) : (
+                                        <img src={mediaState.src} alt="Preview" className="w-full h-full object-cover" />
+                                    )}
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                        <span className="text-white text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30">Change Image</span>
+                                        <span className="text-white text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/30">
+                                            {mediaState.isVideoTag ? 'Change Video' : 'Change Image'}
+                                        </span>
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <Image size={24} className="text-gray-300 mb-2" />
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Click to Upload</span>
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                        {mediaState.isVideoTag ? 'Select Video' : 'Click to Upload'}
+                                    </span>
                                 </>
                             )}
                         </div>
@@ -216,7 +288,7 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                                 className="w-full mt-2 flex items-center justify-center space-x-1.5 py-1.5 text-[10px] font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
                             >
                                 <Trash2 size={12} />
-                                <span>REMOVE IMAGE</span>
+                                <span>{mediaState.isVideoTag ? 'REMOVE VIDEO' : 'REMOVE IMAGE'}</span>
                             </button>
                         )}
                     </>
@@ -225,11 +297,11 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                 {/* External URL Input */}
                 <div className="pt-2">
                     <label className="text-[9px] font-bold text-gray-400 tracking-widest uppercase flex items-center mb-1.5">
-                       Or Paste Image URL
+                       {mediaState.isVideoTag ? 'Or Paste Video URL' : 'Or Paste Image URL'}
                     </label>
                     <input 
                         type="text" 
-                        placeholder="https://example.com/image.jpg" 
+                        placeholder={mediaState.isVideoTag ? "https://example.com/video.mp4" : "https://example.com/image.jpg"}
                         value={mediaState.src}
                         onChange={(e) => updateMedia('src', e.target.value)}
                         className="w-full px-3 py-2 text-[11px] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#1e49e2] bg-white shadow-sm transition-colors"
@@ -237,8 +309,8 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                 </div>
             </div>
 
-            {/* Background Controls (Only if not just an <img> tag) */}
-            {!mediaState.isImageTag && (
+            {/* Background Controls (Only if not just an <img> tag and not a <video> tag) */}
+            {!mediaState.isImageTag && !mediaState.isVideoTag && (
                 <div className="grid grid-cols-2 gap-4">
                     {/* Size */}
                     <div className="space-y-1.5">
