@@ -44,13 +44,18 @@ export const MediaUI = ({ editor }: { editor: any }) => {
       
       let isVideo = (typeof selected.is === 'function' && selected.is('video')) || selected.get('type') === 'video' || selected.get('type') === 'video-bg' || tagName === 'video';
 
+      const style = selected.getStyle() || {};
+      const hasBgImage = style['background-image'] && style['background-image'] !== 'none';
+
       // Advanced UX: Traverse up the component hierarchy to find closest parent container that contains a video child!
-      if (!isVideo) {
+      // ONLY if the currently selected item is NOT an image, NOT a video, and DOES NOT already have a background image.
+      if (!isVideo && !isImage && !hasBgImage) {
         let current = selected;
         while (current) {
           if (typeof current.find === 'function') {
             const foundVideo = current.find('video')[0];
-            if (foundVideo) {
+            // Only hijack if the video cannot be clicked directly (pointer-events-none)
+            if (foundVideo && foundVideo.getClasses().includes('pointer-events-none')) {
               isVideo = true;
               targetComponent = foundVideo;
               break;
@@ -62,28 +67,28 @@ export const MediaUI = ({ editor }: { editor: any }) => {
 
       targetCompRef.current = targetComponent;
 
-      const style = targetComponent.getStyle() || {};
-      const hasBgImage = style['background-image'] && style['background-image'] !== 'none';
+      const finalStyle = targetComponent.getStyle() || {};
+      const finalHasBgImage = finalStyle['background-image'] && finalStyle['background-image'] !== 'none';
 
       // Show panel if it's an image tag, a video tag, OR a section/div (usually sections/divs are for backgrounds)
-      if (isImage || isVideo || hasBgImage || selected.get('type') === 'section' || tagName === 'div') {
+      if (isImage || isVideo || finalHasBgImage || selected.get('type') === 'section' || tagName === 'div') {
         setIsVisible(true);
         
         let currentSrc = '';
         if (isImage || isVideo) {
             currentSrc = targetComponent.get('src') || '';
-        } else if (hasBgImage) {
-            const match = style['background-image'].match(/url\(['"]?([^'"]+)['"]?\)/);
+        } else if (finalHasBgImage) {
+            const match = finalStyle['background-image'].match(/url\(['"]?([^'"]+)['"]?\)/);
             if (match) currentSrc = match[1];
         }
 
         setMediaState({
           src: currentSrc,
-          bgSize: style['background-size'] || 'cover',
-          bgPosition: style['background-position'] || 'center center',
-          bgRepeat: style['background-repeat'] || 'no-repeat',
-          bgAttachment: style['background-attachment'] || 'scroll',
-          bgColor: style['background-color'] || 'transparent',
+          bgSize: finalStyle['background-size'] || 'cover',
+          bgPosition: finalStyle['background-position'] || 'center center',
+          bgRepeat: finalStyle['background-repeat'] || 'no-repeat',
+          bgAttachment: finalStyle['background-attachment'] || 'scroll',
+          bgColor: finalStyle['background-color'] || 'transparent',
           isImageTag: isImage,
           isVideoTag: isVideo
         });
@@ -114,6 +119,9 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     if (key === 'src') {
         if (mediaState.isImageTag || mediaState.isVideoTag) {
             target.set('src', value);
+            if (mediaState.isVideoTag) {
+              target.addAttributes({ src: value });
+            }
             // If it's a video tag, force trigger load & play so it updates in real time inside GrapesJS iframe
             if (mediaState.isVideoTag) {
               setTimeout(() => {

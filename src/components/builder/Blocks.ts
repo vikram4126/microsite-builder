@@ -69,11 +69,11 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('header-video', {
-    label: 'Video Hero Banner',
+    label: 'Video Gradient',
     category: 'Header',
     media: `
       <div class="flex flex-col items-center justify-center p-2 bg-[#0c233c] text-white h-full w-full rounded border border-gray-700/30">
-        <span class="text-[9px] font-bold text-[#00b8f5]">VIDEO BANNER</span>
+        <span class="text-[9px] font-bold text-[#00b8f5]">VIDEO GRADIENT</span>
         <div class="w-6 h-0.5 bg-[#1e49e2] my-1"></div>
         <span class="text-[7px] text-[#aceaff]/70">Premium video background</span>
       </div>
@@ -85,7 +85,52 @@ export const registerBlocks = (editor: any) => {
         
         <!-- Dark Premium Overlay -->
         <div class="absolute inset-0 bg-[#0c233c]/75 mix-blend-multiply z-10 pointer-events-none"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0c233c] via-transparent to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0c233c] via-[#0c233c]/50 to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Content Container -->
+        <div class="container mx-auto px-4 lg:px-0 text-white text-center relative z-20">
+          <div class="max-w-4xl mx-auto flex flex-col items-center gap-6">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1e49e2]/30 border border-[#aceaff]/20 text-[#aceaff] text-xs font-bold uppercase tracking-wider animate-pulse">
+              <span class="h-2 w-2 rounded-full bg-[#00b8f5]"></span> Next Generation Platform
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-display font-black leading-tight tracking-tight text-white">
+              Revolutionize Your <span class="bg-gradient-to-r from-[#00b8f5] to-[#aceaff] bg-clip-text text-transparent">Digital Future</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed font-medium">
+              Experience the power of real-time cloud data, automated workflows, and premium intelligent insights.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-4 justify-center items-center">
+              <a href="#" class="h-14 px-8 bg-[#00b8f5] text-[#0c233c] hover:bg-[#aceaff] rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#00b8f5]/20 hover:shadow-[#aceaff]/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                Get Started Free
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="#" class="h-14 px-8 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-bold flex items-center justify-center transition-all duration-300 backdrop-blur-sm">
+                Watch Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  });
+
+  bm.add('header-video-plain', {
+    label: 'Video Banner',
+    category: 'Header',
+    media: `
+      <div class="flex flex-col items-center justify-center p-2 bg-[#0c233c] text-white h-full w-full rounded border border-gray-700/30">
+        <span class="text-[9px] font-bold text-[#00b8f5]">VIDEO BANNER</span>
+        <div class="w-6 h-0.5 bg-[#1e49e2] my-1"></div>
+        <span class="text-[7px] text-[#aceaff]/70">Premium video background</span>
+      </div>
+    `,
+    content: `
+      <div id="video-hero-section-plain" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20 lg:py-32" layout-mode="container">
+        <!-- Video Background Element -->
+        <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
+        
+        <!-- Dark Premium Overlay -->
+        <div class="absolute inset-0 bg-[#0c233c]/60 mix-blend-multiply z-10 pointer-events-none"></div>
 
         <!-- Content Container -->
         <div class="container mx-auto px-4 lg:px-0 text-white text-center relative z-20">
@@ -151,10 +196,8 @@ export const registerBlocks = (editor: any) => {
             </div>
 
             <!-- Right: Video -->
-            <div class="flex-1 relative rounded-2xl overflow-hidden shadow-2xl shadow-[#1e49e2]/20 min-h-[300px] md:min-h-[400px] hidden md:block">
+            <div class="flex-1 relative shadow-2xl shadow-[#1e49e2]/20 min-h-[300px] md:min-h-[400px] hidden md:block">
               <video data-gjs-type="video-bg" data-gjs-name="Hero Video" class="w-full h-full object-cover absolute inset-0" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
-              <!-- Blue overlay on video -->
-              <div class="absolute inset-0 bg-gradient-to-tr from-[#00338d]/60 via-transparent to-transparent pointer-events-none"></div>
             </div>
 
           </div>

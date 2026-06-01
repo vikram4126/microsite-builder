@@ -49,10 +49,10 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
   // Helper to build the local ZIP path for a public asset
   const getLocalImagePath = (src: string) => {
     // src is like /images/image-1.png or /team-member/member-2.jpg or /background/bg.jpg
-    // We want: images/images/image-1.png -> just use the path without leading /
-    // All go into the images/ folder in the zip
+    // We want: assets/images-image-1.png -> just use the path without leading /
+    // All go into the assets/ folder in the zip
     const cleanSrc = src.startsWith('/') ? src.substring(1) : src;
-    return 'images/' + cleanSrc.replace(/\//g, '-'); // flatten to single folder
+    return 'assets/' + cleanSrc.replace(/\//g, '-'); // flatten to single folder
   };
 
   // Fetch a local image and cache it
@@ -158,7 +158,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
           } else {
             const ext = match[1].replace('+xml', '').replace('jpeg', 'jpg');
             imgCounter++;
-            const localPath = `images/image-${imgCounter}.${ext}`;
+            const localPath = `assets/image-${imgCounter}.${ext}`;
             imageMap.set(src, localPath);
             img.setAttribute('src', localPath);
           }
@@ -168,6 +168,16 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       else if (isLocalPath(src)) {
         const localPath = await fetchLocalImage(src);
         img.setAttribute('src', localPath);
+      }
+    }
+
+    // 2a-2. Process <video> tags
+    const videoEls = baseDoc.querySelectorAll('video');
+    for (const vid of Array.from(videoEls)) {
+      const src = vid.getAttribute('src') || '';
+      if (isLocalPath(src)) {
+        const localPath = await fetchLocalImage(src);
+        vid.setAttribute('src', localPath);
       }
     }
 
@@ -188,7 +198,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         } else {
           const ext = bgBase64Match[2].replace('+xml', '').replace('jpeg', 'jpg');
           imgCounter++;
-          const localPath = `images/image-${imgCounter}.${ext}`;
+          const localPath = `assets/image-${imgCounter}.${ext}`;
           imageMap.set(fullDataUri, localPath);
           newStyle = newStyle.replace(fullDataUri, localPath);
         }
@@ -386,7 +396,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         const rawPath = m[1];
         if (isLocalPath(rawPath)) {
           const localPath = await fetchLocalImage(rawPath);
-          // Prepend ../ for paths inside the css/ folder to reach images/ folder correctly
+          // Prepend ../ for paths inside the css/ folder to reach assets/ folder correctly
           processedCss = processedCss.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '../' + localPath);
         }
       }
@@ -462,12 +472,12 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
   }
   
   // 5. Write all collected images to ZIP
-  const imgFolder = zip.folder('images')!;
+  const imgFolder = zip.folder('assets')!;
   
   // Base64 images
   for (const [dataUri, localPath] of imageMap.entries()) {
     if (!dataUri.startsWith('data:image/')) continue; // only base64
-    const fileName = localPath.replace('images/', '');
+    const fileName = localPath.replace('assets/', '');
     const base64Data = dataUri.split(',')[1];
     if (base64Data) {
       imgFolder.file(fileName, base64Data, { base64: true });
@@ -476,7 +486,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
 
   // Fetched local images (from /public/)
   for (const [localPath, buffer] of fetchedImages.entries()) {
-    const fileName = localPath.replace('images/', '');
+    const fileName = localPath.replace('assets/', '');
     imgFolder.file(fileName, buffer);
   }
 

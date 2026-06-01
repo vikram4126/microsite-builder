@@ -699,7 +699,7 @@ export default function Builder() {
 
       // Custom Video Background component type with pre-loaded options dropdown
       domc.addType('video-bg', {
-        extend: 'video',
+        extend: 'default',
         isComponent: (el: any) => {
           if (el.tagName !== 'VIDEO') return false;
           return (
@@ -709,6 +709,7 @@ export default function Builder() {
         },
         model: {
           defaults: {
+            tagName: 'video',
             traits: [
               {
                 type: 'select',
@@ -1133,6 +1134,7 @@ export default function Builder() {
         const selTag = (model.get('tagName') || '').toLowerCase();
         const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
         const isVideoSel = (typeof model.is === 'function' && model.is('video')) || model.get('type') === 'video' || model.get('type') === 'video-bg' || selTag === 'video';
+        const isTextSel = (typeof model.is === 'function' && model.is('text')) || model.get('type') === 'text' || ['h1','h2','h3','h4','h5','h6','p','span','a','b','i','strong','em'].includes(selTag);
         
         // Also check if any ancestor or child has a video — to auto-show media tab for entire video hero sections
         const hasVideoChild = !isVideoSel && typeof model.find === 'function' && model.find('video').length > 0;
@@ -1146,9 +1148,12 @@ export default function Builder() {
           return false;
         })();
 
-        if (isImgSel || isVideoSel || hasVideoChild || hasVideoAncestor) {
+        if (isTextSel) {
+          setActiveTab('style');
+        } else if (isImgSel || isVideoSel || hasVideoChild || hasVideoAncestor) {
           setActiveTab('media');
-        } else if (activeTabRef.current === 'layers' || activeTabRef.current === 'media') {
+        } else {
+          // Always switch to style tab for any non-image/video element selection
           setActiveTab('style');
         }
 
