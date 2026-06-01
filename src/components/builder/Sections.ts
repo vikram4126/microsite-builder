@@ -1397,7 +1397,7 @@ export const sectionsLibrary: SectionDef[] = [
           </div>
           
           <!-- 4-Column Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             
             <!-- Card 1 -->
             <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700">
@@ -1488,7 +1488,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div id="section-documents-text-content" data-gjs-type="section" data-gjs-name="Text Content Document" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
-          <div class="max-w-4xl">
+          <div class="w-full">
             <h2 class="text-4xl md:text-5xl font-display font-black text-[#0c233c] dark:text-white mb-10 tracking-tight">Lorem ipsum dolor sit</h2>
             
             <div class="mb-10">
@@ -1521,6 +1521,57 @@ export const sectionsLibrary: SectionDef[] = [
               </p>
             </div>
 
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-timeline-horizontal',
+    category: 'Timeline',
+    label: 'Horizontal Timeline',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Timeline</text><rect x="5" y="12" width="60" height="2" fill="#cbd5e1"/><rect x="10" y="25" width="12" height="15" fill="#1e49e2"/><rect x="22" y="32" width="12" height="15" fill="#1e49e2"/><rect x="34" y="25" width="12" height="15" fill="#1e49e2"/><rect x="46" y="32" width="12" height="15" fill="#1e49e2"/><rect x="58" y="25" width="12" height="15" fill="#1e49e2"/><rect x="70" y="32" width="12" height="15" fill="#1e49e2"/></svg>',
+    html: `
+      <div id="section-timeline-horizontal" data-gjs-type="section" data-gjs-name="Horizontal Timeline" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 tracking-tight">Timeline</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+            </p>
+          </div>
+          
+          <div class="flex flex-col md:flex-row w-full justify-center md:items-start max-w-6xl mx-auto">
+            <!-- Block 1 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">1</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
+            <!-- Block 2 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">2</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
+            <!-- Block 3 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">3</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
+            <!-- Block 4 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">4</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
+            <!-- Block 5 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">5</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
+            <!-- Block 6 -->
+            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+              <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">6</div>
+              <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
+            </div>
           </div>
         </div>
       </div>

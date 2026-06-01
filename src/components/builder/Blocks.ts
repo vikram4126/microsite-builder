@@ -574,26 +574,36 @@ export const registerBlocks = (editor: any) => {
 
   bm.add('cards-grid', {
     label: 'Feature Cards Grid',
-    category: 'Cards',
+    category: 'Documents',
     media: svgs.cards,
     content: `
-      <section class="py-16 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div id="feature-cards-grid" data-gjs-type="section" data-gjs-name="Feature Cards Grid" class="w-full bg-white dark:bg-slate-900 py-16" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+             <i class="fa-solid fa-pen-nib text-[#1e49e2] text-xl"></i>
+           </div>
            <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Design Tools</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Create beautiful interfaces with ease using our drag-and-drop components.</p>
         </div>
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+             <i class="fa-solid fa-chart-line text-[#1e49e2] text-xl"></i>
+           </div>
            <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Analytics Insights</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Track user behavior and optimize your funnel with real-time data metrics.</p>
         </div>
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
-           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg"></div>
+           <div class="w-10 h-10 mb-4 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+             <i class="fa-solid fa-cloud text-[#1e49e2] text-xl"></i>
+           </div>
            <h3 class="text-xl font-display font-bold mb-2 dark:text-white">Cloud Storage</h3>
            <p class="text-gray-600 dark:text-gray-400 text-sm">Keep all your assets secure and accessible anywhere in the world.</p>
         </div>
-      </section>
+          </div>
+        </div>
+      </div>
     `
   });
 
