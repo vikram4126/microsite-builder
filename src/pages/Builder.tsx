@@ -382,7 +382,17 @@ export default function Builder() {
             '/images/team-1.jpg', '/images/team-2.jpg', '/images/team-3.jpg', '/images/team-4.jpg', '/images/team-5.jpg',
             '/images/banner-background-1.jpg', '/images/banner-background-2.jpg', '/images/banner-background-3.jpg', '/images/banner-background-4.jpg', '/images/banner-background-5.jpg',
             '/images/image-1.png', '/images/image-2.png', '/images/image-3.png', '/images/image-4.png', '/images/image-5.png', '/images/image-6.jpg',
-            '/images/signature-image.png', '/images/signature.png'
+            '/images/signature-image.png', '/images/signature.png',
+            { type: 'video', src: '/videos/video-1.mp4' },
+            { type: 'video', src: '/videos/video-2.mp4' },
+            { type: 'video', src: '/videos/video-3.mp4' },
+            { type: 'video', src: '/videos/video-4.mp4' },
+            { type: 'video', src: '/videos/video-5.mp4' },
+            { type: 'video', src: '/videos/video-6.mp4' },
+            { type: 'video', src: '/videos/video-7.mp4' },
+            { type: 'video', src: '/videos/video-8.mp4' },
+            { type: 'video', src: '/videos/video-9.mp4' },
+            { type: 'video', src: '/videos/video-10.mp4' }
           ]
         },
         plugins: [],
