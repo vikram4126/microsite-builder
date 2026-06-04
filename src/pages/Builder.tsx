@@ -1594,14 +1594,15 @@ export default function Builder() {
     };
     const colors = themePresets[themeColor];
 
-    const previewHtml = [
+      const baseHref = window.location.href.split('?')[0].replace(/[^/]*$/, '');
+      const previewHtml = [
       '<!doctype html>',
       '<html lang="en">',
       '<head>',
       '<meta charset="utf-8">',
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
       '<title>Preview</title>',
-      '<base href="' + window.location.origin + '/">',
+      '<base href="' + baseHref + '">',
       '<style type="text/tailwindcss">',
       '  @custom-variant dark (&:where(.dark, .dark *));',
       '  @theme {',
@@ -1676,8 +1677,16 @@ export default function Builder() {
       '</body>',
       '</html>'
     ].join('\n');
-    const blob = new Blob([previewHtml], { type: 'text/html' });
-    previewWindowRef.current = window.open(URL.createObjectURL(blob), '_blank');
+    
+    const newWin = window.open('', '_blank');
+    if (newWin) {
+      newWin.document.open();
+      newWin.document.write(previewHtml);
+      newWin.document.close();
+      previewWindowRef.current = newWin;
+    } else {
+      toast.error('Popup blocked. Please allow popups to view preview.');
+    }
   };
 
   const addBlockToCanvas = (block: any) => {
