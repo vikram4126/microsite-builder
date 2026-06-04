@@ -3148,7 +3148,7 @@ export default function Builder() {
 
       {/* Hidden container for GrapesJS blocks */}
       <div id="gjs-blocks" className="hidden"></div>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </div>
   );
 }

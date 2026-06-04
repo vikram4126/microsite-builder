@@ -19,11 +19,27 @@ export const MediaUI = ({ editor }: { editor: any }) => {
   });
 
   const videoAssets = [
-    { src: '/videos/video-1.mp4', label: 'Tech Concept (Video 1)' },
-    { src: '/videos/video-2.mp4', label: 'Business Growth (Video 2)' },
-    { src: '/videos/video-3.mp4', label: 'Data Abstract (Video 3)' },
-    { src: '/videos/video-4.mp4', label: 'Corporate Office (Video 4)' },
-    { src: '/videos/video-5.mp4', label: 'Particle Loop (Video 5)' }
+    { src: '/videos/video-1.mp4', label: 'Video 1' },
+    { src: '/videos/video-2.mp4', label: 'Video 2' },
+    { src: '/videos/video-3.mp4', label: 'Video 3' },
+    { src: '/videos/video-4.mp4', label: 'Video 4' },
+    { src: '/videos/video-5.mp4', label: 'Video 5' },
+    { src: '/videos/video-6.mp4', label: 'Video 6' },
+    { src: '/videos/video-7.mp4', label: 'Video 7' },
+    { src: '/videos/video-8.mp4', label: 'Video 8' },
+    { src: '/videos/video-9.mp4', label: 'Video 9' },
+    { src: '/videos/video-10.mp4', label: 'Video 10' }
+  ];
+
+  const imageAssets = [
+    '/images/finance-1.jpg', '/images/finance-2.jpg', '/images/finance-3.jpg', '/images/finance-4.jpg', '/images/finance-5.jpg',
+    '/images/business-1.jpg', '/images/business-2.jpg', '/images/business-3.jpg', '/images/business-4.jpg', '/images/business-5.jpg',
+    '/images/audit-1.jpg', '/images/audit-2.jpg', '/images/audit-3.jpg', '/images/audit-4.jpg', '/images/audit-5.jpg',
+    '/images/tax-1.jpg', '/images/tax-2.jpg', '/images/tax-3.jpg', '/images/tax-4.jpg', '/images/tax-5.jpg',
+    '/images/team-1.jpg', '/images/team-2.jpg', '/images/team-3.jpg', '/images/team-4.jpg', '/images/team-5.jpg',
+    '/images/banner-background-1.jpg', '/images/banner-background-2.jpg', '/images/banner-background-3.jpg', '/images/banner-background-4.jpg', '/images/banner-background-5.jpg',
+    '/images/image-1.png', '/images/image-2.png', '/images/image-3.png', '/images/image-4.png', '/images/image-5.png', '/images/image-6.jpg',
+    '/images/signature-image.png', '/images/signature.png'
   ];
 
   useEffect(() => {
@@ -61,6 +77,15 @@ export const MediaUI = ({ editor }: { editor: any }) => {
               break;
             }
           }
+          
+          // STRICT BOUNDARY: Stop traversing if we hit a section container or the root wrapper
+          // This prevents finding videos from completely unrelated sections on the page!
+          const type = current.get('type');
+          const attrs = current.getAttributes?.() || {};
+          if (type === 'wrapper' || type === 'section' || current.is?.('wrapper') || attrs['data-gjs-type'] === 'section') {
+            break;
+          }
+          
           current = typeof current.parent === 'function' ? current.parent() : null;
         }
       }
@@ -119,9 +144,8 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     if (key === 'src') {
         if (mediaState.isImageTag || mediaState.isVideoTag) {
             target.set('src', value);
-            if (mediaState.isVideoTag) {
-              target.addAttributes({ src: value });
-            }
+            target.addAttributes({ src: value }); // Force update the DOM attribute
+            
             // If it's a video tag, force trigger load & play so it updates in real time inside GrapesJS iframe
             if (mediaState.isVideoTag) {
               setTimeout(() => {
@@ -151,11 +175,9 @@ export const MediaUI = ({ editor }: { editor: any }) => {
   const toggleGallery = () => {
     if (!showGallery) {
       if (mediaState.isVideoTag) {
-        // Videos don't load from general GrapesJS asset manager, we use our curated list
         setAssets(videoAssets);
       } else {
-        const allAssets = editor.AssetManager.getAll().models.map((m: any) => m.attributes);
-        setAssets(allAssets);
+        setAssets(imageAssets);
       }
       setShowGallery(true);
     } else {
@@ -251,15 +273,18 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                               </div>
                           ))
                         ) : (
-                          assets.map((asset, idx) => (
+                          assets.map((asset, idx) => {
+                            const src = typeof asset === 'string' ? asset : (asset.src || asset.id || '');
+                            return (
                               <div 
                                   key={idx} 
-                                  onClick={() => selectAsset(asset.src)}
+                                  onClick={() => selectAsset(src)}
                                   className="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-[#1e49e2] cursor-pointer transition-all shadow-sm bg-white"
                               >
-                                  <img src={asset.src} className="w-full h-full object-cover" />
+                                  <img src={src} className="w-full h-full object-cover" />
                               </div>
-                          ))
+                            );
+                          })
                         )}
                     </div>
                 ) : (
