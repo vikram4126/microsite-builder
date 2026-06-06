@@ -371,6 +371,9 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       '      --font-sans: "Open Sans", sans-serif;',
       '      --font-display: "Open Sans Condensed", sans-serif;',
       '    }',
+      '    @layer components {',
+      '      .container { max-width: 1280px !important; margin-left: auto; margin-right: auto; }',
+      '    }',
       '    body { font-family: "Open Sans", sans-serif; }',
       '    h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif; }',
       '  </style>',
@@ -453,6 +456,9 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
           --color-background-dark: var(--theme-background-dark, #071728);
           --font-sans: "Open Sans", sans-serif;
           --font-display: "Open Sans Condensed", sans-serif;
+        }
+        @layer components {
+          .container { max-width: 1280px !important; margin-left: auto; margin-right: auto; }
         }
       `;
       doc.head.appendChild(tailwindStyle);
