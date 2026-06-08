@@ -807,6 +807,151 @@ export const sectionsLibrary: SectionDef[] = [
     `
   },
   {
+    id: 'section-contact-meet-team',
+    category: 'Contacts',
+    label: 'Meet the team Grid',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="5" fill="#00338d" font-weight="bold">Meet the team</text><rect x="5" y="15" width="90" height="2" fill="#cbd5e1"/><rect x="5" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="28" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="51" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="74" y="25" width="20" height="25" fill="#e2e8f0"/></svg>',
+    html: `
+      <div id="section-meet-team" data-gjs-type="section" data-gjs-name="Meet the Team" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-6">Meet the team</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed max-w-4xl mb-6">
+              Our Transaction Services team brings together a diverse group of professionals with deep expertise in financial analysis, operational strategy, and deal execution. Throughout this engagement, the team has worked collaboratively to deliver insights, drive progress, and support informed decision-making.
+            </p>
+            <div class="flex items-center gap-2 text-[#00b8f5] font-semibold text-sm">
+              <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+              <span>Select a team member tile to learn more about their role and experience!</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            <!-- Card 1 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">John Doe</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Engagement Lead</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-2.jpg" alt="Sofia Almeida" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Sofia Almeida</h3>
+                  <p class="text-white/90 text-xs font-semibold pointer-events-auto">Senior Financial Analyst</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-3.jpg" alt="Daniel Okafor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Daniel Okafor</h3>
+                  <p class="text-white/90 text-xs font-semibold pointer-events-auto">Operations Consultant</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-4.jpg" alt="Pepita Perez" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Pepita Perez</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Risk & Compliance Advisor</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-5.jpg" alt="Liam Chen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Liam Chen</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Design & Reporting Specialist</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-6.jpg" alt="Nina Verhoeven" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Nina Verhoeven</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Transaction Strategy Advisor</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-7.jpg" alt="Jaya Menon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Jaya Menon</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Data & Insights Analyst</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="relative group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+              <img src="/team-member/member-8.jpg" alt="Clara Becker" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+                <div>
+                  <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Clara Becker</h3>
+                  <p class="text-white/80 text-xs font-semibold pointer-events-auto">Client Services Coordinator</p>
+                </div>
+                <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 'section-data-visualization-stats',
     category: 'Data Visualization',
     label: 'Circle Statistics Row',
@@ -1282,13 +1427,13 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div id="section-documents-grid-sidebar" data-gjs-type="section" data-gjs-name="Documents Grid with Sidebar" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             
             <!-- Left Side: Document Cards -->
-            <div class="lg:col-span-7 xl:col-span-8 flex flex-col">
+            <div class="md:col-span-7 lg:col-span-8 flex flex-col">
               <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-8 tracking-tight">Documents</h2>
               
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 flex-grow">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 flex-grow">
                 <!-- Card 1 -->
                 <div class="bg-[#1e49e2] text-white p-6 md:p-8 flex flex-col h-full">
                   <svg class="w-10 h-10 mb-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1361,7 +1506,7 @@ export const sectionsLibrary: SectionDef[] = [
             </div>
 
             <!-- Right Side: Text Sidebar -->
-            <div class="lg:col-span-5 xl:col-span-4 flex flex-col lg:pt-14">
+            <div class="md:col-span-5 xl:col-span-4 flex flex-col md:pt-14">
               <span class="text-xs font-bold text-[#7213ea] uppercase tracking-wider mb-3">DOCUMENTS</span>
               <h3 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 leading-tight">Lorem ipsum dolor sit</h3>
               
@@ -1541,7 +1686,7 @@ export const sectionsLibrary: SectionDef[] = [
             </p>
           </div>
           
-          <div class="flex flex-col md:flex-row w-full justify-center md:items-start max-w-6xl mx-auto">
+          <div class="flex flex-col md:flex-row w-full justify-center md:items-start mx-auto">
             <!-- Block 1 -->
             <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">1</div>
@@ -1576,5 +1721,197 @@ export const sectionsLibrary: SectionDef[] = [
         </div>
       </div>
     `
-  }
+  },
+  {
+    id: 'section-tabs-vertical',
+    category: 'Tabs',
+    label: 'Vertical Tabs',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Key Deal Insights</text><rect x="5" y="15" width="30" height="8" fill="#e2e8f0"/><rect x="5" y="25" width="30" height="8" fill="#f1f5f9"/><rect x="5" y="35" width="30" height="8" fill="#f1f5f9"/><rect x="38" y="15" width="57" height="38" fill="#1e49e2"/><circle cx="45" cy="22" r="3" fill="none" stroke="white"/><text x="52" y="23" font-size="3" fill="white" font-weight="bold">Key personnel</text><rect x="42" y="30" width="45" height="2" fill="white" opacity="0.8"/><rect x="42" y="35" width="45" height="2" fill="white" opacity="0.8"/><rect x="42" y="40" width="45" height="2" fill="white" opacity="0.8"/></svg>',
+    html: `
+      <div id="section-vertical-tabs" data-gjs-type="vertical-tabs" class="w-full py-16 md:py-24 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0 relative">
+          
+          <div class="tabs-container-wrapper relative">
+            <!-- Header -->
+            <div class="max-w-3xl mb-12">
+              <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-4 tracking-tight">Key Deal Insights</h2>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Overview of pre-deal, SPA, and post-deal themes relevant to your engagement.
+              </p>
+            </div>
+            
+            <style>
+              /* === Active panel reveal === */
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(1) input:checked) .deal-panels-container .deal-panel:nth-of-type(1),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(2) input:checked) .deal-panels-container .deal-panel:nth-of-type(2),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(3) input:checked) .deal-panels-container .deal-panel:nth-of-type(3),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(4) input:checked) .deal-panels-container .deal-panel:nth-of-type(4),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(5) input:checked) .deal-panels-container .deal-panel:nth-of-type(5),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(6) input:checked) .deal-panels-container .deal-panel:nth-of-type(6),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(7) input:checked) .deal-panels-container .deal-panel:nth-of-type(7),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(8) input:checked) .deal-panels-container .deal-panel:nth-of-type(8),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(9) input:checked) .deal-panels-container .deal-panel:nth-of-type(9),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(10) input:checked) .deal-panels-container .deal-panel:nth-of-type(10),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(11) input:checked) .deal-panels-container .deal-panel:nth-of-type(11),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(12) input:checked) .deal-panels-container .deal-panel:nth-of-type(12) {
+                opacity: 1; pointer-events: auto; z-index: 10;
+              }
+
+              /* === Active tab button indicator === */
+              .deal-labels-container label:has(input:checked) {
+                background-color: #f1f5f9;
+                color: #0c233c;
+                font-weight: 700;
+                border-left-color: #00b8f5 !important;
+                border-right-color: transparent !important;
+              }
+              .deal-labels-container label:has(input:checked) .deal-arrow {
+                color: #00b8f5;
+              }
+              @media (min-width: 768px) {
+                .deal-labels-container label:has(input:checked) {
+                  border-left-color: transparent !important;
+                  border-right-color: #00b8f5 !important;
+                }
+              }
+            </style>
+            
+            <div class="flex flex-col md:flex-row w-full bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700">
+              
+              <!-- Left: Tab Buttons (Labels) -->
+              <div class="deal-labels-container w-full md:w-5/12 lg:w-4/12 flex flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700">
+                 
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" checked />
+                    <span class="flex-1">Key financials</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+                 
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Accounting and Reporting</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+                 
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Key personnel</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Customers</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Suppliers & Technology</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Operational Considerations</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+
+                 <label class="deal-btn cursor-pointer text-left px-6 py-5 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
+                    <input type="radio" name="deal-tabs" class="hidden" />
+                    <span class="flex-1">Legal & Compliance</span>
+                    <svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                 </label>
+</div>
+              
+              <!-- Right: Tab Content Panels -->
+              <div class="deal-panels-container w-full md:w-7/12 lg:w-8/12 bg-[#1e49e2] relative min-h-[450px]">
+                
+                <!-- Panel 1 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">01</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Key financials</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Analysis of historical EBITDA adjustments and working capital trends.</li>
+                     <li><strong class="text-white">SPA:</strong> Advising on working capital target and net debt definition.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Integration costs and run-rate synergy realization tracking.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 2 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">02</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Accounting and Reporting</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Quality of earnings assessment and policy alignment.</li>
+                     <li><strong class="text-white">SPA:</strong> Accounting warranties and indemnities structure.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Day 1 reporting readiness and audit transition planning.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">03</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Key personnel</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Management team assessment and retention risk analysis.</li>
+                     <li><strong class="text-white">SPA:</strong> Key employee retention conditions and non-compete clauses.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Cultural integration and leadership alignment strategy.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 4 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">04</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Customers</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Concentration risk and churn analysis.</li>
+                     <li><strong class="text-white">SPA:</strong> Material contract change of control provisions.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Customer communication and cross-selling opportunities.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 5 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">05</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Suppliers & Technology</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Supply chain resilience and IT infrastructure assessment.</li>
+                     <li><strong class="text-white">SPA:</strong> TSA (Transition Service Agreement) scope and duration.</li>
+                     <li><strong class="text-white">Post-deal:</strong> ERP migration and vendor consolidation strategy.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 6 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">06</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Operational Considerations</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Facility footprint and operational bottleneck review.</li>
+                     <li><strong class="text-white">SPA:</strong> Environmental and regulatory compliance representations.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Process optimization and CapEx deployment plan.</li>
+                   </ul>
+                </div>
+
+                <!-- Panel 7 -->
+                <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
+                   <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">07</div>
+                   <h3 class="text-3xl font-display font-bold text-white mb-6">Legal & Compliance</h3>
+                   <ul class="text-white/90 space-y-4 list-disc pl-5">
+                     <li><strong class="text-white">Pre-deal:</strong> Regulatory landscape review and compliance risk assessment.</li>
+                     <li><strong class="text-white">SPA:</strong> Representations, warranties, and indemnification provisions.</li>
+                     <li><strong class="text-white">Post-deal:</strong> Legal entity rationalization and ongoing compliance monitoring.</li>
+                   </ul>
+                </div>
+                
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    `
+  },
 ];

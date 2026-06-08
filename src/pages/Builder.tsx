@@ -409,7 +409,7 @@ export default function Builder() {
         panels: { defaults: [] },
         deviceManager: {
           devices: [
-            { id: 'desktop', name: 'Desktop', width: '' },
+            { id: 'desktop', name: 'Desktop', width: '', widthMedia: '' },
             { id: 'tablet', name: 'Tablet', width: '768px', widthMedia: '992px' },
             { id: 'mobile', name: 'Mobile', width: '320px', widthMedia: '480px' },
           ]
@@ -585,6 +585,127 @@ export default function Builder() {
           }
         }
       });
+
+      // Register Vertical Tabs Widget Type
+      domc.addType('vertical-tabs', {
+        extend: 'section',
+        isComponent: (el: any) => el.getAttribute && el.getAttribute('data-gjs-type') === 'vertical-tabs',
+        model: {
+          defaults: {
+            name: 'Vertical Tabs',
+            traits: [
+              'id',
+              'title',
+              {
+                type: 'select',
+                name: 'numTabs',
+                label: 'Number of Tabs',
+                options: [
+                  { id: '1', name: '1' },
+                  { id: '2', name: '2' },
+                  { id: '3', name: '3' },
+                  { id: '4', name: '4' },
+                  { id: '5', name: '5' },
+                  { id: '6', name: '6' },
+                  { id: '7', name: '7' },
+                  { id: '8', name: '8' },
+                  { id: '9', name: '9' },
+                  { id: '10', name: '10' },
+                  { id: '11', name: '11' },
+                  { id: '12', name: '12' },
+                ]
+              },
+              {
+                type: 'layout-toggle',
+                name: 'layout-mode',
+                label: 'Content Layout Width',
+              }
+            ]
+          },
+          init() {
+            // Generate a unique name for radio inputs to prevent cross-block conflicts
+            this.uniqueRadioName = 'tabs-' + this.getId();
+
+            // Use timeout to ensure children are fully parsed into models
+            setTimeout(() => {
+              this.syncRadioNames();
+              // Set the trait value to match existing labels count
+              const labelsContainer = this.find('.deal-labels-container')[0];
+              if (labelsContainer) {
+                const count = labelsContainer.components().length;
+                this.getTrait('numTabs').set('value', count);
+              }
+            }, 100);
+
+            // GrapesJS fires 'change:attributes:traitName' when trait changes
+            this.listenTo(this, 'change:attributes:numTabs', this.handleNumTabsChange);
+          },
+          syncRadioNames() {
+            const labelsContainer = this.find('.deal-labels-container')[0];
+            if (!labelsContainer) return;
+            const labels = labelsContainer.components();
+            labels.forEach((label: any) => {
+              const radio = label.find('input[type="radio"]')[0];
+              if (radio) {
+                radio.addAttributes({ name: this.uniqueRadioName });
+              }
+            });
+          },
+          handleNumTabsChange() {
+            const newNum = parseInt(this.getAttributes()['numTabs'] || '6', 10);
+            if (isNaN(newNum) || newNum < 1 || newNum > 12) return;
+
+            const labelsContainer = this.find('.deal-labels-container')[0];
+            const panelsContainer = this.find('.deal-panels-container')[0];
+
+            if (!labelsContainer || !panelsContainer) return;
+
+            const currentLabels = labelsContainer.components();
+            const currentPanels = panelsContainer.components();
+            const currentNum = currentLabels.length;
+
+            if (newNum > currentNum) {
+              for (let i = currentNum; i < newNum; i++) {
+                const n = i + 1;
+                const numDisplay = n < 10 ? ('0' + n) : String(n);
+                const labelHtml = '<label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">'
+                  + '<input type="radio" name="' + this.uniqueRadioName + '" class="hidden" />'
+                  + '<span class="flex-1">New Tab ' + n + '</span>'
+                  + '<svg class="deal-arrow w-4 h-4 shrink-0 text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>'
+                  + '</label>';
+                const panelHtml = '<div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">'
+                  + '<div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center text-white font-bold text-sm mb-6 shrink-0">' + numDisplay + '</div>'
+                  + '<h3 class="text-3xl font-display font-bold text-white mb-6">New Tab ' + n + '</h3>'
+                  + '<p class="text-white/90">Add your content here for tab ' + n + '.</p>'
+                  + '</div>';
+                labelsContainer.append(labelHtml);
+                panelsContainer.append(panelHtml);
+              }
+            } else if (newNum < currentNum) {
+              for (let i = currentNum - 1; i >= newNum; i--) {
+                const l = currentLabels.at(i);
+                if (l) l.remove();
+                const p = currentPanels.at(i);
+                if (p) p.remove();
+              }
+              // Ensure at least one tab is checked
+              setTimeout(() => {
+                const remRadios = labelsContainer.find('input[type="radio"]');
+                let anyChecked = false;
+                remRadios.forEach((r: any) => {
+                  if (r.getAttributes().checked) anyChecked = true;
+                });
+                if (!anyChecked && remRadios.length > 0) {
+                  remRadios[0].addAttributes({ checked: 'checked' });
+                  const radioEl = remRadios[0].getEl() as HTMLInputElement;
+                  if (radioEl) radioEl.checked = true;
+                }
+              }, 50);
+            }
+          }
+        }
+      });
+
 
       // Register Custom Code Widget Type
       domc.addType('custom-code-block', {
@@ -816,6 +937,9 @@ export default function Builder() {
         tailwindStyle.innerHTML = `
           @custom-variant dark (&:where(.dark, .dark *));
           @theme {
+            --breakpoint-lg: 900px;
+            --breakpoint-xl: 1100px;
+            --breakpoint-2xl: 1300px;
             --color-primary: var(--theme-primary, #00338d);
             --color-secondary: var(--theme-secondary, #1e49e2);
             --color-accent: var(--theme-accent, #1e49e2);
@@ -867,92 +991,107 @@ export default function Builder() {
         injectTailwindTheme();
 
         // Make default template components easily selectable
-        const style = editor.Canvas.getDocument().createElement('style');
-        style.innerHTML = `
-          /* Enhanced visibility for layout grids and columns in editor mode */
-          body.gjs-dashed [data-gjs-type="responsive-grid"] > div,
-          body.gjs-dashed .container-custom > div {
-             outline: 1px dashed rgba(100, 116, 139, 0.6) !important;
-             outline-offset: -2px;
-             background-color: rgba(241, 245, 249, 0.3);
-          }
-          body.gjs-dashed [data-gjs-type="responsive-grid"],
-          body.gjs-dashed .container-custom {
-             outline: 1px dashed rgba(59, 130, 246, 0.6) !important;
-             outline-offset: -2px;
-          }
-          
-          /* Add a placeholder hint when columns are totally empty */
-          body.gjs-dashed [data-gjs-type="responsive-grid"] > div:empty::after,
-          body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
-          h1, h2, h3, h4, h5, h6 { font-family: 'Open Sans Condensed', sans-serif; }
-          * { box-sizing: inherit; }
-          .container-custom { width: 100%; max-width: 1200px; padding-left: 1rem; padding-right: 1rem; }
-          img { max-width: 100%; height: auto; }
-          
-          /* GrapesJS specific overrides for better editing experience */
-          .gjs-dashed *[data-gjs-type] {
-             outline: 1px dashed rgba(30, 73, 226, 0.4);
-             outline-offset: -2px;
-          }
-          .gjs-selected {
-             outline: 2px solid #1e49e2 !important;
-             outline-offset: -2px !important;
-             box-shadow: 0 0 0 4px rgba(30,73,226,0.2) !important;
-          }
-          .gjs-hovered {
-             outline: 2px dashed #00b894 !important;
-             outline-offset: -2px !important;
-          }
-          /* Improve drag and drop zone targeting for section blocks */
-          body.gjs-dashed [data-gjs-type="section"],
-          body.gjs-dashed .template-wrapper > * {
-             margin-top: 4px !important;
-             margin-bottom: 4px !important;
-          }
-          /* Placeholder component styles */
-          [data-gjs-type="default"]:empty, [data-gjs-type="responsive-grid"]:empty {
-             min-height: 10px;
-             border: 1px dashed rgba(0, 0, 0, 0.1);
-             display: flex;
-             align-items: center;
-             justify-content: center;
-          }
-          [data-gjs-type="default"]:empty::before, [data-gjs-type="responsive-grid"]:empty::before {
-             content: '';
-          }
+        const doc = editor.Canvas.getDocument();
+        if (doc) {
+          const style = doc.createElement('style');
+          style.innerHTML = `
+            /* Enhanced visibility for layout grids and columns in editor mode */
+            body.gjs-dashed [data-gjs-type="responsive-grid"] > div,
+            body.gjs-dashed .container-custom > div {
+               outline: 1px dashed rgba(100, 116, 139, 0.6) !important;
+               outline-offset: -2px;
+               background-color: rgba(241, 245, 249, 0.3);
+            }
+            body.gjs-dashed [data-gjs-type="responsive-grid"],
+            body.gjs-dashed .container-custom {
+               outline: 1px dashed rgba(59, 130, 246, 0.6) !important;
+               outline-offset: -2px;
+            }
+            
+            /* Add a placeholder hint when columns are totally empty */
+            body.gjs-dashed [data-gjs-type="responsive-grid"] > div:empty::after,
+            body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+            h1, h2, h3, h4, h5, h6 { font-family: 'Open Sans Condensed', sans-serif; }
+            * { box-sizing: inherit; }
+            .container-custom { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+            @media (min-width: 640px) { .container-custom { max-width: 640px; } }
+            @media (min-width: 768px) { .container-custom { max-width: 768px; } }
+            @media (min-width: 1024px) { .container-custom { max-width: 1024px; } }
+            @media (min-width: 1280px) { .container-custom { max-width: 1280px; } }
+            @media (min-width: 1536px) { .container-custom { max-width: 1536px; } }
+            
+            .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+            .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+            .grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+            .grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+            .grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+            .grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+            .grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }
+            .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  
+            @media (min-width: 768px) {
+              .md\\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+              .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+              .md\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+              .md\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+              .md\\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+              .md\\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+              .md\\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+              .md\\:grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+              .md\\:grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+              .md\\:grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+              .md\\:grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }
+              .md\\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            }
 
-          /* Tailwind Grid Dynamic Classes for GrapesJS Breakpoints */
-          @media (min-width: 481px) {
-            .sm\\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-            .sm\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .sm\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .sm\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-            .sm\\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-            .sm\\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-            .sm\\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
-            .sm\\:grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
-            .sm\\:grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }
-            .sm\\:grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }
-            .sm\\:grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }
-            .sm\\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-          }
-          @media (min-width: 993px) {
-            .md\\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .md\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .md\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-            .md\\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-            .md\\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-            .md\\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
-            .md\\:grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }
-            .md\\:grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }
-            .md\\:grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }
-            .md\\:grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }
-            .md\\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-          }
-        `;
-        editor.Canvas.getDocument().head.appendChild(style);
+            /* Documents Grid with Sidebar — inner cards: 1-col mobile, 2-col tablet/desktop */
+            @media (max-width: 480px) {
+              #section-documents-grid-sidebar .grid-cols-2 {
+                grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+              }
+            }
+          `;
+          doc.head.appendChild(style);
+          
+          // Enable interactive Tabs toggling natively using GrapesJS selection event for CSS-Only Tabs
+          editor.on('component:selected', (model: any) => {
+            const el = model.getEl();
+            if (!el || !el.classList || !el.classList.contains('deal-btn')) return;
+            
+            // Find the radio input component inside this label component
+            const radioComp = model.find('input[type="radio"]')[0];
+            if (!radioComp) return;
+
+            // GrapesJS component reference
+            const wrapperModel = model.closest('.tabs-container-wrapper');
+            if (!wrapperModel) return;
+
+            // Find all radio inputs in this wrapper component
+            const allRadios = wrapperModel.find('input[type="radio"]');
+            
+            allRadios.forEach((radio: any) => {
+              const radioEl = radio.getEl() as HTMLInputElement;
+              
+              if (radio === radioComp) {
+                // Set as checked in the model
+                radio.addAttributes({ checked: 'checked' });
+                // Force immediate DOM update for visual reflection
+                if (radioEl) radioEl.checked = true;
+              } else {
+                // Remove checked attribute from model
+                const attrs = { ...radio.getAttributes() };
+                delete attrs.checked;
+                radio.setAttributes(attrs);
+                // Force immediate DOM update for visual reflection
+                if (radioEl) radioEl.checked = false;
+              }
+            });
+          });
+        }
 
         // Turn on component outlines (borders) by default
         editor.Commands.run('sw-visibility');
@@ -1194,6 +1333,57 @@ export default function Builder() {
               { id: 'slide-up', name: 'Slide Up' },
               { id: 'zoom-in', name: 'Zoom In' }
             ]
+          });
+        }
+
+        if (!model.getTrait('href')) {
+          model.addTrait({
+            type: 'text',
+            name: 'href',
+            label: 'Link (URL)',
+            placeholder: 'https://...'
+          });
+        }
+
+        if (!model.getTrait('target')) {
+          model.addTrait({
+            type: 'select',
+            name: 'target',
+            label: 'Open In',
+            options: [
+              { id: '', name: 'Same Window' },
+              { id: '_blank', name: 'New Window' },
+            ]
+          });
+        }
+
+        if (!model.__hrefListenerAttached) {
+          model.__hrefListenerAttached = true;
+          model.on('change:attributes:href', () => {
+            const attrs = model.getAttributes();
+            const href = attrs.href;
+            const currentTag = model.get('tagName')?.toLowerCase();
+            
+            if (currentTag === 'img') return;
+
+            if (href && href.trim() !== '') {
+              if (currentTag !== 'a') {
+                if (!model.get('original-tag')) {
+                  model.set('original-tag', currentTag || 'div');
+                }
+                model.set('tagName', 'a');
+              }
+            } else {
+              if (currentTag === 'a' && model.get('original-tag')) {
+                const originalTag = model.get('original-tag');
+                model.set('tagName', originalTag);
+                model.set('original-tag', null);
+                const newAttrs = { ...attrs };
+                delete newAttrs.href;
+                delete newAttrs.target;
+                model.setAttributes(newAttrs);
+              }
+            }
           });
         }
 
@@ -1609,6 +1799,9 @@ export default function Builder() {
       '<style type="text/tailwindcss">',
       '  @custom-variant dark (&:where(.dark, .dark *));',
       '  @theme {',
+      '    --breakpoint-lg: 900px;',
+      '    --breakpoint-xl: 1100px;',
+      '    --breakpoint-2xl: 1300px;',
       `    --color-primary: ${colors.primary}; --color-secondary: ${colors.secondary}; --color-accent: ${colors.accent};`,
       '    --color-dark: #0c233c; --color-light-accent: #aceaff; --color-cta: #00b8f5;',
       '    --color-purple: #7213ea; --color-pink: #fd349c; --color-success: #00b894;',
