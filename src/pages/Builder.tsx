@@ -1169,34 +1169,11 @@ export default function Builder() {
           if (!sel) return;
           const parent = sel.parent();
           if (!parent) return;
-          const comps = parent.components();
-          const idx = comps.indexOf(sel);
-
+          const idx = sel.index();
+          // Only swap with the previous sibling, never jump into/out of containers
           if (idx > 0) {
-            const prevSibling = comps.at(idx - 1);
-            if (isContainer(prevSibling)) {
-              // Move INTO the container, just above its LAST child
-              const targetComps = prevSibling.components();
-              const targetIdx = Math.max(0, targetComps.length);
-              comps.remove(sel);
-              targetComps.add(sel, { at: targetIdx });
-              ed.select(sel);
-              return;
-            }
-
-            // Normal sibling swap
-            comps.remove(sel);
-            comps.add(sel, { at: idx - 1 });
+            sel.move(parent, { at: idx - 1 });
             ed.select(sel);
-          } else {
-            // At the top of parent. Move OUT of parent, just ABOVE the parent.
-            const grandParent = parent.parent();
-            if (grandParent && isContainer(parent)) {
-              const pIdx = grandParent.components().indexOf(parent);
-              parent.components().remove(sel);
-              grandParent.components().add(sel, { at: pIdx });
-              ed.select(sel);
-            }
           }
         }
       });
@@ -1208,32 +1185,11 @@ export default function Builder() {
           const parent = sel.parent();
           if (!parent) return;
           const comps = parent.components();
-          const idx = comps.indexOf(sel);
-
+          const idx = sel.index();
+          // Only swap with the next sibling, never jump into/out of containers
           if (idx < comps.length - 1) {
-            const nextSibling = comps.at(idx + 1);
-            if (isContainer(nextSibling)) {
-              // Move INTO the container, just BELOW its FIRST child
-              const targetComps = nextSibling.components();
-              const targetIdx = Math.min(targetComps.length, 0);
-              comps.remove(sel);
-              targetComps.add(sel, { at: targetIdx });
-              ed.select(sel);
-              return;
-            }
-
-            comps.remove(sel);
-            comps.add(sel, { at: idx + 1 });
+            sel.move(parent, { at: idx + 2 });
             ed.select(sel);
-          } else {
-            // At the bottom of parent. Move OUT of parent, just BELOW the parent.
-            const grandParent = parent.parent();
-            if (grandParent && isContainer(parent)) {
-              const pIdx = grandParent.components().indexOf(parent);
-              parent.components().remove(sel);
-              grandParent.components().add(sel, { at: pIdx + 1 });
-              ed.select(sel);
-            }
           }
         }
       });
@@ -1255,6 +1211,39 @@ export default function Builder() {
           const sel = ed.getSelected();
           if (sel) {
             sel.remove();
+          }
+        }
+      });
+      editor.Commands.add('custom:hide', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          const currentStyle = sel.getStyle();
+          const isHidden = currentStyle['display'] === 'none';
+          if (isHidden) {
+            // Restore: remove display:none
+            const newStyle = { ...currentStyle };
+            delete newStyle['display'];
+            sel.setStyle(newStyle);
+            // Update toolbar icon to indicate visible state
+            const toolbar = sel.get('toolbar') || [];
+            const updated = toolbar.map((t: any) =>
+              t.command === 'custom:hide'
+                ? { ...t, attributes: { ...t.attributes, class: 'fa fa-eye', title: 'Hide Element' } }
+                : t
+            );
+            sel.set('toolbar', updated);
+          } else {
+            // Hide: set display:none
+            sel.setStyle({ ...currentStyle, display: 'none' });
+            // Update toolbar icon to indicate hidden state
+            const toolbar = sel.get('toolbar') || [];
+            const updated = toolbar.map((t: any) =>
+              t.command === 'custom:hide'
+                ? { ...t, attributes: { ...t.attributes, class: 'fa fa-eye-slash', title: 'Show Element' } }
+                : t
+            );
+            sel.set('toolbar', updated);
           }
         }
       });
@@ -1417,11 +1406,13 @@ export default function Builder() {
         }
 
         // Set custom toolbar
+        const isCurrentlyHidden = (model.getStyle()?.['display'] === 'none');
         model.set('toolbar', [
           { attributes: { class: 'fa fa-arrow-up', title: 'Move Up' }, command: 'custom:move-up' },
           { attributes: { class: 'fa fa-arrow-down', title: 'Move Down' }, command: 'custom:move-down' },
           { attributes: { class: 'fa fa-plus', title: 'Add Inside' }, command: 'custom:add-inside' },
           { attributes: { class: 'fa fa-clone', title: 'Clone' }, command: 'custom:clone' },
+          { attributes: { class: isCurrentlyHidden ? 'fa fa-eye-slash' : 'fa fa-eye', title: isCurrentlyHidden ? 'Show Element' : 'Hide Element' }, command: 'custom:hide' },
           { attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' },
         ]);
       });
