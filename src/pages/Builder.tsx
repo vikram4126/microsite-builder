@@ -1412,7 +1412,6 @@ export default function Builder() {
           { attributes: { class: 'fa fa-arrow-down', title: 'Move Down' }, command: 'custom:move-down' },
           { attributes: { class: 'fa fa-plus', title: 'Add Inside' }, command: 'custom:add-inside' },
           { attributes: { class: 'fa fa-clone', title: 'Clone' }, command: 'custom:clone' },
-          { attributes: { class: isCurrentlyHidden ? 'fa fa-eye-slash' : 'fa fa-eye', title: isCurrentlyHidden ? 'Show Element' : 'Hide Element' }, command: 'custom:hide' },
           { attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' },
         ]);
       });

@@ -32,7 +32,7 @@ export const registerTemplates = (editor: any) => {
 <div data-gjs-type="default" data-gjs-droppable="true" data-gjs-custom-name="Template 2" class="template-wrapper w-full flex flex-col min-h-screen">
   
   <!-- 2. Header Hero -->
-  <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-24" layout-mode="container">
+  <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-20" layout-mode="container">
     <div class="container mx-auto text-white text-center">
       <div class="mx-auto flex flex-col items-center w-full">
         <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
@@ -89,7 +89,7 @@ export const registerTemplates = (editor: any) => {
   </div>
 
   <!-- 5. Cards Grid -->
-  <div id="cards-grid" data-gjs-type="section" data-gjs-name="Cards Grid" class="w-full py-16 bg-white dark:bg-slate-900" layout-mode="container">
+  <div id="cards-grid" data-gjs-type="section" data-gjs-name="Cards Grid" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm w-full">
@@ -112,7 +112,7 @@ export const registerTemplates = (editor: any) => {
   </div>
 
   <!-- 6. Corporate Footer -->
-  <div id="business-footer" data-gjs-type="section" data-gjs-name="Footer" class="w-full bg-slate-50 py-16 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+  <div id="business-footer" data-gjs-type="section" data-gjs-name="Footer" class="w-full bg-slate-50 py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
       <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div class="flex flex-col gap-6 w-full items-start">

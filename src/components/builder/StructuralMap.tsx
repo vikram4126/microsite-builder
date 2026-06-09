@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Trash2, Copy, Folder, FileText, Image as ImageIcon, Layout as LayoutIcon, Plus } from 'lucide-react';
+import { Trash2, Copy, Folder, FileText, Image as ImageIcon, Layout as LayoutIcon, Plus, Eye, EyeOff } from 'lucide-react';
 
 interface StructuralMapProps {
   editor: any;
@@ -107,15 +107,16 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
     try {
       const parent = model.parent();
       if (parent) {
-        const index = model.index();
-        const componentData = JSON.parse(JSON.stringify(model.toJSON()));
-        // Adding a new component with the same data clones it
-        const cloned = parent.add(componentData, { at: index + 1 });
+        const cloned = model.clone();
+        const index = parent.components().indexOf(model);
+        parent.components().add(cloned, { at: index + 1 });
         
-        editor.refresh();
-        refreshTree();
         editor.select(cloned);
         editor.Canvas.scrollToComponent(cloned, { force: true });
+        
+        // Force a UI refresh
+        editor.refresh();
+        refreshTree();
       }
     } catch (err) {
       console.error('Unified Clone failed:', err);
@@ -135,7 +136,6 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
           onDrop={handleDrop}
           onClone={handleClone}
           draggedCid={draggedCid}
-          isParentHorizontal={false}
         />
       ))}
       <button 
@@ -148,41 +148,74 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
   );
 };
 
-// --- COMPONENT CLASSIFICATION ---
+// --- COMPONENT CLASSIFICATION & ABSTRACTION ---
+const getSmartColumnName = (node: any) => {
+  let hasText = false;
+  let hasMedia = false;
+  let hasMenu = false;
+  let hasLogo = false;
+
+  const walk = (n: any) => {
+    if (!n) return;
+    const tagName = (n.get('tagName') || '').toLowerCase();
+    const classes = n.getClasses?.() || [];
+    
+    if (tagName === 'img' || tagName === 'svg' || tagName === 'video' || n.get('type') === 'image') hasMedia = true;
+    if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'].includes(tagName)) hasText = true;
+    if (tagName === 'ul' || tagName === 'nav' || classes.includes('menu')) hasMenu = true;
+    if (classes.includes('logo') || (tagName === 'img' && classes.join('').includes('logo'))) hasLogo = true;
+    
+    const children = n.get('components')?.models || [];
+    children.forEach(walk);
+  };
+  
+  walk(node);
+
+  if (hasLogo) return { name: "Logo", icon: "media" };
+  if (hasMenu) return { name: "Menu", icon: "folder" };
+  if (hasMedia && !hasText) return { name: "Media", icon: "media" };
+  if (hasText && !hasMedia) return { name: "Text Content", icon: "text" };
+  if (hasText && hasMedia) return { name: "Content Card", icon: "layout" };
+  
+  return { name: "Block", icon: "layout" };
+};
+
 const getComponentMeta = (node: any) => {
   const type = (node.get('type') || '').toLowerCase();
   const tagName = (node.get('tagName') || '').toLowerCase();
   const classes = node.getClasses?.() || [];
 
-  if (type === 'section') return { name: 'Section', isHorizontal: false, skip: false, icon: 'folder' };
+  if (type === 'section' || tagName === 'header' || tagName === 'footer' || tagName === 'nav') {
+    return { name: 'Section', skip: false, icon: 'folder', terminal: false };
+  }
   
-  const isLayout = ['responsive-grid', 'row', 'grid-row'].includes(type) || classes.includes('grid') || classes.includes('flex-row');
+  const isLayout = ['responsive-grid', 'row', 'grid-row'].includes(type) || classes.includes('grid') || classes.includes('flex-row') || classes.includes('flex');
   if (isLayout) {
-    return { name: 'Row', isHorizontal: true, skip: false, icon: 'layout' };
+    return { name: 'Layout Row', skip: false, isRow: true, icon: 'layout', terminal: false };
   }
 
   const isText = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'text'].includes(type) || ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'].includes(tagName);
-  if (isText) return { name: 'Text', isHorizontal: false, skip: false, icon: 'text', terminal: true };
+  if (isText) return { name: 'Text', skip: false, icon: 'text', terminal: true };
   
-  if (type === 'image' || type === 'media' || tagName === 'img' || tagName === 'svg') return { name: 'Media', isHorizontal: false, skip: false, icon: 'media', terminal: true };
-  if (type === 'link' || type === 'button' || tagName === 'a' || tagName === 'button') return { name: 'Link', isHorizontal: false, skip: false, icon: 'file', terminal: true };
+  if (type === 'image' || type === 'media' || tagName === 'img' || tagName === 'svg') return { name: 'Media', skip: false, icon: 'media', terminal: true };
   
-  const isCol = ['column', 'col', 'cell'].includes(type) || classes.some((c: string) => c.startsWith('col-'));
-  if (isCol) return { name: 'Col', isHorizontal: false, skip: false, icon: 'file', terminal: true };
+  if (type === 'link' || type === 'button' || tagName === 'a' || tagName === 'button') return { name: 'Button/Link', skip: false, icon: 'file', terminal: true };
 
-  if (tagName === 'div') {
-    return { name: 'Col', isHorizontal: false, skip: true };
-  }
-
-  return { name: 'Block', isHorizontal: false, skip: false, icon: 'file' };
+  // Treat all other structural wrappers as skipped so we flatten the tree
+  return { name: 'Block', skip: true, terminal: false, icon: 'file' };
 };
 
-const getMeaningfulChildren = (node: any, isParentHorizontal: boolean = false): any[] => {
+const getMeaningfulChildren = (node: any, isParentRow: boolean = false): any[] => {
   const children = node.get('components').models;
   const result: any[] = [];
   children.forEach((child: any) => {
     const meta = getComponentMeta(child);
-    if (isParentHorizontal) {
+    
+    // If the parent was a Layout Row, then THIS child is a Column!
+    // Columns are NOT skipped, and they ARE terminal (they hide their children)
+    if (isParentRow) {
+       // We attach a dynamic flag to let the MapNode know it's a semantic column
+       child.__isSemanticColumn = true;
        result.push(child);
     } else if (meta.skip) {
       result.push(...getMeaningfulChildren(child, false));
@@ -202,17 +235,66 @@ const MapNode: React.FC<{
   onDrop: (targetCid: string, position: 'before' | 'after' | 'inside') => void;
   onClone: (cid: string) => void;
   draggedCid: string | null;
-  isParentHorizontal: boolean;
 }> = ({ 
-  node, editor, selectedCid, onDragStart, onDragEnd, onDrop, onClone, draggedCid, isParentHorizontal 
+  node, editor, selectedCid, onDragStart, onDragEnd, onDrop, onClone, draggedCid
 }) => {
   const [dropIndicator, setDropIndicator] = useState<'before' | 'after' | 'inside' | null>(null);
   const meta = getComponentMeta(node);
+  const isSemanticColumn = !!node.__isSemanticColumn;
   const isSelected = selectedCid === node.cid;
   const isSection = meta.name === 'Section';
+  const isLayoutRow = meta.isRow;
+  const [isHidden, setIsHidden] = useState(false);
 
-  const isTerminal = meta.terminal || isParentHorizontal;
-  const children = !isTerminal ? getMeaningfulChildren(node, meta.isHorizontal) : [];
+  useEffect(() => {
+    const style = node.getStyle() || {};
+    setIsHidden(style.display === 'none');
+    
+    const handleStyleChange = () => {
+      const currentStyle = node.getStyle() || {};
+      setIsHidden(currentStyle.display === 'none');
+    };
+    
+    node.on('change:style', handleStyleChange);
+    return () => {
+      node.off('change:style', handleStyleChange);
+    };
+  }, [node]);
+
+  const handleToggleVisibility = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const currentStyle = node.getStyle() || {};
+    if (isHidden) {
+      const newStyle = { ...currentStyle };
+      delete newStyle.display;
+      node.setStyle(newStyle);
+      
+      if (isSelected) {
+        const toolbar = node.get('toolbar') || [];
+        const updated = toolbar.map((t: any) =>
+          t.command === 'custom:hide'
+            ? { ...t, attributes: { ...t.attributes, class: 'fa fa-eye', title: 'Hide Element' } }
+            : t
+        );
+        node.set('toolbar', updated);
+      }
+    } else {
+      node.setStyle({ ...currentStyle, display: 'none' });
+      
+      if (isSelected) {
+        const toolbar = node.get('toolbar') || [];
+        const updated = toolbar.map((t: any) =>
+          t.command === 'custom:hide'
+            ? { ...t, attributes: { ...t.attributes, class: 'fa fa-eye-slash', title: 'Show Element' } }
+            : t
+        );
+        node.set('toolbar', updated);
+      }
+    }
+  };
+
+  const isTerminal = meta.terminal || isSemanticColumn;
+  const children = !isTerminal ? getMeaningfulChildren(node, isLayoutRow) : [];
 
   const handleSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -225,12 +307,21 @@ const MapNode: React.FC<{
     node.remove();
   };
 
+  let iconType = meta.icon;
+  let defaultName = meta.name;
+  
+  if (isSemanticColumn) {
+     const smart = getSmartColumnName(node);
+     iconType = smart.icon;
+     defaultName = smart.name;
+  }
+
   const getIcon = () => {
     const iconClass = "w-2 h-2";
-    if (meta.icon === 'text') return <span className="text-[7.5px] font-black">TT</span>;
-    if (meta.icon === 'media') return <ImageIcon className={iconClass} />;
-    if (meta.icon === 'folder') return <Folder className={iconClass} />;
-    if (meta.icon === 'layout') return <LayoutIcon className={iconClass} />;
+    if (iconType === 'text') return <span className="text-[7.5px] font-black">TT</span>;
+    if (iconType === 'media') return <ImageIcon className={iconClass} />;
+    if (iconType === 'folder') return <Folder className={iconClass} />;
+    if (iconType === 'layout') return <LayoutIcon className={iconClass} />;
     return <FileText className={iconClass} />;
   };
 
@@ -241,10 +332,9 @@ const MapNode: React.FC<{
   const nameProp = node.get('name');
   const attrName = node.getAttributes?.()?.['data-gjs-name'];
   
-  let displayName = customName || nameProp || attrName || meta.name;
+  let displayName = customName || nameProp || attrName || defaultName;
   
-  if (isParentHorizontal) displayName = "Col";
-  else if (meta.name === 'Text' && !customName && !nameProp && !attrName) {
+  if (meta.name === 'Text' && !customName && !nameProp && !attrName) {
     const rawContent = node.get('content') || "";
     const cleanContent = rawContent.replace(/<[^>]*>?/gm, '').trim();
     if (cleanContent) {
@@ -254,11 +344,11 @@ const MapNode: React.FC<{
 
   return (
     <div 
-      className={`relative ${isParentHorizontal ? 'flex-1 min-w-[20px]' : 'w-full'} ${isDragging ? 'opacity-30' : ''} transition-all`}
+      className={`relative ${isSemanticColumn ? 'flex-1 min-w-[20px]' : 'w-full'} ${isDragging ? 'opacity-30' : ''} transition-all`}
       onDragOver={(e) => {
         e.preventDefault(); e.stopPropagation();
         if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
-        const rect = e.currentTarget.getBoundingClientRect();
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
         const y = e.clientY - rect.top;
         if (isSection) {
            if (y < rect.height * 0.2) setDropIndicator('before');
@@ -269,27 +359,34 @@ const MapNode: React.FC<{
            else setDropIndicator('after');
         }
       }}
-      onDragLeave={() => setDropIndicator(null)}
+      onDragLeave={(e) => {
+        // Only clear if we're truly leaving this node (not entering a child)
+        const related = e.relatedTarget as HTMLElement | null;
+        if (!e.currentTarget.contains(related)) {
+          setDropIndicator(null);
+        }
+      }}
       onDrop={(e) => {
         e.preventDefault(); e.stopPropagation();
         if (dropIndicator) onDrop(node.cid, dropIndicator);
         setDropIndicator(null);
       }}
-      onDragEnd={(e) => {
-        e.preventDefault(); e.stopPropagation();
-        onDragEnd();
-      }}
     >
-      {!isParentHorizontal && dropIndicator === 'before' && <div className="h-0.5 bg-[#1e49e2] rounded-none mb-0.5 animate-pulse" />}
+      {!isSemanticColumn && dropIndicator === 'before' && <div className="h-0.5 bg-[#1e49e2] rounded-none mb-0.5 animate-pulse" />}
 
       <div 
         draggable
         onDragStart={(e) => {
+          e.stopPropagation();
           if (e.dataTransfer) {
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/plain', node.cid);
           }
           onDragStart(node.cid);
+        }}
+        onDragEnd={(e) => {
+          e.stopPropagation();
+          onDragEnd();
         }}
         onClick={handleSelect}
         className={`
@@ -297,18 +394,21 @@ const MapNode: React.FC<{
           ${isSection ? 'bg-[#f3f4f6] rounded-none border border-gray-200 p-2' : 'bg-white rounded-none border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] p-1.5 mt-1'}
           ${isSelected ? 'ring-1 ring-[#1e49e2] border-[#1e49e2] bg-blue-50/20' : 'hover:border-[#1e49e2]/30'}
           ${dropIndicator === 'inside' ? 'bg-blue-50' : ''}
-          ${isParentHorizontal ? 'mt-0 mx-0.5' : ''}
+          ${isSemanticColumn ? 'mt-0 mx-0.5' : ''}
         `}
       >
         <div className="flex items-center gap-1.5 overflow-hidden">
           <div className={`flex-shrink-0 w-4 h-4 rounded-none flex items-center justify-center border ${isSection ? 'bg-slate-200 text-slate-600 border-slate-300' : 'bg-gray-50 text-slate-400 border-gray-100'}`}>
             {getIcon()}
           </div>
-          <span className={`text-[8px] tracking-wider truncate ${isSection ? 'font-black text-slate-800' : 'font-bold text-slate-500'}`}>
+          <span className={`text-[8px] tracking-wider truncate ${isSection ? 'font-black text-slate-800' : 'font-bold text-slate-500'} ${isHidden ? 'opacity-50' : ''}`}>
             {displayName}
           </span>
-          {!isParentHorizontal && (
+          {!isSemanticColumn && (
             <div className="ml-auto flex items-center gap-1 opacity-0 group-hover:opacity-100">
+               <button onClick={handleToggleVisibility} title={isHidden ? "Show" : "Hide"} className={`p-0.5 transition-all ${isHidden ? 'text-gray-400 hover:text-[#1e49e2]' : 'hover:text-[#1e49e2]'}`}>
+                {isHidden ? <EyeOff className="w-2 h-2" /> : <Eye className="w-2 h-2" />}
+               </button>
                <button onClick={(e) => { e.stopPropagation(); onClone(node.cid); }} title="Clone" className="p-0.5 hover:text-[#1e49e2] transition-all">
                 <Copy className="w-2 h-2" />
                </button>
@@ -320,7 +420,7 @@ const MapNode: React.FC<{
         </div>
 
         {children.length > 0 && (
-          <div className={`mt-1 ${meta.isHorizontal ? 'flex flex-row gap-0.5 w-full mt-1.5' : 'flex flex-col mt-1'}`}>
+          <div className={`mt-1 ${isLayoutRow ? 'flex flex-row gap-0.5 w-full mt-1.5' : 'flex flex-col mt-1'}`}>
             {children.map((child: any) => (
               <MapNode 
                 key={child.cid} 
@@ -332,14 +432,13 @@ const MapNode: React.FC<{
                 onDrop={onDrop}
                 onClone={onClone}
                 draggedCid={draggedCid}
-                isParentHorizontal={meta.isHorizontal}
               />
             ))}
           </div>
         )}
       </div>
 
-      {!isParentHorizontal && dropIndicator === 'after' && <div className="h-0.5 bg-[#1e49e2] rounded-none mt-0.5 animate-pulse" />}
+      {!isSemanticColumn && dropIndicator === 'after' && <div className="h-0.5 bg-[#1e49e2] rounded-none mt-0.5 animate-pulse" />}
     </div>
   );
 };

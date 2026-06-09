@@ -56,7 +56,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/header-hero.jpg" class="object-cover" />',
     content: `
-      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-10 md:py-[60px] lg:py-24" layout-mode="container">
+      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-white text-center">
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
@@ -79,7 +79,7 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div id="video-hero-section" data-gjs-type="section" data-gjs-name="Video Hero Header" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20 lg:py-32" layout-mode="container">
+      <div id="video-hero-section" data-gjs-type="section" data-gjs-name="Video Hero Header" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
         <!-- Video Background Element -->
         <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
         
@@ -125,7 +125,7 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div id="video-hero-section-plain" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20 lg:py-32" layout-mode="container">
+      <div id="video-hero-section-plain" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
         <!-- Video Background Element -->
         <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
         
@@ -174,7 +174,7 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div data-gjs-type="section" data-gjs-name="Split Banner Video" class="w-full bg-[#0c233c] py-10 md:py-[60px] lg:py-24 overflow-hidden" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Split Banner Video" class="w-full bg-[#0c233c] py-20 overflow-hidden" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
 
@@ -234,7 +234,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: svgs.partnerMessage,
     content: `
-      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Partner Message Section" class="w-full py-16 md:py-24 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Partner Message Section" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-10 tracking-tight">A message from our Global Lead Partner</h2>
           <div class="flex flex-col lg:flex-row gap-12 w-full items-start">
@@ -285,7 +285,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/center-white.jpg" class="object-cover" />',
     content: `
-      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-10 md:py-[60px] lg:py-24" layout-mode="container">
+      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-center">
           <div class="mx-auto flex flex-col items-center justify-center w-full">
             <h1 class="text-5xl font-display font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
@@ -577,7 +577,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Documents',
     media: svgs.cards,
     content: `
-      <div id="feature-cards-grid" data-gjs-type="section" data-gjs-name="Feature Cards Grid" class="w-full bg-white dark:bg-slate-900 py-16" layout-mode="container">
+      <div id="feature-cards-grid" data-gjs-type="section" data-gjs-name="Feature Cards Grid" class="w-full bg-white dark:bg-slate-900 py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
