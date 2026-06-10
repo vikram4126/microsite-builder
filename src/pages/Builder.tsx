@@ -586,6 +586,39 @@ export default function Builder() {
         }
       });
 
+      // Register Custom Background Video Widget
+      domc.addType('bg-video', {
+        extend: 'video',
+        isComponent: (el: any) => el.tagName === 'VIDEO' && el.getAttribute('data-gjs-type') === 'bg-video',
+        model: {
+          defaults: {
+            name: 'Background Video',
+            provider: 'so',
+            controls: false, // Ensure controls are always disabled
+            autoplay: true,
+            loop: true,
+            muted: true,
+            traits: ['id', 'title', 'src', 'poster'],
+            attributes: {
+              autoplay: 'autoplay',
+              loop: 'loop',
+              muted: 'muted',
+              playsinline: 'playsinline'
+            },
+            style: {
+              width: '100%',
+              height: '100%',
+              'min-width': '100%',
+              'min-height': '100%',
+              'object-fit': 'cover',
+              position: 'absolute',
+              top: '0',
+              left: '0'
+            }
+          }
+        }
+      });
+
       // Register Vertical Tabs Widget Type
       domc.addType('vertical-tabs', {
         extend: 'section',
@@ -1011,6 +1044,31 @@ export default function Builder() {
             /* Add a placeholder hint when columns are totally empty */
             body.gjs-dashed [data-gjs-type="responsive-grid"] > div:empty::after,
             body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+            
+            /* Force background videos to fill container regardless of GrapesJS defaults */
+            .gjs-video-bg {
+               width: 100% !important;
+               height: 100% !important;
+               min-width: 100% !important;
+               min-height: 100% !important;
+               position: absolute !important;
+               top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+               max-width: none !important;
+               border: none !important;
+               margin: 0 !important;
+               padding: 0 !important;
+               overflow: hidden !important;
+            }
+            .gjs-video-bg * {
+               width: 100% !important;
+               height: 100% !important;
+               min-width: 100% !important;
+               min-height: 100% !important;
+               object-fit: cover !important;
+               object-position: center !important;
+               display: block !important;
+            }
+
             h1, h2, h3, h4, h5, h6 { font-family: 'Open Sans Condensed', sans-serif; }
             * { box-sizing: inherit; }
             .container-custom { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
@@ -1092,6 +1150,44 @@ export default function Builder() {
             });
           });
         }
+
+        // --- VIDEO AUTOPLAY IN CANVAS ---
+        // Inject a MutationObserver into the canvas iframe so any <video> element
+        // added to the canvas (via block OR template drop) gets auto-played instantly.
+        const injectVideoAutoplay = () => {
+          try {
+            const iframe = editor.Canvas.getFrameEl();
+            const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
+            if (!iframeDoc || (iframeDoc as any).__videoObserverInjected) return;
+            (iframeDoc as any).__videoObserverInjected = true;
+
+            // Play all existing videos immediately
+            iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
+              v.muted = true; v.play().catch(() => {});
+            });
+
+            // Watch for new video elements added dynamically
+            const observer = new (iframe.contentWindow as any).MutationObserver((mutations: any[]) => {
+              mutations.forEach((m: any) => {
+                m.addedNodes.forEach((node: any) => {
+                  if (node.nodeType !== 1) return;
+                  const videos = node.tagName === 'VIDEO'
+                    ? [node]
+                    : Array.from(node.querySelectorAll?.('video') || []);
+                  videos.forEach((v: any) => { v.muted = true; v.play().catch(() => {}); });
+                });
+              });
+            });
+            observer.observe(iframeDoc.body, { childList: true, subtree: true });
+          } catch (_) {}
+        };
+
+        // Run immediately and also re-run after a short delay in case iframe is still loading
+        injectVideoAutoplay();
+        setTimeout(injectVideoAutoplay, 800);
+
+        // Re-inject whenever canvas reloads (theme change, page switch, etc.)
+        editor.on('canvas:frame:load', injectVideoAutoplay);
 
         // Turn on component outlines (borders) by default
         editor.Commands.run('sw-visibility');
@@ -1690,10 +1786,44 @@ export default function Builder() {
       } else if (model.get('data-gjs-name') === 'Navbar') {
         model.set({ removable: false, copyable: false });
       }
+
+      // Force-play any video elements added to the canvas (GrapesJS iframe doesn't execute scripts)
+      setTimeout(() => {
+        try {
+          const iframe = editor.Canvas.getFrameEl();
+          const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
+          if (iframeDoc) {
+            iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
+              v.muted = true;
+              v.play().catch(() => {});
+            });
+          }
+        } catch (_) {}
+      }, 300);
+    };
+
+    // Also play videos whenever the canvas reloads (e.g. template drop)
+    const playAllCanvasVideos = () => {
+      setTimeout(() => {
+        try {
+          const iframe = editor.Canvas.getFrameEl();
+          const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
+          if (iframeDoc) {
+            iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
+              v.muted = true;
+              v.play().catch(() => {});
+            });
+          }
+        } catch (_) {}
+      }, 500);
     };
 
     editor.on('component:add', handleComponentAdd);
-    return () => editor.off('component:add', handleComponentAdd);
+    editor.on('canvas:drop', playAllCanvasVideos);
+    return () => {
+      editor.off('component:add', handleComponentAdd);
+      editor.off('canvas:drop', playAllCanvasVideos);
+    };
   }, [editorRef.current, projectData, pageId, projectId]);
 
   const setDeviceMode = (mode: string) => {

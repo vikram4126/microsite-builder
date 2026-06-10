@@ -173,17 +173,62 @@ export const registerTemplates = (editor: any) => {
     'section-business-footer'
   ];
 
-  const template3Content = `
-  ${customTemplateSections
-    .map(id => sectionsLibrary.find(s => s.id === id)?.html || '')
+  const template3Content = customTemplateSections
+    .map(id => sectionsLibrary.find(s => s.id === id)?.html?.trim() || '')
     .filter(html => html !== '')
-    .join('\n')}
-`;
+    .join('');
 
   bm.add('template-custom', {
     label: 'Custom Landing Page',
     media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-primary"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
     category: 'Full Page Templates',
     content: template3Content
+  });
+
+  const template4Sections = [
+    'section-business-hero',
+    'section-intro-letter',
+    'section-business-services',
+    'section-case-studies-numbered-questions',
+    'section-timeline-horizontal',
+    'section-business-cta',
+    'section-contact-meet-team',
+    'section-business-footer'
+  ];
+
+  const template4Content = template4Sections
+    .map(id => sectionsLibrary.find(s => s.id === id)?.html?.trim() || '')
+    .filter(html => html !== '')
+    .join('');
+
+  bm.add('template-4', {
+    label: 'Custom Landing Page 2',
+    media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-secondary"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
+    category: 'Full Page Templates',
+    content: template4Content
+  });
+
+  const template5Sections = [
+    'section-header-video-banner',
+    'section-intro-letter',
+    'section-business-services',
+    'section-case-studies-cards-quote',
+    'section-timeline-horizontal',
+    'section-tabs-vertical',
+    'section-cta-explore-findings',
+    'section-contact-meet-team',
+    'section-business-footer'
+  ];
+
+  const template5Content = template5Sections
+    .map(id => sectionsLibrary.find(s => s.id === id)?.html?.trim() || '')
+    .filter(html => html !== '')
+    .join('');
+
+  bm.add('template-5', {
+    label: 'Custom Landing Page 3',
+    media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-purple-500"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
+    category: 'Full Page Templates',
+    content: template5Content
   });
 };

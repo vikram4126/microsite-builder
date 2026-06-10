@@ -157,6 +157,39 @@ export const sectionsLibrary: SectionDef[] = [
       </div>
     `
   },
+  {
+    id: 'section-header-video-banner',
+    category: 'Header',
+    label: 'Video Banner Hero',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><circle cx="50" cy="30" r="12" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1"/><polygon points="46,24 46,36 58,30" fill="white"/><rect x="5" y="48" width="25" height="3" rx="1" fill="white"/><rect x="5" y="53" width="40" height="2" rx="1" fill="rgba(255,255,255,0.5)"/></svg>',
+    html: `
+      <div id="header-video-banner" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full relative overflow-hidden bg-[#0c233c]" layout-mode="container">
+        <!-- Background video -->
+        <video data-gjs-type="bg-video" id="hero-bg-video" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" poster="/video-5.jpg" src="/videos/video-4.mp4" class="gjs-video-bg absolute inset-0 z-0 opacity-50" style="width: 100% !important; height: 100% !important; object-fit: cover !important;"></video>
+        
+        <!-- Dark gradient overlay -->
+        <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#00338d]/85 via-[#00338d]/40 to-[#00338d]/10" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
+        <!-- Content -->
+        <div class="container mx-auto px-4 lg:px-0 relative z-20 py-28 pointer-events-none">
+          <div class="flex flex-col items-start text-left max-w-3xl pointer-events-auto">
+            <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
+              OVERLINE
+            </span>
+            <h1 class="text-white text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
+              What we stand for
+            </h1>
+            <p class="text-white/90 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium mb-8">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl bg-[#00b8f5] text-white font-bold text-lg shadow-lg hover:-translate-y-1 hover:bg-[#1e49e2] transition-all">Explore Now</a>
+              <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl border-2 border-white/40 text-white font-bold text-lg hover:bg-white/10 transition-colors">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
 
 
   {
@@ -1159,32 +1192,32 @@ export const sectionsLibrary: SectionDef[] = [
           </div>
 
           <!-- Two-column questions grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+          <div data-gjs-type="responsive-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
 
             <!-- Left Column -->
             <div class="border border-slate-200 dark:border-slate-700 flex flex-col divide-y divide-slate-200 dark:divide-slate-700">
               <!-- Q01 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">01</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">What is the company's strategy?</p>
               </div>
               <!-- Q02 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">02</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Where are the skills gaps in relation to strategy?</p>
               </div>
               <!-- Q03 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">03</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Does the board have the right combination of skills, backgrounds, experiences, and perspectives to probe management's strategic assumptions?</p>
               </div>
               <!-- Q04 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">04</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Has sufficient attention been given to recruiting directors with backgrounds in academia, government, civil society, as well as entrepreneurs and those from family businesses?</p>
               </div>
               <!-- Q05 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">05</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Is the 20th century paradigm of filling boards with directors with 'big company' experience still relevant?</p>
               </div>
@@ -1193,27 +1226,27 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- Right Column -->
             <div class="border border-slate-200 dark:border-slate-700 flex flex-col divide-y divide-slate-200 dark:divide-slate-700">
               <!-- Q06 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">06</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Is there a robust board evaluation process that focuses not only on what the board does, but how it does it, and how it can improve?</p>
               </div>
               <!-- Q07 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">07</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">How robust is your formal succession plan to achieve the 'right board composition'?</p>
               </div>
               <!-- Q08 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">08</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Are your underperforming directors being removed in an efficient and effective manner?</p>
               </div>
               <!-- Q09 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">09</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">Are matrices identifying any missing knowledge, skills and expertise being applied without fear or favour when recruiting new board members?</p>
               </div>
               <!-- Q10 -->
-              <div class="flex items-start gap-4 p-5">
+              <div class="flex flex-row items-start gap-4 p-5">
                 <span class="text-2xl font-display font-black text-[#1e49e2] flex-shrink-0 leading-none mt-0.5">10</span>
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">What is the leadership style of your board chair?</p>
               </div>
@@ -1489,7 +1522,7 @@ export const sectionsLibrary: SectionDef[] = [
                   </p>
                   <div class="mt-auto flex justify-end">
                     <button class="flex items-center gap-2 px-5 py-2 border border-white/40 rounded-full text-sm font-semibold hover:bg-white hover:text-[#1e49e2] transition-colors group">
-                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+ n,[0opi k;]                      <svg class="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       Download
                     </button>
                   </div>
@@ -1958,4 +1991,37 @@ export const sectionsLibrary: SectionDef[] = [
       </div>
     `
   },
+  {
+    id: 'section-cta-explore-findings',
+    category: 'Call to actions',
+    label: 'Explore Findings CTA',
+    svg: '<svg viewBox="0 0 100 40" class="w-full h-full" fill="none"><rect width="100" height="40" fill="#00338d"/><rect x="10" y="10" width="40" height="8" rx="1" fill="white"/><rect x="10" y="22" width="50" height="3" rx="1" fill="white" opacity="0.8"/><rect x="10" y="27" width="30" height="3" rx="1" fill="white" opacity="0.8"/><rect x="70" y="10" width="20" height="8" rx="4" fill="white"/><rect x="70" y="22" width="20" height="8" rx="4" fill="transparent" stroke="white" stroke-width="1"/></svg>',
+    html: `
+      <div id="cta-explore" data-gjs-type="section" data-gjs-name="Explore Findings CTA" class="w-full py-16 bg-[#00338d]" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+            
+            <!-- Left side: Text content -->
+            <div class="flex-1 max-w-3xl">
+              <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-4 tracking-tight">Explore our findings.</h2>
+              <p class="text-white text-lg md:text-xl leading-relaxed">
+                Explore our digital report summary via this portal, or download<br class="hidden md:block"/>to see the full PDF Report.
+              </p>
+            </div>
+
+            <!-- Right side: Buttons -->
+            <div class="flex flex-col gap-4 w-full md:w-auto shrink-0">
+              <a href="#" class="inline-flex items-center justify-center px-8 py-3 bg-[#f8f9fa] hover:bg-white text-[#0c233c] font-bold text-sm md:text-base rounded-full transition-colors text-center w-full md:w-72 border-2 border-transparent">
+                Digital Report Summary
+              </a>
+              <a href="#" class="inline-flex items-center justify-center px-8 py-3 bg-transparent hover:bg-white/10 text-white font-bold text-sm md:text-base rounded-full transition-colors border border-white text-center w-full md:w-72">
+                Report PDF
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `
+  }
 ];
