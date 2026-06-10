@@ -13,7 +13,10 @@ import {
   Clock,
   Copy,
   Trash2,
-  Edit2
+  Edit2,
+  X,
+  Image,
+  Upload
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 
@@ -30,6 +33,11 @@ export default function Dashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
 
+  // Create Modal State
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [newProjectName, setNewProjectName] = useState('');
+  const [newProjectThumbnail, setNewProjectThumbnail] = useState('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80');
+
   useEffect(() => {
     loadProjects();
   }, []);
@@ -43,16 +51,31 @@ export default function Dashboard() {
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setNewProjectThumbnail(event.target.result as string);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleCreateProject = async () => {
+    if (!newProjectName.trim()) return;
+
     const newId = Date.now().toString() + Math.random().toString(36).substring(2, 9);
     
     const newProject = {
       id: newId,
       userId: user?.id,
-      title: 'New Project',
+      title: newProjectName,
       status: 'draft',
       lastEdited: new Date().toISOString(),
-      thumbnailUrl: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80',
+      thumbnailUrl: newProjectThumbnail || 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80',
       pages: [
         {
           id: `p_${newId}`,
@@ -66,6 +89,9 @@ export default function Dashboard() {
     try {
       await api.post('/projects', newProject);
       await loadProjects();
+      setIsCreateModalOpen(false);
+      setNewProjectName('');
+      setNewProjectThumbnail('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80');
     } catch (err) {
       console.error(err);
     }
@@ -102,6 +128,35 @@ export default function Dashboard() {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleUpdateThumbnail = (projectId: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      if (event.target?.result) {
+        const newThumbnail = event.target.result as string;
+        
+        // Optimistic UI update
+        setProjects(prev => prev.map(p => 
+          p.id === projectId ? { ...p, thumbnailUrl: newThumbnail } : p
+        ));
+
+        // API update
+        try {
+          const projectToUpdate = projects.find(p => p.id === projectId);
+          if (projectToUpdate) {
+            await api.put(`/projects/${projectId}`, { ...projectToUpdate, thumbnailUrl: newThumbnail });
+          }
+        } catch (err) {
+          console.error('Failed to update thumbnail', err);
+          loadProjects(); // Revert on failure
+        }
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleRename = async (id: string, newTitle: string) => {
@@ -187,7 +242,11 @@ export default function Dashboard() {
               <p className="text-gray-500 mt-1 text-sm">You have {projects.length} active microsites this month.</p>
             </div>
             <button 
-              onClick={handleCreateProject}
+              onClick={() => {
+                setNewProjectName('New Project');
+                setNewProjectThumbnail('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80');
+                setIsCreateModalOpen(true);
+              }}
               className="flex items-center space-x-2 bg-[#1e49e2] hover:bg-[#1a3fc0] text-white px-5 py-2.5 rounded-xl font-medium transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
             >
               <Plus className="w-5 h-5" />
@@ -235,11 +294,24 @@ export default function Dashboard() {
             {filteredProjects.map((project: any) => (
               <div key={project.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-gray-200/50 hover:border-gray-200 transition-all group flex flex-col shadow-sm">
                 <div 
-                  className="h-44 bg-gray-50 bg-cover bg-center relative cursor-pointer"
+                  className="h-44 bg-gray-50 bg-cover bg-center relative cursor-pointer group/thumb"
                   style={{ backgroundImage: `url(${project.thumbnailUrl})` }}
                   onClick={() => navigate(`/project/${project.id}`)}
                 >
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                  <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/20 transition-colors flex items-center justify-center">
+                    <label 
+                      className="opacity-0 group-hover/thumb:opacity-100 bg-white/90 text-slate-900 px-3 py-1.5 rounded-md text-xs font-bold cursor-pointer hover:bg-white shadow-sm flex items-center gap-1.5 transition-all translate-y-2 group-hover/thumb:translate-y-0 duration-200"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Image className="w-3.5 h-3.5" /> Change Cover
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        className="hidden" 
+                        onChange={(e) => handleUpdateThumbnail(project.id, e)} 
+                      />
+                    </label>
+                  </div>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
                   {editingId === project.id ? (
@@ -302,8 +374,12 @@ export default function Dashboard() {
 
             {/* Create New Project Dashed Card */}
             {viewMode === 'grid' && (
-              <button 
-                onClick={handleCreateProject}
+              <button
+                onClick={() => {
+                  setNewProjectName('New Project');
+                  setNewProjectThumbnail('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80');
+                  setIsCreateModalOpen(true);
+                }}
                 className="rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center hover:border-[#1e49e2]/50 hover:bg-[#1e49e2]/5 transition-all min-h-[290px] text-gray-500 hover:text-[#1e49e2] group bg-white/50"
               >
                  <div className="w-12 h-12 rounded-full bg-gray-50 group-hover:bg-[#1e49e2]/10 flex items-center justify-center mb-4 transition-colors">
@@ -316,7 +392,84 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
+
+      {/* Create Project Modal */}
+      {isCreateModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h3 className="text-lg font-bold text-slate-900">Create New Project</h3>
+              <button onClick={() => setIsCreateModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Project Name</label>
+                <input
+                  type="text"
+                  value={newProjectName}
+                  onChange={(e) => setNewProjectName(e.target.value)}
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent transition-all"
+                  placeholder="e.g. Acme Corp Microsite"
+                  autoFocus
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Thumbnail Image (URL or Upload)</label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Image className="h-4 w-4 text-slate-400" />
+                    </div>
+                    <input
+                      type="text"
+                      value={newProjectThumbnail}
+                      onChange={(e) => setNewProjectThumbnail(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent transition-all"
+                      placeholder="https://example.com/image.jpg"
+                    />
+                  </div>
+                  <label className="flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg cursor-pointer transition-colors border border-slate-200 whitespace-nowrap">
+                    <Upload className="w-4 h-4 mr-2" />
+                    <span className="text-sm font-medium">Upload</span>
+                    <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                  </label>
+                </div>
+                {newProjectThumbnail && (
+                  <div className="mt-3 rounded-lg overflow-hidden border border-slate-200 h-32 w-full bg-slate-50 relative group">
+                    <img src={newProjectThumbnail} alt="Thumbnail Preview" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/400x200?text=Invalid+Image'; }} />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                      <label className="bg-white/90 text-slate-900 px-3 py-1.5 rounded-md text-xs font-bold cursor-pointer hover:bg-white shadow-sm flex items-center gap-1.5">
+                        <Upload className="w-3 h-3" /> Change Image
+                        <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
+              <button
+                onClick={() => setIsCreateModalOpen(false)}
+                className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleCreateProject}
+                disabled={!newProjectName.trim()}
+                className="px-6 py-2 bg-[#1e49e2] text-white text-sm font-bold rounded-lg hover:bg-[#1a3fc0] disabled:opacity-50 transition-colors"
+              >
+                Create Project
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

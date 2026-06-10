@@ -10,7 +10,8 @@ import {
   Trash2, 
   ChevronLeft,
   Layout,
-  Edit2
+  Edit2,
+  X
 } from 'lucide-react';
 
 export default function ProjectDetails() {
@@ -22,6 +23,11 @@ export default function ProjectDetails() {
   // Renaming State
   const [editingPageId, setEditingPageId] = useState<string | null>(null);
   const [editPageTitle, setEditPageTitle] = useState('');
+
+  // Create/Clone Page Modal State
+  const [isCreatePageModalOpen, setIsCreatePageModalOpen] = useState(false);
+  const [newPageName, setNewPageName] = useState('');
+  const [cloneTargetPage, setCloneTargetPage] = useState<any>(null);
 
   useEffect(() => {
     loadProject();
@@ -41,15 +47,30 @@ export default function ProjectDetails() {
   };
 
   const handleCreatePage = async () => {
-    if (!project) return;
+    if (!project || !newPageName.trim()) return;
     
     const newPageId = `p_${projectId}_${Date.now().toString().substring(5)}`;
-    const newPage = {
-      id: newPageId,
-      title: `Page ${project.pages.length + 1}`,
-      route: `/page-${project.pages.length + 1}`,
-      layout: []
-    };
+    const routeName = '/' + newPageName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    
+    let newPage;
+    
+    if (cloneTargetPage) {
+      // Clone mode
+      newPage = {
+        ...cloneTargetPage,
+        id: newPageId,
+        title: newPageName,
+        route: routeName || `/${newPageId}`
+      };
+    } else {
+      // Create fresh mode
+      newPage = {
+        id: newPageId,
+        title: newPageName,
+        route: routeName || `/${newPageId}`,
+        layout: []
+      };
+    }
 
     const updatedProject = {
       ...project,
@@ -61,32 +82,9 @@ export default function ProjectDetails() {
       // Optimistic update
       setProject(updatedProject);
       await api.put(`/projects/${projectId}`, updatedProject);
-    } catch (err) {
-      console.error(err);
-      loadProject();
-    }
-  };
-
-  const handleClonePage = async (pageToClone: any) => {
-    if (!project) return;
-
-    const newPageId = `p_${projectId}_${Date.now().toString().substring(5)}`;
-    const newPage = {
-      ...pageToClone,
-      id: newPageId,
-      title: `${pageToClone.title} (Copy)`,
-      route: `${pageToClone.route}-copy`
-    };
-
-    const updatedProject = {
-      ...project,
-      lastEdited: new Date().toISOString(),
-      pages: [...project.pages, newPage]
-    };
-
-    try {
-      setProject(updatedProject);
-      await api.put(`/projects/${projectId}`, updatedProject);
+      setIsCreatePageModalOpen(false);
+      setNewPageName('');
+      setCloneTargetPage(null);
     } catch (err) {
       console.error(err);
       loadProject();
@@ -177,7 +175,11 @@ export default function ProjectDetails() {
               <p className="text-gray-500 mt-1 text-sm">Manage the structure and inner pages of your microsite.</p>
             </div>
             <button 
-              onClick={handleCreatePage}
+              onClick={() => {
+                setCloneTargetPage(null);
+                setNewPageName('');
+                setIsCreatePageModalOpen(true);
+              }}
               className="flex items-center space-x-2 bg-[#1e49e2] hover:bg-[#1a3fc0] text-white px-5 py-2.5 rounded-xl font-medium transition-all shadow-sm active:scale-[0.98]"
             >
               <Plus className="w-5 h-5" />
@@ -229,7 +231,11 @@ export default function ProjectDetails() {
                   </button>
                   <div className="w-px h-6 bg-gray-200 mx-1"></div>
                   <button 
-                    onClick={() => handleClonePage(page)}
+                    onClick={() => {
+                      setCloneTargetPage(page);
+                      setNewPageName(`${page.title} (Copy)`);
+                      setIsCreatePageModalOpen(true);
+                    }}
                     title="Clone Page"
                     className="p-2 text-gray-400 hover:text-[#1e49e2] hover:bg-[#1e49e2]/10 rounded-lg transition-colors"
                   >
@@ -248,6 +254,60 @@ export default function ProjectDetails() {
           </div>
         </div>
       </main>
+
+      {/* Create Page Modal */}
+      {isCreatePageModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h3 className="text-lg font-bold text-slate-900">{cloneTargetPage ? 'Clone Page' : 'Add New Page'}</h3>
+              <button onClick={() => {
+                setIsCreatePageModalOpen(false);
+                setCloneTargetPage(null);
+              }} className="text-slate-400 hover:text-slate-600 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Page Name</label>
+              <input
+                type="text"
+                value={newPageName}
+                onChange={(e) => setNewPageName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleCreatePage();
+                }}
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e49e2] focus:border-transparent transition-all"
+                placeholder="e.g. About Us"
+                autoFocus
+              />
+              <p className="text-xs text-slate-500 mt-2">
+                Route will be generated automatically: <span className="font-mono text-slate-700">/{newPageName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'route-name'}</span>
+              </p>
+            </div>
+
+            <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setIsCreatePageModalOpen(false);
+                  setCloneTargetPage(null);
+                }}
+                className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleCreatePage}
+                disabled={!newPageName.trim()}
+                className="px-6 py-2 bg-[#1e49e2] text-white text-sm font-bold rounded-lg hover:bg-[#1a3fc0] disabled:opacity-50 transition-colors"
+              >
+                {cloneTargetPage ? 'Clone Page' : 'Add Page'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
