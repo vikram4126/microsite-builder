@@ -1198,6 +1198,8 @@ export default function Builder() {
         const cats = Array.from(new Set(allBlocks.map((b: any) => b.get('category').id || b.get('category')))) as string[];
         // Sort: push Footer to the end
         cats.sort((a, b) => {
+          if (a === 'Full Page Templates') return -1;
+          if (b === 'Full Page Templates') return 1;
           if (a === 'Footer') return 1;
           if (b === 'Footer') return -1;
           return 0;
