@@ -125,6 +125,38 @@ export const sectionsLibrary: SectionDef[] = [
       </div>
     `
   },
+  {
+    id: 'section-header-left-solid-with-image',
+    category: 'Header',
+    label: 'Left-Aligned Hero with Right Image',
+    svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
+    html: `
+      <div data-gjs-type="section" data-gjs-name="Header Left Solid White Image" class="w-full relative overflow-hidden py-20 bg-white" layout-mode="container">
+        <div class="container mx-auto px-4 lg:px-0 relative z-10">
+          <div class="flex flex-col md:flex-row gap-12 items-center">
+            <div class="flex-1 flex flex-col items-start text-left max-w-3xl">
+              <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
+                OVERLINE
+              </span>
+              <h1 class="text-[var(--color-primary)] text-5xl lg:text-7xl font-display font-bold mb-6 tracking-tight leading-tight">
+                What we stand for
+              </h1>
+              <p class="text-slate-600 text-lg lg:text-xl leading-relaxed max-w-2xl font-medium mb-8">
+                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.
+              </p>
+              <div class="flex flex-wrap gap-4">
+                <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl bg-[var(--color-accent)] text-white font-bold text-lg shadow-lg hover:-translate-y-1 hover:bg-[var(--color-primary)] transition-all">Get Started</a>
+                <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl border-2 border-[var(--color-primary)]/20 text-[var(--color-primary)] font-bold text-lg hover:bg-slate-50 transition-colors">Learn More</a>
+              </div>
+            </div>
+            <div class="flex-1 relative z-10 hidden md:block w-full">
+              <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-slate-100" alt="Hero Image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
 
 
   {
@@ -1019,6 +1051,12 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div id="data-visualization-number-cards" data-gjs-type="section" data-gjs-name="Number Cards Section" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis in eros pharetra tincidunt. Nullam vestibulum at sapien et sagittis. In accumsan erat ex.
+            </p>
+          </div>
           <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full">
             <!-- Card 1 -->
             <div class="bg-slate-100 dark:bg-slate-800 border-l-4 border-[#7213ea] p-6 md:p-8 flex flex-col justify-center items-center h-full w-full shadow-sm hover:shadow-md transition-shadow">
@@ -1056,6 +1094,12 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div id="data-visualization-divided-stats" data-gjs-type="section" data-gjs-name="Divided Stats Section" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
+          <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis in eros pharetra tincidunt. Nullam vestibulum at sapien et sagittis. In accumsan erat ex.
+            </p>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-700 shadow-sm">
             <!-- Column 1 -->
             <div class="flex flex-col justify-center items-center text-center p-6 min-h-[160px]">

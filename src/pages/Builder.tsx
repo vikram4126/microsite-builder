@@ -1896,9 +1896,10 @@ export default function Builder() {
         return null;
       };
       const target = findByCid(wrapper);
-      if (target) {
-        // Add content inside the target component
-        target.components().add(content);
+      if (target && target.parent()) {
+        // Add content AFTER the target component as a sibling
+        const index = target.index();
+        target.parent().components().add(content, { at: index + 1 });
       } else {
         editorRef.current.addComponents(content);
       }
@@ -2938,6 +2939,12 @@ export default function Builder() {
                         setLibraryMode('layouts');
                         setSelectedCategory('Layout');
                         setInsertAfterCid(null);
+                        setIsLibraryOpen(true);
+                      }}
+                      onAddSectionBetween={(cid) => {
+                        setLibraryMode('layouts');
+                        setSelectedCategory('Layout');
+                        setInsertAfterCid(cid);
                         setIsLibraryOpen(true);
                       }}
                     />

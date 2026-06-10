@@ -4,9 +4,10 @@ import { Trash2, Copy, Folder, FileText, Image as ImageIcon, Layout as LayoutIco
 interface StructuralMapProps {
   editor: any;
   onOpenLibrary: () => void;
+  onAddSectionBetween?: (cid: string) => void;
 }
 
-export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibrary }) => {
+export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibrary, onAddSectionBetween }) => {
   const [components, setComponents] = useState<any[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [draggedCid, setDraggedCid] = useState<string | null>(null);
@@ -126,17 +127,30 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
   return (
     <div className="flex flex-col gap-2 p-3 h-full overflow-y-auto bg-white no-scrollbar">
       {components.map((comp) => (
-        <MapNode 
-          key={comp.cid} 
-          node={comp} 
-          editor={editor} 
-          selectedCid={selected} 
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          onDrop={handleDrop}
-          onClone={handleClone}
-          draggedCid={draggedCid}
-        />
+        <React.Fragment key={comp.cid}>
+          <MapNode 
+            node={comp} 
+            editor={editor} 
+            selectedCid={selected} 
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDrop={handleDrop}
+            onClone={handleClone}
+            draggedCid={draggedCid}
+          />
+          {onAddSectionBetween && (
+            <div 
+              className="w-full h-3 my-0.5 group flex items-center justify-center relative cursor-pointer opacity-0 hover:opacity-100 transition-opacity" 
+              onClick={() => onAddSectionBetween(comp.cid)}
+              title="Add section here"
+            >
+              <div className="absolute inset-x-0 h-px bg-[#1e49e2] z-0" />
+              <div className="w-5 h-5 rounded-full bg-white border border-[#1e49e2] flex items-center justify-center relative z-10 shadow-sm">
+                <Plus className="w-3 h-3 text-[#1e49e2]" strokeWidth={3} />
+              </div>
+            </div>
+          )}
+        </React.Fragment>
       ))}
       <button 
         onClick={onOpenLibrary}

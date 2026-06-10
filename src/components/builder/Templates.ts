@@ -13,12 +13,10 @@ export const registerTemplates = (editor: any) => {
   ];
 
   const content = `
-<div data-gjs-type="default" data-gjs-droppable="true" data-gjs-custom-name="Page Block" class="template-wrapper w-full flex flex-col min-h-screen">
   ${businessLandingPageSections
     .map(id => sectionsLibrary.find(s => s.id === id)?.html || '')
     .filter(html => html !== '')
     .join('\n')}
-</div>
 `;
 
   bm.add('template-business', {
@@ -29,8 +27,6 @@ export const registerTemplates = (editor: any) => {
   });
 
   const template2Content = `
-<div data-gjs-type="default" data-gjs-droppable="true" data-gjs-custom-name="Template 2" class="template-wrapper w-full flex flex-col min-h-screen">
-  
   <!-- 2. Header Hero -->
   <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-20" layout-mode="container">
     <div class="container mx-auto text-white text-center">
@@ -158,7 +154,6 @@ export const registerTemplates = (editor: any) => {
       </div>
     </div>
   </div>
-</div>
 `;
 
   bm.add('template-2', {
@@ -166,5 +161,29 @@ export const registerTemplates = (editor: any) => {
     media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-secondary"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
     category: 'Full Page Templates',
     content: template2Content
+  });
+
+  const customTemplateSections = [
+    'section-header-left-blue-bg',
+    'section-intro-letter',
+    'section-data-visualization-stats',
+    'section-case-study-details',
+    'section-business-features',
+    'section-business-cta',
+    'section-business-footer'
+  ];
+
+  const template3Content = `
+  ${customTemplateSections
+    .map(id => sectionsLibrary.find(s => s.id === id)?.html || '')
+    .filter(html => html !== '')
+    .join('\n')}
+`;
+
+  bm.add('template-custom', {
+    label: 'Custom Landing Page',
+    media: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-primary"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`,
+    category: 'Full Page Templates',
+    content: template3Content
   });
 };
