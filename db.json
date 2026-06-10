@@ -31,7 +31,7 @@
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-06-09T06:44:30.741Z",
+      "lastEdited": "2026-06-10T08:22:01.750Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -3816,6 +3816,22 @@
             ],
             "symbols": []
           }
+        }
+      ]
+    },
+    {
+      "id": "1781079816039p6apbpy",
+      "userId": "guest",
+      "title": "New Project",
+      "status": "draft",
+      "lastEdited": "2026-06-10T08:23:36.039Z",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
+      "pages": [
+        {
+          "id": "p_1781079816039p6apbpy",
+          "title": "Home",
+          "route": "/",
+          "layout": []
         }
       ]
     }
