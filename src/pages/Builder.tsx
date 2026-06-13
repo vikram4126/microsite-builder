@@ -1387,13 +1387,17 @@ export default function Builder() {
           return false;
         })();
 
-        if (isTextSel) {
-          setActiveTab('style');
-        } else if (isImgSel || isVideoSel || hasVideoChild || hasVideoAncestor) {
-          setActiveTab('media');
-        } else {
-          // Always switch to style tab for any non-image/video element selection
-          setActiveTab('style');
+        // Auto-switch to media tab when image or video selected, style tab on fresh selection,
+        // but NOT when we are currently navigating/moving elements in the layers tab.
+        if (activeTabRef.current !== 'layers') {
+          if (isTextSel) {
+            setActiveTab('style');
+          } else if (isImgSel || isVideoSel || hasVideoChild || hasVideoAncestor) {
+            setActiveTab('media');
+          } else {
+            // Always switch to style tab for any non-image/video element selection
+            setActiveTab('style');
+          }
         }
 
         // Redirect LI selection to parent UL/OL
