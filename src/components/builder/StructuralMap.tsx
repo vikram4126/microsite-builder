@@ -16,8 +16,9 @@ export const StructuralMap: React.FC<StructuralMapProps> = ({ editor, onOpenLibr
     if (!editor) return;
     const wrapper = editor.getWrapper();
     if (wrapper) {
-      // Use spread operator to ensure React detects a new array reference
-      setComponents([...wrapper.get('components').models]);
+      // Filter components at the root level using getMeaningfulChildren to exclude
+      // non-layerable nodes, comments, styles, and empty blocks.
+      setComponents(getMeaningfulChildren(wrapper, false));
     }
   }, [editor]);
 
@@ -220,9 +221,26 @@ const getComponentMeta = (node: any) => {
 };
 
 const getMeaningfulChildren = (node: any, isParentRow: boolean = false): any[] => {
+  if (!node) return [];
   const children = node.get('components').models;
   const result: any[] = [];
   children.forEach((child: any) => {
+    // Skip if child is set to not show in layers (layerable is false)
+    if (child.get('layerable') === false) return;
+
+    const type = child.get('type') || '';
+    const tagName = (child.get('tagName') || '').toLowerCase();
+    
+    // Ignore script, style, comments, and other non-visual/utility tags
+    if (
+      type === 'comment' ||
+      type === 'style' ||
+      type === 'script' ||
+      ['style', 'script', 'meta', 'link', 'head', 'title', 'html', 'body'].includes(tagName)
+    ) {
+      return;
+    }
+
     const meta = getComponentMeta(child);
     
     // If the parent was a Layout Row, then THIS child is a Column!

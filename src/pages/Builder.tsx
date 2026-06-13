@@ -1785,12 +1785,44 @@ export default function Builder() {
       if (model.get('type') === 'dynamic-nav-links') {
         setTimeout(updateNavLinks, 10);
       }
+
+      const type = model.get('type');
+      const tagName = (model.get('tagName') || '').toLowerCase();
+      if (
+        type === 'comment' ||
+        type === 'style' ||
+        type === 'script' ||
+        ['style', 'script', 'meta', 'link', 'head', 'title', 'html', 'body'].includes(tagName)
+      ) {
+        model.set('layerable', false);
+      }
       
       // Protect the Navbar from deletion if added manually
       if (model.get('attributes') && model.get('attributes')['data-gjs-name'] === 'Navbar') {
         model.set({ removable: false, copyable: false });
       } else if (model.get('data-gjs-name') === 'Navbar') {
         model.set({ removable: false, copyable: false });
+      }
+
+      // Force target="_blank" on all footer links
+      if (tagName === 'a' || type === 'link') {
+        let isInsideFooter = false;
+        let parent = model.parent();
+        while (parent) {
+          const pTagName = (parent.get('tagName') || '').toLowerCase();
+          const pName = (parent.get('data-gjs-name') || parent.get('name') || '').toLowerCase();
+          const pId = (parent.get('attributes')?.id || '').toLowerCase();
+          if (pTagName === 'footer' || pName.includes('footer') || pId.includes('footer')) {
+            isInsideFooter = true;
+            break;
+          }
+          parent = parent.parent();
+        }
+        if (isInsideFooter) {
+          const attrs = { ...model.get('attributes') };
+          attrs.target = '_blank';
+          model.set('attributes', attrs);
+        }
       }
 
       // Force-play any video elements added to the canvas (GrapesJS iframe doesn't execute scripts)
