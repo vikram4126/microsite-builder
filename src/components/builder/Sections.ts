@@ -220,7 +220,7 @@ export const sectionsLibrary: SectionDef[] = [
             </label>
 
             <!-- Navigation Links -->
-            <nav data-nav-type="dynamic" class="hidden peer-checked:flex md:flex flex-col w-full md:w-auto md:flex-row items-center gap-6 mt-4 md:mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
+            <nav data-nav-type="dynamic" class="hidden peer-checked:flex absolute top-full left-0 w-full bg-white dark:bg-dark p-4 shadow-lg md:static md:p-0 md:shadow-none md:bg-transparent z-50 md:flex flex-col md:w-auto md:flex-row items-center gap-6 mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
               <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Home</a>
               <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Services</a>
               <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Features</a>
