@@ -1675,9 +1675,13 @@ export default function Builder() {
             
             // Ensure any navbar in existing layout is also non-removable
             const wrapper = editorRef.current.DomComponents.getWrapper();
-            const existingNav = wrapper.find('[data-gjs-name="Navbar"]')[0];
-            if (existingNav) {
-              existingNav.set({ removable: false, copyable: false });
+            if (wrapper) {
+              wrapper.components().forEach((comp: any) => {
+                const name = comp.get('name') || comp.get('data-gjs-name') || (comp.get('attributes') && comp.get('attributes')['data-gjs-name']) || '';
+                if (name === 'Navbar' || name.includes('Navbar') || (comp.get('attributes') && comp.get('attributes')['data-nav-type'] === 'dynamic')) {
+                  comp.set({ removable: false, copyable: false, draggable: false });
+                }
+              });
             }
 
             // Step 2: Immediately re-inject the Tailwind @theme block.

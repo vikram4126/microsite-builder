@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const files = [
-  'C:\\Users\\Vikram\\Desktop\\All\\Vikram-DND\\antigravity\\microsite-builder\\src\\components\\builder\\Blocks.ts',
-  'C:\\Users\\Vikram\\Desktop\\All\\Vikram-DND\\antigravity\\microsite-builder\\src\\components\\builder\\Sections.ts'
+  path.join(__dirname, 'src', 'components', 'builder', 'Blocks.ts'),
+  path.join(__dirname, 'src', 'components', 'builder', 'Sections.ts')
 ];
 
 files.forEach(file => {
