@@ -117,17 +117,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     const htmlBody: string = editor.getHtml() || '';
     let css: string = editor.getCss() || '';
     
-    // Process global CSS for local images
-    if (css.includes('url(')) {
-      const bgMatches = css.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
-      for (const m of bgMatches) {
-        const rawPath = m[1];
-        if (isLocalPath(rawPath)) {
-          const localPath = await fetchLocalImage(rawPath);
-          css = css.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), localPath);
-        }
-      }
-    }
+    // NOTE: CSS url() processing happens later (line ~383) with correct ../assets/ prefix for css/ subfolder
     let js = '';
     try { js = editor.getJs?.() || ''; } catch (_e) { /* no JS */ }
 
@@ -381,16 +371,24 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     
     // Take CSS/JS from the first page (shared across pages)
     if (i === 0) {
-      // Also process CSS for local image urls (background-image in CSS rules)
+      // Process CSS for local image urls (background-image in CSS rules)
+      // Since style.css is inside css/ folder, assets/ must be referenced as ../assets/
       let processedCss = css;
-      const cssUrlMatches = css.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      const cssUrlMatches = processedCss.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      const cssPathsToReplace: Array<{ rawPath: string; localPath: string }> = [];
       for (const m of cssUrlMatches) {
         const rawPath = m[1];
         if (isLocalPath(rawPath)) {
           const localPath = await fetchLocalImage(rawPath);
-          // Prepend ../ for paths inside the css/ folder to reach assets/ folder correctly
-          processedCss = processedCss.replace(new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '../' + localPath);
+          cssPathsToReplace.push({ rawPath, localPath });
         }
+      }
+      // Apply replacements - use ../ prefix since CSS is in css/ subfolder
+      for (const { rawPath, localPath } of cssPathsToReplace) {
+        processedCss = processedCss.replace(
+          new RegExp(rawPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+          '../' + localPath
+        );
       }
       zip.folder('css')!.file('style.css', processedCss || '');
       zip.folder('js')!.file('script.js', finalJs);

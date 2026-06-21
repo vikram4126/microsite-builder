@@ -787,7 +787,6 @@ export default function Builder() {
                 label: 'Full Height (100vh)',
                 valueTrue: 'true',
                 valueFalse: 'false',
-                changeProp: true,
               },
               {
                 type: 'checkbox',
@@ -795,7 +794,6 @@ export default function Builder() {
                 label: 'Vertical Center Content',
                 valueTrue: 'true',
                 valueFalse: 'false',
-                changeProp: true,
               },
               {
                 type: 'select',
@@ -828,37 +826,38 @@ export default function Builder() {
           },
           init() {
             this.on('change:attributes:layout-mode', this.handleLayoutChange);
-            this.on('change:data-full-height', this.handleFullHeightChange);
-            this.on('change:data-vertical-center', this.handleVerticalCenterChange);
+            this.on('change:attributes:data-full-height', this.handleFullHeightChange);
+            this.on('change:attributes:data-vertical-center', this.handleVerticalCenterChange);
+            
+            // Sync on load/creation
+            setTimeout(() => {
+              this.handleFullHeightChange();
+              this.handleVerticalCenterChange();
+            }, 0);
           },
           handleFullHeightChange() {
-            const isFullHeight = this.get('data-full-height') === 'true';
             const attrs = { ...this.getAttributes() };
+            const isFullHeight = attrs['data-full-height'] === 'true';
             if (isFullHeight) {
-              attrs['data-full-height'] = 'true';
-              this.setAttributes(attrs);
               this.addStyle({ 'min-height': '100vh' });
             } else {
-              delete attrs['data-full-height'];
-              this.setAttributes(attrs);
-              this.removeStyle('min-height');
+              const currentStyle = { ...this.getStyle() };
+              delete currentStyle['min-height'];
+              this.setStyle(currentStyle);
             }
           },
           handleVerticalCenterChange() {
-            const isCenter = this.get('data-vertical-center') === 'true';
             const attrs = { ...this.getAttributes() };
+            const isCenter = attrs['data-vertical-center'] === 'true';
             if (isCenter) {
-              attrs['data-vertical-center'] = 'true';
-              this.setAttributes(attrs);
               this.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
             } else {
-              delete attrs['data-vertical-center'];
-              this.setAttributes(attrs);
-              this.removeStyle('align-items');
-              this.removeStyle('justify-content');
-              const currentDisplay = this.getStyle()['display'];
-              if (currentDisplay === 'flex') this.removeStyle('display');
-              this.removeStyle('flex-direction');
+              const currentStyle = { ...this.getStyle() };
+              delete currentStyle['align-items'];
+              delete currentStyle['justify-content'];
+              if (currentStyle['display'] === 'flex') delete currentStyle['display'];
+              delete currentStyle['flex-direction'];
+              this.setStyle(currentStyle);
             }
           },
           handleLayoutChange() {
@@ -1733,48 +1732,6 @@ export default function Builder() {
                  const name = comp.get('name') || comp.get('data-gjs-name') || (comp.get('attributes') && comp.get('attributes')['data-gjs-name']) || '';
                  if (name === 'Navbar' || name.includes('Navbar') || (comp.get('attributes') && comp.get('attributes')['data-nav-type'] === 'dynamic')) {
                    comp.set({ removable: false, copyable: false, draggable: false });
-                 }
-               });
- 
-               // Sync section styling for full height and vertical centering on load
-               const sections = wrapper.findWhere((comp: any) => comp.get('type') === 'section');
-               sections.forEach((section: any) => {
-                 const attrs = { ...section.getAttributes() };
-                 // Sync full height
-                 const isFullHeight = section.get('data-full-height') === 'true' || section.getAttributes()['data-full-height'] === 'true';
-                 if (isFullHeight) {
-                   section.set('data-full-height', 'true');
-                   attrs['data-full-height'] = 'true';
-                   section.setAttributes(attrs);
-                   section.addStyle({ 'min-height': '100vh' });
-                 } else {
-                   section.set('data-full-height', 'false');
-                   delete attrs['data-full-height'];
-                   section.setAttributes(attrs);
-                   if (section.getStyle()['min-height'] === '100vh') {
-                     section.removeStyle('min-height');
-                   }
-                 }
- 
-                 const centerAttrs = { ...section.getAttributes() };
-                 // Sync vertical center
-                 const isCenter = section.get('data-vertical-center') === 'true' || section.getAttributes()['data-vertical-center'] === 'true';
-                 if (isCenter) {
-                   section.set('data-vertical-center', 'true');
-                   centerAttrs['data-vertical-center'] = 'true';
-                   section.setAttributes(centerAttrs);
-                   section.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
-                 } else {
-                   section.set('data-vertical-center', 'false');
-                   delete centerAttrs['data-vertical-center'];
-                   section.setAttributes(centerAttrs);
-                   if (section.getStyle()['justify-content'] === 'center') {
-                     section.removeStyle('align-items');
-                     section.removeStyle('justify-content');
-                     const currentDisplay = section.getStyle()['display'];
-                     if (currentDisplay === 'flex') section.removeStyle('display');
-                     section.removeStyle('flex-direction');
-                   }
                  }
                });
              }
