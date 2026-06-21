@@ -826,38 +826,34 @@ export default function Builder() {
           },
           init() {
             this.on('change:attributes:layout-mode', this.handleLayoutChange);
-            this.on('change:attributes:data-full-height', this.handleFullHeightChange);
-            this.on('change:attributes:data-vertical-center', this.handleVerticalCenterChange);
-            
-            // Sync on load/creation
-            setTimeout(() => {
-              this.handleFullHeightChange();
-              this.handleVerticalCenterChange();
-            }, 0);
+            // Listen to any attribute change — GrapesJS fires 'change:attributes' on setAttributes()
+            this.on('change:attributes', this.handleAllAttributeChanges);
+            // NOTE: Do NOT call handlers in setTimeout here!
+            // GrapesJS automatically restores CSS rules from saved project data on load.
+            // Calling addStyle() on init creates DUPLICATE CSS rules which break removal.
+          },
+          handleAllAttributeChanges() {
+            this.handleFullHeightChange();
+            this.handleVerticalCenterChange();
           },
           handleFullHeightChange() {
-            const attrs = { ...this.getAttributes() };
-            const isFullHeight = attrs['data-full-height'] === 'true';
+            const isFullHeight = this.getAttributes()['data-full-height'] === 'true';
             if (isFullHeight) {
               this.addStyle({ 'min-height': '100vh' });
             } else {
-              const currentStyle = { ...this.getStyle() };
-              delete currentStyle['min-height'];
-              this.setStyle(currentStyle);
+              // Use removeStyle() — directly removes property from CSS Manager rule
+              this.removeStyle('min-height');
             }
           },
           handleVerticalCenterChange() {
-            const attrs = { ...this.getAttributes() };
-            const isCenter = attrs['data-vertical-center'] === 'true';
+            const isCenter = this.getAttributes()['data-vertical-center'] === 'true';
             if (isCenter) {
               this.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
             } else {
-              const currentStyle = { ...this.getStyle() };
-              delete currentStyle['align-items'];
-              delete currentStyle['justify-content'];
-              if (currentStyle['display'] === 'flex') delete currentStyle['display'];
-              delete currentStyle['flex-direction'];
-              this.setStyle(currentStyle);
+              this.removeStyle('align-items');
+              this.removeStyle('justify-content');
+              this.removeStyle('flex-direction');
+              this.removeStyle('display');
             }
           },
           handleLayoutChange() {

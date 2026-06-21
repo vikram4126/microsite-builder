@@ -288,7 +288,7 @@ export const registerTemplates = (editor: any) => {
     'section-timeline-horizontal',
     'section-tabs-vertical',
     'section-cta-explore-findings',
-    'section-contact-meet-team',
+    'section-functional-team',
     'section-business-footer'
   ];
 
