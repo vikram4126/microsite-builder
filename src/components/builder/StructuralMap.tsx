@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Trash2, Copy, Folder, FileText, Image as ImageIcon, Layout as LayoutIcon, Plus, Eye, EyeOff } from 'lucide-react';
+import { Trash2, Copy, Folder, FileText, Image as ImageIcon, Layout as LayoutIcon, Plus, Eye, EyeOff, ArrowUp, ArrowDown } from 'lucide-react';
 
 interface StructuralMapProps {
   editor: any;
@@ -438,14 +438,24 @@ const MapNode: React.FC<{
           </span>
           {!isSemanticColumn && (
             <div className="ml-auto flex items-center gap-1 opacity-0 group-hover:opacity-100">
+               {isSection && (
+                 <>
+                   <button onClick={(e) => { e.stopPropagation(); editor.select(node); editor.Commands.run('custom:move-up'); }} title="Move Up" className="p-0.5 hover:text-[#1e49e2] transition-all">
+                    <ArrowUp className="w-3 h-3" />
+                   </button>
+                   <button onClick={(e) => { e.stopPropagation(); editor.select(node); editor.Commands.run('custom:move-down'); }} title="Move Down" className="p-0.5 hover:text-[#1e49e2] transition-all">
+                    <ArrowDown className="w-3 h-3" />
+                   </button>
+                 </>
+               )}
                <button onClick={handleToggleVisibility} title={isHidden ? "Show" : "Hide"} className={`p-0.5 transition-all ${isHidden ? 'text-gray-400 hover:text-[#1e49e2]' : 'hover:text-[#1e49e2]'}`}>
-                {isHidden ? <EyeOff className="w-2 h-2" /> : <Eye className="w-2 h-2" />}
+                {isHidden ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
                </button>
                <button onClick={(e) => { e.stopPropagation(); onClone(node.cid); }} title="Clone" className="p-0.5 hover:text-[#1e49e2] transition-all">
-                <Copy className="w-2 h-2" />
+                <Copy className="w-3 h-3" />
                </button>
                <button onClick={handleDelete} title="Delete" className="p-0.5 hover:text-red-500 transition-all">
-                <Trash2 className="w-2 h-2" />
+                <Trash2 className="w-3 h-3" />
                </button>
             </div>
           )}

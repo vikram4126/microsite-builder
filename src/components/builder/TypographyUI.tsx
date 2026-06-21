@@ -411,86 +411,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                 </div>
             </div>
 
-            {/* Row 4: Text Color Palette */}
-            <div className="space-y-2 pt-2">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                    <span className="mr-1.5 text-gray-400"><Palette size={12} strokeWidth={2.5} /></span> TEXT COLOR
-                </label>
-                <div className="flex items-center space-x-2 pt-1">
-                    {[
-                      { value: '#00338d', label: 'Navy' },
-                      { value: '#1e49e2', label: 'Blue' },
-                      { value: '#00b894', label: 'Green' },
-                      { value: '#fd349c', label: 'Pink' },
-                      { value: '#0c233c', label: 'Dark' },
-                      { value: '#e5e5e5', label: 'Light Gray' },
-                      { value: '#000000', label: 'Black' },
-                      { value: '#ffffff', label: 'White' }
-                    ].map((c) => (
-                       <button
-                         key={c.value}
-                         onClick={() => updateStyle('color', c.value)}
-                         title={c.label}
-                         className={`w-6 h-6 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${styles.color.toLowerCase() === c.value.toLowerCase() ? 'ring-2 ring-offset-2 ring-[#1e49e2] border-white/20' : 'border-transparent shadow-sm'}`}
-                         style={{ backgroundColor: c.value }}
-                       />
-                    ))}
-                    {/* Add custom color picker plus button to match ref */}
-                    <div className="relative w-7 h-7 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden hover:bg-gray-100 cursor-pointer">
-                        <span className="text-gray-400 text-sm font-light leading-none mb-0.5">+</span>
-                        <input 
-                            type="color" 
-                            className="absolute inset-0 opacity-0 cursor-pointer"
-                            onChange={(e) => updateStyle('color', e.target.value)}
-                            title="Custom Color"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Row 5: Background Color Palette */}
-            <div className="space-y-2 pt-2 pb-1">
-                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
-                    <span className="mr-1.5 text-gray-400"><PaintBucket size={12} strokeWidth={2.5} /></span> BACKGROUND COLOR
-                </label>
-                <div className="flex items-center space-x-2 pt-1">
-                    {[
-                      { value: 'transparent', label: 'Transparent' },
-                      { value: '#00338d', label: 'Navy' },
-                      { value: '#1e49e2', label: 'Blue' },
-                      { value: '#00b894', label: 'Green' },
-                      { value: '#fd349c', label: 'Pink' },
-                      { value: '#0c233c', label: 'Dark' },
-                      { value: '#e5e5e5', label: 'Light Gray' },
-                      { value: '#000000', label: 'Black' },
-                      { value: '#ffffff', label: 'White' }
-                    ].map((c) => (
-                       <button
-                         key={c.value}
-                         onClick={() => updateStyle('backgroundColor', c.value)}
-                         title={c.label}
-                         className={`w-6 h-6 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${styles.backgroundColor.toLowerCase() === c.value.toLowerCase() ? 'ring-2 ring-offset-2 ring-[#1e49e2] border-white/20' : 'border-transparent shadow-sm'}`}
-                         style={{ 
-                             background: c.value === 'transparent' 
-                                ? 'linear-gradient(to top right, #f8fafc calc(50% - 1px), #ef4444 calc(50% - 1px), #ef4444 calc(50% + 1px), #f8fafc calc(50% + 1px))' 
-                                : c.value 
-                         }}
-                       />
-                    ))}
-                    {/* Add custom color picker plus button */}
-                    <div className="relative w-7 h-7 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden hover:bg-gray-100 cursor-pointer">
-                        <span className="text-gray-400 text-sm font-light leading-none mb-0.5">+</span>
-                        <input 
-                            type="color" 
-                            className="absolute inset-0 opacity-0 cursor-pointer"
-                            onChange={(e) => updateStyle('backgroundColor', e.target.value)}
-                            title="Custom Background Color"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Row 6: List Style */}
+            {/* Row 4: List Style */}
             <div className="space-y-1.5 pt-2 pb-1">
                 <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
                     <span className="mr-1.5 text-gray-400"><List size={12} strokeWidth={2.5} /></span> LIST STYLE
@@ -514,7 +435,7 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                 </div>
             </div>
 
-            {/* Row 7: Text Decoration & Text Transform */}
+            {/* Row 5: Text Decoration & Text Transform */}
             <div className="flex space-x-4 pt-2 pb-1">
                 {/* Text Decoration */}
                 <div className="flex-1 space-y-1.5">
@@ -570,6 +491,85 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
                             {label}
                           </button>
                         ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Row 6: Text Color Palette */}
+            <div className="space-y-2 pt-2 pb-1">
+                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
+                    <span className="mr-1.5 text-gray-400"><Palette size={12} strokeWidth={2.5} /></span> TEXT COLOR
+                </label>
+                <div className="flex items-center space-x-2 pt-1">
+                    {[
+                      { value: '#00338d', label: 'Navy' },
+                      { value: '#1e49e2', label: 'Blue' },
+                      { value: '#00b894', label: 'Green' },
+                      { value: '#fd349c', label: 'Pink' },
+                      { value: '#0c233c', label: 'Dark' },
+                      { value: '#e5e5e5', label: 'Light Gray' },
+                      { value: '#000000', label: 'Black' },
+                      { value: '#ffffff', label: 'White' }
+                    ].map((c) => (
+                       <button
+                         key={c.value}
+                         onClick={() => updateStyle('color', c.value)}
+                         title={c.label}
+                         className={`w-6 h-6 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${styles.color.toLowerCase() === c.value.toLowerCase() ? 'ring-2 ring-offset-2 ring-[#1e49e2] border-white/20' : 'border-transparent shadow-sm'}`}
+                         style={{ backgroundColor: c.value }}
+                       />
+                    ))}
+                    {/* Add custom color picker plus button to match ref */}
+                    <div className="relative w-7 h-7 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden hover:bg-gray-100 cursor-pointer">
+                        <span className="text-gray-400 text-sm font-light leading-none mb-0.5">+</span>
+                        <input 
+                            type="color" 
+                            className="absolute inset-0 opacity-0 cursor-pointer"
+                            onChange={(e) => updateStyle('color', e.target.value)}
+                            title="Custom Color"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* Row 7: Background Color Palette */}
+            <div className="space-y-2 pt-2 pb-1">
+                <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider flex items-center">
+                    <span className="mr-1.5 text-gray-400"><PaintBucket size={12} strokeWidth={2.5} /></span> BACKGROUND COLOR
+                </label>
+                <div className="flex items-center space-x-2 pt-1">
+                    {[
+                      { value: 'transparent', label: 'Transparent' },
+                      { value: '#00338d', label: 'Navy' },
+                      { value: '#1e49e2', label: 'Blue' },
+                      { value: '#00b894', label: 'Green' },
+                      { value: '#fd349c', label: 'Pink' },
+                      { value: '#0c233c', label: 'Dark' },
+                      { value: '#e5e5e5', label: 'Light Gray' },
+                      { value: '#000000', label: 'Black' },
+                      { value: '#ffffff', label: 'White' }
+                    ].map((c) => (
+                       <button
+                         key={c.value}
+                         onClick={() => updateStyle('backgroundColor', c.value)}
+                         title={c.label}
+                         className={`w-6 h-6 shrink-0 rounded-full border-2 transition-transform hover:scale-110 ${styles.backgroundColor.toLowerCase() === c.value.toLowerCase() ? 'ring-2 ring-offset-2 ring-[#1e49e2] border-white/20' : 'border-transparent shadow-sm'}`}
+                         style={{ 
+                             background: c.value === 'transparent' 
+                                ? 'linear-gradient(to top right, #f8fafc calc(50% - 1px), #ef4444 calc(50% - 1px), #ef4444 calc(50% + 1px), #f8fafc calc(50% + 1px))' 
+                                : c.value 
+                         }}
+                       />
+                    ))}
+                    {/* Add custom color picker plus button */}
+                    <div className="relative w-7 h-7 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden hover:bg-gray-100 cursor-pointer">
+                        <span className="text-gray-400 text-sm font-light leading-none mb-0.5">+</span>
+                        <input 
+                            type="color" 
+                            className="absolute inset-0 opacity-0 cursor-pointer"
+                            onChange={(e) => updateStyle('backgroundColor', e.target.value)}
+                            title="Custom Background Color"
+                        />
                     </div>
                 </div>
             </div>

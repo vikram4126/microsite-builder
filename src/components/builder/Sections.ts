@@ -209,9 +209,9 @@ export const sectionsLibrary: SectionDef[] = [
             </a>
             
             <!-- CSS Checkbox Hack for Mobile Menu -->
-            <input type="checkbox" id="mobile-menu-toggle" class="hidden peer">
+            <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" data-gjs-layerable="false">
             
-            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-white hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu">
+            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-white hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu" data-gjs-layerable="false">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -248,7 +248,7 @@ export const sectionsLibrary: SectionDef[] = [
     id: 'section-business-hero',
     category: 'Header',
     label: 'Split Banner (Right Image + Left CTA)',
-    svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
+    svg: '<img src="/thumbs/services-thumb-1.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
       <div data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 relative overflow-hidden" layout-mode="container">
@@ -281,11 +281,11 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-features',
     category: 'Services',
-    label: 'Core Capabilities Grid (3 Cards)',
+    label: 'Service Cards (Icons)',
     svg: '<img src="/thumbs/services-thumb-2.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Features (Using responsive-grid trait method) -->
-      <div data-gjs-type="section" data-gjs-name="Features List" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Service Cards (Icons)" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-primary dark:text-white text-4xl font-display font-black mb-4 tracking-tight">Our Core Capabilities</h2>
@@ -323,11 +323,11 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-services',
     category: 'Services',
-    label: 'Professional Services Grid (3 Images)',
+    label: 'Service Cards (Images)',
     svg: '<img src="/thumbs/services-thumb-3.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Services Grid -->
-      <div data-gjs-type="section" data-gjs-name="Services Grid" class="w-full py-20 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Service Cards (Images)" class="w-full py-20 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center">
             <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
@@ -371,11 +371,11 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-business-cta',
     category: 'Introduction',
-    label: 'Vibrant Call-to-Action Block',
+    label: 'Vibrant CTA Block',
     svg: '<img src="/thumbs/Call-to-Action-thumb.png" class="object-cover w-full h-full" />',
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
-      <div data-gjs-type="section" data-gjs-name="Call to Action" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Vibrant CTA Block" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto">
           <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
             <div class="relative z-10 max-w-3xl mx-auto">
@@ -586,10 +586,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-dual-cta-pdf',
     category: 'Call to actions',
-    label: 'Split Card Banner with Download PDF',
+    label: 'Split Card Banner (Download)',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Split CTA Card" class="w-full bg-secondary py-10 md:py-20 lg:py-20" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Split Card Banner (Download)" class="w-full bg-secondary py-10 md:py-20 lg:py-20" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
             <div class="flex-1 min-h-[400px]">
@@ -607,10 +607,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-trust-impact',
     category: 'Introduction',
-    label: 'Trust & Impact Banner (Text + Large Image)',
+    label: 'Text & Large Image Banner',
     svg: '<img src="/thumbs/trust-and-impact-thumb.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Trust Hero" class="w-full py-20 bg-white" layout-mode="container">
+      <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Text & Large Image Banner" class="w-full py-20 bg-white" layout-mode="container">
         <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
             <span class="text-xs font-bold uppercase tracking-widest text-secondary mb-4">OVERLINE</span>
@@ -630,10 +630,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-intro-letter',
     category: 'Introduction',
-    label: 'CEO Welcome Letter with Signature',
+    label: 'Welcome Letter with Signature',
     svg: '<img src="/thumbs/welcome-letter-thumb.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="intro-letter" data-gjs-type="section" data-gjs-name="Introduction Letter" class="w-full py-20 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
+      <div id="intro-letter" data-gjs-type="section" data-gjs-name="Welcome Letter with Signature" class="w-full py-20 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-col md:flex-row gap-8 lg:gap-16">
             <!-- 30% Left Side -->
@@ -679,10 +679,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-expert-profiles',
     category: 'Services',
-    label: 'Expert Team Profiles (3 Members)',
+    label: 'Team Profiles Grid',
     svg: '<img src="/thumbs/services-thumb-4.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Expert Profiles" class="w-full py-20 bg-[#F5F7FA]" layout-mode="container">
+      <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Team Profiles Grid" class="w-full py-20 bg-[#F5F7FA]" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center mb-20 max-w-3xl mx-auto">
             <p class="text-gray-600 text-lg leading-relaxed font-medium">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
@@ -759,10 +759,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-functional-team',
     category: 'Contacts',
-    label: 'Functional Team Directory (10 Avatars)',
+    label: 'Team Directory (Avatars Grid)',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
-      <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Grid" class="w-full py-20 bg-white" layout-mode="container">
+      <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Directory (Avatars Grid)" class="w-full py-20 bg-white" layout-mode="container">
         <div class="container mx-auto">
           <h2 class="text-4xl font-display font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
           <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
@@ -874,10 +874,10 @@ export const sectionsLibrary: SectionDef[] = [
   {
     id: 'section-contact-meet-team',
     category: 'Contacts',
-    label: 'Meet the team Grid',
+    label: 'Meet the Team Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="5" fill="#00338d" font-weight="bold">Meet the team</text><rect x="5" y="15" width="90" height="2" fill="#cbd5e1"/><rect x="5" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="28" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="51" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="74" y="25" width="20" height="25" fill="#e2e8f0"/></svg>',
     html: `
-      <div id="section-meet-team" data-gjs-type="section" data-gjs-name="Meet the Team" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-meet-team" data-gjs-type="section" data-gjs-name="Meet the Team Grid" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="mb-12">
             <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-6">Meet the team</h2>
@@ -1022,7 +1022,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Circle Statistics Row',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="30" r="8" fill="var(--color-secondary)"/><circle cx="38" cy="30" r="10" fill="var(--color-primary)"/><circle cx="58" cy="30" r="12" fill="var(--color-purple)"/><circle cx="76" cy="30" r="7" fill="var(--color-accent)"/><circle cx="90" cy="30" r="5" fill="var(--color-light-accent)"/></svg>',
     html: `
-      <div id="data-visualization-stats" data-gjs-type="section" data-gjs-name="Stats Section" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-stats" data-gjs-type="section" data-gjs-name="Circle Statistics Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
@@ -1082,7 +1082,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Number Stat Cards',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="5" y1="15" x2="5" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="28" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="28" y1="15" x2="28" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="51" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="51" y1="15" x2="51" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="74" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="74" y1="15" x2="74" y2="45" stroke="#7213ea" stroke-width="2"/></svg>',
     html: `
-      <div id="data-visualization-number-cards" data-gjs-type="section" data-gjs-name="Number Cards Section" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-number-cards" data-gjs-type="section" data-gjs-name="Number Stat Cards" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
@@ -1125,7 +1125,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Divided Stats Row',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="90" height="30" rx="2" fill="white" stroke="#e2e8f0"/><line x1="23" y1="15" x2="23" y2="45" stroke="#e2e8f0"/><line x1="41" y1="15" x2="41" y2="45" stroke="#e2e8f0"/><line x1="59" y1="15" x2="59" y2="45" stroke="#e2e8f0"/><line x1="77" y1="15" x2="77" y2="45" stroke="#e2e8f0"/></svg>',
     html: `
-      <div id="data-visualization-divided-stats" data-gjs-type="section" data-gjs-name="Divided Stats Section" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-divided-stats" data-gjs-type="section" data-gjs-name="Divided Stats Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>

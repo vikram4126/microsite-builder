@@ -212,7 +212,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: '<img src="/thumbs/ceo intro thumb.png" class="object-cover w-full h-full" />',
     content: `
-      <div id="introduction-section" data-gjs-type="section" data-gjs-name="Intro Section" class="w-full py-20" layout-mode="container">
+      <div id="introduction-section" data-gjs-type="section" data-gjs-name="Introduction Section" class="w-full py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
             <div class="flex-1">
@@ -234,7 +234,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: svgs.partnerMessage,
     content: `
-      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Partner Message Section" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Global Lead Partner Message" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-10 tracking-tight">A message from our Global Lead Partner</h2>
           <div class="flex flex-col lg:flex-row gap-12 w-full items-start">
@@ -301,11 +301,11 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('features-grid', {
-    label: 'Services Grid with Icons',
+    label: 'Service Cards (Simple)',
     category: 'Services',
     media: '<img src="/thumbs/services-thumb-1.png" class="object-cover w-full h-full" />',
     content: `
-      <div id="features-grid" data-gjs-type="section" class="w-full bg-white py-20" layout-mode="container">
+      <div id="features-grid" data-gjs-type="section" data-gjs-name="Service Cards (Simple)" class="w-full bg-white py-20" layout-mode="container">
         <div class="container mx-auto">
           <div class="mx-auto flex flex-col w-full">
             <div class="text-center mb-16">
@@ -479,6 +479,84 @@ export const registerBlocks = (editor: any) => {
     `
   });
 
+  bm.add('icon-card', {
+    label: 'Icon Card',
+    category: 'Cards',
+    media: svgs.icons,
+    content: `
+      <div class="p-8 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
+        <div class="w-14 h-14 bg-accent/10 text-accent flex items-center justify-center mb-6">
+          <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        </div>
+        <h3 class="text-xl font-display font-bold text-primary dark:text-white mb-3">Icon Card Title</h3>
+        <p class="text-slate-600 dark:text-white leading-relaxed">This is a description for the icon card. You can customize the icon, title, and this text.</p>
+      </div>
+    `
+  });
+
+  bm.add('image-card', {
+    label: 'Image Card',
+    category: 'Cards',
+    media: svgs.image,
+    content: `
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-shadow w-full">
+        <img src="/images/image-2.png" class="h-56 w-full object-cover" alt="Card Image" />
+        <div class="p-8">
+          <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Category</div>
+          <h4 class="text-2xl font-display font-bold text-primary dark:text-white mb-3">Card Title</h4>
+          <p class="text-slate-600 dark:text-white mb-6">Card description goes here. Add more details about the service or product.</p>
+          <a href="#" class="bg-slate-100 dark:bg-slate-800 text-primary dark:text-white text-center py-3 block font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Read More</a>
+        </div>
+      </div>
+    `
+  });
+
+  bm.add('team-profile-card', {
+    label: 'Team Profile Card',
+    category: 'Cards',
+    media: svgs.card,
+    content: `
+      <div class="relative w-full group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+        <img src="/team-member/member-1.jpg" alt="Team Member" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
+          <div>
+            <h3 class="text-white font-bold text-lg mb-1 pointer-events-auto">Member Name</h3>
+            <p class="text-white/80 text-xs font-semibold pointer-events-auto">Job Title / Role</p>
+          </div>
+          <a href="mailto:email@example.com" class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white shrink-0 hover:bg-white hover:text-[#00338d] transition-colors pointer-events-auto" data-gjs-type="link">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </a>
+        </div>
+      </div>
+    `
+  });
+
+  bm.add('document-card', {
+    label: 'Document Card',
+    category: 'Cards',
+    media: svgs.card,
+    content: `
+      <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700 w-full h-full">
+        <div class="h-48 w-full shrink-0 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Document Cover" class="w-full h-full object-cover">
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mb-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span class="text-xs font-semibold">10 May 2023</span>
+          </div>
+          <div class="flex items-start justify-between mt-1 gap-2 mt-auto">
+            <h3 class="font-bold text-[#0c233c] dark:text-white text-lg leading-snug">Document Title</h3>
+            <a href="#" class="w-10 h-10 shrink-0 bg-[#1e49e2] text-white rounded-full flex items-center justify-center hover:bg-[#00338d] transition-colors mt-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    `
+  });
+
   bm.add('accordion', {
     label: 'Collapsible FAQ Accordion',
     category: 'Advanced',
@@ -554,15 +632,15 @@ export const registerBlocks = (editor: any) => {
   });
 
   bm.add('testimonial-card', {
-    label: 'Customer Testimonial',
-    category: 'Testimonials',
+    label: 'Testimonial Card',
+    category: 'Cards',
     media: svgs.testimonial,
     content: `
-      <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700 max-w-md mx-auto relative overflow-hidden">
-        <div class="text-6xl text-gray-200 dark:text-slate-700 absolute -top-2 left-4 font-serif">"</div>
+      <div class="bg-gray-50 dark:bg-slate-800 p-8 border border-gray-100 dark:border-gray-700 w-full h-full relative overflow-hidden">
+        <div class="text-6xl text-gray-200 dark:text-slate-700 absolute top-2 left-4 font-serif">"</div>
         <p class="text-gray-700 dark:text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg">"This platform transformed how our entire agency builds landing pages. It's incredibly fast and easy to use. Highly recommended!"</p>
         <div class="flex items-center">
-          <img src="/team-member/member-1jpg" class="w-12 h-12 rounded-full mr-4" />
+          <img src="/team-member/member-1.jpg" class="w-12 h-12 mr-4 object-cover" />
           <div>
             <h4 class="font-display font-bold text-gray-900 dark:text-white">Sarah Jenkins</h4>
             <span class="text-gray-500 dark:text-gray-400 text-sm">Marketing Director</span>

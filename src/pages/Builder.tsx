@@ -131,7 +131,7 @@ export default function Builder() {
     if (pData) {
       const newId = Math.random().toString(36).substring(2, 9);
       const newSlug = newPageName.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      
+
       // Check if slug already exists
       const exists = pData.pages.some((p: any, idx: number) => {
         const s = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -145,12 +145,12 @@ export default function Builder() {
 
       const updatedProjectWithNew = {
         ...pData,
-        pages: [...pData.pages, { 
-          id: newId, 
-          name: newPageName, 
+        pages: [...pData.pages, {
+          id: newId,
+          name: newPageName,
           title: newPageName,
           route: `/${newSlug}`,
-          layout: {} 
+          layout: {}
         }]
       };
 
@@ -163,7 +163,7 @@ export default function Builder() {
         setIsAddPageModalOpen(false);
         setNewPageName('');
         toast.success(`Page "${newPageName}" added successfully`);
-        
+
         // Update pageId ref immediately before navigation
         pageIdRef.current = newId;
         setPageId(newId);
@@ -180,7 +180,7 @@ export default function Builder() {
   const handleDeletePage = () => {
     const pData = projectDataRef.current;
     if (!pData || !pageId) return;
-    
+
     const currentPage = pData.pages.find((p: any) => p.id === pageId);
     if (!currentPage) return;
 
@@ -195,7 +195,7 @@ export default function Builder() {
 
   const handleConfirmDelete = async () => {
     if (!pageToDelete || !projectDataRef.current) return;
-    
+
     const updatedPages = projectDataRef.current.pages.filter((p: any) => p.id !== pageToDelete.id);
     const updatedProject = {
       ...projectDataRef.current,
@@ -211,7 +211,7 @@ export default function Builder() {
       setIsDeleteModalOpen(false);
       setPageToDelete(null);
       toast.success(`Page "${pageToDelete.title || pageToDelete.name}" deleted successfully`);
-      
+
       // Navigate to home page
       navigate(`/builder/${projectId}/home`);
       setTimeout(syncNavLinks, 100);
@@ -226,7 +226,7 @@ export default function Builder() {
     const pages = projectDataRef.current.pages;
     const wrapper = editorRef.current.getWrapper();
     const navContainers = wrapper.find('[data-nav-type="dynamic"]');
-    
+
     navContainers.forEach((nav: any) => {
       nav.components().reset();
       pages.forEach((p: any, idx: number) => {
@@ -235,7 +235,7 @@ export default function Builder() {
           tagName: 'a',
           type: 'link',
           classes: ['text-slate-600', 'dark:text-slate-300', 'hover:text-accent', 'transition-colors', 'w-full', 'md:w-auto', 'text-center', 'py-2', 'md:py-0', 'border-b', 'border-gray-100', 'md:border-none'],
-          attributes: { 
+          attributes: {
             href: idx === 0 ? 'index.html' : `${slug}.html`, // Relative paths for better compatibility
             'data-page-id': p.id,
             'data-slug': slug
@@ -400,7 +400,7 @@ export default function Builder() {
         styleManager: { appendTo: '#gjs-styles-container' },
         traitManager: { appendTo: '#gjs-traits-container' },
         layerManager: { appendTo: '#gjs-layers-container' },
-        selectorManager: { 
+        selectorManager: {
           componentFirst: true,
           escapeName: (name: string) => name // Preserve Tailwind classes like md:, dark:, []
         },
@@ -776,9 +776,27 @@ export default function Builder() {
         isComponent: (el: any) => el.getAttribute && el.getAttribute('data-gjs-type') === 'section',
         model: {
           defaults: {
+            'data-full-height': 'false',
+            'data-vertical-center': 'false',
             traits: [
               'id',
               'title',
+              {
+                type: 'checkbox',
+                name: 'data-full-height',
+                label: 'Full Height (100vh)',
+                valueTrue: 'true',
+                valueFalse: 'false',
+                changeProp: true,
+              },
+              {
+                type: 'checkbox',
+                name: 'data-vertical-center',
+                label: 'Vertical Center Content',
+                valueTrue: 'true',
+                valueFalse: 'false',
+                changeProp: true,
+              },
               {
                 type: 'select',
                 name: 'data-animation',
@@ -810,6 +828,38 @@ export default function Builder() {
           },
           init() {
             this.on('change:attributes:layout-mode', this.handleLayoutChange);
+            this.on('change:data-full-height', this.handleFullHeightChange);
+            this.on('change:data-vertical-center', this.handleVerticalCenterChange);
+          },
+          handleFullHeightChange() {
+            const isFullHeight = this.get('data-full-height') === 'true';
+            const attrs = { ...this.getAttributes() };
+            if (isFullHeight) {
+              attrs['data-full-height'] = 'true';
+              this.setAttributes(attrs);
+              this.addStyle({ 'min-height': '100vh' });
+            } else {
+              delete attrs['data-full-height'];
+              this.setAttributes(attrs);
+              this.removeStyle('min-height');
+            }
+          },
+          handleVerticalCenterChange() {
+            const isCenter = this.get('data-vertical-center') === 'true';
+            const attrs = { ...this.getAttributes() };
+            if (isCenter) {
+              attrs['data-vertical-center'] = 'true';
+              this.setAttributes(attrs);
+              this.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
+            } else {
+              delete attrs['data-vertical-center'];
+              this.setAttributes(attrs);
+              this.removeStyle('align-items');
+              this.removeStyle('justify-content');
+              const currentDisplay = this.getStyle()['display'];
+              if (currentDisplay === 'flex') this.removeStyle('display');
+              this.removeStyle('flex-direction');
+            }
           },
           handleLayoutChange() {
             const layout = this.getAttributes()['layout-mode'] || 'container';
@@ -899,7 +949,7 @@ export default function Builder() {
                 if (el) {
                   el.src = src;
                   el.load();
-                  el.play().catch(() => {});
+                  el.play().catch(() => { });
                 }
               }, 50);
             });
@@ -963,7 +1013,7 @@ export default function Builder() {
         // Always remove old tag to force Tailwind to re-process when called after loadProjectData
         const old = doc.getElementById('tw-canvas-theme');
         if (old) old.remove();
-        
+
         const tailwindStyle = doc.createElement('style');
         tailwindStyle.id = 'tw-canvas-theme';
         tailwindStyle.setAttribute('type', 'text/tailwindcss');
@@ -1114,12 +1164,12 @@ export default function Builder() {
             }
           `;
           doc.head.appendChild(style);
-          
+
           // Enable interactive Tabs toggling natively using GrapesJS selection event for CSS-Only Tabs
           editor.on('component:selected', (model: any) => {
             const el = model.getEl();
             if (!el || !el.classList || !el.classList.contains('deal-btn')) return;
-            
+
             // Find the radio input component inside this label component
             const radioComp = model.find('input[type="radio"]')[0];
             if (!radioComp) return;
@@ -1130,10 +1180,10 @@ export default function Builder() {
 
             // Find all radio inputs in this wrapper component
             const allRadios = wrapperModel.find('input[type="radio"]');
-            
+
             allRadios.forEach((radio: any) => {
               const radioEl = radio.getEl() as HTMLInputElement;
-              
+
               if (radio === radioComp) {
                 // Set as checked in the model
                 radio.addAttributes({ checked: 'checked' });
@@ -1163,7 +1213,7 @@ export default function Builder() {
 
             // Play all existing videos immediately
             iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
-              v.muted = true; v.play().catch(() => {});
+              v.muted = true; v.play().catch(() => { });
             });
 
             // Watch for new video elements added dynamically
@@ -1174,12 +1224,12 @@ export default function Builder() {
                   const videos = node.tagName === 'VIDEO'
                     ? [node]
                     : Array.from(node.querySelectorAll?.('video') || []);
-                  videos.forEach((v: any) => { v.muted = true; v.play().catch(() => {}); });
+                  videos.forEach((v: any) => { v.muted = true; v.play().catch(() => { }); });
                 });
               });
             });
             observer.observe(iframeDoc.body, { childList: true, subtree: true });
-          } catch (_) {}
+          } catch (_) { }
         };
 
         // Run immediately and also re-run after a short delay in case iframe is still loading
@@ -1213,7 +1263,7 @@ export default function Builder() {
 
           if (autoSaveRef.current && projectDataRef.current) {
             if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-            
+
             saveTimeoutRef.current = setTimeout(async () => {
               try {
                 // Purge empty CSS rules before saving to prevent style corruption on reload
@@ -1232,7 +1282,7 @@ export default function Builder() {
                 const editorData = editor.getProjectData();
                 const pData = projectDataRef.current;
                 const activeId = pageIdRef.current;
-                
+
                 const updatedProject = {
                   ...pData,
                   lastEdited: new Date().toISOString(),
@@ -1252,6 +1302,9 @@ export default function Builder() {
             }, 1000);
           }
         });
+
+        // Removed Layer Manager Section Reordering via MutationObserver
+        // Reordering is handled natively via the StructuralMap React component
 
       });
 
@@ -1373,8 +1426,8 @@ export default function Builder() {
         const selTag = (model.get('tagName') || '').toLowerCase();
         const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
         const isVideoSel = (typeof model.is === 'function' && model.is('video')) || model.get('type') === 'video' || model.get('type') === 'video-bg' || selTag === 'video';
-        const isTextSel = (typeof model.is === 'function' && model.is('text')) || model.get('type') === 'text' || ['h1','h2','h3','h4','h5','h6','p','span','a','b','i','strong','em'].includes(selTag);
-        
+        const isTextSel = (typeof model.is === 'function' && model.is('text')) || model.get('type') === 'text' || ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'a', 'b', 'i', 'strong', 'em'].includes(selTag);
+
         // Also check if any ancestor or child has a video — to auto-show media tab for entire video hero sections
         const hasVideoChild = !isVideoSel && typeof model.find === 'function' && model.find('video').length > 0;
         const hasVideoAncestor = (() => {
@@ -1454,7 +1507,7 @@ export default function Builder() {
             const attrs = model.getAttributes();
             const href = attrs.href;
             const currentTag = model.get('tagName')?.toLowerCase();
-            
+
             if (currentTag === 'img') return;
 
             if (href && href.trim() !== '') {
@@ -1648,9 +1701,9 @@ export default function Builder() {
             firstPage.title = firstPage.name;
           }
         }
-        
+
         setProjectData(data);
-        projectDataRef.current = data; 
+        projectDataRef.current = data;
 
         // Find pageId from slug
         let targetPage = data.pages.find((p: any, idx: number) => {
@@ -1672,17 +1725,59 @@ export default function Builder() {
 
           if (currentPage && currentPage.layout && Object.keys(currentPage.layout).length > 0) {
             editorRef.current.loadProjectData(currentPage.layout);
-            
-            // Ensure any navbar in existing layout is also non-removable
-            const wrapper = editorRef.current.DomComponents.getWrapper();
-            if (wrapper) {
-              wrapper.components().forEach((comp: any) => {
-                const name = comp.get('name') || comp.get('data-gjs-name') || (comp.get('attributes') && comp.get('attributes')['data-gjs-name']) || '';
-                if (name === 'Navbar' || name.includes('Navbar') || (comp.get('attributes') && comp.get('attributes')['data-nav-type'] === 'dynamic')) {
-                  comp.set({ removable: false, copyable: false, draggable: false });
-                }
-              });
-            }
+
+             // Ensure any navbar in existing layout is also non-removable, and sync section styles
+             const wrapper = editorRef.current.DomComponents.getWrapper();
+             if (wrapper) {
+               wrapper.components().forEach((comp: any) => {
+                 const name = comp.get('name') || comp.get('data-gjs-name') || (comp.get('attributes') && comp.get('attributes')['data-gjs-name']) || '';
+                 if (name === 'Navbar' || name.includes('Navbar') || (comp.get('attributes') && comp.get('attributes')['data-nav-type'] === 'dynamic')) {
+                   comp.set({ removable: false, copyable: false, draggable: false });
+                 }
+               });
+ 
+               // Sync section styling for full height and vertical centering on load
+               const sections = wrapper.findWhere((comp: any) => comp.get('type') === 'section');
+               sections.forEach((section: any) => {
+                 const attrs = { ...section.getAttributes() };
+                 // Sync full height
+                 const isFullHeight = section.get('data-full-height') === 'true' || section.getAttributes()['data-full-height'] === 'true';
+                 if (isFullHeight) {
+                   section.set('data-full-height', 'true');
+                   attrs['data-full-height'] = 'true';
+                   section.setAttributes(attrs);
+                   section.addStyle({ 'min-height': '100vh' });
+                 } else {
+                   section.set('data-full-height', 'false');
+                   delete attrs['data-full-height'];
+                   section.setAttributes(attrs);
+                   if (section.getStyle()['min-height'] === '100vh') {
+                     section.removeStyle('min-height');
+                   }
+                 }
+ 
+                 const centerAttrs = { ...section.getAttributes() };
+                 // Sync vertical center
+                 const isCenter = section.get('data-vertical-center') === 'true' || section.getAttributes()['data-vertical-center'] === 'true';
+                 if (isCenter) {
+                   section.set('data-vertical-center', 'true');
+                   centerAttrs['data-vertical-center'] = 'true';
+                   section.setAttributes(centerAttrs);
+                   section.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
+                 } else {
+                   section.set('data-vertical-center', 'false');
+                   delete centerAttrs['data-vertical-center'];
+                   section.setAttributes(centerAttrs);
+                   if (section.getStyle()['justify-content'] === 'center') {
+                     section.removeStyle('align-items');
+                     section.removeStyle('justify-content');
+                     const currentDisplay = section.getStyle()['display'];
+                     if (currentDisplay === 'flex') section.removeStyle('display');
+                     section.removeStyle('flex-direction');
+                   }
+                 }
+               });
+             }
 
             // Step 2: Immediately re-inject the Tailwind @theme block.
             // loadProjectData rebuilds the canvas frame, clearing the <head>.
@@ -1758,13 +1853,13 @@ export default function Builder() {
   useEffect(() => {
     if (!editorRef.current || !projectData) return;
     const editor = editorRef.current;
-    
+
     const updateNavLinks = () => {
       const navContainers = editor.DomComponents.getWrapper().find('[data-gjs-type="dynamic-nav-links"]');
       navContainers.forEach((nav: any) => {
         // Clear existing links
         nav.components().reset();
-        
+
         // Add project pages
         projectData.pages.forEach((p: any) => {
           const isActive = p.id === pageId;
@@ -1800,7 +1895,7 @@ export default function Builder() {
       ) {
         model.set('layerable', false);
       }
-      
+
       // Protect the Navbar from deletion if added manually
       if (model.get('attributes') && model.get('attributes')['data-gjs-name'] === 'Navbar') {
         model.set({ removable: false, copyable: false });
@@ -1837,10 +1932,10 @@ export default function Builder() {
           if (iframeDoc) {
             iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
               v.muted = true;
-              v.play().catch(() => {});
+              v.play().catch(() => { });
             });
           }
-        } catch (_) {}
+        } catch (_) { }
       }, 300);
     };
 
@@ -1853,10 +1948,10 @@ export default function Builder() {
           if (iframeDoc) {
             iframeDoc.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
               v.muted = true;
-              v.play().catch(() => {});
+              v.play().catch(() => { });
             });
           }
-        } catch (_) {}
+        } catch (_) { }
       }, 500);
     };
 
@@ -1893,12 +1988,12 @@ export default function Builder() {
 
     const pData = projectDataRef.current;
     const activeId = pageIdRef.current;
-    
+
     if (!editorRef.current || !pData || !activeId) {
       console.warn('Save skipped: missing editor, project data, or page ID', { pData, activeId });
       return;
     }
-    
+
     try {
       // Purge empty CSS rules before saving to prevent style corruption on reload
       try {
@@ -1920,9 +2015,9 @@ export default function Builder() {
           p.id === activeId ? { ...p, layout: editorData } : p
         )
       };
-      
+
       await api.put(`/projects/${projectId}`, updatedProject);
-      
+
       // Update both ref and state
       projectDataRef.current = updatedProject;
       setProjectData(updatedProject);
@@ -1949,8 +2044,8 @@ export default function Builder() {
     };
     const colors = themePresets[themeColor];
 
-      const baseHref = window.location.href.split('?')[0].replace(/[^/]*$/, '');
-      const previewHtml = [
+    const baseHref = window.location.href.split('?')[0].replace(/[^/]*$/, '');
+    const previewHtml = [
       '<!doctype html>',
       '<html lang="en">',
       '<head>',
@@ -2038,7 +2133,7 @@ export default function Builder() {
       '</body>',
       '</html>'
     ].join('\n');
-    
+
     const newWin = window.open('', '_blank');
     if (newWin) {
       newWin.document.open();
@@ -2085,7 +2180,7 @@ export default function Builder() {
   const handleExportZip = () => {
     if (!editorRef.current || !projectData) return;
     setIsExporting(true);
-    
+
     // Yield to browser rendering engine so the overlay can actually paint
     // before the heavy synchronous DOM manipulations block the main thread
     setTimeout(async () => {
@@ -2179,16 +2274,16 @@ export default function Builder() {
                 onChange={(e) => {
                   const targetSlug = e.target.value;
                   const pData = projectDataRef.current;
-                  
+
                   // Force save current page layout before leaving
                   if (editorRef.current && pData && pageId) {
                     const currentLayout = editorRef.current.getProjectData();
-                    const updatedPages = pData.pages.map((p: any) => 
+                    const updatedPages = pData.pages.map((p: any) =>
                       p.id === pageId ? { ...p, layout: currentLayout } : p
                     );
                     const updatedProject = { ...pData, pages: updatedPages };
                     projectDataRef.current = updatedProject;
-                    
+
                     // Don't wait for it, just fire and forget so UI is snappy
                     if (projectId !== 'guest') {
                       api.put(`/projects/${projectId}`, updatedProject).catch(console.error);
@@ -2217,14 +2312,14 @@ export default function Builder() {
               const currentPage = projectData.pages.find((p: any) => p.id === pageId);
               return currentPage?.name !== 'Home' && currentPage?.title !== 'Home';
             })() && (
-              <button
-                onClick={handleDeletePage}
-                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all"
-                title="Delete Current Page"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            )}
+                <button
+                  onClick={handleDeletePage}
+                  className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all"
+                  title="Delete Current Page"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
           </div>
 
         </div>
@@ -2471,6 +2566,54 @@ export default function Builder() {
         .gjs-trt-trait .gjs-field {
           border-color: #cbd5e1 !important;
           background: #ffffff !important;
+        }
+
+        /* Checkbox traits: Fix the custom GrapesJS checkmark icon visibility and layout */
+        /* GrapesJS hides native <input> and uses .gjs-chk-icon as visual checkmark */
+        .gjs-field-checkbox {
+          background: #f1f5f9 !important;
+          border: 1.5px solid #cbd5e1 !important;
+          border-radius: 4px !important;
+          width: 18px !important;
+          height: 18px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          cursor: pointer !important;
+          flex-shrink: 0 !important;
+        }
+        /* The custom checkmark icon — shown when checked via CSS sibling selector */
+        .gjs-chk-icon {
+          box-sizing: border-box !important;
+          display: block !important;
+          height: 11px !important;
+          width: 6px !important;
+          margin: 0 !important;
+          border-color: transparent !important;
+          border-width: 0 2px 2px 0 !important;
+          border-style: solid !important;
+        }
+        /* Show checkmark when input is checked */
+        .gjs-field-checkbox input:checked + .gjs-chk-icon {
+          border-color: #1e49e2 !important;
+        }
+        /* Make the row for checkbox traits compact and single-line */
+        .gjs-trt-trait:has(.gjs-field-checkbox) {
+          padding: 6px 12px !important;
+          min-height: unset !important;
+        }
+        .gjs-trt-trait:has(.gjs-field-checkbox) .gjs-label-wrp {
+          display: flex !important;
+          align-items: center !important;
+        }
+        .gjs-trt-trait:has(.gjs-field-checkbox) .gjs-label {
+          margin-bottom: 0 !important;
+          line-height: 1.2 !important;
+          white-space: nowrap !important;
+        }
+        .gjs-trt-trait:has(.gjs-field-checkbox) .gjs-field-wrp {
+          display: flex !important;
+          align-items: center !important;
         }
 
         /* Scrollbars */
@@ -3425,14 +3568,14 @@ export default function Builder() {
                 <Plus className="w-5 h-5 mr-2 text-[#1e49e2]" />
                 Create New Page
               </h3>
-              <button 
+              <button
                 onClick={() => setIsAddPageModalOpen(false)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
+
             <div className="p-8">
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -3484,14 +3627,14 @@ export default function Builder() {
                 <Trash2 className="w-5 h-5 mr-2" />
                 Delete Page
               </h3>
-              <button 
+              <button
                 onClick={() => setIsDeleteModalOpen(false)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
+
             <div className="p-8">
               <div className="mb-6 text-center">
                 <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -3499,7 +3642,7 @@ export default function Builder() {
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Are you sure?</h4>
                 <p className="text-gray-500 dark:text-gray-400">
-                  You are about to delete <span className="font-bold text-gray-900 dark:text-white">"{pageToDelete.title || pageToDelete.name}"</span>. 
+                  You are about to delete <span className="font-bold text-gray-900 dark:text-white">"{pageToDelete.title || pageToDelete.name}"</span>.
                   This action cannot be undone and all content on this page will be permanently removed.
                 </p>
               </div>
