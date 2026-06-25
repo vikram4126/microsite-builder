@@ -27,15 +27,15 @@
   ],
   "projects": [
     {
-      "id": "1782368890664a0k00cp",
+      "id": "1782371504768rmaveas",
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-06-25T06:28:14.254Z",
+      "lastEdited": "2026-06-25T07:17:18.863Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
-          "id": "p_1782368890664a0k00cp",
+          "id": "p_1782371504768rmaveas",
           "title": "Home",
           "route": "/",
           "layout": {
@@ -378,7 +378,37 @@
                 "width": 0
               }
             ],
-            "styles": [],
+            "styles": [
+              {
+                "selectors": [
+                  "#header-1-center"
+                ],
+                "style": {
+                  "background-image": "url(\"/background/background-1.jpg\")",
+                  "background-size": "cover",
+                  "background-position-x": "center",
+                  "background-position-y": "center",
+                  "background-repeat": "no-repeat"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-full-height=\"true\"]",
+                "style": {
+                  "min-height": "calc(100vh - var(--navbar-h, 0px))"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-vertical-center=\"true\"]",
+                "style": {
+                  "display": "flex",
+                  "align-items": "center",
+                  "flex-direction": "column",
+                  "justify-content": "center"
+                }
+              }
+            ],
             "pages": [
               {
                 "frames": [
@@ -406,7 +436,7 @@
                             "bg-white",
                             "dark:bg-dark",
                             "border-b-[3px]",
-                            "border-accent",
+                            "border-[#00338d]",
                             "shadow-sm",
                             "transition-all",
                             "duration-300",
@@ -669,7 +699,7 @@
                                           ],
                                           "attributes": {
                                             "href": "index.html",
-                                            "data-page-id": "p_1782368890664a0k00cp",
+                                            "data-page-id": "p_1782371504768rmaveas",
                                             "data-slug": "home"
                                           }
                                         },
@@ -705,6 +735,116 @@
                               ]
                             }
                           ]
+                        },
+                        {
+                          "type": "section",
+                          "name": "Background Image",
+                          "classes": [
+                            "w-full",
+                            "relative",
+                            "overflow-hidden",
+                            "py-20",
+                            "bg-cover",
+                            "bg-center",
+                            "bg-no-repeat",
+                            "bg-slate-800"
+                          ],
+                          "attributes": {
+                            "id": "header-1-center",
+                            "layout-mode": "container",
+                            "data-full-height": "false",
+                            "data-vertical-center": "false"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container",
+                                "mx-auto",
+                                "relative",
+                                "z-10"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "flex",
+                                    "flex-col",
+                                    "items-center",
+                                    "text-center",
+                                    "max-w-4xl",
+                                    "mx-auto",
+                                    "mix-blend-difference",
+                                    "drop-shadow-md"
+                                  ],
+                                  "components": [
+                                    {
+                                      "tagName": "span",
+                                      "type": "text",
+                                      "classes": [
+                                        "inline-block",
+                                        "rounded-full",
+                                        "px-4",
+                                        "py-1.5",
+                                        "text-xs",
+                                        "font-bold",
+                                        "text-white",
+                                        "mb-4",
+                                        "tracking-widest",
+                                        "uppercase",
+                                        "bg-white/20",
+                                        "backdrop-blur-sm",
+                                        "border",
+                                        "border-white/30"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "\n              OVERLINE\n            "
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "h1",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-white",
+                                        "text-5xl",
+                                        "lg:text-7xl",
+                                        "font-display",
+                                        "font-bold",
+                                        "mb-6",
+                                        "tracking-tight",
+                                        "leading-tight"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "\n              Inspire trust and deliver impact\n            "
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-white",
+                                        "text-lg",
+                                        "lg:text-xl",
+                                        "leading-relaxed",
+                                        "max-w-2xl",
+                                        "font-medium"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "\n              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.\n            "
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ],
                       "head": {
@@ -714,11 +854,11 @@
                         "tagName": "html"
                       }
                     },
-                    "id": "dZbIR11rYchKm9FV"
+                    "id": "g0brsjDQ5fMsY2DM"
                   }
                 ],
                 "type": "main",
-                "id": "igZmJUzeIqLhE2sD"
+                "id": "cYfyiNTOzzpWD3Kh"
               }
             ],
             "symbols": []

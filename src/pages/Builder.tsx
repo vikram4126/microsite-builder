@@ -431,7 +431,9 @@ export default function Builder() {
           styles: [
             'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Open+Sans+Condensed:wght@300;400;600;700;800&display=swap',
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-            `data:text/css;base64,${btoa('@custom-variant dark (&:where(.dark, .dark *));')}`
+            `data:text/css;base64,${btoa('@custom-variant dark (&:where(.dark, .dark *));')}`,
+            // Permanent section helper rules — always present regardless of loadProjectData
+            `data:text/css;base64,${btoa('[data-full-height="true"]{min-height:calc(100vh - var(--navbar-h,0px))!important}[data-vertical-center="true"]{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}')}`
           ],
           scripts: [
             'https://unpkg.com/@tailwindcss/browser@4'
@@ -449,7 +451,7 @@ export default function Builder() {
       // These are the single source of truth — driven only by the attribute value on each
       // section component. This avoids duplicate CSS rules that broke toggling after reopen.
       const injectSectionHelperRules = () => {
-        editor.Css.setRule('[data-full-height="true"]', { 'min-height': '100vh' });
+        editor.Css.setRule('[data-full-height="true"]', { 'min-height': 'calc(100vh - var(--navbar-h, 0px))' });
         editor.Css.setRule('[data-vertical-center="true"]', {
           display: 'flex',
           'align-items': 'center',
@@ -848,10 +850,6 @@ export default function Builder() {
           },
           init() {
             this.on('change:attributes:layout-mode', this.handleLayoutChange);
-            // NOTE: Full Height and Vertical Center are now handled via global CSS attribute-selector
-            // rules injected after editor init and after each loadProjectData.
-            // No per-component addStyle/removeStyle needed — this avoids duplicate CSS rules
-            // that would break toggling after project reopen.
           },
           handleLayoutChange() {
             const layout = this.getAttributes()['layout-mode'] || 'container';
@@ -1233,6 +1231,60 @@ export default function Builder() {
 
         // Turn on component outlines (borders) by default
         editor.Commands.run('sw-visibility');
+
+        // --- NAVBAR HEIGHT TRACKER ---
+        // Measures the sticky navbar height and sets --navbar-h CSS variable on :root
+        // so full-height sections use calc(100vh - var(--navbar-h)) and never scroll.
+        const injectNavbarHeightTracker = () => {
+          try {
+            const iframe = editor.Canvas.getFrameEl();
+            const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
+            if (!iframeDoc) return;
+
+            // Avoid duplicate injection
+            if ((iframeDoc as any).__navbarHeightTrackerInjected) {
+              // Still re-measure in case DOM changed
+              const fn = (iframeDoc as any).__measureNavbarH;
+              if (fn) fn();
+              return;
+            }
+            (iframeDoc as any).__navbarHeightTrackerInjected = true;
+
+            const measure = () => {
+              const navbar = iframeDoc.querySelector('[data-gjs-name="Navbar"], [data-nav-type="dynamic"]')?.closest('[data-gjs-type="section"]') ||
+                iframeDoc.querySelector('[data-gjs-type="section"]');
+              const navEl = iframeDoc.querySelector('[data-gjs-name="Navbar"]') ||
+                iframeDoc.querySelector('header') ||
+                iframeDoc.querySelector('nav')?.closest('[data-gjs-type="section"]') ||
+                iframeDoc.querySelector('[class*="sticky"]');
+              const h = navEl ? navEl.getBoundingClientRect().height : 0;
+              iframeDoc.documentElement.style.setProperty('--navbar-h', h + 'px');
+            };
+            (iframeDoc as any).__measureNavbarH = measure;
+
+            measure();
+            (iframe.contentWindow as any)?.addEventListener?.('resize', measure);
+
+            // Also watch for DOM changes (e.g. navbar dragged, sections added)
+            const obs = new (iframe.contentWindow as any).MutationObserver(() => measure());
+            obs.observe(iframeDoc.body, { childList: true, subtree: false });
+          } catch (_) { }
+        };
+
+        injectNavbarHeightTracker();
+        setTimeout(injectNavbarHeightTracker, 800);
+        editor.on('canvas:frame:load', injectNavbarHeightTracker);
+        // Re-measure when sections are added/removed
+        editor.on('component:add component:remove', () => {
+          setTimeout(() => {
+            try {
+              const iframe = editor.Canvas.getFrameEl();
+              const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
+              const fn = (iframeDoc as any)?.__measureNavbarH;
+              if (fn) fn();
+            } catch (_) { }
+          }, 100);
+        });
 
         const allBlocks = editor.BlockManager.getAll().models;
         setBlocks(allBlocks);
@@ -1786,40 +1838,9 @@ export default function Builder() {
                   (editorRef.current as any)._injectSectionHelperRules();
                 }
 
-                // Migration cleanup: remove old addStyle-based inline styles that are now
-                // redundant (handled by CSS attribute-selector rules). Prevents stale residuals
-                // from blocking the toggle after reopen.
-                try {
-                  const wrapper = editorRef.current.DomComponents.getWrapper();
-                  if (wrapper) {
-                    wrapper.find('[data-gjs-type="section"]').forEach((comp: any) => {
-                      const attrs = comp.getAttributes();
-                      const style = comp.getStyle ? comp.getStyle() : {};
+                // Cleaned up: No post-load sync needed. Global CSS rules in canvas.styles
+                // natively apply the correct CSS based purely on the restored attributes.
 
-                      // Remove old min-height: 100vh inline style — CSS rule now covers it
-                      if (style['min-height'] === '100vh') {
-                        comp.removeStyle('min-height');
-                      }
-
-                      // Remove old vertical-center inline styles — CSS rule now covers it
-                      // Only remove if they match exactly what the old handler would have set
-                      if (
-                        style['align-items'] === 'center' &&
-                        style['justify-content'] === 'center' &&
-                        style['flex-direction'] === 'column'
-                      ) {
-                        comp.removeStyle('align-items');
-                        comp.removeStyle('justify-content');
-                        comp.removeStyle('flex-direction');
-                        // Only remove display:flex if it's the vertical-center attribute is false
-                        // (if true, keep it — the CSS rule provides it)
-                        if (attrs['data-vertical-center'] !== 'true') {
-                          comp.removeStyle('display');
-                        }
-                      }
-                    });
-                  }
-                } catch (_) { /* non-critical migration */ }
 
                 isSyncingRef.current = false;
               });
@@ -2084,6 +2105,12 @@ export default function Builder() {
       '  body { font-family: "Open Sans", sans-serif !important; }',
       '  h1, h2, h3, h4, h5, h6 { font-family: "Open Sans Condensed", sans-serif !important; }',
       '</style>',
+      // Navbar height CSS variable + full-height rule for preview
+      '<style>',
+      '  :root { --navbar-h: 0px; }',
+      '  [data-full-height="true"] { min-height: calc(100vh - var(--navbar-h, 0px)) !important; }',
+      '  [data-vertical-center="true"] { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }',
+      '</style>',
       '<style id="gjs-css">' + css + '</style>',
       '<script src="https://unpkg.com/@tailwindcss/browser@4"></scr' + 'ipt>',
       '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></scr' + 'ipt>',
@@ -2095,6 +2122,20 @@ export default function Builder() {
       '<div id="preview-content">' + html + '</div>',
       '<script>',
       'document.addEventListener("DOMContentLoaded", function() {',
+      '  // --- Navbar height tracker ---',
+      '  // Measures sticky navbar height and sets --navbar-h so full-height sections',
+      '  // are exactly (100vh - navbar) tall with no scrollbar.',
+      '  function measureNavbarHeight() {',
+      '    var navEl = document.querySelector(\'[data-gjs-name="Navbar"]\') ||',
+      '                document.querySelector(\'[class*="sticky"]\') ||',
+      '                document.querySelector("header") ||',
+      '                document.querySelector("nav");',
+      '    var h = navEl ? navEl.getBoundingClientRect().height : 0;',
+      '    document.documentElement.style.setProperty("--navbar-h", h + "px");',
+      '  }',
+      '  measureNavbarHeight();',
+      '  window.addEventListener("resize", measureNavbarHeight);',
+      '  ',
       '  function initAnimations() {',
       '    if(typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){',
       '      gsap.registerPlugin(ScrollTrigger);',
@@ -2126,6 +2167,8 @@ export default function Builder() {
       '    if (event.data.type === "UPDATE_PREVIEW_CONTENT") {',
       '      document.getElementById("preview-content").innerHTML = event.data.html;',
       '      document.getElementById("gjs-css").textContent = event.data.css;',
+      '      // Re-measure navbar height after content update',
+      '      setTimeout(measureNavbarHeight, 50);',
       '      // Re-init animations and scroll to top',
       '      window.scrollTo(0, 0);',
       '      setTimeout(initAnimations, 100);',
@@ -2145,6 +2188,7 @@ export default function Builder() {
       '</body>',
       '</html>'
     ].join('\n');
+
 
     const newWin = window.open('', '_blank');
     if (newWin) {

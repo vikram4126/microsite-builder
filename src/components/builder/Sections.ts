@@ -199,7 +199,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
-      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-[#00338d] shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
         <div class="container mx-auto" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
           <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
             <a href="#" class="block" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
