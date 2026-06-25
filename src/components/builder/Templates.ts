@@ -33,7 +33,7 @@ export const registerTemplates = (editor: any) => {
       <div class="mx-auto flex flex-col items-center w-full">
         <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
         <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-        <button class="bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+        <a href="#" class="inline-block bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</a>
       </div>
     </div>
   </div>

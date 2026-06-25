@@ -61,7 +61,7 @@ export const registerBlocks = (editor: any) => {
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
             <p class="text-xl text-gray-400 mb-8 max-w-2xl">Discover how we can help you grow your business effortlessly with our powerful tools.</p>
-            <button class="bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</button>
+            <a href="#" class="inline-block bg-secondary px-8 py-3 rounded-xl font-bold hover:bg-[#3b82f6] transition-colors">Get Started Now</a>
           </div>
         </div>
       </div>
@@ -442,7 +442,7 @@ export const registerBlocks = (editor: any) => {
     category: "Popups",
     media: `<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><span class="text-[8px] font-bold text-[#0c233c] px-2 py-1 border border-slate-300 rounded shadow-sm">Simple Popup</span></div>`,
     content: `
-<div data-gjs-type="popup-wrapper" id="simple-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+<div data-gjs-type="popup-wrapper" id="simple-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="false">
   <div class="popup-content bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative flex flex-col items-center text-center animate-[zoomIn_0.3s_ease-out]">
     <a href="#" class="popup-close absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -463,7 +463,7 @@ export const registerBlocks = (editor: any) => {
     category: "Popups",
     media: `<div class="flex flex-col items-center justify-center p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="w-full h-1/2 bg-slate-200 mb-1 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm mb-0.5"></div><div class="w-3/4 h-1 bg-slate-300 rounded-sm"></div></div>`,
     content: `
-<div data-gjs-type="popup-wrapper" id="image-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+<div data-gjs-type="popup-wrapper" id="image-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="false">
   <div class="popup-content bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative flex flex-col animate-[zoomIn_0.3s_ease-out]">
     <a href="#" class="popup-close absolute top-4 right-4 text-white hover:text-slate-200 transition-colors z-10 bg-black/20 rounded-full p-1 backdrop-blur-sm">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -486,7 +486,7 @@ export const registerBlocks = (editor: any) => {
     category: "Popups",
     media: `<div class="flex flex-row items-center justify-center p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="w-1/3 h-full bg-[#0c233c] rounded-l-sm"></div><div class="w-2/3 h-full bg-slate-100 flex flex-col gap-1 p-1 rounded-r-sm"><div class="w-full h-1 bg-slate-300 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm"></div></div></div>`,
     content: `
-<div data-gjs-type="popup-wrapper" id="team-popup" class="fixed inset-0 bg-[#0c233c]/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+<div data-gjs-type="popup-wrapper" id="team-popup" class="fixed inset-0 bg-[#0c233c]/80 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="false">
   <div class="popup-content bg-slate-50 shadow-2xl w-full max-w-5xl relative flex flex-col md:flex-row animate-[zoomIn_0.3s_ease-out] border border-slate-300 rounded overflow-hidden">
     <a href="#" class="popup-close absolute top-2 right-2 text-white bg-[#0c233c] hover:bg-[#1e49e2] rounded flex items-center justify-center w-6 h-6 transition-colors z-10 shadow">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -540,6 +540,39 @@ export const registerBlocks = (editor: any) => {
         </ul>
       </div>
 
+    </div>
+  </div>
+</div>
+    `
+  });
+
+  bm.add("popup-split", {
+    label: "Split Image Popup",
+    category: "Popups",
+    media: `<div class="flex flex-row items-center justify-center p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="w-1/2 h-full bg-slate-200 rounded-l-sm"></div><div class="w-1/2 h-full bg-slate-50 flex flex-col gap-1 p-1 rounded-r-sm"><div class="w-full h-1 bg-slate-300 rounded-sm"></div><div class="w-3/4 h-1 bg-slate-300 rounded-sm"></div></div></div>`,
+    content: `
+<div data-gjs-type="popup-wrapper" id="split-popup" class="fixed inset-0 bg-[#0c233c]/80 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="false">
+  <div class="popup-content bg-white shadow-2xl w-full max-w-4xl relative flex flex-col md:flex-row animate-[zoomIn_0.3s_ease-out] rounded-xl overflow-hidden">
+    <a href="#" class="popup-close absolute top-4 right-4 text-slate-400 hover:text-[#0c233c] transition-colors z-10 bg-white/80 backdrop-blur-sm rounded-full p-1.5 shadow-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </a>
+    
+    <!-- Left Image Column -->
+    <div class="w-full md:w-1/2 h-64 md:h-auto relative bg-slate-100">
+      <img src="/images/business-1.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Popup Image">
+    </div>
+    
+    <!-- Right Content Column -->
+    <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e49e2]/10 text-[#1e49e2] text-xs font-bold uppercase tracking-wider mb-4 w-fit">
+        Announcement
+      </span>
+      <h3 class="text-3xl font-display font-bold text-[#0c233c] mb-4 leading-tight">Heading Goes Here</h3>
+      <p class="text-slate-600 mb-6 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="flex gap-4 mt-auto md:mt-4">
+        <a href="#" class="bg-[#00b8f5] text-[#0c233c] px-6 py-2.5 rounded-lg font-bold hover:bg-[#aceaff] transition-colors text-sm shadow-sm">Learn More</a>
+        <a href="#" class="bg-white border border-slate-300 text-slate-700 px-6 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-sm">Cancel</a>
+      </div>
     </div>
   </div>
 </div>

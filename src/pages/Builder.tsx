@@ -590,6 +590,65 @@ export default function Builder() {
         }
       });
 
+      editor.TraitManager.addType('popup-selector', {
+        createInput({ trait }: any) {
+          const el = document.createElement('div');
+          el.innerHTML = `
+            <select class="popup-select w-full bg-white border border-gray-200 rounded p-1 text-xs">
+              <option value="">-- None --</option>
+            </select>
+          `;
+          return el;
+        },
+        onEvent({ elInput, component }: any) {
+          try {
+            const select = elInput.querySelector('.popup-select');
+            if (select && select.value) {
+              component.addAttributes({ 'data-target': select.value });
+              if (component.is('link')) {
+                 component.addAttributes({ href: select.value });
+              }
+            } else {
+              const attrs = component.getAttributes();
+              delete attrs['data-target'];
+              component.setAttributes(attrs);
+            }
+          } catch (e) {
+            console.error('Error in popup-selector onEvent:', e);
+          }
+        },
+        onUpdate({ elInput, component }: any) {
+          try {
+            const select = elInput.querySelector('.popup-select');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">-- None --</option>';
+            
+            let popups: any[] = [];
+            const wrapper = editor.getWrapper();
+            if (wrapper && typeof wrapper.find === 'function') {
+               popups = wrapper.find('[data-gjs-type="popup-wrapper"]');
+            }
+            
+            popups.forEach((p: any) => {
+               const id = p.getId();
+               const name = p.getName() || 'Popup';
+               const option = document.createElement('option');
+               option.value = '#' + id;
+               option.textContent = name + ' (' + id + ')';
+               select.appendChild(option);
+            });
+            
+            const currentTarget = component.getAttributes()['data-target'] || component.getAttributes()['href'];
+            if (currentTarget && currentTarget.startsWith('#')) {
+               select.value = currentTarget;
+            }
+          } catch (e) {
+            console.error('Error in popup-selector onUpdate:', e);
+          }
+        }
+      });
+
       const domc = editor.DomComponents;
 
       // Register Responsive Grid Widget
@@ -800,6 +859,7 @@ export default function Builder() {
         isComponent: (el) => el.getAttribute && el.getAttribute("data-gjs-type") === "popup-wrapper",
         model: {
           defaults: {
+            name: "Popup Wrapper",
             traits: [
               "id",
               {
@@ -812,6 +872,15 @@ export default function Builder() {
             ],
             script: function() {
               const popup = this;
+              
+              // Initially hide popup on the live site and in preview
+              // We detect GrapesJS editor by checking window.parent
+              const isEditor = typeof window !== 'undefined' && window.parent && window.parent.document.querySelector('.gjs-editor');
+              if (!isEditor) {
+                popup.classList.add("hidden");
+                popup.classList.remove("flex");
+              }
+              
               const id = popup.id;
               if (!id) return;
               
@@ -844,10 +913,17 @@ export default function Builder() {
           },
           init() {
             this.on("change:attributes:data-show-editor", this.handleShowEditor);
+            this.on("change:status", this.handleStatusChange);
             if (!this.getAttributes()["data-show-editor"]) {
-               this.addAttributes({ "data-show-editor": "true" });
+               this.addAttributes({ "data-show-editor": "false" });
             }
             this.handleShowEditor();
+          },
+          handleStatusChange() {
+            const status = this.get('status');
+            if (status === 'selected') {
+               this.addAttributes({ "data-show-editor": "true" });
+            }
           },
           handleShowEditor() {
             const attrs = this.getAttributes();
@@ -1041,6 +1117,11 @@ export default function Builder() {
               'id',
               'title',
               {
+                type: 'popup-selector',
+                name: 'popup-selector',
+                label: 'Trigger Popup',
+              },
+              {
                 type: 'select',
                 name: 'data-animation',
                 label: 'GSAP Animation',
@@ -1066,6 +1147,25 @@ export default function Builder() {
               }
             ]
           }
+        }
+      });
+
+      // Dynamically ensure ALL components get the popup-selector trait
+      editor.on('component:add', (component: any) => {
+        try {
+          const traits = component.get('traits');
+          if (traits) {
+            const hasPopup = traits.some((t: any) => t.get('name') === 'popup-selector');
+            if (!hasPopup) {
+              traits.add({
+                type: 'popup-selector',
+                name: 'popup-selector',
+                label: 'Trigger Popup',
+              });
+            }
+          }
+        } catch (e) {
+          console.error('Error adding popup-selector trait to component:', e);
         }
       });
 
