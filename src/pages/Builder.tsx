@@ -632,10 +632,11 @@ export default function Builder() {
             
             popups.forEach((p: any) => {
                const id = p.getId();
-               const name = p.getName() || 'Popup';
+               // Use custom label attr, fallback to id
+               const label = p.getAttributes()['data-popup-label'] || id;
                const option = document.createElement('option');
                option.value = '#' + id;
-               option.textContent = name + ' (' + id + ')';
+               option.textContent = label;
                select.appendChild(option);
             });
             
@@ -863,6 +864,12 @@ export default function Builder() {
             traits: [
               "id",
               {
+                type: "text",
+                name: "data-popup-label",
+                label: "Popup Name",
+                placeholder: "e.g. Contact Form",
+              },
+              {
                 type: "checkbox",
                 name: "data-show-editor",
                 label: "Show in Editor",
@@ -914,10 +921,39 @@ export default function Builder() {
           init() {
             this.on("change:attributes:data-show-editor", this.handleShowEditor);
             this.on("change:status", this.handleStatusChange);
+            this.on("change:attributes:data-popup-label", this.handleLabelChange);
+
+            // Force-add traits so they always appear (even on saved/loaded popups)
+            if (!this.getTrait('data-popup-label')) {
+              this.addTrait({
+                type: 'text',
+                name: 'data-popup-label',
+                label: 'Popup Name',
+                placeholder: 'e.g. Contact Form',
+              }, { at: 1 });
+            }
+            if (!this.getTrait('data-show-editor')) {
+              this.addTrait({
+                type: 'checkbox',
+                name: 'data-show-editor',
+                label: 'Show in Editor',
+                valueTrue: 'true',
+                valueFalse: 'false',
+              }, { at: 2 });
+            }
+
             if (!this.getAttributes()["data-show-editor"]) {
                this.addAttributes({ "data-show-editor": "false" });
             }
             this.handleShowEditor();
+          },
+          handleLabelChange() {
+            const label = this.getAttributes()["data-popup-label"];
+            if (label && label.trim()) {
+              this.set("name", label.trim());
+            } else {
+              this.set("name", "Popup Wrapper");
+            }
           },
           handleStatusChange() {
             const status = this.get('status');
@@ -1166,6 +1202,87 @@ export default function Builder() {
           }
         } catch (e) {
           console.error('Error adding popup-selector trait to component:', e);
+        }
+      });
+
+      // Auto-show popup when it is selected (via Canvas or Layers)
+      editor.on('component:selected', (component: any) => {
+        try {
+          if (!component) return;
+
+          // Walk up ancestors to find popup-wrapper
+          let target = component;
+          while (target) {
+            if (target.is && target.is('popup-wrapper')) break;
+            target = target.parent ? target.parent() : null;
+          }
+
+          if (!target || !target.is('popup-wrapper')) return;
+
+          // 1. Show popup visually
+          target.removeClass('hidden');
+          target.addClass('flex');
+          target.addAttributes({ 'data-show-editor': 'true' });
+          const el = target.getEl();
+          if (el) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+          }
+
+          // 2. If selected component is NOT the popup-wrapper itself,
+          //    re-select the popup-wrapper so Traits panel shows popup-wrapper traits
+          if (target !== component) {
+            setTimeout(() => {
+              editor.select(target);
+            }, 0);
+            return;
+          }
+
+          // 3. Update trait checkbox UI
+          const traits = target.get('traits');
+          if (traits) {
+            const showTrait = traits.filter((t: any) => t.get('name') === 'data-show-editor')[0];
+            if (showTrait) showTrait.set('value', 'true');
+          }
+        } catch (e) {
+          console.error('[popup-select] error:', e);
+        }
+      });
+
+
+      // Auto-hide popup when deselected (if desired)
+      editor.on('component:deselected', (component: any) => {
+        try {
+          let target = component;
+          while (target) {
+            if (target.is && target.is('popup-wrapper')) break;
+            target = target.parent ? target.parent() : null;
+          }
+
+          if (target && target.is('popup-wrapper')) {
+            const currentlySelected = editor.getSelected();
+            // Only hide if nothing inside is selected anymore
+            let selectedIsInsidePopup = false;
+            if (currentlySelected) {
+              let p: any = currentlySelected;
+              while (p) {
+                if (p === target) { selectedIsInsidePopup = true; break; }
+                p = p.parent ? p.parent() : null;
+              }
+            }
+            if (!selectedIsInsidePopup) {
+              target.addClass('hidden');
+              target.removeClass('flex');
+              target.addAttributes({ 'data-show-editor': 'false' });
+              const el = target.getEl();
+              if (el) {
+                el.classList.add('hidden');
+                el.classList.remove('flex');
+              }
+            }
+          }
+        } catch (e) {
+          console.error('[popup-deselect] error:', e);
         }
       });
 
