@@ -21,7 +21,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-1-center" data-gjs-type="section" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-20 bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
+      <div id="header-1-center" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Background Image" class="w-full relative overflow-hidden py-20 bg-cover bg-center bg-no-repeat bg-slate-800" layout-mode="container">
         <div class="container mx-auto relative z-10">
           <div class="flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference drop-shadow-md">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-white mb-4 tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30">
@@ -52,7 +52,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-2-left-blue" data-gjs-type="section" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-20 bg-cover bg-right bg-no-repeat bg-primary" layout-mode="container">
+      <div id="header-2-left-blue" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Header Left Blue Gradient" class="w-full relative overflow-hidden py-20 bg-cover bg-right bg-no-repeat bg-primary" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -84,7 +84,7 @@ export const sectionsLibrary: SectionDef[] = [
           background-repeat: no-repeat;
         }
       </style>
-      <div id="header-3-left-white" data-gjs-type="section" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-20 bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
+      <div id="header-3-left-white" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Backgound + White Gradient" class="w-full relative overflow-hidden py-20 bg-cover bg-right bg-no-repeat bg-white" layout-mode="container">
         <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);" data-gjs-hoverable="false" data-gjs-selectable="false" data-gjs-draggable="false" data-gjs-removable="false"></div>
         <div class="container mx-auto relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
@@ -108,7 +108,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Left-Aligned Hero (White Background)',
     svg: '<img src="/thumbs/header-left-solid-white-thumb.jpg" class="object-cover" />',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-20 bg-white" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Header Left Solid White" class="w-full relative overflow-hidden py-20 bg-white" layout-mode="container">
         <div class="container mx-auto relative z-10">
           <div class="flex flex-col items-start text-left max-w-3xl">
             <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
@@ -131,10 +131,10 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Left-Aligned Hero with Right Image',
     svg: '<img src="/thumbs/left-image-thumb.jpg" class="object-cover" />',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Header Left Solid White Image" class="w-full relative overflow-hidden py-20 bg-white" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Header Left Solid White Image" class="w-full relative overflow-hidden py-20 bg-white" layout-mode="container">
         <div class="container mx-auto relative z-10">
           <div class="flex flex-col md:flex-row gap-12 items-center">
-            <div class="flex-1 flex flex-col items-start text-left max-w-3xl">
+            <div data-animation="slide-left" class="flex-1 flex flex-col items-start text-left max-w-3xl">
               <span class="inline-block rounded-full px-4 py-1.5 text-xs font-bold text-[var(--color-secondary)] mb-4 tracking-widest uppercase bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20">
                 OVERLINE
               </span>
@@ -149,7 +149,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl border-2 border-[var(--color-primary)]/20 text-[var(--color-primary)] font-bold text-lg hover:bg-slate-50 transition-colors">Learn More</a>
               </div>
             </div>
-            <div class="flex-1 relative z-10 hidden md:block w-full">
+            <div data-animation="slide-right" class="flex-1 relative z-10 hidden md:block w-full">
               <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-slate-100" alt="Hero Image" />
             </div>
           </div>
@@ -163,7 +163,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Video Banner Hero',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#0c233c"/><circle cx="50" cy="30" r="12" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1"/><polygon points="46,24 46,36 58,30" fill="white"/><rect x="5" y="48" width="25" height="3" rx="1" fill="white"/><rect x="5" y="53" width="40" height="2" rx="1" fill="rgba(255,255,255,0.5)"/></svg>',
     html: `
-      <div id="header-video-banner" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full relative overflow-hidden bg-[#0c233c]" layout-mode="container">
+      <div id="header-video-banner" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Video Banner" class="w-full relative overflow-hidden bg-[#0c233c]" layout-mode="container">
         <!-- Background video -->
         <video data-gjs-type="bg-video" id="hero-bg-video" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" poster="/video-5.jpg" src="/videos/video-4.mp4" class="gjs-video-bg absolute inset-0 z-0 opacity-50" style="width: 100% !important; height: 100% !important; object-fit: cover !important;"></video>
         
@@ -199,7 +199,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
-      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-[#00338d] shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-[#00338d] shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
         <div class="container mx-auto" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
           <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
             <a href="#" class="block" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
@@ -251,11 +251,11 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/services-thumb-1.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Hero Section with subtle colored gradient background (Fix for B&W preview) -->
-      <div data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 relative overflow-hidden" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Hero Header" class="w-full bg-gradient-to-b from-accent/10 to-transparent dark:from-slate-800 dark:to-slate-900 py-20 relative overflow-hidden" layout-mode="container">
         <div class="container mx-auto">
           <!-- Wrap interior in standard flex layout -->
           <div class="flex flex-col md:flex-row gap-12 items-center px-4 sm:px-0">
-            <div class="flex-1 flex flex-col gap-8 z-10 w-full object-cover">
+            <div data-animation="slide-left" class="flex-1 flex flex-col gap-8 z-10 w-full object-cover">
               <div>
                 <span class="inline-flex items-center rounded-full bg-accent/10 px-4 py-1.5 text-sm font-bold text-accent mb-6 border border-accent/20 shadow-sm">New: Enterprise Cloud 2.0</span>
                 <h1 class="text-primary dark:text-white text-4xl lg:text-5xl font-display font-black leading-tight tracking-tight">
@@ -270,7 +270,7 @@ export const sectionsLibrary: SectionDef[] = [
                 <a href="#" class="h-14 flex items-center justify-center px-8 rounded-xl border-2 border-primary/20 dark:border-slate-700 text-primary dark:text-slate-200 font-bold text-lg hover:bg-white dark:hover:bg-slate-800 transition-colors">View Demo</a>
               </div>
             </div>
-            <div class="flex-1 relative z-10 hidden md:block w-full">
+            <div data-animation="slide-right" class="flex-1 relative z-10 hidden md:block w-full">
               <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-white dark:border-slate-800" alt="Office" />
             </div>
           </div>
@@ -285,7 +285,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/services-thumb-2.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Features (Using responsive-grid trait method) -->
-      <div data-gjs-type="section" data-gjs-name="Service Cards (Icons)" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Service Cards (Icons)" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-primary dark:text-white text-4xl font-display font-black mb-4 tracking-tight">Our Core Capabilities</h2>
@@ -327,7 +327,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/services-thumb-3.png" class="object-cover w-full h-full" />',
     html: `
       <!-- Services Grid -->
-      <div data-gjs-type="section" data-gjs-name="Service Cards (Images)" class="w-full py-20 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Service Cards (Images)" class="w-full py-20 bg-slate-50 dark:bg-slate-800/50" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-12 flex flex-col items-center">
             <h2 class="text-4xl font-display font-black text-primary dark:text-white mb-4 tracking-tight">Professional Services</h2>
@@ -375,7 +375,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<img src="/thumbs/Call-to-Action-thumb.png" class="object-cover w-full h-full" />',
     html: `
       <!-- CTA Block (Refactored to native Tailwind gradient instead of blurred absolute shapes) -->
-      <div data-gjs-type="section" data-gjs-name="Vibrant CTA Block" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Vibrant CTA Block" class="w-full py-20 bg-white dark:bg-background-dark" layout-mode="container">
         <div class="container mx-auto">
           <div class="bg-gradient-to-br from-primary via-primary to-accent dark:from-slate-800 dark:to-slate-900 rounded-[2.5rem] p-12 lg:p-24 text-center shadow-2xl relative overflow-hidden text-white border border-primary/20">
             <div class="relative z-10 max-w-3xl mx-auto">
@@ -398,7 +398,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
       <!-- KPMG Footer -->
-      <div data-gjs-type="section" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-10 md:py-20 lg:py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Page Footer" class="w-full bg-slate-50 py-10 md:py-20 lg:py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -467,7 +467,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="15" width="15" height="4" fill="var(--color-primary)"/></svg>',
     html: `
       <!-- KPMG UK Footer -->
-      <div data-gjs-type="section" data-gjs-name="Page Footer UK" class="w-full bg-slate-50 py-10 md:py-20 lg:py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Page Footer UK" class="w-full bg-slate-50 py-10 md:py-20 lg:py-20 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <!-- Responsive grid component trait -->
           <div data-gjs-type="responsive-grid" class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -542,7 +542,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'India',
     svg: '<svg viewBox="0 0 100 30" class="w-full h-full" fill="none"><rect width="100" height="30" fill="#f8fafc"/><rect x="10" y="13" width="50" height="4" fill="var(--color-primary)"/><rect x="70" y="13" width="20" height="4" fill="var(--color-primary)"/></svg>',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Simple Footer" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Simple Footer" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="w-full md:w-[70%] text-sm text-slate-500 font-medium text-center md:text-left space-y-2">
@@ -566,7 +566,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'UK',
     svg: '<svg viewBox="0 0 100 30" class="w-full h-full" fill="none"><rect width="100" height="30" fill="#f8fafc"/><rect x="10" y="13" width="50" height="4" fill="var(--color-primary)"/><rect x="70" y="13" width="20" height="4" fill="var(--color-primary)"/></svg>',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Simple Footer UK" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Simple Footer UK" class="w-full bg-slate-50 py-6 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="w-full md:w-[70%] text-sm text-slate-500 font-medium text-center md:text-left space-y-2">
@@ -589,13 +589,13 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Split Card Banner (Download)',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="var(--color-secondary)"/><rect x="15" y="15" width="35" height="30" fill="#ffffff" opacity="0.5"/><rect x="50" y="15" width="35" height="30" fill="#ffffff"/></svg>',
     html: `
-      <div data-gjs-type="section" data-gjs-name="Split Card Banner (Download)" class="w-full bg-secondary py-10 md:py-20 lg:py-20" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Split Card Banner (Download)" class="w-full bg-secondary py-10 md:py-20 lg:py-20" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
-            <div class="flex-1 min-h-[400px]">
+            <div data-animation="slide-left" class="flex-1 min-h-[400px]">
               <img src="/background/background-1.jpg" class="w-full h-full object-cover" alt="Handshake" />
             </div>
-            <div class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
+            <div data-animation="slide-right" class="flex-1 flex flex-col items-center justify-center p-12 lg:p-16 text-center">
               <h2 class="text-4xl font-display font-black text-gray-900 mb-8 tracking-tight">Lorem ipsum</h2>
               <a href="#" data-gjs-type="link" class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">Download PDF</a>
             </div>
@@ -610,14 +610,14 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Text & Large Image Banner',
     svg: '<img src="/thumbs/trust-and-impact-thumb.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="trust-impact-hero" data-gjs-type="section" data-gjs-name="Text & Large Image Banner" class="w-full py-20 bg-white" layout-mode="container">
+      <div id="trust-impact-hero" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Text & Large Image Banner" class="w-full py-20 bg-white" layout-mode="container">
         <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
           <div class="flex-[1.2] flex flex-col items-start text-left">
             <span class="text-xs font-bold uppercase tracking-widest text-secondary mb-4">OVERLINE</span>
             <h1 class="text-4xl lg:text-5xl font-display font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
             <p class="text-lg text-gray-600 leading-relaxed max-w-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
           </div>
-          <div class="flex-1 relative w-full">
+          <div data-animation="slide-left" class="flex-1 relative w-full">
             <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] md:aspect-auto md:h-[450px]">
               <img src="/background/background-2.jpg" class="w-full h-full object-cover" alt="Team impact" />
               <div class="absolute inset-0 bg-gradient-to-tr from-[#0c233c]/20 to-transparent"></div>
@@ -633,7 +633,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Welcome Letter with Signature',
     svg: '<img src="/thumbs/welcome-letter-thumb.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="intro-letter" data-gjs-type="section" data-gjs-name="Welcome Letter with Signature" class="w-full py-20 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
+      <div id="intro-letter" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Welcome Letter with Signature" class="w-full py-20 bg-white dark:bg-background-dark border-y border-gray-100 dark:border-slate-800" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-col md:flex-row gap-8 lg:gap-16">
             <!-- 30% Left Side -->
@@ -682,7 +682,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Team Profiles Grid',
     svg: '<img src="/thumbs/services-thumb-4.png" class="object-cover w-full h-full" />',
     html: `
-      <div id="expert-profiles" data-gjs-type="section" data-gjs-name="Team Profiles Grid" class="w-full py-20 bg-[#F5F7FA]" layout-mode="container">
+      <div id="expert-profiles" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Team Profiles Grid" class="w-full py-20 bg-[#F5F7FA]" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center mb-20 max-w-3xl mx-auto">
             <p class="text-gray-600 text-lg leading-relaxed font-medium">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
@@ -762,7 +762,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Team Directory (Avatars Grid)',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="20" r="5" fill="#cbd5e1"/><circle cx="40" cy="20" r="5" fill="#cbd5e1"/><circle cx="60" cy="20" r="5" fill="#cbd5e1"/><circle cx="80" cy="20" r="5" fill="#cbd5e1"/><circle cx="20" cy="40" r="5" fill="#cbd5e1"/><circle cx="40" cy="40" r="5" fill="#cbd5e1"/><circle cx="60" cy="40" r="5" fill="#cbd5e1"/><circle cx="80" cy="40" r="5" fill="#cbd5e1"/></svg>',
     html: `
-      <div id="functional-team" data-gjs-type="section" data-gjs-name="Team Directory (Avatars Grid)" class="w-full py-20 bg-white" layout-mode="container">
+      <div id="functional-team" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Team Directory (Avatars Grid)" class="w-full py-20 bg-white" layout-mode="container">
         <div class="container mx-auto">
           <h2 class="text-4xl font-display font-extrabold text-center text-[#0c233c] mb-20 tracking-tight">Our core functional team</h2>
           <div data-gjs-type="responsive-grid" data-cols-desktop="5" data-cols-tablet="3" data-cols-mobile="2" class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8">
@@ -877,7 +877,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Questions? Team Contacts',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#1e49e2"/><text x="5" y="15" font-size="6" fill="#fff" font-weight="bold">Questions?</text><rect x="5" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="10" cy="32.5" r="4" fill="#fff"/><rect x="16" y="30" width="10" height="2" fill="#fff"/><rect x="16" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/><rect x="36" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="41" cy="32.5" r="4" fill="#fff"/><rect x="47" y="30" width="10" height="2" fill="#fff"/><rect x="47" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/><rect x="67" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="72" cy="32.5" r="4" fill="#fff"/><rect x="78" y="30" width="10" height="2" fill="#fff"/><rect x="78" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/></svg>',
     html: `
-      <div id="section-contact-questions-team" data-gjs-type="section" data-gjs-name="Questions Team Contact" class="w-full py-16 bg-[#1e49e2] text-white" layout-mode="container">
+      <div id="section-contact-questions-team" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Questions Team Contact" class="w-full py-16 bg-[#1e49e2] text-white" layout-mode="container">
         <div class="container mx-auto px-4">
           <div class="mb-8">
             <h2 class="text-3xl md:text-4xl font-display font-bold mb-3">Questions?</h2>
@@ -954,7 +954,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Meet the Team Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="5" fill="#00338d" font-weight="bold">Meet the team</text><rect x="5" y="15" width="90" height="2" fill="#cbd5e1"/><rect x="5" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="28" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="51" y="25" width="20" height="25" fill="#e2e8f0"/><rect x="74" y="25" width="20" height="25" fill="#e2e8f0"/></svg>',
     html: `
-      <div id="section-meet-team" data-gjs-type="section" data-gjs-name="Meet the Team Grid" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-meet-team" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Meet the Team Grid" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="mb-12">
             <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-6">Meet the team</h2>
@@ -1099,7 +1099,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Circle Statistics Row',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><circle cx="20" cy="30" r="8" fill="var(--color-secondary)"/><circle cx="38" cy="30" r="10" fill="var(--color-primary)"/><circle cx="58" cy="30" r="12" fill="var(--color-purple)"/><circle cx="76" cy="30" r="7" fill="var(--color-accent)"/><circle cx="90" cy="30" r="5" fill="var(--color-light-accent)"/></svg>',
     html: `
-      <div id="data-visualization-stats" data-gjs-type="section" data-gjs-name="Circle Statistics Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-stats" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Circle Statistics Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
@@ -1159,7 +1159,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Number Stat Cards',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="5" y1="15" x2="5" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="28" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="28" y1="15" x2="28" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="51" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="51" y1="15" x2="51" y2="45" stroke="#7213ea" stroke-width="2"/><rect x="74" y="15" width="20" height="30" rx="1" fill="#e2e8f0"/><line x1="74" y1="15" x2="74" y2="45" stroke="#7213ea" stroke-width="2"/></svg>',
     html: `
-      <div id="data-visualization-number-cards" data-gjs-type="section" data-gjs-name="Number Stat Cards" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-number-cards" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Number Stat Cards" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
@@ -1202,7 +1202,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Divided Stats Row',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="15" width="90" height="30" rx="2" fill="white" stroke="#e2e8f0"/><line x1="23" y1="15" x2="23" y2="45" stroke="#e2e8f0"/><line x1="41" y1="15" x2="41" y2="45" stroke="#e2e8f0"/><line x1="59" y1="15" x2="59" y2="45" stroke="#e2e8f0"/><line x1="77" y1="15" x2="77" y2="45" stroke="#e2e8f0"/></svg>',
     html: `
-      <div id="data-visualization-divided-stats" data-gjs-type="section" data-gjs-name="Divided Stats Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="data-visualization-divided-stats" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Divided Stats Row" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-display font-black text-[#00338d] dark:text-white mb-4 tracking-tight">Stats</h2>
@@ -1257,7 +1257,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Numbered Questions List',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="5" y="8" width="42" height="44" rx="1" fill="white" stroke="#e2e8f0"/><rect x="53" y="8" width="42" height="44" rx="1" fill="white" stroke="#e2e8f0"/><line x1="5" y1="20" x2="47" y2="20" stroke="#e2e8f0"/><line x1="5" y1="30" x2="47" y2="30" stroke="#e2e8f0"/><line x1="5" y1="40" x2="47" y2="40" stroke="#e2e8f0"/><line x1="53" y1="20" x2="95" y2="20" stroke="#e2e8f0"/><line x1="53" y1="30" x2="95" y2="30" stroke="#e2e8f0"/><line x1="53" y1="40" x2="95" y2="40" stroke="#e2e8f0"/><text x="8" y="17" font-size="4" fill="var(--color-secondary)" font-weight="bold">01</text><text x="8" y="27" font-size="4" fill="var(--color-secondary)" font-weight="bold">02</text><text x="8" y="37" font-size="4" fill="var(--color-secondary)" font-weight="bold">03</text><text x="56" y="17" font-size="4" fill="var(--color-secondary)" font-weight="bold">06</text><text x="56" y="27" font-size="4" fill="var(--color-secondary)" font-weight="bold">07</text><text x="56" y="37" font-size="4" fill="var(--color-secondary)" font-weight="bold">08</text></svg>',
     html: `
-      <div id="section-case-studies-numbered-questions" data-gjs-type="section" data-gjs-name="Numbered Questions" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="section-case-studies-numbered-questions" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Numbered Questions" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
 
           <!-- Centered heading block -->
@@ -1340,7 +1340,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Case Study Details',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="3" fill="#7213ea">CASE STUDY</text><text x="5" y="15" font-size="5" fill="#0c233c" font-weight="bold">Case study name</text><rect x="5" y="20" width="90" height="10" fill="#0c233c"/><rect x="5" y="35" width="50" height="20" fill="#e2e8f0"/><rect x="60" y="35" width="35" height="20" fill="white" stroke="#e2e8f0"/></svg>',
     html: `
-      <div id="section-case-study-details" data-gjs-type="section" data-gjs-name="Case Study Details" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-case-study-details" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Case Study Details" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           
           <!-- Top Section -->
@@ -1353,15 +1353,15 @@ export const sectionsLibrary: SectionDef[] = [
 
           <!-- Banner without border radius -->
           <div class="w-full bg-[#0c233c] text-white flex flex-col md:flex-row mb-16">
-            <div class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
+            <div data-animation="slide-left" class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
               <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">CLIENT</h3>
               <p class="text-sm font-medium">A global payments and financial services technology provider</p>
             </div>
-            <div class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
+            <div data-animation="slide-right" class="flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/20">
               <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">SECTOR</h3>
               <p class="text-sm font-medium">A global payments and financial services technology provider</p>
             </div>
-            <div class="flex-1 p-6 md:p-8">
+            <div data-animation="slide-up" class="flex-1 p-6 md:p-8">
               <h3 class="text-xs font-bold uppercase tracking-wider mb-2 text-slate-300">PROJECT</h3>
               <p class="text-sm font-medium">A global payments and financial services technology provider</p>
             </div>
@@ -1433,7 +1433,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Discover Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="20" width="18" height="35" fill="#e2e8f0"/><rect x="30" y="20" width="18" height="15" fill="#1e49e2"/><rect x="50" y="20" width="38" height="15" fill="#e2e8f0"/><rect x="30" y="37" width="18" height="18" fill="#cbd5e1"/><rect x="10" y="57" width="38" height="2" fill="#94a3b8"/><rect x="50" y="37" width="18" height="20" fill="#94a3b8"/><rect x="70" y="37" width="18" height="20" fill="#64748b"/></svg>',
     html: `
-      <div id="section-case-studies-discover" data-gjs-type="section" data-gjs-name="Discover Case Studies" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-case-studies-discover" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Discover Case Studies" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           
           <!-- Heading -->
@@ -1498,7 +1498,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Cards with Quote',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#00338d"/><rect x="30" y="8" width="40" height="4" fill="white"/><rect x="20" y="14" width="60" height="2" fill="#cbd5e1"/><rect x="5" y="22" width="28" height="30" fill="white"/><rect x="36" y="22" width="28" height="30" fill="white"/><rect x="67" y="22" width="28" height="30" fill="transparent" stroke="white"/></svg>',
     html: `
-      <div id="section-case-studies-cards-quote" data-gjs-type="section" data-gjs-name="Cards with Quote" class="w-full py-20 bg-[#00338d]" layout-mode="container">
+      <div id="section-case-studies-cards-quote" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Cards with Quote" class="w-full py-20 bg-[#00338d]" layout-mode="container">
         <div class="container mx-auto">
           
           <!-- Heading -->
@@ -1579,7 +1579,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Documents Grid with Sidebar',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Documents</text><rect x="5" y="15" width="25" height="18" fill="#1e49e2"/><rect x="32" y="15" width="25" height="18" fill="#1e49e2"/><rect x="5" y="35" width="25" height="18" fill="#1e49e2"/><rect x="32" y="35" width="25" height="18" fill="#1e49e2"/><text x="62" y="15" font-size="3" fill="#7213ea">DOCUMENTS</text><text x="62" y="22" font-size="4" fill="#0c233c" font-weight="bold">Lorem ipsum</text><rect x="62" y="28" width="30" height="2" fill="#cbd5e1"/><rect x="62" y="32" width="30" height="2" fill="#cbd5e1"/><rect x="62" y="36" width="30" height="2" fill="#cbd5e1"/></svg>',
     html: `
-      <div id="section-documents-grid-sidebar" data-gjs-type="section" data-gjs-name="Documents Grid with Sidebar" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-documents-grid-sidebar" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Documents Grid with Sidebar" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
             
@@ -1684,7 +1684,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: '4-Column Document Grid',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Documents</text><rect x="5" y="12" width="60" height="2" fill="#cbd5e1"/><rect x="5" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="5" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="28" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="28" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="51" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="51" y="18" width="20" height="20" fill="#cbd5e1"/><rect x="74" y="18" width="20" height="35" fill="white" stroke="#e2e8f0"/><rect x="74" y="18" width="20" height="20" fill="#cbd5e1"/></svg>',
     html: `
-      <div id="section-documents-grid-4-col" data-gjs-type="section" data-gjs-name="4-Column Documents" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-documents-grid-4-col" data-gjs-type="section" data-animation="slide-up" data-gjs-name="4-Column Documents" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           
           <!-- Header -->
@@ -1785,7 +1785,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Text Content Document',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><rect x="10" y="10" width="80" height="4" fill="#0c233c"/><rect x="10" y="18" width="50" height="3" fill="#0c233c"/><rect x="10" y="24" width="80" height="2" fill="#94a3b8"/><rect x="10" y="28" width="75" height="2" fill="#94a3b8"/><rect x="10" y="34" width="50" height="3" fill="#0c233c"/><rect x="10" y="40" width="80" height="2" fill="#94a3b8"/><rect x="10" y="44" width="75" height="2" fill="#94a3b8"/></svg>',
     html: `
-      <div id="section-documents-text-content" data-gjs-type="section" data-gjs-name="Text Content Document" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="section-documents-text-content" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Text Content Document" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto">
           <div class="w-full">
             <h2 class="text-4xl md:text-5xl font-display font-black text-[#0c233c] dark:text-white mb-10 tracking-tight">Lorem ipsum dolor sit</h2>
@@ -1831,7 +1831,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Horizontal Timeline',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Timeline</text><rect x="5" y="12" width="60" height="2" fill="#cbd5e1"/><rect x="10" y="25" width="12" height="15" fill="#1e49e2"/><rect x="22" y="32" width="12" height="15" fill="#1e49e2"/><rect x="34" y="25" width="12" height="15" fill="#1e49e2"/><rect x="46" y="32" width="12" height="15" fill="#1e49e2"/><rect x="58" y="25" width="12" height="15" fill="#1e49e2"/><rect x="70" y="32" width="12" height="15" fill="#1e49e2"/></svg>',
     html: `
-      <div id="section-timeline-horizontal" data-gjs-type="section" data-gjs-name="Horizontal Timeline" class="w-full py-20 bg-slate-50 dark:bg-slate-900 overflow-hidden" layout-mode="container">
+      <div id="section-timeline-horizontal" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Horizontal Timeline" class="w-full py-20 bg-slate-50 dark:bg-slate-900 overflow-hidden" layout-mode="container">
         <div class="container mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-6 tracking-tight">Timeline</h2>
@@ -1842,32 +1842,32 @@ export const sectionsLibrary: SectionDef[] = [
           
           <div class="flex flex-col md:flex-row w-full justify-center md:items-start mx-auto">
             <!-- Block 1 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-left" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">1</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
             <!-- Block 2 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-right" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">2</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
             <!-- Block 3 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-up" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">3</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
             <!-- Block 4 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-up" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">4</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
             <!-- Block 5 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-up" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mb-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">5</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
             <!-- Block 6 -->
-            <div class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
+            <div data-animation="slide-up" class="flex-1 bg-[#1e49e2] text-white p-6 relative min-h-[180px] shadow-lg md:mt-12 border-b border-r border-[#00338d]/30">
               <div class="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center font-bold text-sm mb-6">6</div>
               <h3 class="font-bold text-lg leading-tight">Lorem Ipsum<br/>dolor sit</h3>
             </div>
@@ -1933,7 +1933,7 @@ export const sectionsLibrary: SectionDef[] = [
             <div class="flex flex-col md:flex-row w-full bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700">
               
               <!-- Left: Tab Buttons (Labels) -->
-              <div class="deal-labels-container w-full md:w-5/12 lg:w-4/12 flex flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700">
+              <div data-animation="slide-left" class="deal-labels-container w-full md:w-5/12 lg:w-4/12 flex flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700">
                  
                  <label class="deal-btn cursor-pointer text-left px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center gap-3 transition-all text-slate-600 dark:text-slate-300 font-semibold border-l-4 md:border-l-0 md:border-r-4 border-transparent hover:bg-slate-50">
                     <input type="radio" name="deal-tabs" class="hidden" checked />
@@ -1979,7 +1979,7 @@ export const sectionsLibrary: SectionDef[] = [
 </div>
               
               <!-- Right: Tab Content Panels -->
-              <div class="deal-panels-container w-full md:w-7/12 lg:w-8/12 bg-[#1e49e2] relative min-h-[450px]">
+              <div data-animation="slide-right" class="deal-panels-container w-full md:w-7/12 lg:w-8/12 bg-[#1e49e2] relative min-h-[450px]">
                 
                 <!-- Panel 1 -->
                 <div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300">
@@ -2074,12 +2074,12 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Explore Findings CTA',
     svg: '<svg viewBox="0 0 100 40" class="w-full h-full" fill="none"><rect width="100" height="40" fill="#00338d"/><rect x="10" y="10" width="40" height="8" rx="1" fill="white"/><rect x="10" y="22" width="50" height="3" rx="1" fill="white" opacity="0.8"/><rect x="10" y="27" width="30" height="3" rx="1" fill="white" opacity="0.8"/><rect x="70" y="10" width="20" height="8" rx="4" fill="white"/><rect x="70" y="22" width="20" height="8" rx="4" fill="transparent" stroke="white" stroke-width="1"/></svg>',
     html: `
-      <div id="cta-explore" data-gjs-type="section" data-gjs-name="Explore Findings CTA" class="w-full py-16 bg-[#00338d]" layout-mode="container">
+      <div id="cta-explore" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Explore Findings CTA" class="w-full py-16 bg-[#00338d]" layout-mode="container">
         <div class="container mx-auto">
           <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             
             <!-- Left side: Text content -->
-            <div class="flex-1 max-w-3xl">
+            <div data-animation="slide-left" class="flex-1 max-w-3xl">
               <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-4 tracking-tight">Explore our findings.</h2>
               <p class="text-white text-lg md:text-xl leading-relaxed">
                 Explore our digital report summary via this portal, or download<br class="hidden md:block"/>to see the full PDF Report.

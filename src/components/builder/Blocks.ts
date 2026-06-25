@@ -56,7 +56,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/header-hero.jpg" class="object-cover" />',
     content: `
-      <div id="header-hero" data-gjs-type="section" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-20" layout-mode="container">
+      <div id="header-hero" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Hero Header" class="w-full bg-gray-900 py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-white text-center">
           <div class="mx-auto flex flex-col items-center w-full">
             <h1 class="text-5xl font-display font-extrabold mb-6">Welcome to Our Platform</h1>
@@ -79,7 +79,7 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div id="video-hero-section" data-gjs-type="section" data-gjs-name="Video Hero Header" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
+      <div id="video-hero-section" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Video Hero Header" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
         <!-- Video Background Element -->
         <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
         
@@ -125,7 +125,7 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div id="video-hero-section-plain" data-gjs-type="section" data-gjs-name="Video Banner" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
+      <div id="video-hero-section-plain" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Video Banner" class="w-full min-h-[75vh] flex items-center justify-center relative overflow-hidden py-20" layout-mode="container">
         <!-- Video Background Element -->
         <video class="video-bg-element absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
         
@@ -174,12 +174,12 @@ export const registerBlocks = (editor: any) => {
       </div>
     `,
     content: `
-      <div data-gjs-type="section" data-gjs-name="Split Banner Video" class="w-full bg-[#0c233c] py-20 overflow-hidden" layout-mode="container">
+      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Split Banner Video" class="w-full bg-[#0c233c] py-20 overflow-hidden" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
 
             <!-- Left: CTA Content -->
-            <div class="flex-1 flex flex-col gap-6 z-10">
+            <div data-animation="slide-left" class="flex-1 flex flex-col gap-6 z-10">
               <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1e49e2]/30 border border-[#aceaff]/20 text-[#aceaff] text-xs font-bold uppercase tracking-wider w-fit">
                 <span class="h-2 w-2 rounded-full bg-[#00b8f5]"></span> New: Enterprise Cloud 2.0
               </span>
@@ -196,7 +196,7 @@ export const registerBlocks = (editor: any) => {
             </div>
 
             <!-- Right: Video -->
-            <div class="flex-1 relative shadow-2xl shadow-[#1e49e2]/20 min-h-[300px] md:min-h-[400px] hidden md:block">
+            <div data-animation="slide-right" class="flex-1 relative shadow-2xl shadow-[#1e49e2]/20 min-h-[300px] md:min-h-[400px] hidden md:block">
               <video data-gjs-type="video-bg" data-gjs-name="Hero Video" class="w-full h-full object-cover absolute inset-0" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline" src="/videos/video-1.mp4"></video>
             </div>
 
@@ -212,15 +212,15 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: '<img src="/thumbs/ceo intro thumb.png" class="object-cover w-full h-full" />',
     content: `
-      <div id="introduction-section" data-gjs-type="section" data-gjs-name="Introduction Section" class="w-full py-20" layout-mode="container">
+      <div id="introduction-section" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Introduction Section" class="w-full py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
-            <div class="flex-1">
+            <div data-animation="slide-left" class="flex-1">
                <h2 class="text-3xl font-display font-bold mb-4 text-gray-900">Who We Are</h2>
                <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
                <a href="#" class="font-semibold text-secondary hover:underline">Learn more about our mission &rarr;</a>
             </div>
-            <div class="flex-1">
+            <div data-animation="slide-right" class="flex-1">
                <img src="/images/image-5.png" alt="Team" class="rounded-2xl shadow-xl w-full" />
             </div>
           </div>
@@ -234,12 +234,12 @@ export const registerBlocks = (editor: any) => {
     category: 'Introduction',
     media: svgs.partnerMessage,
     content: `
-      <div id="partner-message-section" data-gjs-type="section" data-gjs-name="Global Lead Partner Message" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
+      <div id="partner-message-section" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Global Lead Partner Message" class="w-full py-20 bg-white dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <h2 class="text-3xl md:text-4xl font-display font-black text-[#00338d] dark:text-white mb-10 tracking-tight">A message from our Global Lead Partner</h2>
           <div class="flex flex-col lg:flex-row gap-12 w-full items-start">
             <!-- Left Column (Message text & signature) -->
-            <div class="flex-1 lg:w-7/12 flex flex-col gap-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-base">
+            <div data-animation="slide-left" class="flex-1 lg:w-7/12 flex flex-col gap-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-base">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae congue eu consequat ac. Augue interdum velit euismod in pellentesque massa.</p>
               <p>Sed tempus urna et pharetra pharetra massa massa ultricies. Duis ut diam quam nulla porttitor massa id neque.</p>
               <p>Diam volutpat commodo sed egestas egestas fringilla. Aenean et tortor at risus viverra adipiscing at. Proin nibh nisl condimentum id venenatis a condimentum. Eu ultrices vitae auctor eu augue ut. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies.</p>
@@ -254,7 +254,7 @@ export const registerBlocks = (editor: any) => {
             </div>
 
             <!-- Right Column (Avatar & Name Card) -->
-            <div class="w-full lg:w-5/12 flex flex-col gap-6 max-w-md mx-auto lg:mx-0">
+            <div data-animation="slide-right" class="w-full lg:w-5/12 flex flex-col gap-6 max-w-md mx-auto lg:mx-0">
               <!-- Partner image -->
               <div class="w-full aspect-[4/3] overflow-hidden shadow-lg border border-slate-100 dark:border-slate-800">
                 <img src="/team-member/member-11.jpg" alt="John Doe" class="w-full h-full object-cover" />
@@ -285,7 +285,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Header',
     media: '<img src="/thumbs/center-white.jpg" class="object-cover" />',
     content: `
-      <div id="hero-section" data-gjs-type="section" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
+      <div id="hero-section" data-gjs-type="section" data-animation="slide-up" class="w-full bg-[#f8fafc] py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0 text-center">
           <div class="mx-auto flex flex-col items-center justify-center w-full">
             <h1 class="text-5xl font-display font-extrabold text-[var(--color-dark)] mb-6 tracking-tight">Build Your Brand Today</h1>
@@ -305,7 +305,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Services',
     media: '<img src="/thumbs/services-thumb-1.png" class="object-cover w-full h-full" />',
     content: `
-      <div id="features-grid" data-gjs-type="section" data-gjs-name="Service Cards (Simple)" class="w-full bg-white py-20" layout-mode="container">
+      <div id="features-grid" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Service Cards (Simple)" class="w-full bg-white py-20" layout-mode="container">
         <div class="container mx-auto">
           <div class="mx-auto flex flex-col w-full">
             <div class="text-center mb-16">
@@ -352,9 +352,9 @@ export const registerBlocks = (editor: any) => {
       category: 'Layout',
       media: svgs.columns,
       content: `
-        <div data-gjs-type="section" class="w-full" layout-mode="container">
+        <div data-gjs-type="section" data-animation="slide-up" class="w-full" layout-mode="container">
           <div data-gjs-type="responsive-grid" class="container mx-auto grid ${combo.class} gap-4">
-            ${Array.from({ length: parseInt(combo.label.split(' ')[0]) }).map(() => '<div class="flex-1 min-h-[50px]"></div>').join('')}
+            ${Array.from({ length: parseInt(combo.label.split(' ')[0]) }).map(() => '<div data-animation="slide-left" class="flex-1 min-h-[50px]"></div>').join('')}
           </div>
         </div>
       `,
@@ -374,7 +374,7 @@ export const registerBlocks = (editor: any) => {
       category: 'Layout',
       media: svgs.columns,
       content: `
-        <div data-gjs-type="section" class="w-full" layout-mode="container">
+        <div data-gjs-type="section" data-animation="slide-up" class="w-full" layout-mode="container">
           <div class="container mx-auto px-4 lg:px-0 flex flex-col md:flex-row gap-4">
             <div class="min-h-[50px]" style="flex: ${combo.left}"></div>
             <div class="min-h-[50px]" style="flex: ${combo.right}"></div>
@@ -390,21 +390,21 @@ export const registerBlocks = (editor: any) => {
     label: 'Heading Title',
     category: 'Basic',
     media: svgs.heading,
-    content: '<h2 data-gjs-type="text" class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
+    content: '<h2 data-animation="slide-up" data-gjs-type="text" class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Insert Heading Here</h2>',
   });
 
   bm.add('text', {
     label: 'Rich Text Box',
     category: 'Basic',
     media: svgs.text,
-    content: '<p data-gjs-type="text" class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
+    content: '<p data-animation="slide-up" data-gjs-type="text" class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
   });
 
   bm.add('button', {
     label: 'CTA Button',
     category: 'Basic',
     media: svgs.button,
-    content: '<a href="#" data-gjs-type="link" class="inline-block bg-secondary dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-primary dark:hover:bg-blue-700 transition-colors">Click Here</a>',
+    content: '<a data-animation="slide-up" href="#" data-gjs-type="link" class="inline-block bg-secondary dark:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-primary dark:hover:bg-blue-700 transition-colors">Click Here</a>',
   });
 
   bm.add('image', {
@@ -418,21 +418,21 @@ export const registerBlocks = (editor: any) => {
     label: 'Divider',
     category: 'Basic',
     media: svgs.divider,
-    content: '<hr class="my-8 border-t border-gray-200 dark:border-gray-700" />',
+    content: '<hr data-animation="slide-up" class="my-8 border-t border-gray-200 dark:border-gray-700" />',
   });
 
   bm.add('spacer', {
     label: 'Spacer',
     category: 'Basic',
     media: svgs.spacer,
-    content: '<div class="py-8 w-full"></div>',
+    content: '<div data-animation="slide-up" class="py-8 w-full"></div>',
   });
 
   bm.add('list', {
     label: 'List',
     category: 'Basic',
     media: svgs.list,
-    content: '<ul class="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
+    content: '<ul data-animation="slide-up" class="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
   });
 
   // ADVANCED WIDGETS
@@ -441,7 +441,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.card,
     content: `
-      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 w-full flex flex-col gap-5">
+      <div data-animation="slide-up" class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 w-full flex flex-col gap-5">
         <!-- Top Badges Row -->
         <div class="flex gap-2">
           <span class="inline-flex items-center rounded-lg border border-[#7213ea] px-3 py-1.5 text-xs font-semibold text-[#7213ea] bg-[#7213ea]/5 tracking-wide">
@@ -484,7 +484,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.icons,
     content: `
-      <div class="p-8 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
+      <div data-animation="slide-up" class="p-8 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 hover:border-accent/50 transition-colors h-full w-full">
         <div class="w-14 h-14 bg-accent/10 text-accent flex items-center justify-center mb-6">
           <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" class="fill-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
         </div>
@@ -499,7 +499,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.image,
     content: `
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-shadow w-full">
+      <div data-animation="slide-up" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-shadow w-full">
         <img src="/images/image-2.png" class="h-56 w-full object-cover" alt="Card Image" />
         <div class="p-8">
           <div class="text-accent font-bold uppercase tracking-wider text-xs mb-3 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-accent"></div>Category</div>
@@ -516,7 +516,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.card,
     content: `
-      <div class="relative w-full group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
+      <div data-animation="slide-up" class="relative w-full group overflow-hidden bg-slate-200 aspect-[4/5] cursor-pointer">
         <img src="/team-member/member-1.jpg" alt="Team Member" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
         <div class="absolute inset-0 bg-gradient-to-t from-[#00338d] via-[#00338d]/60 to-transparent opacity-90 pointer-events-none" data-gjs-locked="true"></div>
         <div class="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between pointer-events-none">
@@ -537,7 +537,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.card,
     content: `
-      <div class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700 w-full h-full">
+      <div data-animation="slide-up" class="bg-white dark:bg-slate-800 flex flex-col border border-slate-200 dark:border-slate-700 w-full h-full">
         <div class="h-48 w-full shrink-0 overflow-hidden">
           <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Document Cover" class="w-full h-full object-cover">
         </div>
@@ -636,7 +636,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Cards',
     media: svgs.testimonial,
     content: `
-      <div class="bg-gray-50 dark:bg-slate-800 p-8 border border-gray-100 dark:border-gray-700 w-full h-full relative overflow-hidden">
+      <div data-animation="slide-up" class="bg-gray-50 dark:bg-slate-800 p-8 border border-gray-100 dark:border-gray-700 w-full h-full relative overflow-hidden">
         <div class="text-6xl text-gray-200 dark:text-slate-700 absolute top-2 left-4 font-serif">"</div>
         <p class="text-gray-700 dark:text-gray-300 italic mb-6 relative z-10 leading-relaxed text-lg">"This platform transformed how our entire agency builds landing pages. It's incredibly fast and easy to use. Highly recommended!"</p>
         <div class="flex items-center">
@@ -655,7 +655,7 @@ export const registerBlocks = (editor: any) => {
     category: 'Documents',
     media: svgs.cards,
     content: `
-      <div id="feature-cards-grid" data-gjs-type="section" data-gjs-name="Feature Cards Grid" class="w-full bg-white dark:bg-slate-900 py-20" layout-mode="container">
+      <div id="feature-cards-grid" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Feature Cards Grid" class="w-full bg-white dark:bg-slate-900 py-20" layout-mode="container">
         <div class="container mx-auto px-4 lg:px-0">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-secondary transition-colors shadow-sm">
@@ -711,7 +711,7 @@ export const registerBlocks = (editor: any) => {
       label: icon.label,
       category: 'Icons',
       media: `<i class="${icon.class} text-3xl"></i>`,
-      content: `<span class="inline-block m-2 text-[var(--color-primary)] hover:text-opacity-80 transition-opacity"><i data-gjs-type="icon" class="${icon.class} text-4xl"></i></span>`,
+      content: `<span data-animation="slide-up" class="inline-block m-2 text-[var(--color-primary)] hover:text-opacity-80 transition-opacity"><i data-gjs-type="icon" class="${icon.class} text-4xl"></i></span>`,
     });
   });
 };

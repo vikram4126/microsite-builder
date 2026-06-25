@@ -827,6 +827,8 @@ export default function Builder() {
                   { id: '', name: 'None' },
                   { id: 'fade-in', name: 'Fade In' },
                   { id: 'slide-up', name: 'Slide Up' },
+                  { id: 'slide-left', name: 'Slide Left' },
+                  { id: 'slide-right', name: 'Slide Right' },
                   { id: 'zoom-in', name: 'Zoom In' }
                 ]
               },
@@ -975,6 +977,8 @@ export default function Builder() {
                   { id: '', name: 'None' },
                   { id: 'fade-in', name: 'Fade In' },
                   { id: 'slide-up', name: 'Slide Up' },
+                  { id: 'slide-left', name: 'Slide Left' },
+                  { id: 'slide-right', name: 'Slide Right' },
                   { id: 'zoom-in', name: 'Zoom In' }
                 ]
               },
@@ -1530,6 +1534,8 @@ export default function Builder() {
               { id: '', name: 'None' },
               { id: 'fade-in', name: 'Fade In' },
               { id: 'slide-up', name: 'Slide Up' },
+                  { id: 'slide-left', name: 'Slide Left' },
+                  { id: 'slide-right', name: 'Slide Right' },
               { id: 'zoom-in', name: 'Zoom In' }
             ]
           });
@@ -2145,6 +2151,8 @@ export default function Builder() {
       '        var vars = { scrollTrigger: { trigger: el, start: "top 85%" }, duration: 0.8, ease: "power2.out", opacity: 0, clearProps: "all" };',
       '        if(animType === "fade-in"){ gsap.from(el, vars); }',
       '        else if(animType === "slide-up"){ vars.y = 50; gsap.from(el, vars); }',
+      '        else if(animType === "slide-left"){ vars.x = -50; gsap.from(el, vars); }',
+      '        else if(animType === "slide-right"){ vars.x = 50; gsap.from(el, vars); }',
       '        else if(animType === "zoom-in"){ vars.scale = 0.8; gsap.from(el, vars); }',
       '      });',
       '    }',
