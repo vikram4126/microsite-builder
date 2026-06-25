@@ -898,18 +898,18 @@ export default function Builder() {
                 document.body.style.overflow = "";
               };
 
-              closeBtns.forEach(btn => btn.addEventListener("click", (e) => {
+              closeBtns.forEach((btn: any) => btn.addEventListener("click", (e: any) => {
                 e.preventDefault();
                 closePopup();
               }));
 
-              popup.addEventListener("click", (e) => {
+              popup.addEventListener("click", (e: any) => {
                 if (e.target === popup) closePopup();
               });
 
               // Also bind to any element that explicitly targets this popup via href or data-target
-              document.querySelectorAll("a[href=\"#" + id + "\"], [data-target=\"" + id + "\"], [data-target=\"#" + id + "\"]").forEach(trigger => {
-                trigger.addEventListener("click", (e) => {
+              document.querySelectorAll("a[href=\"#" + id + "\"], [data-target=\"" + id + "\"], [data-target=\"#" + id + "\"]").forEach((trigger: any) => {
+                trigger.addEventListener("click", (e: any) => {
                   e.preventDefault();
                   popup.classList.remove("hidden");
                   popup.classList.add("flex");
@@ -925,21 +925,21 @@ export default function Builder() {
 
             // Force-add traits so they always appear (even on saved/loaded popups)
             if (!this.getTrait('data-popup-label')) {
-              this.addTrait({
+              (this as any).addTrait({
                 type: 'text',
                 name: 'data-popup-label',
                 label: 'Popup Name',
                 placeholder: 'e.g. Contact Form',
-              }, { at: 1 });
+              } as any, { at: 1 });
             }
             if (!this.getTrait('data-show-editor')) {
-              this.addTrait({
+              (this as any).addTrait({
                 type: 'checkbox',
                 name: 'data-show-editor',
                 label: 'Show in Editor',
                 valueTrue: 'true',
                 valueFalse: 'false',
-              }, { at: 2 });
+              } as any, { at: 2 });
             }
 
             if (!this.getAttributes()["data-show-editor"]) {
