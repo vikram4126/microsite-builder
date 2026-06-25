@@ -445,6 +445,21 @@ export default function Builder() {
       registerTemplates(editor);
       registerStyles(editor);
 
+      // Inject global CSS attribute-selector rules for Full Height and Vertical Center.
+      // These are the single source of truth — driven only by the attribute value on each
+      // section component. This avoids duplicate CSS rules that broke toggling after reopen.
+      const injectSectionHelperRules = () => {
+        editor.Css.setRule('[data-full-height="true"]', { 'min-height': '100vh' });
+        editor.Css.setRule('[data-vertical-center="true"]', {
+          display: 'flex',
+          'align-items': 'center',
+          'flex-direction': 'column',
+          'justify-content': 'center',
+        });
+      };
+      injectSectionHelperRules();
+      (editorRef.current as any)._injectSectionHelperRules = injectSectionHelperRules;
+
       // Register Custom Trait BEFORE load so it is available when components are parsed
       editor.TraitManager.addType('layout-toggle', {
         createInput() {
@@ -833,35 +848,10 @@ export default function Builder() {
           },
           init() {
             this.on('change:attributes:layout-mode', this.handleLayoutChange);
-            // Listen to any attribute change — GrapesJS fires 'change:attributes' on setAttributes()
-            this.on('change:attributes', this.handleAllAttributeChanges);
-            // NOTE: Do NOT call handlers in setTimeout here!
-            // GrapesJS automatically restores CSS rules from saved project data on load.
-            // Calling addStyle() on init creates DUPLICATE CSS rules which break removal.
-          },
-          handleAllAttributeChanges() {
-            this.handleFullHeightChange();
-            this.handleVerticalCenterChange();
-          },
-          handleFullHeightChange() {
-            const isFullHeight = this.getAttributes()['data-full-height'] === 'true';
-            if (isFullHeight) {
-              this.addStyle({ 'min-height': '100vh' });
-            } else {
-              // Use removeStyle() — directly removes property from CSS Manager rule
-              this.removeStyle('min-height');
-            }
-          },
-          handleVerticalCenterChange() {
-            const isCenter = this.getAttributes()['data-vertical-center'] === 'true';
-            if (isCenter) {
-              this.addStyle({ display: 'flex', 'align-items': 'center', 'flex-direction': 'column', 'justify-content': 'center' });
-            } else {
-              this.removeStyle('align-items');
-              this.removeStyle('justify-content');
-              this.removeStyle('flex-direction');
-              this.removeStyle('display');
-            }
+            // NOTE: Full Height and Vertical Center are now handled via global CSS attribute-selector
+            // rules injected after editor init and after each loadProjectData.
+            // No per-component addStyle/removeStyle needed — this avoids duplicate CSS rules
+            // that would break toggling after project reopen.
           },
           handleLayoutChange() {
             const layout = this.getAttributes()['layout-mode'] || 'container';
@@ -1247,7 +1237,16 @@ export default function Builder() {
         const allBlocks = editor.BlockManager.getAll().models;
         setBlocks(allBlocks);
 
-        const cats = Array.from(new Set(allBlocks.map((b: any) => b.get('category').id || b.get('category')))) as string[];
+        // Filter out 'Navbar' category — navbar is registered for programmatic use
+        // (auto-added to new pages) but should NOT appear in the left sidebar.
+        const cats = Array.from(new Set(
+          allBlocks
+            .filter((b: any) => {
+              const catId = b.get('category').id || b.get('category');
+              return catId !== 'Navbar';
+            })
+            .map((b: any) => b.get('category').id || b.get('category'))
+        )) as string[];
         // Sort: push Footer to the end
         cats.sort((a, b) => {
           if (a === 'Full Page Templates') return -1;
@@ -1781,6 +1780,47 @@ export default function Builder() {
                 } catch (_) { /* non-critical */ }
 
                 if (forceReScanRef.current) forceReScanRef.current();
+
+                // Re-inject helper rules in case loadProjectData wiped the CSS manager
+                if ((editorRef.current as any)._injectSectionHelperRules) {
+                  (editorRef.current as any)._injectSectionHelperRules();
+                }
+
+                // Migration cleanup: remove old addStyle-based inline styles that are now
+                // redundant (handled by CSS attribute-selector rules). Prevents stale residuals
+                // from blocking the toggle after reopen.
+                try {
+                  const wrapper = editorRef.current.DomComponents.getWrapper();
+                  if (wrapper) {
+                    wrapper.find('[data-gjs-type="section"]').forEach((comp: any) => {
+                      const attrs = comp.getAttributes();
+                      const style = comp.getStyle ? comp.getStyle() : {};
+
+                      // Remove old min-height: 100vh inline style — CSS rule now covers it
+                      if (style['min-height'] === '100vh') {
+                        comp.removeStyle('min-height');
+                      }
+
+                      // Remove old vertical-center inline styles — CSS rule now covers it
+                      // Only remove if they match exactly what the old handler would have set
+                      if (
+                        style['align-items'] === 'center' &&
+                        style['justify-content'] === 'center' &&
+                        style['flex-direction'] === 'column'
+                      ) {
+                        comp.removeStyle('align-items');
+                        comp.removeStyle('justify-content');
+                        comp.removeStyle('flex-direction');
+                        // Only remove display:flex if it's the vertical-center attribute is false
+                        // (if true, keep it — the CSS rule provides it)
+                        if (attrs['data-vertical-center'] !== 'true') {
+                          comp.removeStyle('display');
+                        }
+                      }
+                    });
+                  }
+                } catch (_) { /* non-critical migration */ }
+
                 isSyncingRef.current = false;
               });
             });
@@ -3129,6 +3169,8 @@ export default function Builder() {
                     const isOpen = !!expandedCategories[cat];
                     const blocksInCat = blocks.filter(b => {
                       const catId = b.get('category').id || b.get('category');
+                      // Never show Navbar category in the sidebar
+                      if (catId === 'Navbar') return false;
                       if (catId !== cat) return false;
                       if (searchQuery) {
                         return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());
@@ -3418,6 +3460,7 @@ export default function Builder() {
                 <div className={selectedCategory === 'Icons' ? "flex flex-wrap gap-3" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"}>
                   {blocks.filter(b => {
                     const catId = b.get('category').id || b.get('category');
+                    if (catId === 'Navbar') return false; // Never show Navbar in UI
                     if (catId !== selectedCategory) return false;
                     if (searchQuery) {
                       return b.get('label').toLowerCase().includes(searchQuery.toLowerCase());

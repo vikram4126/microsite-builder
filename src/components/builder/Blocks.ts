@@ -27,9 +27,6 @@ export const registerBlocks = (editor: any) => {
 
   // REGISTER DYNAMIC SECTIONS LIBRARY
   sectionsLibrary.forEach(section => {
-    // Hide Navbar from the block manager so users cannot drag it again
-    if (section.category === 'Navbar') return;
-
     bm.add(section.id, {
       label: section.label,
       category: section.category || 'Services', // Use section's own category
