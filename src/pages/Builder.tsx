@@ -47,6 +47,7 @@ export default function Builder() {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('Layout');
   const [hasSelection, setHasSelection] = useState(false);
+  const [isRemovable, setIsRemovable] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
   const [themeColor, setThemeColor] = useState<string>('default');
@@ -234,6 +235,9 @@ export default function Builder() {
         nav.append({
           tagName: 'a',
           type: 'link',
+          removable: false,
+          draggable: false,
+          copyable: false,
           classes: ['text-slate-600', 'dark:text-slate-300', 'hover:text-accent', 'transition-colors', 'w-full', 'md:w-auto', 'text-center', 'py-2', 'md:py-0', 'border-b', 'border-gray-100', 'md:border-none'],
           attributes: {
             href: idx === 0 ? 'index.html' : `${slug}.html`, // Relative paths for better compatibility
@@ -247,6 +251,9 @@ export default function Builder() {
       nav.append({
         tagName: 'a',
         type: 'link',
+        removable: false,
+        draggable: false,
+        copyable: false,
         classes: ['bg-primary', 'text-white', 'hover:bg-accent', 'px-5', 'py-2.5', 'rounded-lg', 'shadow', 'transition-all', 'w-full', 'md:w-auto', 'text-center', 'mt-2', 'md:mt-0'],
         attributes: { href: '#' },
         content: 'Get Started',
@@ -1355,7 +1362,7 @@ export default function Builder() {
       editor.Commands.add('custom:delete', {
         run(ed: any) {
           const sel = ed.getSelected();
-          if (sel) {
+          if (sel && sel.get('removable') !== false) {
             sel.remove();
           }
         }
@@ -1406,6 +1413,7 @@ export default function Builder() {
       editor.on('component:selected', (model: any) => {
         if (!model) {
           setHasSelection(false);
+          setIsRemovable(true);
           setBreadcrumb([]);
           return;
         }
@@ -1416,6 +1424,7 @@ export default function Builder() {
           return newBreadcrumb;
         });
         setHasSelection(true);
+        setIsRemovable(model.get('removable') !== false);
 
         // Auto-switch to media tab when image or video selected, style tab on fresh selection from layers
         const selTag = (model.get('tagName') || '').toLowerCase();
@@ -1557,17 +1566,26 @@ export default function Builder() {
 
         // Set custom toolbar
         const isCurrentlyHidden = (model.getStyle()?.['display'] === 'none');
-        model.set('toolbar', [
+        const toolbar = [
           { attributes: { class: 'fa fa-arrow-up', title: 'Move Up' }, command: 'custom:move-up' },
           { attributes: { class: 'fa fa-arrow-down', title: 'Move Down' }, command: 'custom:move-down' },
           { attributes: { class: 'fa fa-plus', title: 'Add Inside' }, command: 'custom:add-inside' },
-          { attributes: { class: 'fa fa-clone', title: 'Clone' }, command: 'custom:clone' },
-          { attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' },
-        ]);
+        ];
+        
+        if (model.get('copyable') !== false) {
+          toolbar.push({ attributes: { class: 'fa fa-clone', title: 'Clone' }, command: 'custom:clone' });
+        }
+        
+        if (model.get('removable') !== false) {
+          toolbar.push({ attributes: { class: 'fa fa-trash', title: 'Delete' }, command: 'custom:delete' });
+        }
+        
+        model.set('toolbar', toolbar);
       });
 
       editor.on('component:deselected', () => {
         setHasSelection(false);
+        setIsRemovable(true);
         setBreadcrumb([]);
       });
 
@@ -1925,9 +1943,10 @@ export default function Builder() {
   const handleRedo = () => editorRef.current?.UndoManager.redo();
   const handleDelete = () => {
     const selected = editorRef.current?.getSelected();
-    if (selected) {
+    if (selected && selected.get('removable') !== false) {
       selected.remove();
       setHasSelection(false);
+      setIsRemovable(true);
       setBreadcrumb([]);
     }
   };
@@ -2303,8 +2322,8 @@ export default function Builder() {
             <div className="h-5 w-px bg-gray-200 self-center mx-1"></div>
             <button
               onClick={handleDelete}
-              disabled={!hasSelection}
-              className={`p-1.5 rounded transition-colors ${hasSelection ? 'text-gray-500 hover:bg-red-50 hover:text-red-500' : 'text-gray-300 cursor-not-allowed'}`}
+              disabled={!hasSelection || !isRemovable}
+              className={`p-1.5 rounded transition-colors ${hasSelection && isRemovable ? 'text-gray-500 hover:bg-red-50 hover:text-red-500' : 'text-gray-300 cursor-not-allowed'}`}
               title="Delete Selected"
             >
               <Trash2 className="w-4 h-4" />

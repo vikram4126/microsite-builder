@@ -199,33 +199,33 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
-      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
-        <div class="container mx-auto">
-          <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative">
-            <a href="#" class="block">
-              <svg class="text-primary dark:text-white transition-colors" width="82" height="32" viewBox="0 0 77 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="m59.4297.0894165v14.8992835l-.1935.157-.1935.157-.1855.1649-.1773.1648-.1693.1649-.1693.1727-.1613.1727-.1612.1727v-16.2259835h-16.9549v13.5647835h-1.4028v-13.5647835h-16.9549v13.5883835h-1.4028v-13.5883835h-16.95487v15.4880835l-4.329426 14.0436h3.805376l1.91075-6.2172h.54823l3.16039 6.2172h4.59545l-3.0636-6.2172h6.9496l-1.9269 6.2172h4.1521l1.9027-6.2015h.9191v-.0157h1.306.1049 7.8445l-1.8382 6.2015h4.1924l1.7817-6.2015h1.8866l.0483 6.2015h3.5152l4.0391-6.2015h2.6444l-1.3705 6.2015h4.1278l1.3464-6.2015h2.3864l-.0161.3533.0086.3611.0161.3453.0322.3455.0242.1648.0241.1649.0322.1648.0323.1649.0402.1648.0403.157.0484.157.0483.157.0565.157.0565.1492.0644.1491.0646.1413.0726.1492.0725.1413.0807.1334.0807.1413.0887.1335.0967.1256.0968.1334.1048.1178.1048.1256.1048.1177.1209.1178.121.1099.1531.1256.1532.1256.1613.1177.1693.1099.1693.1099.1693.1021.1774.0863.1854.0942.1774.0785.1854.0784.1854.0707.1935.0707.1935.0628.1935.055.1935.0549.1935.0471.387.0863.395.0629.387.0549.387.0471.3789.0314.3709.0157.3628.0158h.3466l.4677-.0075.4676-.0074.4756-.0236.4757-.0236.4757-.0392.4757-.0393.4756-.0471.4757-.055.4837-.0628.4838-.0707.4837-.0785.4837-.0785.4838-.0863.4837-.0942.4837-.0942.4918-.1099 1.4351-5.6284h4.7084v-23.3145573h-16.9549zm-53.50905 22.7335835.02417-.0863.05649.0863zm14.77005-8.3524-.2419.7929-2.2574 7.3005-.0887.259h-7.4173l-.5724-1.1932 7.9897-7.952h-5.1357l-6.2482 6.5547 2.02361-6.5547h-3.78924v-12.999627h15.73743v13.792427zm4.3777 6.1701-.1209.0075-.1129.0074-.1209.0075h-.129-.1693-.1451l-.1371.0074h-.129l-1.0077-.0074.4676-1.6799.2176-.8321.5322-1.9547h.1693.1773l.1693-.0074h.1613.782l.4757.0074.4353.0158.1935.0074.1855.0157.1773.0236.1613.0236.1451.0235.1371.0393.129.0393.1128.0471.0968.0471.0887.0629.0806.0628.0645.0785.0403.0629.0322.0628.0322.0707.0242.0785.0161.0863.0085.0863v.0942.102l-.0085.1099-.0076.1099-.0242.1256-.0241.1256-.0726.2669-.0887.2983-.0887.2512-.0968.2434-.1048.2276-.1129.212-.0565.0942-.0564.0942-.0646.0942-.0726.0863-.0726.0863-.0726.0785-.0806.0785-.0807.0706-.0887.0629-.0887.0707-.0967.0549-.1049.0628-.1048.055-.1128.0471-.1129.0471-.1209.0393-.129.0471-.1371.0314-.1451.0314-.1451.0313-.1613.0236-.1612.0236-.1693.0157-.1774.0157zm11.4645 2.1823 1.6528-5.7305.0645 5.7305h-1.7172zm2.5155-9.1688h-3.9344l-2.7089 9.1688h-4.1763l.1935-.0784.1935-.0785.1855-.0785.1854-.0863.1774-.0864.1693-.102.1693-.0942.1612-.1021.1613-.1099.1531-.1099.1452-.1098.1451-.1257.137-.1177.129-.1335.129-.1256.121-.1413.1209-.1334.1129-.1492.1048-.1413.1048-.157.0967-.157.0887-.1569.0888-.1649.0806-.1727.0807-.1727.0726-.1727.0644-.1806.0645-.1884.0484-.1884.0565-.1884.0402-.2041.0403-.1962.0565-.314.0483-.2983.0323-.2826.0241-.2669.0086-.2669-.0086-.2434-.0075-.2433-.0323-.2277-.0322-.2119-.0565-.212-.0565-.1962-.0806-.1884-.0887-.1806-.0968-.1805-.1128-.1649-.129-.157-.1049-.1099-.1048-.1099-.1128-.0942-.121-.0863-.129-.0863-.129-.0785-.137-.0706-.1371-.0629-.1451-.0628-.1451-.0471-.1532-.0472-.1532-.0471-.1612-.0393-.1613-.0313-.1612-.0314-.1693-.0236-.3467-.0471-.3467-.0235-.3547-.0236-.3628-.0074h-.7256-.7175-.2258-.4031-.4999-.5563-.5401-.4596-.3225-.1209v-12.976108h15.7375v12.976108zm9.5617 9.1688h-2.3622l3.5796-5.495zm8.7959-8.9097-.0085 3.1792-.2015.2748-.1855.2826-.1854.2826-.1693.2826-.1613.2826-.1612.2904-.1371.2826-.137.2826-.129.2748-.1129.2826-.1129.2747-.0967.2669-.0887.2669-.0807.2591-.0726.2512-.0645.2512-.0403.1648-.0403.1727-.0402.1649-.0323.1727-.0322.1648-.0242.1649-.0241.1648-.0161.1727h-2.3139l1.9753-9.1452-6.6594-.0075-5.958 9.1531h-.4354v-22.144827h15.7455v13.235127zm9.0781 12.6542-.3305.0549-.3387.0471-.3386.0471-.3305.0393-.3306.0314-.3305.0236-.3225.0157h-.3225-.2096l-.2096-.0074-.2016-.0158-.2015-.0235-.1935-.0314-.1855-.0314-.1854-.0393-.1774-.0471-.1693-.0549-.1693-.055-.1612-.0706-.1532-.0707-.1532-.0863-.1451-.0863-.1371-.0942-.129-.0942-.129-.1099-.1128-.1178-.1129-.1177-.1048-.1335-.0968-.1334-.0887-.1492-.0806-.1491-.0807-.157-.0645-.1649-.0565-.1805-.0483-.1806-.0484-.1884-.0322-.1962-.0242-.2041-.0161-.212-.0085-.2198h7.3366l-.8062 3.1636zm9.3038-3.7445h-3.9666l.653-2.5591h-7.9493l-.6531 2.5591h-3.8456v-.5259l.0483-.2198.0403-.2198.0483-.2355.0483-.2355.0726-.2591.0726-.259.0807-.2591.0887-.2512.0967-.2512.1049-.2512.1128-.2433.1129-.2434.129-.2433.129-.2277.1371-.2355.1531-.2198.1532-.2198.1532-.2119.1693-.2041.1774-.1963.1854-.1884.1854-.1727.2016-.1727.2015-.1648.2097-.1492.2257-.1413.2258-.1256.2338-.1177.2418-.1099.2499-.0942.258-.0785.2661-.0629.2741-.0549.2822-.0393.2902-.0235.2983-.0075.2338.0075.2338.0157.2338.0314.2258.0471.1129.0314.1048.0313.1048.0314.0967.0471.0968.0393.0967.055.0887.0549.0887.0549.0807.0707.0806.0707.0726.0706.0726.0863.0646.0785.0565.0942.0483.1021.0483.102.0403.1099.0322.1178.0242.1177.0242.1335.0085.1334v.1413.1492l-.0161.157h4.7406l.0726-.3219.0645-.3689.0322-.1963.0162-.2119.0161-.212v-.2198l-.0076-.2276-.0242-.2355-.0241-.1099-.0162-.1178-.0322-.1177-.0322-.1178-.0403-.1256-.0403-.1177-.0483-.1178-.0565-.1177-.0565-.1178-.0726-.1177-.0726-.1178-.0806-.1177-.0968-.1256-.1048-.1178-.1048-.1177-.1129-.1099-.1209-.1099-.129-.1021-.129-.0942-.137-.0942-.1452-.0942-.1451-.0785-.1532-.0784-.1612-.0785-.1612-.0707-.1694-.0707-.1773-.0628-.1774-.0629-.1774-.0549-.1935-.0471-.1854-.0471-.2015-.0471-.2016-.0393-.2016-.0393-.2096-.0314-.2177-.0236-.4434-.0471-.4515-.0393-.4756-.0157-.4838-.0074-.3628.0074-.3789.0075-.395.0235-.4112.0314-.4273.0471-.4354.0549-.4434.0707-.4515.0942-.2257.0471-.2338.0549-.2258.0629-.2338.0628-.2338.0707-.2338.0785-.2338.0785-.2257.0863-.2338.0942-.2338.102-.2258.1021-.2338.1099-.2257.1177-.2258.1256-.2257.1256-.2258.1413v-13.894463h15.7617v22.144863z" fill="currentColor"/>
+      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-accent shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
+        <div class="container mx-auto" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+          <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+            <a href="#" class="block" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+              <svg class="text-primary dark:text-white transition-colors" width="82" height="32" viewBox="0 0 77 30" fill="none" xmlns="http://www.w3.org/2000/svg" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+                <path d="m59.4297.0894165v14.8992835l-.1935.157-.1935.157-.1855.1649-.1773.1648-.1693.1649-.1693.1727-.1613.1727-.1612.1727v-16.2259835h-16.9549v13.5647835h-1.4028v-13.5647835h-16.9549v13.5883835h-1.4028v-13.5883835h-16.95487v15.4880835l-4.329426 14.0436h3.805376l1.91075-6.2172h.54823l3.16039 6.2172h4.59545l-3.0636-6.2172h6.9496l-1.9269 6.2172h4.1521l1.9027-6.2015h.9191v-.0157h1.306.1049 7.8445l-1.8382 6.2015h4.1924l1.7817-6.2015h1.8866l.0483 6.2015h3.5152l4.0391-6.2015h2.6444l-1.3705 6.2015h4.1278l1.3464-6.2015h2.3864l-.0161.3533.0086.3611.0161.3453.0322.3455.0242.1648.0241.1649.0322.1648.0323.1649.0402.1648.0403.157.0484.157.0483.157.0565.157.0565.1492.0644.1491.0646.1413.0726.1492.0725.1413.0807.1334.0807.1413.0887.1335.0967.1256.0968.1334.1048.1178.1048.1256.1048.1177.1209.1178.121.1099.1531.1256.1532.1256.1613.1177.1693.1099.1693.1099.1693.1021.1774.0863.1854.0942.1774.0785.1854.0784.1854.0707.1935.0707.1935.0628.1935.055.1935.0549.1935.0471.387.0863.395.0629.387.0549.387.0471.3789.0314.3709.0157.3628.0158h.3466l.4677-.0075.4676-.0074.4756-.0236.4757-.0236.4757-.0392.4757-.0393.4756-.0471.4757-.055.4837-.0628.4838-.0707.4837-.0785.4837-.0785.4838-.0863.4837-.0942.4837-.0942.4918-.1099 1.4351-5.6284h4.7084v-23.3145573h-16.9549zm-53.50905 22.7335835.02417-.0863.05649.0863zm14.77005-8.3524-.2419.7929-2.2574 7.3005-.0887.259h-7.4173l-.5724-1.1932 7.9897-7.952h-5.1357l-6.2482 6.5547 2.02361-6.5547h-3.78924v-12.999627h15.73743v13.792427zm4.3777 6.1701-.1209.0075-.1129.0074-.1209.0075h-.129-.1693-.1451l-.1371.0074h-.129l-1.0077-.0074.4676-1.6799.2176-.8321.5322-1.9547h.1693.1773l.1693-.0074h.1613.782l.4757.0074.4353.0158.1935.0074.1855.0157.1773.0236.1613.0236.1451.0235.1371.0393.129.0393.1128.0471.0968.0471.0887.0629.0806.0628.0645.0785.0403.0629.0322.0628.0322.0707.0242.0785.0161.0863.0085.0863v.0942.102l-.0085.1099-.0076.1099-.0242.1256-.0241.1256-.0726.2669-.0887.2983-.0887.2512-.0968.2434-.1048.2276-.1129.212-.0565.0942-.0564.0942-.0646.0942-.0726.0863-.0726.0863-.0726.0785-.0806.0785-.0807.0706-.0887.0629-.0887.0707-.0967.0549-.1049.0628-.1048.055-.1128.0471-.1129.0471-.1209.0393-.129.0471-.1371.0314-.1451.0314-.1451.0313-.1613.0236-.1612.0236-.1693.0157-.1774.0157zm11.4645 2.1823 1.6528-5.7305.0645 5.7305h-1.7172zm2.5155-9.1688h-3.9344l-2.7089 9.1688h-4.1763l.1935-.0784.1935-.0785.1855-.0785.1854-.0863.1774-.0864.1693-.102.1693-.0942.1612-.1021.1613-.1099.1531-.1099.1452-.1098.1451-.1257.137-.1177.129-.1335.129-.1256.121-.1413.1209-.1334.1129-.1492.1048-.1413.1048-.157.0967-.157.0887-.1569.0888-.1649.0806-.1727.0807-.1727.0726-.1727.0644-.1806.0645-.1884.0484-.1884.0565-.1884.0402-.2041.0403-.1962.0565-.314.0483-.2983.0323-.2826.0241-.2669.0086-.2669-.0086-.2434-.0075-.2433-.0323-.2277-.0322-.2119-.0565-.212-.0565-.1962-.0806-.1884-.0887-.1806-.0968-.1805-.1128-.1649-.129-.157-.1049-.1099-.1048-.1099-.1128-.0942-.121-.0863-.129-.0863-.129-.0785-.137-.0706-.1371-.0629-.1451-.0628-.1451-.0471-.1532-.0472-.1532-.0471-.1612-.0393-.1613-.0313-.1612-.0314-.1693-.0236-.3467-.0471-.3467-.0235-.3547-.0236-.3628-.0074h-.7256-.7175-.2258-.4031-.4999-.5563-.5401-.4596-.3225-.1209v-12.976108h15.7375v12.976108zm9.5617 9.1688h-2.3622l3.5796-5.495zm8.7959-8.9097-.0085 3.1792-.2015.2748-.1855.2826-.1854.2826-.1693.2826-.1613.2826-.1612.2904-.1371.2826-.137.2826-.129.2748-.1129.2826-.1129.2747-.0967.2669-.0887.2669-.0807.2591-.0726.2512-.0645.2512-.0403.1648-.0403.1727-.0402.1649-.0323.1727-.0322.1648-.0242.1649-.0241.1648-.0161.1727h-2.3139l1.9753-9.1452-6.6594-.0075-5.958 9.1531h-.4354v-22.144827h15.7455v13.235127zm9.0781 12.6542-.3305.0549-.3387.0471-.3386.0471-.3305.0393-.3306.0314-.3305.0236-.3225.0157h-.3225-.2096l-.2096-.0074-.2016-.0158-.2015-.0235-.1935-.0314-.1855-.0314-.1854-.0393-.1774-.0471-.1693-.0549-.1693-.055-.1612-.0706-.1532-.0707-.1532-.0863-.1451-.0863-.1371-.0942-.129-.0942-.129-.1099-.1128-.1178-.1129-.1177-.1048-.1335-.0968-.1334-.0887-.1492-.0806-.1491-.0807-.157-.0645-.1649-.0565-.1805-.0483-.1806-.0484-.1884-.0322-.1962-.0242-.2041-.0161-.212-.0085-.2198h7.3366l-.8062 3.1636zm9.3038-3.7445h-3.9666l.653-2.5591h-7.9493l-.6531 2.5591h-3.8456v-.5259l.0483-.2198.0403-.2198.0483-.2355.0483-.2355.0726-.2591.0726-.259.0807-.2591.0887-.2512.0967-.2512.1049-.2512.1128-.2433.1129-.2434.129-.2433.129-.2277.1371-.2355.1531-.2198.1532-.2198.1532-.2119.1693-.2041.1774-.1963.1854-.1884.1854-.1727.2016-.1727.2015-.1648.2097-.1492.2257-.1413.2258-.1256.2338-.1177.2418-.1099.2499-.0942.258-.0785.2661-.0629.2741-.0549.2822-.0393.2902-.0235.2983-.0075.2338.0075.2338.0157.2338.0314.2258.0471.1129.0314.1048.0313.1048.0314.0967.0471.0968.0393.0967.055.0887.0549.0887.0549.0807.0707.0806.0707.0726.0706.0726.0863.0646.0785.0565.0942.0483.1021.0483.102.0403.1099.0322.1178.0242.1177.0242.1335.0085.1334v.1413.1492l-.0161.157h4.7406l.0726-.3219.0645-.3689.0322-.1963.0162-.2119.0161-.212v-.2198l-.0076-.2276-.0242-.2355-.0241-.1099-.0162-.1178-.0322-.1177-.0322-.1178-.0403-.1256-.0403-.1177-.0483-.1178-.0565-.1177-.0565-.1178-.0726-.1177-.0726-.1178-.0806-.1177-.0968-.1256-.1048-.1178-.1048-.1177-.1129-.1099-.1209-.1099-.129-.1021-.129-.0942-.137-.0942-.1452-.0942-.1451-.0785-.1532-.0784-.1612-.0785-.1612-.0707-.1694-.0707-.1773-.0628-.1774-.0629-.1774-.0549-.1935-.0471-.1854-.0471-.2015-.0471-.2016-.0393-.2016-.0393-.2096-.0314-.2177-.0236-.4434-.0471-.4515-.0393-.4756-.0157-.4838-.0074-.3628.0074-.3789.0075-.395.0235-.4112.0314-.4273.0471-.4354.0549-.4434.0707-.4515.0942-.2257.0471-.2338.0549-.2258.0629-.2338.0628-.2338.0707-.2338.0785-.2338.0785-.2257.0863-.2338.0942-.2338.102-.2258.1021-.2338.1099-.2257.1177-.2258.1256-.2257.1256-.2258.1413v-13.894463h15.7617v22.144863z" fill="currentColor" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false"/>
               </svg>
             </a>
             
             <!-- CSS Checkbox Hack for Mobile Menu -->
-            <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" data-gjs-layerable="false">
+            <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" data-gjs-layerable="false" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
             
-            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-white hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu" data-gjs-layerable="false">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
+            <label for="mobile-menu-toggle" class="md:hidden p-2 text-slate-600 dark:text-white hover:text-accent cursor-pointer transition-colors" aria-label="Toggle Menu" data-gjs-layerable="false" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+                <line x1="3" y1="12" x2="21" y2="12" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false"></line>
+                <line x1="3" y1="6" x2="21" y2="6" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false"></line>
+                <line x1="3" y1="18" x2="21" y2="18" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false"></line>
               </svg>
             </label>
 
             <!-- Navigation Links -->
-            <nav data-nav-type="dynamic" class="hidden peer-checked:flex absolute top-full left-0 w-full bg-white dark:bg-dark p-4 shadow-lg md:static md:p-0 md:shadow-none md:bg-transparent z-50 md:flex flex-col md:w-auto md:flex-row items-center gap-6 mt-0 font-medium text-sm transition-all duration-300 ease-in-out">
-              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Home</a>
-              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Services</a>
-              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">Features</a>
-              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none">About</a>
-              <a href="#" class="bg-primary text-white hover:bg-accent px-5 py-2.5 rounded-lg shadow transition-all w-full md:w-auto text-center mt-2 md:mt-0">Get Started</a>
+            <nav data-nav-type="dynamic" class="hidden peer-checked:flex absolute top-full left-0 w-full bg-white dark:bg-dark p-4 shadow-lg md:static md:p-0 md:shadow-none md:bg-transparent z-50 md:flex flex-col md:w-auto md:flex-row items-center gap-6 mt-0 font-medium text-sm transition-all duration-300 ease-in-out" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">Home</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">Services</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">Features</a>
+              <a href="#" class="text-slate-600 dark:text-white hover:text-accent transition-colors w-full md:w-auto text-center py-2 md:py-0 border-b border-gray-100 md:border-none" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">About</a>
+              <a href="#" class="bg-primary text-white hover:bg-accent px-5 py-2.5 rounded-lg shadow transition-all w-full md:w-auto text-center mt-2 md:mt-0" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">Get Started</a>
             </nav>
           </div>
         </div>
@@ -865,6 +865,83 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
               <h4 class="text-lg font-black text-[#0c233c]">John Doe</h4>
               <p class="text-gray-500 font-medium text-sm">Job Title</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-contact-questions-team',
+    category: 'Contacts',
+    label: 'Questions? Team Contacts',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#1e49e2"/><text x="5" y="15" font-size="6" fill="#fff" font-weight="bold">Questions?</text><rect x="5" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="10" cy="32.5" r="4" fill="#fff"/><rect x="16" y="30" width="10" height="2" fill="#fff"/><rect x="16" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/><rect x="36" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="41" cy="32.5" r="4" fill="#fff"/><rect x="47" y="30" width="10" height="2" fill="#fff"/><rect x="47" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/><rect x="67" y="25" width="28" height="15" rx="2" fill="transparent" stroke="#fff" stroke-width="0.5"/><circle cx="72" cy="32.5" r="4" fill="#fff"/><rect x="78" y="30" width="10" height="2" fill="#fff"/><rect x="78" y="34" width="8" height="1.5" fill="#fff" opacity="0.7"/></svg>',
+    html: `
+      <div id="section-contact-questions-team" data-gjs-type="section" data-gjs-name="Questions Team Contact" class="w-full py-16 bg-[#1e49e2] text-white" layout-mode="container">
+        <div class="container mx-auto px-4">
+          <div class="mb-8">
+            <h2 class="text-3xl md:text-4xl font-display font-bold mb-3">Questions?</h2>
+            <p class="text-white/90 text-sm md:text-base max-w-3xl">
+              Please contact the Variable client is Undefined project management team.
+            </p>
+          </div>
+
+          <div data-gjs-type="responsive-grid" data-cols-desktop="3" data-cols-tablet="2" data-cols-mobile="1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
+                <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full object-cover rounded-full border border-white/30">
+              </div>
+              <div class="flex flex-col flex-grow">
+                <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">John Doe</h3>
+                <p class="text-sm text-white/80 mb-2">Engagement Lead</p>
+                <div class="flex gap-3 text-white/80">
+                  <a href="mailto:johndoe@example.com" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Email">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  </a>
+                  <a href="tel:+1234567890" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Phone">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
+                <img src="/team-member/member-3.jpg" alt="Sofia Almeida" class="w-full h-full object-cover rounded-full border border-white/30">
+              </div>
+              <div class="flex flex-col flex-grow">
+                <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">Sofia Almeida</h3>
+                <p class="text-sm text-white/80 mb-2">Senior Financial Analyst</p>
+                <div class="flex gap-3 text-white/80">
+                  <a href="mailto:sofia@example.com" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Email">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  </a>
+                  <a href="tel:+1234567890" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Phone">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
+              <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
+                <img src="/team-member/member-4.jpg" alt="Daniel Okafor" class="w-full h-full object-cover rounded-full border border-white/30">
+              </div>
+              <div class="flex flex-col flex-grow">
+                <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">Daniel Okafor</h3>
+                <p class="text-sm text-white/80 mb-2">Operations Consultant</p>
+                <div class="flex gap-3 text-white/80">
+                  <a href="mailto:daniel@example.com" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Email">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  </a>
+                  <a href="tel:+1234567890" class="hover:text-white transition-colors" data-gjs-type="link" aria-label="Phone">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
