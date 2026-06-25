@@ -9,7 +9,7 @@ const fixPathsForBuildPlugin = () => {
     enforce: 'pre' as const,
     apply: 'build' as const,
     transform(code: string, id: string) {
-      if (id.includes('/src/') && (id.endsWith('.ts') || id.endsWith('.tsx'))) {
+      if ((id.includes('/src/') || id.includes('\\src\\')) && (id.endsWith('.ts') || id.endsWith('.tsx'))) {
         return code.replace(/(['"])\/(images|videos|thumbs|team-member|background)\//g, '$1./$2/');
       }
       return null;
