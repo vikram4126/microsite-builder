@@ -794,6 +794,77 @@ export default function Builder() {
         }
       });
 
+      
+      // Popup Wrapper Type
+      domc.addType("popup-wrapper", {
+        isComponent: (el) => el.getAttribute && el.getAttribute("data-gjs-type") === "popup-wrapper",
+        model: {
+          defaults: {
+            traits: [
+              "id",
+              {
+                type: "checkbox",
+                name: "data-show-editor",
+                label: "Show in Editor",
+                valueTrue: "true",
+                valueFalse: "false",
+              }
+            ],
+            script: function() {
+              const popup = this;
+              const id = popup.id;
+              if (!id) return;
+              
+              const closeBtns = popup.querySelectorAll(".popup-close");
+              const closePopup = () => {
+                popup.classList.add("hidden");
+                popup.classList.remove("flex");
+                document.body.style.overflow = "";
+              };
+
+              closeBtns.forEach(btn => btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                closePopup();
+              }));
+
+              popup.addEventListener("click", (e) => {
+                if (e.target === popup) closePopup();
+              });
+
+              // Also bind to any element that explicitly targets this popup via href or data-target
+              document.querySelectorAll("a[href=\"#" + id + "\"], [data-target=\"" + id + "\"], [data-target=\"#" + id + "\"]").forEach(trigger => {
+                trigger.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  popup.classList.remove("hidden");
+                  popup.classList.add("flex");
+                  document.body.style.overflow = "hidden";
+                });
+              });
+            }
+          },
+          init() {
+            this.on("change:attributes:data-show-editor", this.handleShowEditor);
+            if (!this.getAttributes()["data-show-editor"]) {
+               this.addAttributes({ "data-show-editor": "true" });
+            }
+            this.handleShowEditor();
+          },
+          handleShowEditor() {
+            const attrs = this.getAttributes();
+            const isVisible = attrs["data-show-editor"] === "true";
+            
+            if (isVisible) {
+              this.removeClass("hidden");
+              this.addClass("flex");
+            } else {
+              this.addClass("hidden");
+              this.removeClass("flex");
+            }
+          }
+        }
+      });
+
+
       // Section component type - provides Layout Mode toggle + animation trait to section elements
       domc.addType('section', {
         extend: 'default',

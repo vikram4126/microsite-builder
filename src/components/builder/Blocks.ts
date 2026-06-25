@@ -435,6 +435,118 @@ export const registerBlocks = (editor: any) => {
     content: '<ul data-animation="slide-up" class="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
   });
 
+  
+  // POPUPS CATEGORY
+  bm.add("popup-simple", {
+    label: "Simple Info Popup",
+    category: "Popups",
+    media: `<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><span class="text-[8px] font-bold text-[#0c233c] px-2 py-1 border border-slate-300 rounded shadow-sm">Simple Popup</span></div>`,
+    content: `
+<div data-gjs-type="popup-wrapper" id="simple-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+  <div class="popup-content bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative flex flex-col items-center text-center animate-[zoomIn_0.3s_ease-out]">
+    <a href="#" class="popup-close absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </a>
+    <div class="w-16 h-16 bg-[#00b8f5]/10 text-[#00b8f5] rounded-full flex items-center justify-center mb-6">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </div>
+    <h3 class="text-2xl font-display font-bold text-[#0c233c] mb-3">Important Notice</h3>
+    <p class="text-slate-600 mb-8">This is a simple popup modal. You can use it to display important information or capture email signups.</p>
+    <a href="#" class="bg-[#1e49e2] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#0c233c] transition-colors w-full">Got It!</a>
+  </div>
+</div>
+    `
+  });
+
+  bm.add("popup-image", {
+    label: "Image + Offer Popup",
+    category: "Popups",
+    media: `<div class="flex flex-col items-center justify-center p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="w-full h-1/2 bg-slate-200 mb-1 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm mb-0.5"></div><div class="w-3/4 h-1 bg-slate-300 rounded-sm"></div></div>`,
+    content: `
+<div data-gjs-type="popup-wrapper" id="image-popup" class="fixed inset-0 bg-[#0c233c]/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+  <div class="popup-content bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative flex flex-col animate-[zoomIn_0.3s_ease-out]">
+    <a href="#" class="popup-close absolute top-4 right-4 text-white hover:text-slate-200 transition-colors z-10 bg-black/20 rounded-full p-1 backdrop-blur-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </a>
+    <div class="h-48 w-full bg-slate-200 relative">
+      <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Popup Header">
+    </div>
+    <div class="p-8 text-center flex flex-col items-center">
+      <h3 class="text-2xl font-display font-bold text-[#0c233c] mb-3">Special Offer Inside</h3>
+      <p class="text-slate-600 mb-8">Grab your 50% discount today before the offer expires. Exclusively for new members.</p>
+      <a href="#" class="bg-[#7213ea] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#0c233c] transition-colors">Claim Discount</a>
+    </div>
+  </div>
+</div>
+    `
+  });
+
+  bm.add("popup-team", {
+    label: "Team Profile Popup",
+    category: "Popups",
+    media: `<div class="flex flex-row items-center justify-center p-1 bg-white border border-slate-200 h-full w-full rounded"><div class="w-1/3 h-full bg-[#0c233c] rounded-l-sm"></div><div class="w-2/3 h-full bg-slate-100 flex flex-col gap-1 p-1 rounded-r-sm"><div class="w-full h-1 bg-slate-300 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm"></div><div class="w-full h-1 bg-slate-300 rounded-sm"></div></div></div>`,
+    content: `
+<div data-gjs-type="popup-wrapper" id="team-popup" class="fixed inset-0 bg-[#0c233c]/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" data-show-editor="true">
+  <div class="popup-content bg-slate-50 shadow-2xl w-full max-w-5xl relative flex flex-col md:flex-row animate-[zoomIn_0.3s_ease-out] border border-slate-300 rounded overflow-hidden">
+    <a href="#" class="popup-close absolute top-2 right-2 text-white bg-[#0c233c] hover:bg-[#1e49e2] rounded flex items-center justify-center w-6 h-6 transition-colors z-10 shadow">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </a>
+    
+    <!-- Left Dark Column -->
+    <div class="w-full md:w-[35%] bg-gradient-to-b from-[#112d4e] to-[#0c233c] p-8 md:p-10 flex flex-col text-white">
+      <div class="w-24 h-24 rounded-full border-4 border-white/20 overflow-hidden mb-6 shadow-lg bg-white shrink-0">
+        <img src="/team-member/member-1.jpg" alt="Pepita Perez" class="w-full h-full object-cover">
+      </div>
+      <h2 class="text-3xl font-display font-bold mb-1 tracking-tight">Pepita Perez</h2>
+      <p class="text-sm font-semibold text-[#00b8f5] mb-8 uppercase tracking-wide">Risk & Compliance Advisor</p>
+      
+      <p class="text-sm font-medium leading-relaxed mb-6 text-slate-300">Advisor with strong expertise in regulatory risk and compliance frameworks.</p>
+      <p class="text-sm font-medium leading-relaxed mb-auto text-slate-300">Helps organisations manage exposure and embed robust governance during transactions.</p>
+      
+      <div class="mt-8 pt-6 border-t border-white/20 flex flex-col gap-3 text-xs font-medium text-[#aceaff]">
+        <div class="flex items-center gap-3">
+          <svg class="w-4 h-4 text-[#00b8f5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          perez.pepita@kpmg.com
+        </div>
+        <div class="flex items-center gap-3">
+          <svg class="w-4 h-4 text-[#00b8f5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+          +31 000 000 000
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Light Column -->
+    <div class="w-full md:w-[65%] p-8 md:p-12 flex flex-col bg-[#f0f2f5]">
+      
+      <!-- Section 1 -->
+      <div class="mb-8">
+        <h3 class="text-[#1e49e2] font-bold text-xs tracking-widest uppercase mb-4 border-b border-[#1e49e2]/20 pb-2">My Role In The Team</h3>
+        <p class="text-slate-500 text-sm leading-relaxed font-medium">I evaluated regulatory exposure, compliance frameworks, and internal controls as part of transaction assessments and broader transformation efforts.</p>
+      </div>
+      
+      <!-- Section 2 -->
+      <div class="mb-8">
+        <h3 class="text-[#1e49e2] font-bold text-xs tracking-widest uppercase mb-4 border-b border-[#1e49e2]/20 pb-2">My Added Value</h3>
+        <p class="text-slate-500 text-sm leading-relaxed font-medium">I ensured clients gained a clear understanding of compliance risks, enabling risk-aware decision-making before acquisition or restructuring.</p>
+      </div>
+      
+      <!-- Section 3 -->
+      <div>
+        <h3 class="text-[#1e49e2] font-bold text-xs tracking-widest uppercase mb-4 border-b border-[#1e49e2]/20 pb-2">Experience</h3>
+        <ul class="list-disc pl-5 text-slate-500 text-sm space-y-2 font-medium marker:text-[#1e49e2]">
+          <li>Performed compliance gap assessments across corporate and financial sectors.</li>
+          <li>Reviewed internal controls, governance structures, and regulatory obligations.</li>
+          <li>Supported integration of compliance processes during post-deal transitions.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+    `
+  });
+
+
   // ADVANCED WIDGETS
   bm.add('card', {
     label: 'Profile Card',

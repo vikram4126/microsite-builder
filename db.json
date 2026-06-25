@@ -31,7 +31,7 @@
       "userId": "guest",
       "title": "New Project",
       "status": "draft",
-      "lastEdited": "2026-06-25T07:34:56.466Z",
+      "lastEdited": "2026-06-25T10:10:54.086Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -385,6 +385,23 @@
                 ],
                 "style": {
                   "max-width": "150px"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-full-height=\"true\"]",
+                "style": {
+                  "min-height": "calc(100vh - var(--navbar-h, 0px))"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-vertical-center=\"true\"]",
+                "style": {
+                  "display": "flex",
+                  "align-items": "center",
+                  "flex-direction": "column",
+                  "justify-content": "center"
                 }
               }
             ],
@@ -881,7 +898,7 @@
                                                 "transition-all"
                                               ],
                                               "attributes": {
-                                                "href": "#"
+                                                "href": "#simple-popup-1"
                                               },
                                               "components": [
                                                 {
@@ -5122,6 +5139,373 @@
                                               "content": " opens in a new tab."
                                             }
                                           ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "popup-wrapper",
+                          "classes": [
+                            "fixed",
+                            "inset-0",
+                            "bg-[#0c233c]/60",
+                            "z-50",
+                            "flex",
+                            "items-center",
+                            "justify-center",
+                            "p-4",
+                            "backdrop-blur-sm",
+                            "transition-opacity"
+                          ],
+                          "attributes": {
+                            "id": "simple-popup-1",
+                            "data-show-editor": "true"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "popup-content",
+                                "bg-white",
+                                "rounded-2xl",
+                                "shadow-2xl",
+                                "w-full",
+                                "max-w-md",
+                                "p-8",
+                                "relative",
+                                "flex",
+                                "flex-col",
+                                "items-center",
+                                "text-center",
+                                "animate-[zoomIn_0.3s_ease-out]"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "editable": false,
+                                  "classes": [
+                                    "popup-close",
+                                    "absolute",
+                                    "top-4",
+                                    "right-4",
+                                    "text-slate-400",
+                                    "hover:text-slate-700",
+                                    "transition-colors"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "svg",
+                                      "resizable": {
+                                        "ratioDefault": true
+                                      },
+                                      "classes": [
+                                        "w-6",
+                                        "h-6"
+                                      ],
+                                      "attributes": {
+                                        "fill": "none",
+                                        "stroke": "currentColor",
+                                        "viewBox": "0 0 24 24"
+                                      },
+                                      "components": [
+                                        {
+                                          "tagName": "path",
+                                          "type": "svg-in",
+                                          "resizable": {
+                                            "ratioDefault": true
+                                          },
+                                          "attributes": {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            "d": "M6 18L18 6M6 6l12 12"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "w-16",
+                                    "h-16",
+                                    "bg-[#00b8f5]/10",
+                                    "text-[#00b8f5]",
+                                    "rounded-full",
+                                    "flex",
+                                    "items-center",
+                                    "justify-center",
+                                    "mb-6"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "svg",
+                                      "resizable": {
+                                        "ratioDefault": true
+                                      },
+                                      "classes": [
+                                        "w-8",
+                                        "h-8"
+                                      ],
+                                      "attributes": {
+                                        "fill": "none",
+                                        "stroke": "currentColor",
+                                        "viewBox": "0 0 24 24"
+                                      },
+                                      "components": [
+                                        {
+                                          "tagName": "path",
+                                          "type": "svg-in",
+                                          "resizable": {
+                                            "ratioDefault": true
+                                          },
+                                          "attributes": {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            "d": "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tagName": "h3",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-2xl",
+                                    "font-display",
+                                    "font-bold",
+                                    "text-[#0c233c]",
+                                    "mb-3"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "update the file"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tagName": "p",
+                                  "type": "text",
+                                  "classes": [
+                                    "text-slate-600",
+                                    "mb-8"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "This is a simple popup modal. You can use it to display important information or capture email signups."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "link",
+                                  "classes": [
+                                    "bg-[#1e49e2]",
+                                    "text-white",
+                                    "px-8",
+                                    "py-3",
+                                    "rounded-xl",
+                                    "font-bold",
+                                    "hover:bg-[#0c233c]",
+                                    "transition-colors",
+                                    "w-full"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "textnode",
+                                      "content": "Got It!"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "popup-wrapper",
+                          "classes": [
+                            "fixed",
+                            "inset-0",
+                            "bg-[#0c233c]/60",
+                            "z-50",
+                            "flex",
+                            "items-center",
+                            "justify-center",
+                            "p-4",
+                            "backdrop-blur-sm",
+                            "transition-opacity"
+                          ],
+                          "attributes": {
+                            "id": "image-popup-2",
+                            "data-show-editor": "true"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "popup-content",
+                                "bg-white",
+                                "rounded-2xl",
+                                "shadow-2xl",
+                                "w-full",
+                                "max-w-lg",
+                                "overflow-hidden",
+                                "relative",
+                                "flex",
+                                "flex-col",
+                                "animate-[zoomIn_0.3s_ease-out]"
+                              ],
+                              "components": [
+                                {
+                                  "type": "link",
+                                  "editable": false,
+                                  "classes": [
+                                    "popup-close",
+                                    "absolute",
+                                    "top-4",
+                                    "right-4",
+                                    "text-white",
+                                    "hover:text-slate-200",
+                                    "transition-colors",
+                                    "z-10",
+                                    "bg-black/20",
+                                    "rounded-full",
+                                    "p-1",
+                                    "backdrop-blur-sm"
+                                  ],
+                                  "attributes": {
+                                    "href": "#"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "svg",
+                                      "resizable": {
+                                        "ratioDefault": true
+                                      },
+                                      "classes": [
+                                        "w-5",
+                                        "h-5"
+                                      ],
+                                      "attributes": {
+                                        "fill": "none",
+                                        "stroke": "currentColor",
+                                        "viewBox": "0 0 24 24"
+                                      },
+                                      "components": [
+                                        {
+                                          "tagName": "path",
+                                          "type": "svg-in",
+                                          "resizable": {
+                                            "ratioDefault": true
+                                          },
+                                          "attributes": {
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round",
+                                            "stroke-width": "2",
+                                            "d": "M6 18L18 6M6 6l12 12"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "h-48",
+                                    "w-full",
+                                    "bg-slate-200",
+                                    "relative"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "image",
+                                      "resizable": {
+                                        "ratioDefault": 1
+                                      },
+                                      "classes": [
+                                        "w-full",
+                                        "h-full",
+                                        "object-cover"
+                                      ],
+                                      "attributes": {
+                                        "src": "/images/finance-1.jpg",
+                                        "alt": "Popup Header"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classes": [
+                                    "p-8",
+                                    "text-center",
+                                    "flex",
+                                    "flex-col",
+                                    "items-center"
+                                  ],
+                                  "components": [
+                                    {
+                                      "tagName": "h3",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-2xl",
+                                        "font-display",
+                                        "font-bold",
+                                        "text-[#0c233c]",
+                                        "mb-3"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Special Offer Inside"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-slate-600",
+                                        "mb-8"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Grab your 50% discount today before the offer expires. Exclusively for new members."
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "link",
+                                      "classes": [
+                                        "bg-[#7213ea]",
+                                        "text-white",
+                                        "px-8",
+                                        "py-3",
+                                        "rounded-xl",
+                                        "font-bold",
+                                        "hover:bg-[#0c233c]",
+                                        "transition-colors"
+                                      ],
+                                      "attributes": {
+                                        "href": "#"
+                                      },
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Claim Discount"
                                         }
                                       ]
                                     }
