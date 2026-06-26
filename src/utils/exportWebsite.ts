@@ -36,8 +36,8 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
   // Helper to detect local/public image paths (starts with / but not // or http)
   const isLocalPath = (src: string) => {
     if (!src) return false;
-    // Paths like /images/..., /background/..., /team-member/..., /thumbs/...
-    return (src.startsWith('/') && !src.startsWith('//') && !src.startsWith('/http'));
+    // Paths like /images/..., ./images/..., /background/...
+    return (src.startsWith('/') || src.startsWith('./')) && !src.startsWith('//') && !src.startsWith('/http');
   };
 
   // Helper to get extension from a file path
@@ -48,11 +48,20 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
 
   // Helper to build the local ZIP path for a public asset
   const getLocalImagePath = (src: string) => {
-    // src is like /images/image-1.png or /team-member/member-2.jpg or /background/bg.jpg
-    // We want: assets/images-image-1.png -> just use the path without leading /
-    // All go into the assets/ folder in the zip
-    const cleanSrc = src.startsWith('/') ? src.substring(1) : src;
+    let cleanSrc = src;
+    if (cleanSrc.startsWith('./')) cleanSrc = cleanSrc.substring(2);
+    else if (cleanSrc.startsWith('/')) cleanSrc = cleanSrc.substring(1);
     return 'assets/' + cleanSrc.replace(/\//g, '-'); // flatten to single folder
+  };
+
+  // Helper to convert base64 to ArrayBuffer
+  const base64ToArrayBuffer = (base64: string) => {
+    const binaryString = window.atob(base64.split(',')[1]);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
   };
 
   // Fetch a local image and cache it
@@ -63,16 +72,49 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     const localPath = getLocalImagePath(src);
     imageMap.set(src, localPath);
 
+    let fetched = false;
+
     try {
-      // Fetch from dev server (images served from /public)
-      const url = window.location.origin + src;
+      // Vite build replaces /images/ with ./images/ but they are hosted at the root
+      let cleanSrc = src;
+      if (cleanSrc.startsWith('./')) cleanSrc = cleanSrc.substring(1); // convert ./ to /
+      if (!cleanSrc.startsWith('/')) cleanSrc = '/' + cleanSrc;
+      
+      const url = window.location.origin + cleanSrc;
       const resp = await fetch(url);
       if (resp.ok) {
         const buf = await resp.arrayBuffer();
         fetchedImages.set(localPath, buf);
+        fetched = true;
       }
     } catch (e) {
-      console.warn('[Export] Failed to fetch image:', src, e);
+      console.warn('[Export] Fetch failed, attempting canvas fallback for:', src);
+    }
+
+    // Fallback: If fetch failed (e.g., due to file:// protocol CORS), try reading via canvas
+    if (!fetched) {
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          const dataUrl = canvas.toDataURL('image/png');
+          fetchedImages.set(localPath, base64ToArrayBuffer(dataUrl));
+          fetched = true;
+        }
+      } catch (fallbackErr) {
+        console.warn('[Export] Canvas fallback also failed for:', src, fallbackErr);
+      }
     }
 
     return localPath;
@@ -194,8 +236,8 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         }
       }
 
-      // Match local path background images: url('/images/...')  url(/background/...)
-      const bgLocalMatches = style.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      // Match local path background images: url('/images/...')  url(./background/...)
+      const bgLocalMatches = style.matchAll(/url\(["']?((?:\/|\.\/)[^"')]+)["']?\)/gi);
       for (const m of bgLocalMatches) {
         const rawPath = m[1];
         if (isLocalPath(rawPath) && !rawPath.startsWith('/http')) {
@@ -214,7 +256,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
         let newClassName = className;
 
         // Fix paths in arbitrary URL classes like bg-[url('/images/photo.jpg')]
-        const classUrlMatches = newClassName.matchAll(/\[url\(["']?(\/[^"')\]]+)["']?\)\]/gi);
+        const classUrlMatches = newClassName.matchAll(/\[url\(["']?((?:\/|\.\/)[^"')\]]+)["']?\)\]/gi);
         for (const m of classUrlMatches) {
           const fullMatch = m[0]; // e.g. [url('/images/bg.jpg')]
           const rawPath = m[1];   // e.g. /images/bg.jpg
@@ -255,7 +297,7 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       let cssContent = styleTag.textContent || '';
       if (!cssContent.includes('url(')) continue;
 
-      const bgMatches = cssContent.matchAll(/url\(["']?(\/[^"')]+)["']?\)/gi);
+      const bgMatches = cssContent.matchAll(/url\(["']?((?:\/|\.\/)[^"')]+)["']?\)/gi);
       for (const m of bgMatches) {
         const rawPath = m[1];
         if (isLocalPath(rawPath)) {
@@ -322,7 +364,6 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
     const finalJs = allJs + '\n\n' + customExtractedJs;
 
     // 4. Build page HTML
-    const sc = 'script';
     const themePresets: any = {
       default: { primary: '#00338d', secondary: '#1e49e2', accent: '#00b8f5' },
       purple: { primary: '#4c1d95', secondary: '#7c3aed', accent: '#a78bfa' },
@@ -370,13 +411,13 @@ export async function exportStaticWebsite(editor: any, projectData: any, themeSe
       '    [data-full-height="true"] { min-height: calc(100vh - var(--navbar-h, 0px)) !important; }',
       '    [data-vertical-center="true"] { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }',
       '  </style>',
-      '  <' + sc + ' src="https://unpkg.com/@tailwindcss/browser@4"></' + sc + '>',
-      '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></' + sc + '>',
-      '  <' + sc + ' src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></' + sc + '>',
+      '  <scr' + 'ipt src="https://unpkg.com/@tailwindcss/browser@4"></scr' + 'ipt>',
+      '  <scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></scr' + 'ipt>',
+      '  <scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></scr' + 'ipt>',
       '</head>',
       `<body class="${editor.Canvas?.getBody?.().className || ''}" style="${editor.Canvas?.getBody?.().style.cssText || ''}">`,
       processedHtml,
-      '  <' + sc + ' src="js/script.js"></' + sc + '>',
+      '  <scr' + 'ipt src="js/script.js"></scr' + 'ipt>',
       '</body>',
       '</html>'
     ].join('\n');

@@ -17,6 +17,7 @@ import { TypographyUI } from '../components/builder/TypographyUI';
 import { MediaUI } from '../components/builder/MediaUI';
 import { BorderUI } from '../components/builder/BorderUI';
 import { StructuralMap } from '../components/builder/StructuralMap';
+import { ImageCropModal } from '../components/builder/ImageCropModal';
 
 // Helper: build breadcrumb path from a GrapesJS component model
 function getBreadcrumb(model: any): { name: string; cid: string }[] {
@@ -56,6 +57,7 @@ export default function Builder() {
   const [isBordersActive, setIsBordersActive] = useState(true);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [state, setState] = useState<string>('');
+  const [cropModal, setCropModal] = useState<{ src: string; component: any } | null>(null);
 
   // Library State
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
@@ -1758,6 +1760,9 @@ export default function Builder() {
           setHasSelection(false);
           setIsRemovable(true);
           setBreadcrumb([]);
+          // Hide crop button on deselect
+          const cb = document.getElementById('btn-crop-image');
+          if (cb) cb.classList.add('hidden');
           return;
         }
 
@@ -1774,6 +1779,16 @@ export default function Builder() {
         const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
         const isVideoSel = (typeof model.is === 'function' && model.is('video')) || model.get('type') === 'video' || model.get('type') === 'video-bg' || selTag === 'video';
         const isTextSel = (typeof model.is === 'function' && model.is('text')) || model.get('type') === 'text' || ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'a', 'b', 'i', 'strong', 'em'].includes(selTag);
+
+        // Show crop button only when an image component is selected
+        const cropBtn = document.getElementById('btn-crop-image');
+        if (cropBtn) {
+          if (isImgSel) {
+            cropBtn.classList.remove('hidden');
+          } else {
+            cropBtn.classList.add('hidden');
+          }
+        }
 
         // Also check if any ancestor or child has a video — to auto-show media tab for entire video hero sections
         const hasVideoChild = !isVideoSel && typeof model.find === 'function' && model.find('video').length > 0;
@@ -2707,6 +2722,29 @@ export default function Builder() {
               title="Delete Selected"
             >
               <Trash2 className="w-4 h-4" />
+            </button>
+
+            {/* Crop Image button - only visible when an image is selected */}
+            <button
+              id="btn-crop-image"
+              onClick={() => {
+                const ed = editorRef.current;
+                if (!ed) return;
+                const sel = ed.getSelected();
+                if (!sel) return;
+                const el = sel.getEl() as HTMLImageElement | null;
+                if (!el) return;
+                // Find the <img> element (may be the component itself or a child)
+                const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img');
+                if (!imgEl) return;
+                const src = (imgEl as HTMLImageElement).src || sel.getAttributes()['src'];
+                if (!src) return;
+                setCropModal({ src, component: sel });
+              }}
+              className="hidden p-1.5 rounded transition-colors text-gray-500 hover:bg-blue-50 hover:text-blue-600"
+              title="Crop Image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
             </button>
           </div>
         </div>
@@ -4024,6 +4062,30 @@ export default function Builder() {
       {/* Hidden container for GrapesJS blocks */}
       <div id="gjs-blocks" className="hidden"></div>
       <ToastContainer position="bottom-right" />
+
+      {/* Image Crop Modal */}
+      {cropModal && (
+        <ImageCropModal
+          src={cropModal.src}
+          onApply={(croppedDataUrl) => {
+            const comp = cropModal.component;
+            if (comp) {
+              const el = comp.getEl() as HTMLElement | null;
+              const imgEl = el?.tagName === 'IMG' ? el : el?.querySelector('img');
+              // Update the GrapesJS model attribute
+              if (comp.get('tagName') === 'img') {
+                comp.addAttributes({ src: croppedDataUrl });
+              } else if (imgEl) {
+                // Find inner image component
+                const imgComp = comp.find('img')[0];
+                if (imgComp) imgComp.addAttributes({ src: croppedDataUrl });
+              }
+            }
+            setCropModal(null);
+          }}
+          onClose={() => setCropModal(null)}
+        />
+      )}
     </div>
   );
 }
