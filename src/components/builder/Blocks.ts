@@ -208,7 +208,7 @@ export const registerBlocks = (editor: any) => {
 
   // 3. INTRODUCTION
   bm.add('introduction', {
-    label: 'CEO Intro & Mission Section',
+    label: 'Text + Image',
     category: 'Introduction',
     media: '<img src="/thumbs/ceo intro thumb.png" class="object-cover w-full h-full" />',
     content: `
@@ -216,12 +216,12 @@ export const registerBlocks = (editor: any) => {
         <div class="container mx-auto px-4 lg:px-0">
           <div class="mx-auto flex flex-col md:flex-row items-center gap-12 w-full">
             <div data-animation="slide-left" class="flex-1">
-               <h2 class="text-3xl font-display font-bold mb-4 text-gray-900">Who We Are</h2>
+               <h1 class="text-3xl font-display font-bold mb-4 text-gray-900">Who We Are</h1>
                <p class="text-gray-600 leading-relaxed mb-6">We are a passionate team dedicated to delivering excellence. Our solutions simplify workflows and maximize productivity for teams around the globe.</p>
                <a href="#" class="font-semibold text-secondary hover:underline">Learn more about our mission &rarr;</a>
             </div>
             <div data-animation="slide-right" class="flex-1">
-               <img src="/images/image-5.png" alt="Team" class="rounded-2xl shadow-xl w-full" />
+               <img src="/images/image-5.png" alt="Team" class="shadow-xl w-full" />
             </div>
           </div>
         </div>
@@ -411,7 +411,7 @@ export const registerBlocks = (editor: any) => {
     label: 'Responsive Image',
     category: 'Basic',
     media: svgs.image,
-    content: { type: 'image', classes: ['w-full', 'h-auto', 'rounded-lg', 'shadow-sm'] },
+    content: { type: 'image', classes: ['w-full', 'h-auto', 'shadow-sm'] },
   });
 
   bm.add('divider', {
@@ -600,7 +600,7 @@ export const registerBlocks = (editor: any) => {
         <!-- Profile Row -->
         <div class="flex items-center gap-4">
           <div class="w-14 h-14 rounded-full border-2 border-[#7213ea] p-0.5 overflow-hidden flex items-center justify-center bg-white flex-shrink-0">
-            <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full rounded-full object-cover" />
+            <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full  object-cover" />
           </div>
           <div class="flex flex-col">
             <h3 class="font-display font-bold text-xl text-[#0c233c] dark:text-white leading-tight">John Doe</h3>

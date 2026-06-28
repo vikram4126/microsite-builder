@@ -2135,7 +2135,7 @@ export default function Builder() {
           } else if (!firstPage.name) {
             firstPage.name = firstPage.title;
           } else if (!firstPage.title) {
-            firstPage.title = firstPage.name;
+                firstPage.title = firstPage.name;
           }
         }
 
@@ -2143,12 +2143,20 @@ export default function Builder() {
         projectDataRef.current = data;
 
         // Find pageId from slug
+        console.log('--- FINDING PAGE ---');
+        console.log('URL pageSlug:', pageSlug);
         let targetPage = data.pages.find((p: any, idx: number) => {
           const slug = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-          return slug === pageSlug;
+          console.log(`Checking page ${idx}: title="${p.title}", name="${p.name}", generated slug="${slug}"`);
+          return slug === pageSlug || p.id === pageSlug;
         });
 
-        if (!targetPage) targetPage = data.pages[0];
+        if (!targetPage) {
+          console.log('targetPage NOT FOUND, defaulting to Home (page 0)');
+          targetPage = data.pages[0];
+        } else {
+          console.log('targetPage FOUND:', targetPage.id);
+        }
         const activePageId = targetPage.id;
         setPageId(activePageId);
         pageIdRef.current = activePageId;
@@ -2260,25 +2268,41 @@ export default function Builder() {
     const editor = editorRef.current;
 
     const updateNavLinks = () => {
-      const navContainers = editor.DomComponents.getWrapper().find('[data-gjs-type="dynamic-nav-links"]');
+      const navContainers = editor.DomComponents.getWrapper().find('[data-nav-type="dynamic"]');
+      if (navContainers.length === 0) return;
+
+      const currentPagesStr = JSON.stringify(projectData.pages.map((p: any) => ({id: p.id, title: p.title, name: p.name})));
+      if ((window as any)._lastNavUpdate === currentPagesStr) return; // Prevent unnecessary DOM resets which break text editing
+      (window as any)._lastNavUpdate = currentPagesStr;
+
       navContainers.forEach((nav: any) => {
         // Clear existing links
         nav.components().reset();
 
         // Add project pages
-        projectData.pages.forEach((p: any) => {
+        projectData.pages.forEach((p: any, idx: number) => {
           const isActive = p.id === pageId;
+          const slug = idx === 0 ? 'home' : (p.title || p.name || 'page').toLowerCase().trim().replace(/\\s+/g, '-').replace(/[^a-z0-9-]/g, '');
           nav.append({
             tagName: 'a',
             type: 'link',
-            classes: [isActive ? 'text-[#1e49e2]' : 'text-gray-600', 'hover:text-[var(--color-secondary)]', 'font-semibold', 'transition-colors'],
-            attributes: { href: `/builder/${projectId}/${p.id}` },
+            classes: [
+              isActive ? 'text-[#1e49e2] font-bold' : 'text-slate-600 dark:text-white font-medium',
+              'hover:text-[#1e49e2]',
+              'transition-colors',
+              'w-full',
+              'md:w-auto',
+              'text-center',
+              'py-2',
+              'md:py-0',
+              'border-b',
+              'border-gray-100',
+              'md:border-none'
+            ],
+            attributes: { href: `/builder/${projectId}/${slug}` },
             content: p.name,
           });
         });
-
-        // Ensure "Contact Us" or other static links remain if they were part of the design
-        // Actually, the user might want a separate component for that, but let's stick to page links for now
       });
     };
 

@@ -223,7 +223,10 @@ export default function ProjectDetails() {
 
                 <div className="flex items-center space-x-3">
                   <button 
-                    onClick={() => navigate(`/builder/${project.id}/${page.id}`)}
+                    onClick={() => {
+                      const slug = project.pages.indexOf(page) === 0 ? 'home' : (page.title || page.name || 'page').toLowerCase().trim().replace(/\\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                      navigate(`/builder/${project.id}/${slug}`);
+                    }}
                     className="flex items-center space-x-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                   >
                     <Settings className="w-4 h-4" />

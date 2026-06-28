@@ -150,7 +150,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div data-animation="slide-right" class="flex-1 relative z-10 hidden md:block w-full">
-              <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-slate-100" alt="Hero Image" />
+              <img src="/images/image-1.png" class=" shadow-2xl border-4 border-slate-100" alt="Hero Image" />
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ export const sectionsLibrary: SectionDef[] = [
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="20" fill="#f8fafc"/><rect x="5" y="8" width="15" height="4" rx="2" fill="var(--color-primary)"/><rect x="85" y="6" width="10" height="7" rx="2" fill="var(--color-secondary)"/></svg>',
     html: `
       <!-- Navbar with CSS-Only Responsive Mobile Menu -->
-      <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-[#00338d] shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
+      <div data-gjs-type="section" data-gjs-name="Navbar" data-gjs-removable="false" data-gjs-copyable="false" data-gjs-draggable="false" class="w-full bg-white dark:bg-dark border-b-[3px] border-[#00338d] shadow-sm transition-all duration-300 sticky top-0 z-[100]" layout-mode="container">
         <div class="container mx-auto" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
           <div class="flex flex-wrap items-center justify-between p-4 lg:py-4 lg:px-0 relative" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
             <a href="#" class="block" data-gjs-removable="false" data-gjs-draggable="false" data-gjs-copyable="false">
@@ -271,7 +271,7 @@ export const sectionsLibrary: SectionDef[] = [
               </div>
             </div>
             <div data-animation="slide-right" class="flex-1 relative z-10 hidden md:block w-full">
-              <img src="/images/image-1.png" class="rounded-3xl shadow-2xl border-4 border-white dark:border-slate-800" alt="Office" />
+              <img src="/images/image-1.png" class=" shadow-2xl border-4 border-white dark:border-slate-800" alt="Office" />
             </div>
           </div>
         </div>
@@ -605,29 +605,6 @@ export const sectionsLibrary: SectionDef[] = [
     `
   },
   {
-    id: 'section-trust-impact',
-    category: 'Introduction',
-    label: 'Text & Large Image Banner',
-    svg: '<img src="/thumbs/trust-and-impact-thumb.png" class="object-cover w-full h-full" />',
-    html: `
-      <div id="trust-impact-hero" data-gjs-type="section" data-animation="slide-up" data-gjs-name="Text & Large Image Banner" class="w-full py-20 bg-white" layout-mode="container">
-        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div class="flex-[1.2] flex flex-col items-start text-left">
-            <span class="text-xs font-bold uppercase tracking-widest text-secondary mb-4">OVERLINE</span>
-            <h1 class="text-4xl lg:text-5xl font-display font-black text-[#0c233c] mb-6 leading-tight tracking-tight">Inspire trust and deliver <br/>impact for your brand</h1>
-            <p class="text-lg text-gray-600 leading-relaxed max-w-xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
-          </div>
-          <div data-animation="slide-left" class="flex-1 relative w-full">
-            <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] md:aspect-auto md:h-[450px]">
-              <img src="/background/background-2.jpg" class="w-full h-full object-cover" alt="Team impact" />
-              <div class="absolute inset-0 bg-gradient-to-tr from-[#0c233c]/20 to-transparent"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `
-  },
-  {
     id: 'section-intro-letter',
     category: 'Introduction',
     label: 'Welcome Letter with Signature',
@@ -890,7 +867,7 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- Card 1 -->
             <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
               <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
-                <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full object-cover rounded-full border border-white/30">
+                <img src="/team-member/member-1.jpg" alt="John Doe" class="w-full h-full object-cover  border border-white/30">
               </div>
               <div class="flex flex-col flex-grow">
                 <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">John Doe</h3>
@@ -909,7 +886,7 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- Card 2 -->
             <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
               <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
-                <img src="/team-member/member-3.jpg" alt="Sofia Almeida" class="w-full h-full object-cover rounded-full border border-white/30">
+                <img src="/team-member/member-3.jpg" alt="Sofia Almeida" class="w-full h-full object-cover  border border-white/30">
               </div>
               <div class="flex flex-col flex-grow">
                 <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">Sofia Almeida</h3>
@@ -928,7 +905,7 @@ export const sectionsLibrary: SectionDef[] = [
             <!-- Card 3 -->
             <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
               <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
-                <img src="/team-member/member-4.jpg" alt="Daniel Okafor" class="w-full h-full object-cover rounded-full border border-white/30">
+                <img src="/team-member/member-4.jpg" alt="Daniel Okafor" class="w-full h-full object-cover  border border-white/30">
               </div>
               <div class="flex flex-col flex-grow">
                 <h3 class="text-lg md:text-xl font-bold leading-tight mb-1">Daniel Okafor</h3>
@@ -1563,7 +1540,7 @@ export const sectionsLibrary: SectionDef[] = [
                 This is a quote text placeholder to include quote text. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
               </h3>
               <div class="flex items-center gap-3 mt-auto">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" alt="John Doe" class="w-12 h-12 min-w-12 min-h-12 max-w-12 max-h-12 rounded-full border-2 border-[#00b8f5] object-cover flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" alt="John Doe" class="w-12 h-12 min-w-12 min-h-12 max-w-12 max-h-12  border-2 border-[#00b8f5] object-cover flex-shrink-0">
                 <span class="text-white text-sm"><strong class="font-bold">John Doe</strong> | Head of Pursuit</span>
               </div>
             </div>
