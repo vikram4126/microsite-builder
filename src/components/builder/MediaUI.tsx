@@ -15,7 +15,9 @@ export const MediaUI = ({ editor }: { editor: any }) => {
     bgAttachment: 'scroll',
     bgColor: 'transparent',
     isImageTag: false,
-    isVideoTag: false
+    isVideoTag: false,
+    imgWidth: 0,
+    imgHeight: 0
   });
 
   const videoAssets = [
@@ -115,8 +117,23 @@ export const MediaUI = ({ editor }: { editor: any }) => {
           bgAttachment: finalStyle['background-attachment'] || 'scroll',
           bgColor: finalStyle['background-color'] || 'transparent',
           isImageTag: isImage,
-          isVideoTag: isVideo
+          isVideoTag: isVideo,
+          imgWidth: 0,
+          imgHeight: 0
         });
+
+        if (currentSrc && !isVideo) {
+            const img = new window.Image();
+            img.onload = () => {
+                setMediaState(prev => {
+                    if (prev.src === currentSrc) {
+                        return { ...prev, imgWidth: img.naturalWidth, imgHeight: img.naturalHeight };
+                    }
+                    return prev;
+                });
+            };
+            img.src = currentSrc;
+        }
       } else {
         setIsVisible(false);
       }
@@ -340,6 +357,29 @@ export const MediaUI = ({ editor }: { editor: any }) => {
                         className="w-full px-3 py-2 text-[11px] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#1e49e2] bg-white shadow-sm transition-colors"
                     />
                 </div>
+
+                {/* Dimensions and Crop Option */}
+                {mediaState.src && !mediaState.isVideoTag && (
+                    <div className="pt-4 border-t border-gray-100 mt-2">
+                        <div className="flex justify-between items-center mb-2.5 px-1">
+                            <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center gap-1.5">
+                                <Maximize size={12} /> Original Size
+                            </span>
+                            <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded shadow-sm border border-gray-200">
+                                {mediaState.imgWidth ? `${mediaState.imgWidth} x ${mediaState.imgHeight}` : 'Loading...'}
+                            </span>
+                        </div>
+                        <button
+                            onClick={() => {
+                                editor.runCommand('crop-image');
+                            }}
+                            className="w-full flex items-center justify-center gap-2 py-2 bg-[#00338d] hover:bg-[#1e49e2] text-white rounded-lg transition-all text-xs font-bold uppercase tracking-widest shadow-sm hover:shadow active:scale-[0.98]"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+                            Crop Image
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Background Controls (Only if not just an <img> tag and not a <video> tag) */}

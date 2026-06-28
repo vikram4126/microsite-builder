@@ -1,199 +1,380 @@
-import { useEffect, useRef, useState } from 'react';
-import Cropper from 'cropperjs';
-import { X, RotateCcw, RotateCw, ZoomIn, ZoomOut, Check, Crop } from 'lucide-react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { X, RotateCcw, RotateCw, ZoomIn, ZoomOut, Check, Crop, Move } from 'lucide-react';
 
 interface ImageCropModalProps {
   src: string;
+  component?: any;
   onApply: (croppedDataUrl: string) => void;
   onClose: () => void;
 }
 
 const ASPECT_RATIOS = [
-  { label: 'Free', value: NaN },
-  { label: '1:1', value: 1 },
-  { label: '4:3', value: 4 / 3 },
-  { label: '16:9', value: 16 / 9 },
-  { label: '3:4', value: 3 / 4 },
-  { label: '9:16', value: 9 / 16 },
+  { label: 'Free',  value: -1 },
+  { label: '1:1',   value: 1 },
+  { label: '4:3',   value: 4 / 3 },
+  { label: '16:9',  value: 16 / 9 },
+  { label: '3:4',   value: 3 / 4 },
+  { label: '9:16',  value: 9 / 16 },
 ];
 
-// Inject cropperjs styles once
-let cropperStyleInjected = false;
-function ensureCropperStyles() {
-  if (cropperStyleInjected) return;
-  cropperStyleInjected = true;
-  const s = document.createElement('style');
-  s.id = 'cropper-inline-css';
-  s.textContent = `.cropper-container{direction:ltr;font-size:0;line-height:0;position:relative;touch-action:none;user-select:none}.cropper-container img{display:block;height:100%;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;width:100%}.cropper-wrap-box,.cropper-canvas,.cropper-drag-box,.cropper-crop-box,.cropper-modal{bottom:0;left:0;position:absolute;right:0;top:0}.cropper-wrap-box,.cropper-canvas{overflow:hidden}.cropper-drag-box{background-color:#fff;opacity:0}.cropper-modal{background-color:#000;opacity:.5}.cropper-view-box{display:block;height:100%;outline:1px solid #39f;outline-color:rgba(51,153,255,.75);overflow:hidden;width:100%}.cropper-dashed{border:0 dashed #eee;display:block;opacity:.5;position:absolute}.cropper-dashed.dashed-h{border-bottom-width:1px;border-top-width:1px;height:33.33333%;left:0;top:33.33333%;width:100%}.cropper-dashed.dashed-v{border-left-width:1px;border-right-width:1px;height:100%;left:33.33333%;top:0;width:33.33333%}.cropper-center{display:block;height:0;left:50%;opacity:.75;position:absolute;top:50%;width:0}.cropper-center::before,.cropper-center::after{background-color:#eee;content:" ";display:block;position:absolute}.cropper-center::before{height:1px;left:-3px;top:0;width:7px}.cropper-center::after{height:7px;left:0;top:-3px;width:1px}.cropper-face,.cropper-line,.cropper-point{display:block;height:100%;opacity:.1;position:absolute;width:100%}.cropper-face{background-color:#fff;left:0;top:0}.cropper-line{background-color:#39f}.cropper-line.line-e{cursor:ew-resize;right:-3px;top:0;width:5px}.cropper-line.line-n{cursor:ns-resize;height:5px;left:0;top:-3px}.cropper-line.line-w{cursor:ew-resize;left:-3px;top:0;width:5px}.cropper-line.line-s{bottom:-3px;cursor:ns-resize;height:5px;left:0}.cropper-point{background-color:#39f;height:5px;opacity:.75;width:5px}.cropper-point.point-e{cursor:ew-resize;margin-top:-3px;right:-3px;top:50%}.cropper-point.point-n{cursor:ns-resize;left:50%;margin-left:-3px;top:-3px}.cropper-point.point-w{cursor:ew-resize;left:-3px;margin-top:-3px;top:50%}.cropper-point.point-s{bottom:-3px;cursor:s-resize;left:50%;margin-left:-3px}.cropper-point.point-ne{cursor:nesw-resize;right:-3px;top:-3px}.cropper-point.point-nw{cursor:nwse-resize;left:-3px;top:-3px}.cropper-point.point-sw{bottom:-3px;cursor:nesw-resize;left:-3px}.cropper-point.point-se{bottom:-3px;cursor:nwse-resize;height:20px;opacity:1;right:-3px;width:20px}.cropper-invisible{opacity:0}.cropper-bg{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAADklEQVQI12P4z8BQDwADhQGAWjR9awAAAABJRU5ErkJggg==")}.cropper-hide{display:block;height:1px;position:absolute;width:1px}.cropper-hidden{display:none!important}.cropper-move{cursor:move}.cropper-crop{cursor:crosshair}.cropper-disabled .cropper-drag-box,.cropper-disabled .cropper-face,.cropper-disabled .cropper-line,.cropper-disabled .cropper-point{cursor:not-allowed}`;
-  document.head.appendChild(s);
-}
+interface CropBox { x: number; y: number; w: number; h: number }
+
+const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
 export function ImageCropModal({ src, onApply, onClose }: ImageCropModalProps) {
-  const imgRef = useRef<HTMLImageElement>(null);
-  const cropperRef = useRef<Cropper | null>(null);
-  const [activeRatio, setActiveRatio] = useState<number>(NaN);
-  const [isLoading, setIsLoading] = useState(true);
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const imgRef      = useRef<HTMLImageElement | null>(null);
+  const isDragging  = useRef<false | 'move' | 'nw' | 'ne' | 'sw' | 'se' | 'n' | 's' | 'e' | 'w'>(false);
+  const dragStart   = useRef({ mx: 0, my: 0, box: { x: 0, y: 0, w: 0, h: 0 } });
 
+  const [activeRatio, setActiveRatio]   = useState<number>(-1);
+  const [cropBox, setCropBox]           = useState<CropBox>({ x: 0, y: 0, w: 0, h: 0 });
+  const [scale, setScale]               = useState(1);
+  const [imgLoaded, setImgLoaded]       = useState(false);
+  const [imgDims, setImgDims]           = useState<{ w: number; h: number } | null>(null);
+  const [rotation, setRotation]         = useState(0);
+
+  // canvas layout state
+  const layoutRef = useRef({ offX: 0, offY: 0, dispW: 0, dispH: 0 });
+
+  // ── Load image ────────────────────────────────────────────────────────────
   useEffect(() => {
-    ensureCropperStyles();
-    if (!imgRef.current) return;
+    setImgLoaded(false);
+    setImgDims(null);
 
-    const image = imgRef.current;
-
-    const initCropper = () => {
-      if (cropperRef.current) {
-        (cropperRef.current as any).destroy();
-      }
-      cropperRef.current = new (Cropper as any)(image, {
-        aspectRatio: NaN,
-        viewMode: 1,
-        autoCropArea: 0.85,
-        responsive: true,
-        background: true,
-        guides: true,
-        center: true,
-        highlight: true,
-        cropBoxMovable: true,
-        cropBoxResizable: true,
-        toggleDragModeOnDblclick: false,
-        ready() {
-          setIsLoading(false);
-        },
-      });
+    const img = new window.Image();
+    img.onload = () => {
+      imgRef.current = img;
+      setImgDims({ w: img.naturalWidth, h: img.naturalHeight });
+      setImgLoaded(true);
+      setScale(1);
+      setRotation(0);
     };
-
-    if (image.complete) {
-      initCropper();
-    } else {
-      image.onload = initCropper;
-    }
-
-    return () => {
-      cropperRef.current?.destroy();
+    img.onerror = () => {
+      // Try without crossOrigin
+      const img2 = new window.Image();
+      img2.onload = () => {
+        imgRef.current = img2;
+        setImgDims({ w: img2.naturalWidth, h: img2.naturalHeight });
+        setImgLoaded(true);
+        setScale(1);
+        setRotation(0);
+      };
+      img2.src = src;
     };
+    img.crossOrigin = 'anonymous';
+    img.src = src;
   }, [src]);
 
-  const setRatio = (ratio: number) => {
-    setActiveRatio(ratio);
-    (cropperRef.current as any)?.setAspectRatio(ratio);
+  // ── Draw on canvas whenever state changes ─────────────────────────────────
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    const img    = imgRef.current;
+    if (!canvas || !img) return;
+
+    const ctx = canvas.getContext('2d')!;
+    const CW = canvas.width;
+    const CH = canvas.height;
+    ctx.clearRect(0, 0, CW, CH);
+
+    // Fit image in canvas with scale
+    const naturalW = img.naturalWidth;
+    const naturalH = img.naturalHeight;
+    const fitScale = Math.min(CW / naturalW, CH / naturalH) * scale;
+    const dispW = naturalW * fitScale;
+    const dispH = naturalH * fitScale;
+    const offX = (CW - dispW) / 2;
+    const offY = (CH - dispH) / 2;
+
+    layoutRef.current = { offX, offY, dispW, dispH };
+
+    // Draw image
+    ctx.save();
+    ctx.translate(offX + dispW / 2, offY + dispH / 2);
+    ctx.rotate((rotation * Math.PI) / 180);
+    ctx.drawImage(img, -dispW / 2, -dispH / 2, dispW, dispH);
+    ctx.restore();
+
+    // Dark overlay outside crop
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    const cb = cropBox;
+    // top
+    ctx.fillRect(0, 0, CW, cb.y);
+    // bottom
+    ctx.fillRect(0, cb.y + cb.h, CW, CH - cb.y - cb.h);
+    // left
+    ctx.fillRect(0, cb.y, cb.x, cb.h);
+    // right
+    ctx.fillRect(cb.x + cb.w, cb.y, CW - cb.x - cb.w, cb.h);
+
+    // Crop border
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(cb.x, cb.y, cb.w, cb.h);
+
+    // Grid lines (rule of thirds)
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 0.75;
+    for (let i = 1; i <= 2; i++) {
+      const gx = cb.x + (cb.w * i) / 3;
+      const gy = cb.y + (cb.h * i) / 3;
+      ctx.beginPath(); ctx.moveTo(gx, cb.y); ctx.lineTo(gx, cb.y + cb.h); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cb.x, gy); ctx.lineTo(cb.x + cb.w, gy); ctx.stroke();
+    }
+
+    // Corner handles
+    const hs = 8;
+    ctx.fillStyle = '#fff';
+    [[cb.x, cb.y], [cb.x + cb.w, cb.y], [cb.x, cb.y + cb.h], [cb.x + cb.w, cb.y + cb.h]].forEach(([hx, hy]) => {
+      ctx.fillRect(hx - hs / 2, hy - hs / 2, hs, hs);
+    });
+  }, [cropBox, scale, rotation]);
+
+  // Reset crop box when image loads or ratio changes
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const img    = imgRef.current;
+    if (!canvas || !img || !imgLoaded) return;
+
+    const CW = canvas.width;
+    const CH = canvas.height;
+    const naturalW = img.naturalWidth;
+    const naturalH = img.naturalHeight;
+    const fitScale = Math.min(CW / naturalW, CH / naturalH);
+    const dispW = naturalW * fitScale;
+    const dispH = naturalH * fitScale;
+    const offX = (CW - dispW) / 2;
+    const offY = (CH - dispH) / 2;
+
+    let cw = dispW;
+    let ch = dispH;
+    if (activeRatio !== -1) {
+      if (cw / ch > activeRatio) { cw = ch * activeRatio; }
+      else { ch = cw / activeRatio; }
+    }
+    const cx = offX + (dispW - cw) / 2;
+    const cy = offY + (dispH - ch) / 2;
+    setCropBox({ x: cx, y: cy, w: cw, h: ch });
+    layoutRef.current = { offX, offY, dispW, dispH };
+  }, [imgLoaded, activeRatio, scale]);
+
+  // Redraw on changes
+  useEffect(() => { draw(); }, [draw]);
+
+  // Resize canvas to match container
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const parent = canvas.parentElement!;
+    const resize = () => {
+      canvas.width  = parent.clientWidth;
+      canvas.height = parent.clientHeight;
+      draw();
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(parent);
+    return () => ro.disconnect();
+  }, [draw]);
+
+  // ── Mouse interaction ─────────────────────────────────────────────────────
+  const getHandle = (mx: number, my: number, cb: CropBox): typeof isDragging.current => {
+    const t = 12;
+    const midX = cb.x + cb.w / 2;
+    const midY = cb.y + cb.h / 2;
+    if (Math.abs(mx - cb.x) < t && Math.abs(my - cb.y) < t) return 'nw';
+    if (Math.abs(mx - cb.x - cb.w) < t && Math.abs(my - cb.y) < t) return 'ne';
+    if (Math.abs(mx - cb.x) < t && Math.abs(my - cb.y - cb.h) < t) return 'sw';
+    if (Math.abs(mx - cb.x - cb.w) < t && Math.abs(my - cb.y - cb.h) < t) return 'se';
+    if (Math.abs(mx - midX) < t && Math.abs(my - cb.y) < t) return 'n';
+    if (Math.abs(mx - midX) < t && Math.abs(my - cb.y - cb.h) < t) return 's';
+    if (Math.abs(mx - cb.x) < t && Math.abs(my - midY) < t) return 'w';
+    if (Math.abs(mx - cb.x - cb.w) < t && Math.abs(my - midY) < t) return 'e';
+    if (mx > cb.x && mx < cb.x + cb.w && my > cb.y && my < cb.y + cb.h) return 'move';
+    return false;
   };
 
-  const rotate = (deg: number) => (cropperRef.current as any)?.rotate(deg);
-  const zoom = (val: number) => (cropperRef.current as any)?.zoom(val);
+  const onMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const rect = canvasRef.current!.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const handle = getHandle(mx, my, cropBox);
+    isDragging.current = handle;
+    dragStart.current = { mx, my, box: { ...cropBox } };
+  };
+
+  const onMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const handle = isDragging.current;
+    const canvas = canvasRef.current!;
+    const rect   = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    // Update cursor
+    const hov = getHandle(mx, my, cropBox);
+    const cursors: Record<string, string> = { nw: 'nw-resize', ne: 'ne-resize', sw: 'sw-resize', se: 'se-resize', n: 'n-resize', s: 's-resize', e: 'e-resize', w: 'w-resize', move: 'move' };
+    canvas.style.cursor = hov ? cursors[hov as string] || 'default' : 'default';
+
+    if (!handle) return;
+    const dx = mx - dragStart.current.mx;
+    const dy = my - dragStart.current.my;
+    const ob = dragStart.current.box;
+    const { offX, offY, dispW, dispH } = layoutRef.current;
+    const MIN = 30;
+
+    let { x, y, w, h } = ob;
+
+    if (handle === 'move') {
+      x = clamp(ob.x + dx, offX, offX + dispW - ob.w);
+      y = clamp(ob.y + dy, offY, offY + dispH - ob.h);
+    } else {
+      // Resize handles
+      if (handle === 'se' || handle === 'e') { w = clamp(ob.w + dx, MIN, offX + dispW - ob.x); }
+      if (handle === 'sw' || handle === 'w') { const nw = clamp(ob.w - dx, MIN, ob.x + ob.w - offX); x = ob.x + ob.w - nw; w = nw; }
+      if (handle === 'se' || handle === 's') { h = clamp(ob.h + dy, MIN, offY + dispH - ob.y); }
+      if (handle === 'ne' || handle === 'n') { const nh = clamp(ob.h - dy, MIN, ob.y + ob.h - offY); y = ob.y + ob.h - nh; h = nh; }
+      if (handle === 'sw' || handle === 's') { h = clamp(ob.h + dy, MIN, offY + dispH - ob.y); }
+      if (handle === 'nw') {
+        const nw = clamp(ob.w - dx, MIN, ob.x + ob.w - offX); x = ob.x + ob.w - nw; w = nw;
+        const nh = clamp(ob.h - dy, MIN, ob.y + ob.h - offY); y = ob.y + ob.h - nh; h = nh;
+      }
+
+      // Enforce aspect ratio
+      if (activeRatio !== -1) {
+        if (['e', 'w', 'se', 'sw', 'ne', 'nw'].includes(handle as string)) {
+          h = w / activeRatio;
+        } else {
+          w = h * activeRatio;
+        }
+      }
+    }
+
+    setCropBox({ x, y, w, h });
+  };
+
+  const onMouseUp = () => { isDragging.current = false; };
+
+  // ── Actions ───────────────────────────────────────────────────────────────
+  const handleRotate = (deg: number) => setRotation(r => r + deg);
+
+  const handleZoom = (delta: number) =>
+    setScale(s => clamp(s + delta, 0.2, 5));
+
+  const changeRatio = (val: number) => {
+    setActiveRatio(val);
+  };
 
   const handleApply = () => {
-    const canvas = (cropperRef.current as any)?.getCroppedCanvas({
-      maxWidth: 4096,
-      maxHeight: 4096,
-      imageSmoothingEnabled: true,
-      imageSmoothingQuality: 'high',
-    });
-    if (!canvas) return;
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-    onApply(dataUrl);
+    const img = imgRef.current;
+    if (!img || !canvasRef.current) return;
+    const { offX, offY, dispW, dispH } = layoutRef.current;
+    const natW = img.naturalWidth;
+    const natH = img.naturalHeight;
+    const scaleX = natW / dispW;
+    const scaleY = natH / dispH;
+
+    const srcX = (cropBox.x - offX) * scaleX;
+    const srcY = (cropBox.y - offY) * scaleY;
+    const srcW = cropBox.w * scaleX;
+    const srcH = cropBox.h * scaleY;
+
+    const out = document.createElement('canvas');
+    out.width  = Math.round(srcW);
+    out.height = Math.round(srcH);
+    const ctx = out.getContext('2d')!;
+    ctx.drawImage(img, srcX, srcY, srcW, srcH, 0, 0, out.width, out.height);
+    onApply(out.toDataURL('image/jpeg', 0.92));
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="bg-[#0c233c] rounded-2xl shadow-2xl flex flex-col w-[92vw] max-w-4xl max-h-[92vh] overflow-hidden border border-white/10">
-
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div
+        className="bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200 overflow-hidden"
+        style={{ width: 'min(95vw, 1200px)', height: 'min(92vh, 900px)' }}
+      >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-white/10">
-          <div className="flex items-center gap-2 text-white">
-            <Crop size={18} className="text-[#00b8f5]" />
-            <span className="font-bold text-sm tracking-wide">Crop Image</span>
+        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100 bg-gray-50 shrink-0">
+          <div className="flex items-center gap-2">
+            <Crop size={17} className="text-[#1e49e2]" />
+            <span className="font-black text-sm tracking-[0.1em] uppercase text-gray-800">Crop Image</span>
+            {imgDims && (
+              <span className="text-[10px] font-semibold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full ml-2">
+                {imgDims.w} × {imgDims.h}
+              </span>
+            )}
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-          >
+          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition-colors">
             <X size={16} />
           </button>
         </div>
 
-        {/* Crop Area */}
-        <div className="relative flex-1 min-h-0 bg-[#071728] flex items-center justify-center overflow-hidden">
-          {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#071728]">
-              <div className="w-8 h-8 border-2 border-[#00b8f5] border-t-transparent rounded-full animate-spin" />
+        {/* Canvas area */}
+        <div className="relative flex-1 overflow-hidden bg-[#2b2b2b]" style={{ minHeight: 0 }}>
+          {!imgLoaded && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-3">
+              <div className="w-10 h-10 border-[3px] border-[#1e49e2] border-t-transparent rounded-full animate-spin" />
+              <span className="text-xs font-bold text-gray-300 uppercase tracking-wider">Loading…</span>
             </div>
           )}
-          <img
-            ref={imgRef}
-            src={src}
-            alt="Crop preview"
-            style={{ display: 'block', maxWidth: '100%', maxHeight: '55vh' }}
-            crossOrigin="anonymous"
+          <canvas
+            ref={canvasRef}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseUp}
+            style={{ display: 'block', width: '100%', height: '100%' }}
           />
         </div>
 
         {/* Controls */}
-        <div className="px-5 py-3 border-t border-white/10 flex flex-col gap-3 bg-[#0c233c]">
+        <div className="shrink-0 px-5 py-3 border-t border-gray-100 bg-white">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-3 flex-wrap">
+              {/* Ratio pills */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mr-1">Ratio:</span>
+                {ASPECT_RATIOS.map((r) => (
+                  <button
+                    key={r.label}
+                    onClick={() => changeRatio(r.value)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                      activeRatio === r.value
+                        ? 'bg-[#1e49e2] text-white border-[#1e49e2] shadow-sm'
+                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                    }`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
 
-          {/* Aspect ratios */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-white/50 text-xs font-medium mr-1">Ratio:</span>
-            {ASPECT_RATIOS.map((r) => (
-              <button
-                key={r.label}
-                onClick={() => setRatio(r.value)}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all border ${
-                  (isNaN(activeRatio) && isNaN(r.value)) || activeRatio === r.value
-                    ? 'bg-[#00b8f5] text-white border-[#00b8f5]'
-                    : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10'
-                }`}
-              >
-                {r.label}
-              </button>
-            ))}
-          </div>
+              <div className="w-px h-6 bg-gray-200" />
 
-          {/* Tools + Actions */}
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            {/* Tool buttons */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => rotate(-90)}
-                title="Rotate Left"
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/80 transition-colors"
-              >
-                <RotateCcw size={14} />
-              </button>
-              <button
-                onClick={() => rotate(90)}
-                title="Rotate Right"
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/80 transition-colors"
-              >
-                <RotateCw size={14} />
-              </button>
-              <button
-                onClick={() => zoom(0.1)}
-                title="Zoom In"
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/80 transition-colors"
-              >
-                <ZoomIn size={14} />
-              </button>
-              <button
-                onClick={() => zoom(-0.1)}
-                title="Zoom Out"
-                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/80 transition-colors"
-              >
-                <ZoomOut size={14} />
-              </button>
+              {/* Transform */}
+              <div className="flex items-center gap-1.5">
+                {[
+                  { icon: <RotateCcw size={15} />, action: () => handleRotate(-90), title: 'Rotate Left' },
+                  { icon: <RotateCw  size={15} />, action: () => handleRotate(90),  title: 'Rotate Right' },
+                  { icon: <ZoomIn    size={15} />, action: () => handleZoom(0.15),  title: 'Zoom In' },
+                  { icon: <ZoomOut   size={15} />, action: () => handleZoom(-0.15), title: 'Zoom Out' },
+                ].map((btn) => (
+                  <button
+                    key={btn.title}
+                    onClick={btn.action}
+                    title={btn.title}
+                    className="w-9 h-9 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 transition-colors"
+                  >
+                    {btn.icon}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Apply / Cancel */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={onClose}
-                className="px-4 py-2 rounded-xl text-sm font-bold text-white/70 hover:text-white hover:bg-white/10 border border-white/10 transition-all"
-              >
+              <button onClick={onClose} className="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-500 hover:text-gray-800 hover:bg-gray-100 border border-gray-200 transition-all uppercase tracking-wider">
                 Cancel
               </button>
-              <button
-                onClick={handleApply}
-                className="flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-bold bg-[#1e49e2] hover:bg-[#00b8f5] text-white transition-all shadow-lg"
-              >
+              <button onClick={handleApply} disabled={!imgLoaded} className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold bg-[#1e49e2] hover:bg-[#00338d] disabled:opacity-50 text-white transition-all shadow-md uppercase tracking-wider active:scale-95">
                 <Check size={15} />
                 Apply Crop
               </button>

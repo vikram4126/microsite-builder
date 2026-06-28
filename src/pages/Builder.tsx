@@ -58,6 +58,7 @@ export default function Builder() {
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [state, setState] = useState<string>('');
   const [cropModal, setCropModal] = useState<{ src: string; component: any } | null>(null);
+  const [showCropBtn, setShowCropBtn] = useState(false);
 
   // Library State
   const [libraryMode, setLibraryMode] = useState<'layouts' | 'elements'>('layouts');
@@ -116,6 +117,15 @@ export default function Builder() {
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, [projectId, navigate]);
+
+  // Listen for custom crop event from GrapesJS command
+  useEffect(() => {
+    const handleCropEvent = (e: any) => {
+      setCropModal(e.detail);
+    };
+    window.addEventListener('open-crop-modal', handleCropEvent);
+    return () => window.removeEventListener('open-crop-modal', handleCropEvent);
+  }, []);
 
   const toggleCategory = (catName: string) => {
     setExpandedCategories(prev => ({
@@ -1753,6 +1763,38 @@ export default function Builder() {
         }
       });
 
+      // Custom command for cropping images
+      editor.Commands.add('crop-image', {
+        run(editor: any) {
+          const sel = editor.getSelected();
+          if (!sel) return;
+          const el = sel.getEl() as HTMLElement | null;
+          if (!el) return;
+          
+          let src = '';
+          const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img');
+          
+          if (imgEl) {
+            src = (imgEl as HTMLImageElement).src || sel.getAttributes()['src'];
+          } else {
+            // Check for background image
+            const bgImg = el.style.backgroundImage || sel.getStyle()['background-image'];
+            if (bgImg && bgImg.includes('url(')) {
+              src = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+            }
+          }
+          
+          if (!src) {
+            console.warn('No image found to crop');
+            return;
+          }
+          
+          window.dispatchEvent(new CustomEvent('open-crop-modal', {
+            detail: { src, component: sel }
+          }));
+        }
+      });
+
       // Custom toolbar for every component
       // Combined Selection Listener for performance and consistency
       editor.on('component:selected', (model: any) => {
@@ -1761,8 +1803,7 @@ export default function Builder() {
           setIsRemovable(true);
           setBreadcrumb([]);
           // Hide crop button on deselect
-          const cb = document.getElementById('btn-crop-image');
-          if (cb) cb.classList.add('hidden');
+          setShowCropBtn(false);
           return;
         }
 
@@ -1776,18 +1817,41 @@ export default function Builder() {
 
         // Auto-switch to media tab when image or video selected, style tab on fresh selection from layers
         const selTag = (model.get('tagName') || '').toLowerCase();
-        const isImgSel = (typeof model.is === 'function' && model.is('image')) || model.get('type') === 'image' || selTag === 'img';
+        
+        let hasImgChild = false;
+        if (typeof model.find === 'function') {
+          hasImgChild = model.find('image').length > 0 || model.find('img').length > 0;
+        }
+        
+        const style = model.getStyle() || {};
+        const hasBgImage = !!style['background-image'] && style['background-image'].includes('url(');
+
+        const isImgSel = (typeof model.is === 'function' && model.is('image')) || 
+                         model.get('type') === 'image' || 
+                         selTag === 'img' || 
+                         hasImgChild || 
+                         hasBgImage;
+
         const isVideoSel = (typeof model.is === 'function' && model.is('video')) || model.get('type') === 'video' || model.get('type') === 'video-bg' || selTag === 'video';
         const isTextSel = (typeof model.is === 'function' && model.is('text')) || model.get('type') === 'text' || ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'a', 'b', 'i', 'strong', 'em'].includes(selTag);
 
-        // Show crop button only when an image component is selected
-        const cropBtn = document.getElementById('btn-crop-image');
-        if (cropBtn) {
-          if (isImgSel) {
-            cropBtn.classList.remove('hidden');
-          } else {
-            cropBtn.classList.add('hidden');
-          }
+        // Show crop button in top toolbar
+        setShowCropBtn(isImgSel);
+
+        // Add crop button to the component's native floating toolbar
+        if (isImgSel) {
+          // Use setTimeout to ensure we modify the toolbar after GrapesJS has rendered the default one
+          setTimeout(() => {
+            const tb = model.get('toolbar');
+            if (tb && !tb.some((t: any) => t.command === 'crop-image')) {
+              const newTb = [{
+                label: `<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" style="display:block; margin:auto;"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>`,
+                attributes: { title: 'Crop Image' },
+                command: 'crop-image',
+              }, ...tb];
+              model.set('toolbar', newTb);
+            }
+          }, 50);
         }
 
         // Also check if any ancestor or child has a video — to auto-show media tab for entire video hero sections
@@ -2725,27 +2789,36 @@ export default function Builder() {
             </button>
 
             {/* Crop Image button - only visible when an image is selected */}
-            <button
-              id="btn-crop-image"
-              onClick={() => {
-                const ed = editorRef.current;
-                if (!ed) return;
-                const sel = ed.getSelected();
-                if (!sel) return;
-                const el = sel.getEl() as HTMLImageElement | null;
-                if (!el) return;
-                // Find the <img> element (may be the component itself or a child)
-                const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img');
-                if (!imgEl) return;
-                const src = (imgEl as HTMLImageElement).src || sel.getAttributes()['src'];
-                if (!src) return;
-                setCropModal({ src, component: sel });
-              }}
-              className="hidden p-1.5 rounded transition-colors text-gray-500 hover:bg-blue-50 hover:text-blue-600"
-              title="Crop Image"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
-            </button>
+            {showCropBtn && (
+              <button
+                id="btn-crop-image"
+                onClick={() => {
+                  const ed = editorRef.current;
+                  if (!ed) return;
+                  const sel = ed.getSelected();
+                  if (!sel) return;
+                  const el = sel.getEl() as HTMLImageElement | null;
+                  if (!el) return;
+                  // Find the <img> element (may be the component itself or a child)
+                  let src = '';
+                  const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img');
+                  if (imgEl) {
+                    src = (imgEl as HTMLImageElement).src || sel.getAttributes()['src'];
+                  } else {
+                    const bgImg = el.style.backgroundImage || sel.getStyle()['background-image'];
+                    if (bgImg && bgImg.includes('url(')) {
+                      src = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    }
+                  }
+                  if (!src) return;
+                  setCropModal({ src, component: sel });
+                }}
+                className="p-1.5 rounded transition-colors text-gray-500 hover:bg-blue-50 hover:text-blue-600"
+                title="Crop Image"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+              </button>
+            )}
           </div>
         </div>
 
@@ -4067,17 +4140,20 @@ export default function Builder() {
       {cropModal && (
         <ImageCropModal
           src={cropModal.src}
+          component={cropModal.component}
           onApply={(croppedDataUrl) => {
             const comp = cropModal.component;
             if (comp) {
-              const el = comp.getEl() as HTMLElement | null;
-              const imgEl = el?.tagName === 'IMG' ? el : el?.querySelector('img');
-              // Update the GrapesJS model attribute
-              if (comp.get('tagName') === 'img') {
+              const isImg = comp.is('image') || comp.get('type') === 'image' || comp.get('tagName')?.toLowerCase() === 'img';
+              const style = comp.getStyle() || {};
+              const hasBgImage = !!style['background-image'] && style['background-image'].includes('url(');
+              
+              if (isImg) {
                 comp.addAttributes({ src: croppedDataUrl });
-              } else if (imgEl) {
-                // Find inner image component
-                const imgComp = comp.find('img')[0];
+              } else if (hasBgImage) {
+                comp.addStyle({ 'background-image': `url('${croppedDataUrl}')` });
+              } else {
+                const imgComp = comp.find('img')[0] || comp.find('image')[0];
                 if (imgComp) imgComp.addAttributes({ src: croppedDataUrl });
               }
             }

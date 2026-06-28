@@ -27,15 +27,15 @@
   ],
   "projects": [
     {
-      "id": "1782460365897zt0bsol",
+      "id": "1782619807074i34ib49",
       "userId": "guest",
-      "title": "New Project",
+      "title": "New Project 7",
       "status": "draft",
-      "lastEdited": "2026-06-26T07:53:00.526Z",
+      "lastEdited": "2026-06-28T04:15:38.191Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
-          "id": "p_1782460365897zt0bsol",
+          "id": "p_1782619807074i34ib49",
           "title": "Home",
           "route": "/",
           "layout": {
@@ -380,23 +380,20 @@
             ],
             "styles": [
               {
-                "selectors": [
-                  "#header-2-left-blue"
-                ],
+                "selectors": [],
+                "selectorsAdd": "[data-full-height=\"true\"]",
                 "style": {
-                  "background-image": "url(\"/background/background-5.jpg\")",
-                  "background-size": "cover",
-                  "background-position-x": "center",
-                  "background-position-y": "center",
-                  "background-repeat": "no-repeat"
+                  "min-height": "calc(100vh - var(--navbar-h, 0px))"
                 }
               },
               {
-                "selectors": [
-                  "c17628"
-                ],
+                "selectors": [],
+                "selectorsAdd": "[data-vertical-center=\"true\"]",
                 "style": {
-                  "background": "linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%)"
+                  "display": "flex",
+                  "align-items": "center",
+                  "flex-direction": "column",
+                  "justify-content": "center"
                 }
               }
             ],
@@ -691,7 +688,7 @@
                                           ],
                                           "attributes": {
                                             "href": "index.html",
-                                            "data-page-id": "p_1782460365897zt0bsol",
+                                            "data-page-id": "p_1782619807074i34ib49",
                                             "data-slug": "home"
                                           }
                                         },
@@ -727,125 +724,6 @@
                               ]
                             }
                           ]
-                        },
-                        {
-                          "type": "section",
-                          "name": "Header Left Blue Gradient",
-                          "classes": [
-                            "w-full",
-                            "relative",
-                            "overflow-hidden",
-                            "py-20",
-                            "bg-cover",
-                            "bg-right",
-                            "bg-no-repeat",
-                            "bg-primary"
-                          ],
-                          "attributes": {
-                            "id": "header-2-left-blue",
-                            "data-animation": "slide-up",
-                            "layout-mode": "container"
-                          },
-                          "components": [
-                            {
-                              "removable": false,
-                              "draggable": false,
-                              "selectable": false,
-                              "hoverable": false,
-                              "classes": [
-                                "absolute",
-                                "inset-0",
-                                "z-0",
-                                "pointer-events-none",
-                                "c17628"
-                              ]
-                            },
-                            {
-                              "classes": [
-                                "container",
-                                "mx-auto",
-                                "relative",
-                                "z-10"
-                              ],
-                              "components": [
-                                {
-                                  "classes": [
-                                    "flex",
-                                    "flex-col",
-                                    "items-start",
-                                    "text-left",
-                                    "max-w-3xl"
-                                  ],
-                                  "components": [
-                                    {
-                                      "tagName": "span",
-                                      "type": "text",
-                                      "classes": [
-                                        "inline-block",
-                                        "rounded-full",
-                                        "px-4",
-                                        "py-1.5",
-                                        "text-xs",
-                                        "font-bold",
-                                        "text-white",
-                                        "mb-4",
-                                        "tracking-widest",
-                                        "uppercase",
-                                        "bg-white/20",
-                                        "backdrop-blur-sm",
-                                        "border",
-                                        "border-white/30"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              OVERLINE\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "h1",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white",
-                                        "text-5xl",
-                                        "lg:text-7xl",
-                                        "font-display",
-                                        "font-bold",
-                                        "mb-6",
-                                        "tracking-tight",
-                                        "leading-tight"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              What we stand for\n            "
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tagName": "p",
-                                      "type": "text",
-                                      "classes": [
-                                        "text-white/90",
-                                        "text-lg",
-                                        "lg:text-xl",
-                                        "leading-relaxed",
-                                        "max-w-2xl",
-                                        "font-medium"
-                                      ],
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "\n              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.\n            "
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
                         }
                       ],
                       "head": {
@@ -855,11 +733,11 @@
                         "tagName": "html"
                       }
                     },
-                    "id": "lcrYIRmMR8ihouXn"
+                    "id": "AnLkuDQ9IMtSSuO3"
                   }
                 ],
                 "type": "main",
-                "id": "xBIV3Fh0wIlw8vSn"
+                "id": "5Wjkj0jtP3sdnRpr"
               }
             ],
             "symbols": []
