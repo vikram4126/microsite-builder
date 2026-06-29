@@ -4,6 +4,7 @@ import { Lock, Unlock, ChevronDown, ChevronRight, Square } from 'lucide-react';
 export const BoxModelUI = ({ editor }: { editor: any }) => {
   const [margin, setMargin] = useState({ top: 0, right: 0, bottom: 0, left: 0, unit: 'px', locked: false });
   const [padding, setPadding] = useState({ top: 0, right: 0, bottom: 0, left: 0, unit: 'px', locked: false });
+  const [size, setSize] = useState({ width: '', height: '', wUnit: 'px', hUnit: 'px' });
   
   const [isOpen, setIsOpen] = useState(true);
 
@@ -38,6 +39,13 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
         unit: parseUnit(style['padding-top'], p.unit),
         locked: p.locked
       }));
+
+      setSize(s => ({
+        width: style['width'] ? String(parseFloat(style['width'])) : '',
+        height: style['height'] ? String(parseFloat(style['height'])) : '',
+        wUnit: parseUnit(style['width'], s.wUnit),
+        hUnit: parseUnit(style['height'], s.hUnit)
+      }));
     };
 
     editor.on('component:selected', updateStyles);
@@ -51,8 +59,8 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
   }, [editor]);
 
   const handleUpdate = (type: 'margin' | 'padding', side: 'top' | 'right' | 'bottom' | 'left', val: number) => {
-    const selected = editor.getSelected();
-    if (!selected) return;
+    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+    if (!selectedElements.length) return;
 
     let currentObj = type === 'margin' ? margin : padding;
     const isLocked = currentObj.locked;
@@ -72,12 +80,12 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
         else setPadding(prev => ({ ...prev, [side]: val }));
     }
 
-    selected.addStyle(newStyle);
+    selectedElements.forEach((el: any) => el.addStyle(newStyle));
   };
   
   const changeUnit = (type: 'margin' | 'padding', newUnit: string) => {
-      const selected = editor.getSelected();
-      if (!selected) return;
+      const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+      if (!selectedElements.length) return;
 
       let currentObj = type === 'margin' ? margin : padding;
       const newStyle: any = {
@@ -90,8 +98,31 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
       if (type === 'margin') setMargin(m => ({...m, unit: newUnit}));
       else setPadding(p => ({...p, unit: newUnit}));
 
-      selected.addStyle(newStyle);
+      selectedElements.forEach((el: any) => el.addStyle(newStyle));
   }
+
+  const handleSizeUpdate = (prop: 'width' | 'height', val: string) => {
+      const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+      if (!selectedElements.length) return;
+
+      const unit = prop === 'width' ? size.wUnit : size.hUnit;
+      setSize(prev => ({ ...prev, [prop]: val }));
+      
+      const finalVal = val === '' ? '' : `${val}${unit}`;
+      selectedElements.forEach((el: any) => el.addStyle({ [prop]: finalVal }));
+  };
+
+  const handleSizeUnitUpdate = (prop: 'wUnit' | 'hUnit', newUnit: string) => {
+      const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+      if (!selectedElements.length) return;
+
+      setSize(prev => ({ ...prev, [prop]: newUnit }));
+      const val = prop === 'wUnit' ? size.width : size.height;
+      if (val !== '') {
+         const styleProp = prop === 'wUnit' ? 'width' : 'height';
+         selectedElements.forEach((el: any) => el.addStyle({ [styleProp]: `${val}${newUnit}` }));
+      }
+  };
 
   return (
     <div className={`gjs-sm-sector border-b border-gray-100 ${isOpen ? 'custom-sector-open' : ''}`}>
@@ -100,13 +131,58 @@ export const BoxModelUI = ({ editor }: { editor: any }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="flex items-center tracking-[0.05em] font-bold text-[11px] text-white">
-          Spacing
+          Size & Spacing
         </span>
       </div>
 
       {isOpen && (
         <div className="p-4 bg-white text-xs font-sans text-gray-500 flex flex-col items-center relative overflow-hidden">
           
+          {/* Size (Width / Height) */}
+          <div className="w-full flex items-center justify-between space-x-4 mb-6">
+             <div className="flex-1 space-y-1">
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex justify-between">
+                   <span>Width</span>
+                   <select value={size.wUnit} onChange={(e) => handleSizeUnitUpdate('wUnit', e.target.value)} className="bg-transparent text-[9px] text-gray-400 focus:outline-none cursor-pointer">
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="vw">vw</option>
+                      <option value="auto">auto</option>
+                   </select>
+                </label>
+                <div className="flex bg-[#F5F7FA] border border-gray-200 rounded-lg overflow-hidden focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all">
+                   <input 
+                      type="text" 
+                      placeholder="auto"
+                      value={size.width} 
+                      onChange={(e) => handleSizeUpdate('width', e.target.value)} 
+                      className="w-full bg-transparent px-3 py-1.5 text-sm text-gray-700 outline-none font-medium"
+                   />
+                </div>
+             </div>
+             
+             <div className="flex-1 space-y-1">
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex justify-between">
+                   <span>Height</span>
+                   <select value={size.hUnit} onChange={(e) => handleSizeUnitUpdate('hUnit', e.target.value)} className="bg-transparent text-[9px] text-gray-400 focus:outline-none cursor-pointer">
+                      <option value="px">px</option>
+                      <option value="%">%</option>
+                      <option value="vh">vh</option>
+                      <option value="auto">auto</option>
+                   </select>
+                </label>
+                <div className="flex bg-[#F5F7FA] border border-gray-200 rounded-lg overflow-hidden focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all">
+                   <input 
+                      type="text" 
+                      placeholder="auto"
+                      value={size.height} 
+                      onChange={(e) => handleSizeUpdate('height', e.target.value)} 
+                      className="w-full bg-transparent px-3 py-1.5 text-sm text-gray-700 outline-none font-medium"
+                   />
+                </div>
+             </div>
+          </div>
+
           {/* 2-Layer Box Model: Margin (Outer) -> Padding (Inner) */}
           <div className="relative w-full aspect-video max-w-[300px] border border-gray-300 border-dashed bg-gray-50 flex items-center justify-center p-12 mt-2 group/margin">
             {/* Margin Label & Controls */}

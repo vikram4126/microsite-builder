@@ -31,7 +31,7 @@
       "userId": "guest",
       "title": "New Project 10",
       "status": "draft",
-      "lastEdited": "2026-06-28T06:23:12.427Z",
+      "lastEdited": "2026-06-29T14:03:32.347Z",
       "thumbnailUrl": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80",
       "pages": [
         {
@@ -395,6 +395,26 @@
                   "flex-direction": "column",
                   "justify-content": "center"
                 }
+              },
+              {
+                "selectors": [
+                  "#header-2-left-blue"
+                ],
+                "style": {
+                  "background-image": "url(\"/background/background-5.jpg\")",
+                  "background-size": "cover",
+                  "background-position-x": "center",
+                  "background-position-y": "center",
+                  "background-repeat": "no-repeat"
+                }
+              },
+              {
+                "selectors": [
+                  "c15945"
+                ],
+                "style": {
+                  "background": "linear-gradient(90deg, rgba(0, 51, 141, 1) 0%, rgba(255, 255, 255, 0) 100%)"
+                }
               }
             ],
             "pages": [
@@ -667,10 +687,14 @@
                                       "components": [
                                         {
                                           "type": "link",
+                                          "removable": false,
+                                          "draggable": false,
+                                          "copyable": false,
                                           "content": "Home",
                                           "classes": [
-                                            "text-[#1e49e2] font-bold",
-                                            "hover:text-[#1e49e2]",
+                                            "text-slate-600",
+                                            "dark:text-slate-300",
+                                            "hover:text-accent",
                                             "transition-colors",
                                             "w-full",
                                             "md:w-auto",
@@ -682,45 +706,34 @@
                                             "md:border-none"
                                           ],
                                           "attributes": {
-                                            "href": "/builder/1782626698425ynohrjm/home"
+                                            "href": "index.html",
+                                            "data-page-id": "p_1782626698425ynohrjm",
+                                            "data-slug": "home"
                                           }
                                         },
                                         {
                                           "type": "link",
+                                          "removable": false,
+                                          "draggable": false,
+                                          "copyable": false,
+                                          "content": "Get Started",
                                           "classes": [
-                                            "text-slate-600 dark:text-white font-medium",
-                                            "hover:text-[#1e49e2]",
-                                            "transition-colors",
+                                            "bg-primary",
+                                            "text-white",
+                                            "hover:bg-accent",
+                                            "px-5",
+                                            "py-2.5",
+                                            "rounded-lg",
+                                            "shadow",
+                                            "transition-all",
                                             "w-full",
                                             "md:w-auto",
                                             "text-center",
-                                            "py-2",
-                                            "md:py-0",
-                                            "border-b",
-                                            "border-gray-100",
-                                            "md:border-none"
+                                            "mt-2",
+                                            "md:mt-0"
                                           ],
                                           "attributes": {
-                                            "href": "/builder/1782626698425ynohrjm/aboutus"
-                                          }
-                                        },
-                                        {
-                                          "type": "link",
-                                          "classes": [
-                                            "text-slate-600 dark:text-white font-medium",
-                                            "hover:text-[#1e49e2]",
-                                            "transition-colors",
-                                            "w-full",
-                                            "md:w-auto",
-                                            "text-center",
-                                            "py-2",
-                                            "md:py-0",
-                                            "border-b",
-                                            "border-gray-100",
-                                            "md:border-none"
-                                          ],
-                                          "attributes": {
-                                            "href": "/builder/1782626698425ynohrjm/services"
+                                            "href": "#"
                                           }
                                         }
                                       ]
@@ -733,47 +746,96 @@
                         },
                         {
                           "type": "section",
-                          "name": "Hero Header",
+                          "name": "Header Left Blue Gradient",
                           "classes": [
                             "w-full",
-                            "bg-gray-900",
-                            "py-20"
+                            "relative",
+                            "overflow-hidden",
+                            "py-20",
+                            "bg-cover",
+                            "bg-right",
+                            "bg-no-repeat",
+                            "bg-primary"
                           ],
                           "attributes": {
-                            "id": "header-hero",
+                            "id": "header-2-left-blue",
+                            "data-animation": "slide-up",
                             "layout-mode": "container"
                           },
                           "components": [
                             {
+                              "removable": false,
+                              "draggable": false,
+                              "selectable": false,
+                              "hoverable": false,
+                              "classes": [
+                                "absolute",
+                                "inset-0",
+                                "z-0",
+                                "pointer-events-none",
+                                "c15945"
+                              ]
+                            },
+                            {
                               "classes": [
                                 "container",
                                 "mx-auto",
-                                "text-white",
-                                "text-center"
+                                "relative",
+                                "z-10"
                               ],
                               "components": [
                                 {
                                   "classes": [
-                                    "mx-auto",
                                     "flex",
                                     "flex-col",
-                                    "items-center",
-                                    "w-full"
+                                    "items-start",
+                                    "text-left",
+                                    "max-w-3xl"
                                   ],
                                   "components": [
                                     {
-                                      "tagName": "h1",
+                                      "tagName": "span",
                                       "type": "text",
                                       "classes": [
-                                        "text-5xl",
-                                        "font-display",
-                                        "font-extrabold",
-                                        "mb-6"
+                                        "inline-block",
+                                        "rounded-full",
+                                        "px-4",
+                                        "py-1.5",
+                                        "text-xs",
+                                        "font-bold",
+                                        "text-white",
+                                        "mb-4",
+                                        "tracking-widest",
+                                        "uppercase",
+                                        "bg-white/20",
+                                        "backdrop-blur-sm",
+                                        "border",
+                                        "border-white/30"
                                       ],
                                       "components": [
                                         {
                                           "type": "textnode",
-                                          "content": "bjlajblasjajfdsj uj"
+                                          "content": "\n              OVERLINE\n            "
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "h1",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-white",
+                                        "text-5xl",
+                                        "lg:text-7xl",
+                                        "font-display",
+                                        "font-bold",
+                                        "mb-6",
+                                        "tracking-tight",
+                                        "leading-tight"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "\n              What we stand for\n            "
                                         }
                                       ]
                                     },
@@ -781,37 +843,17 @@
                                       "tagName": "p",
                                       "type": "text",
                                       "classes": [
-                                        "text-xl",
-                                        "text-gray-400",
-                                        "mb-8",
-                                        "max-w-2xl"
+                                        "text-white/90",
+                                        "text-lg",
+                                        "lg:text-xl",
+                                        "leading-relaxed",
+                                        "max-w-2xl",
+                                        "font-medium"
                                       ],
                                       "components": [
                                         {
                                           "type": "textnode",
-                                          "content": "Discover how we can help you grow your business effortlessly with our powerful tools."
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "link",
-                                      "classes": [
-                                        "inline-block",
-                                        "bg-secondary",
-                                        "px-8",
-                                        "py-3",
-                                        "rounded-xl",
-                                        "font-bold",
-                                        "hover:bg-[#3b82f6]",
-                                        "transition-colors"
-                                      ],
-                                      "attributes": {
-                                        "href": "#"
-                                      },
-                                      "components": [
-                                        {
-                                          "type": "textnode",
-                                          "content": "Get Started Now"
+                                          "content": "\n              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Duis aute irure dolor.\n            "
                                         }
                                       ]
                                     }
@@ -2710,15 +2752,10 @@
           "name": "Home"
         },
         {
-          "id": "p_1782626698425ynohrjm_26708706",
-          "title": "about us",
-          "route": "/about-us",
-          "layout": []
-        },
-        {
-          "id": "p_1782626698425ynohrjm_26713892",
-          "title": "services",
-          "route": "/services",
+          "id": "mp51r8t",
+          "name": "test table",
+          "title": "test table",
+          "route": "/test-table",
           "layout": {
             "dataSources": [],
             "assets": [
@@ -3059,7 +3096,84 @@
                 "width": 0
               }
             ],
-            "styles": [],
+            "styles": [
+              {
+                "selectors": [
+                  "c4590"
+                ],
+                "style": {
+                  "color": "#ffffff",
+                  "background-color": "#1e49e2",
+                  "text-align": "left"
+                }
+              },
+              {
+                "selectors": [
+                  "c4785"
+                ],
+                "style": {
+                  "color": "#fd349c",
+                  "background-color": "#00b894"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-full-height=\"true\"]",
+                "style": {
+                  "min-height": "calc(100vh - var(--navbar-h, 0px))"
+                }
+              },
+              {
+                "selectors": [],
+                "selectorsAdd": "[data-vertical-center=\"true\"]",
+                "style": {
+                  "display": "flex",
+                  "align-items": "center",
+                  "flex-direction": "column",
+                  "justify-content": "center"
+                }
+              },
+              {
+                "selectors": [
+                  "c4632"
+                ],
+                "style": {
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "c4653"
+                ],
+                "style": {
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "c4689"
+                ],
+                "style": {
+                  "background-color": "#fd349c"
+                }
+              },
+              {
+                "selectors": [
+                  "c4644"
+                ],
+                "style": {
+                  "width": "300px"
+                }
+              },
+              {
+                "selectors": [
+                  "c4833"
+                ],
+                "style": {
+                  "width": "300px"
+                }
+              }
+            ],
             "pages": [
               {
                 "frames": [
@@ -3330,14 +3444,10 @@
                                       "components": [
                                         {
                                           "type": "link",
-                                          "removable": false,
-                                          "draggable": false,
-                                          "copyable": false,
                                           "content": "Home",
                                           "classes": [
-                                            "text-slate-600",
-                                            "dark:text-slate-300",
-                                            "hover:text-accent",
+                                            "text-slate-600 dark:text-white font-medium",
+                                            "hover:text-[#1e49e2]",
                                             "transition-colors",
                                             "w-full",
                                             "md:w-auto",
@@ -3349,21 +3459,15 @@
                                             "md:border-none"
                                           ],
                                           "attributes": {
-                                            "href": "index.html",
-                                            "data-page-id": "p_1782626698425ynohrjm",
-                                            "data-slug": "home"
+                                            "href": "/builder/1782626698425ynohrjm/home"
                                           }
                                         },
                                         {
                                           "type": "link",
-                                          "removable": false,
-                                          "draggable": false,
-                                          "copyable": false,
-                                          "content": "about us",
+                                          "content": "test table",
                                           "classes": [
-                                            "text-slate-600",
-                                            "dark:text-slate-300",
-                                            "hover:text-accent",
+                                            "text-[#1e49e2] font-bold",
+                                            "hover:text-[#1e49e2]",
                                             "transition-colors",
                                             "w-full",
                                             "md:w-auto",
@@ -3375,61 +3479,1051 @@
                                             "md:border-none"
                                           ],
                                           "attributes": {
-                                            "href": "about-us.html",
-                                            "data-page-id": "p_1782626698425ynohrjm_26708706",
-                                            "data-slug": "about-us"
+                                            "href": "/builder/1782626698425ynohrjm/testtable"
                                           }
-                                        },
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "classes": [
+                            "w-full",
+                            "overflow-x-auto",
+                            "my-6",
+                            "border",
+                            "border-gray-200",
+                            "dark:border-gray-700",
+                            "rounded-xl",
+                            "shadow-sm"
+                          ],
+                          "attributes": {
+                            "data-animation": "slide-up"
+                          },
+                          "components": [
+                            {
+                              "type": "table",
+                              "droppable": [
+                                "tbody",
+                                "thead",
+                                "tfoot"
+                              ],
+                              "classes": [
+                                "w-full",
+                                "text-sm",
+                                "text-left",
+                                "text-gray-700",
+                                "dark:text-gray-300"
+                              ],
+                              "components": [
+                                {
+                                  "type": "thead",
+                                  "draggable": [
+                                    "table"
+                                  ],
+                                  "droppable": [
+                                    "tr"
+                                  ],
+                                  "classes": [
+                                    "text-xs",
+                                    "text-white",
+                                    "uppercase",
+                                    "bg-[#00338d]"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "row",
+                                      "draggable": [
+                                        "thead",
+                                        "tbody",
+                                        "tfoot"
+                                      ],
+                                      "droppable": [
+                                        "th",
+                                        "td"
+                                      ],
+                                      "components": [
                                         {
-                                          "type": "link",
-                                          "removable": false,
-                                          "draggable": false,
-                                          "copyable": false,
-                                          "content": "services",
+                                          "tagName": "th",
+                                          "type": "text",
                                           "classes": [
-                                            "text-slate-600",
-                                            "dark:text-slate-300",
-                                            "hover:text-accent",
-                                            "transition-colors",
-                                            "w-full",
-                                            "md:w-auto",
-                                            "text-center",
-                                            "py-2",
-                                            "md:py-0",
-                                            "border-b",
-                                            "border-gray-100",
-                                            "md:border-none"
+                                            "px-6",
+                                            "py-4",
+                                            "font-bold",
+                                            "tracking-wider",
+                                            "rounded-tl-lg"
                                           ],
                                           "attributes": {
-                                            "href": "services.html",
-                                            "data-page-id": "p_1782626698425ynohrjm_26713892",
-                                            "data-slug": "services"
-                                          }
+                                            "scope": "col"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Project"
+                                            }
+                                          ]
                                         },
                                         {
-                                          "type": "link",
-                                          "removable": false,
-                                          "draggable": false,
-                                          "copyable": false,
-                                          "content": "Get Started",
+                                          "tagName": "th",
+                                          "type": "text",
                                           "classes": [
-                                            "bg-primary",
-                                            "text-white",
-                                            "hover:bg-accent",
-                                            "px-5",
-                                            "py-2.5",
-                                            "rounded-lg",
-                                            "shadow",
-                                            "transition-all",
-                                            "w-full",
-                                            "md:w-auto",
-                                            "text-center",
-                                            "mt-2",
-                                            "md:mt-0"
+                                            "px-6",
+                                            "py-4",
+                                            "font-bold",
+                                            "tracking-wider"
                                           ],
                                           "attributes": {
-                                            "href": "#"
-                                          }
+                                            "scope": "col"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Status"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "th",
+                                          "type": "text",
+                                          "classes": [
+                                            "px-6",
+                                            "py-4",
+                                            "font-bold",
+                                            "tracking-wider",
+                                            "rounded-tr-lg"
+                                          ],
+                                          "attributes": {
+                                            "scope": "col"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Budget"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "tbody",
+                                  "draggable": [
+                                    "table"
+                                  ],
+                                  "droppable": [
+                                    "tr"
+                                  ],
+                                  "classes": [
+                                    "bg-white",
+                                    "dark:bg-slate-900",
+                                    "divide-y",
+                                    "divide-gray-100",
+                                    "dark:divide-gray-800"
+                                  ],
+                                  "components": [
+                                    {
+                                      "type": "row",
+                                      "draggable": [
+                                        "thead",
+                                        "tbody",
+                                        "tfoot"
+                                      ],
+                                      "droppable": [
+                                        "th",
+                                        "td"
+                                      ],
+                                      "classes": [
+                                        "bg-white",
+                                        "dark:bg-slate-900",
+                                        "hover:bg-gray-50",
+                                        "dark:hover:bg-slate-800",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "style": {
+                                            "width": "380px"
+                                          },
+                                          "classes": [
+                                            "px-6",
+                                            "py-4",
+                                            "font-medium",
+                                            "text-gray-900",
+                                            "dark:text-white",
+                                            "c4644"
+                                          ],
+                                          "attributes": {
+                                            "style": "width:380px;"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Website Redesign"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "cell",
+                                          "draggable": [
+                                            "tr"
+                                          ],
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "span",
+                                              "type": "text",
+                                              "classes": [
+                                                "px-2.5",
+                                                "py-1",
+                                                "text-xs",
+                                                "font-bold",
+                                                "text-green-700",
+                                                "bg-green-100",
+                                                "rounded-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Completed"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "$5,400"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "row",
+                                      "draggable": [
+                                        "thead",
+                                        "tbody",
+                                        "tfoot"
+                                      ],
+                                      "droppable": [
+                                        "th",
+                                        "td"
+                                      ],
+                                      "classes": [
+                                        "bg-gray-50",
+                                        "dark:bg-slate-800/50",
+                                        "hover:bg-gray-100",
+                                        "dark:hover:bg-slate-800",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "style": {
+                                            "width": "380px"
+                                          },
+                                          "classes": [
+                                            "px-6",
+                                            "py-4",
+                                            "font-medium",
+                                            "text-gray-900",
+                                            "dark:text-white"
+                                          ],
+                                          "attributes": {
+                                            "style": "width:380px;"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Mobile App"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "cell",
+                                          "draggable": [
+                                            "tr"
+                                          ],
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "span",
+                                              "type": "text",
+                                              "classes": [
+                                                "px-2.5",
+                                                "py-1",
+                                                "text-xs",
+                                                "font-bold",
+                                                "text-blue-700",
+                                                "bg-blue-100",
+                                                "rounded-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "In Progress"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "$12,000"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "row",
+                                      "draggable": [
+                                        "thead",
+                                        "tbody",
+                                        "tfoot"
+                                      ],
+                                      "droppable": [
+                                        "th",
+                                        "td"
+                                      ],
+                                      "classes": [
+                                        "bg-white",
+                                        "dark:bg-slate-900",
+                                        "hover:bg-gray-50",
+                                        "dark:hover:bg-slate-800",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "style": {
+                                            "width": "380px"
+                                          },
+                                          "classes": [
+                                            "px-6",
+                                            "py-4",
+                                            "font-medium",
+                                            "text-gray-900",
+                                            "dark:text-white",
+                                            "c4833"
+                                          ],
+                                          "attributes": {
+                                            "style": "width:380px;"
+                                          },
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "Marketing Campaign"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "cell",
+                                          "draggable": [
+                                            "tr"
+                                          ],
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "span",
+                                              "type": "text",
+                                              "classes": [
+                                                "px-2.5",
+                                                "py-1",
+                                                "text-xs",
+                                                "font-bold",
+                                                "text-orange-700",
+                                                "bg-orange-100",
+                                                "rounded-full"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Pending"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "tagName": "td",
+                                          "type": "text",
+                                          "classes": [
+                                            "px-6",
+                                            "py-4"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "textnode",
+                                              "content": "$3,200"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "section",
+                          "name": "Questions Team Contact",
+                          "classes": [
+                            "w-full",
+                            "py-16",
+                            "bg-[#1e49e2]",
+                            "text-white"
+                          ],
+                          "attributes": {
+                            "id": "section-contact-questions-team",
+                            "data-animation": "slide-up",
+                            "layout-mode": "container"
+                          },
+                          "components": [
+                            {
+                              "classes": [
+                                "container",
+                                "mx-auto",
+                                "px-4"
+                              ],
+                              "components": [
+                                {
+                                  "classes": [
+                                    "mb-8"
+                                  ],
+                                  "components": [
+                                    {
+                                      "tagName": "h2",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-3xl",
+                                        "md:text-4xl",
+                                        "font-display",
+                                        "font-bold",
+                                        "mb-3"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "Questions?"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tagName": "p",
+                                      "type": "text",
+                                      "classes": [
+                                        "text-white/90",
+                                        "text-sm",
+                                        "md:text-base",
+                                        "max-w-3xl"
+                                      ],
+                                      "components": [
+                                        {
+                                          "type": "textnode",
+                                          "content": "\n              Please contact the Variable client is Undefined project management team.\n            "
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "responsive-grid",
+                                  "classes": [
+                                    "grid",
+                                    "grid-cols-1",
+                                    "md:grid-cols-2",
+                                    "lg:grid-cols-3",
+                                    "gap-6"
+                                  ],
+                                  "attributes": {
+                                    "data-cols-desktop": "3",
+                                    "data-cols-tablet": "2",
+                                    "data-cols-mobile": "1"
+                                  },
+                                  "components": [
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 1 "
+                                    },
+                                    {
+                                      "classes": [
+                                        "border",
+                                        "border-white/40",
+                                        "rounded-lg",
+                                        "p-5",
+                                        "flex",
+                                        "items-center",
+                                        "gap-4",
+                                        "hover:bg-white/5",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "w-16",
+                                            "h-16",
+                                            "md:w-20",
+                                            "md:h-20",
+                                            "shrink-0"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "image",
+                                              "resizable": {
+                                                "ratioDefault": 1
+                                              },
+                                              "classes": [
+                                                "w-full",
+                                                "h-full",
+                                                "object-cover",
+                                                "border",
+                                                "border-white/30"
+                                              ],
+                                              "attributes": {
+                                                "src": "/team-member/member-1.jpg",
+                                                "alt": "John Doe"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "flex-grow"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-lg",
+                                                "md:text-xl",
+                                                "font-bold",
+                                                "leading-tight",
+                                                "mb-1"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "John Doe"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-sm",
+                                                "text-white/80",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Engagement Lead"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "flex",
+                                                "gap-3",
+                                                "text-white/80"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "mailto:johndoe@example.com",
+                                                    "aria-label": "Email"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "tel:+1234567890",
+                                                    "aria-label": "Phone"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 2 "
+                                    },
+                                    {
+                                      "classes": [
+                                        "border",
+                                        "border-white/40",
+                                        "rounded-lg",
+                                        "p-5",
+                                        "flex",
+                                        "items-center",
+                                        "gap-4",
+                                        "hover:bg-white/5",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "w-16",
+                                            "h-16",
+                                            "md:w-20",
+                                            "md:h-20",
+                                            "shrink-0"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "image",
+                                              "resizable": {
+                                                "ratioDefault": 1
+                                              },
+                                              "classes": [
+                                                "w-full",
+                                                "h-full",
+                                                "object-cover",
+                                                "border",
+                                                "border-white/30"
+                                              ],
+                                              "attributes": {
+                                                "src": "/team-member/member-3.jpg",
+                                                "alt": "Sofia Almeida"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "flex-grow"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-lg",
+                                                "md:text-xl",
+                                                "font-bold",
+                                                "leading-tight",
+                                                "mb-1"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Sofia Almeida"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-sm",
+                                                "text-white/80",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Senior Financial Analyst"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "flex",
+                                                "gap-3",
+                                                "text-white/80"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "mailto:sofia@example.com",
+                                                    "aria-label": "Email"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "tel:+1234567890",
+                                                    "aria-label": "Phone"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "comment",
+                                      "content": " Card 3 "
+                                    },
+                                    {
+                                      "classes": [
+                                        "border",
+                                        "border-white/40",
+                                        "rounded-lg",
+                                        "p-5",
+                                        "flex",
+                                        "items-center",
+                                        "gap-4",
+                                        "hover:bg-white/5",
+                                        "transition-colors"
+                                      ],
+                                      "components": [
+                                        {
+                                          "classes": [
+                                            "w-16",
+                                            "h-16",
+                                            "md:w-20",
+                                            "md:h-20",
+                                            "shrink-0"
+                                          ],
+                                          "components": [
+                                            {
+                                              "type": "image",
+                                              "resizable": {
+                                                "ratioDefault": 1
+                                              },
+                                              "classes": [
+                                                "w-full",
+                                                "h-full",
+                                                "object-cover",
+                                                "border",
+                                                "border-white/30"
+                                              ],
+                                              "attributes": {
+                                                "src": "/team-member/member-4.jpg",
+                                                "alt": "Daniel Okafor"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classes": [
+                                            "flex",
+                                            "flex-col",
+                                            "flex-grow"
+                                          ],
+                                          "components": [
+                                            {
+                                              "tagName": "h3",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-lg",
+                                                "md:text-xl",
+                                                "font-bold",
+                                                "leading-tight",
+                                                "mb-1"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Daniel Okafor"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tagName": "p",
+                                              "type": "text",
+                                              "classes": [
+                                                "text-sm",
+                                                "text-white/80",
+                                                "mb-2"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "textnode",
+                                                  "content": "Operations Consultant"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [
+                                                "flex",
+                                                "gap-3",
+                                                "text-white/80"
+                                              ],
+                                              "components": [
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "mailto:daniel@example.com",
+                                                    "aria-label": "Email"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "link",
+                                                  "classes": [
+                                                    "hover:text-white",
+                                                    "transition-colors"
+                                                  ],
+                                                  "attributes": {
+                                                    "href": "tel:+1234567890",
+                                                    "aria-label": "Phone"
+                                                  },
+                                                  "components": [
+                                                    {
+                                                      "type": "svg",
+                                                      "resizable": {
+                                                        "ratioDefault": true
+                                                      },
+                                                      "classes": [
+                                                        "w-5",
+                                                        "h-5"
+                                                      ],
+                                                      "attributes": {
+                                                        "fill": "none",
+                                                        "stroke": "currentColor",
+                                                        "viewBox": "0 0 24 24"
+                                                      },
+                                                      "components": [
+                                                        {
+                                                          "tagName": "path",
+                                                          "type": "svg-in",
+                                                          "resizable": {
+                                                            "ratioDefault": true
+                                                          },
+                                                          "attributes": {
+                                                            "stroke-linecap": "round",
+                                                            "stroke-linejoin": "round",
+                                                            "stroke-width": "1.5",
+                                                            "d": "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
@@ -3447,11 +4541,11 @@
                         "tagName": "html"
                       }
                     },
-                    "id": "GTnu5etBZ3goJQze"
+                    "id": "Kf2SMxwkzoiuivck"
                   }
                 ],
                 "type": "main",
-                "id": "3vLNJD3LgpK4bP8W"
+                "id": "X6Tgy6OJiyNjY0PZ"
               }
             ],
             "symbols": []

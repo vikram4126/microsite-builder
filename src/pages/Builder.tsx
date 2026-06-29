@@ -1763,6 +1763,145 @@ export default function Builder() {
         }
       });
 
+      // --- TABLE COMMANDS ---
+      editor.Commands.add('table-add-row', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          let row = sel;
+          if (['td', 'th'].includes((sel.get('tagName') || '').toLowerCase())) {
+            row = sel.parent();
+          }
+          if (!row || (row.get('tagName') || '').toLowerCase() !== 'tr') return;
+          
+          const parent = row.parent();
+          if (!parent) return;
+          const index = row.index();
+          const clone = row.clone();
+          parent.components().add(clone, { at: index + 1 });
+        }
+      });
+
+      editor.Commands.add('table-del-row', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          let row = sel;
+          if (['td', 'th'].includes((sel.get('tagName') || '').toLowerCase())) {
+            row = sel.parent();
+          }
+          if (!row || (row.get('tagName') || '').toLowerCase() !== 'tr') return;
+          
+          ed.selectRemove(sel);
+          row.remove();
+        }
+      });
+
+      editor.Commands.add('table-del-table', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          let table = sel;
+          while (table && (table.get('tagName') || '').toLowerCase() !== 'table') {
+            table = table.parent();
+          }
+          if (table) {
+            // Check if there is a wrapper div for the table to delete instead
+            const wrapper = table.parent();
+            if (wrapper && wrapper.getClasses().includes('overflow-x-auto')) {
+              ed.selectRemove(wrapper);
+              wrapper.remove();
+            } else {
+              ed.selectRemove(table);
+              table.remove();
+            }
+          }
+        }
+      });
+
+      editor.Commands.add('table-add-col', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          const tag = (sel.get('tagName') || '').toLowerCase();
+          if (tag !== 'td' && tag !== 'th') return;
+          
+          const row = sel.parent();
+          if (!row || (row.get('tagName') || '').toLowerCase() !== 'tr') return;
+          
+          const cellIndex = sel.index();
+          let container = row.parent();
+          let table = container?.parent();
+          if (table && (table.get('tagName') || '').toLowerCase() !== 'table') {
+             table = table.parent();
+          }
+          if (!table) table = container; // fallback if no outer table wrapper
+          
+          const allRows: any[] = [];
+          table.components().forEach((child: any) => {
+            const ctag = (child.get('tagName') || '').toLowerCase();
+            if (ctag === 'tr') {
+               allRows.push(child);
+            } else if (['thead', 'tbody', 'tfoot'].includes(ctag)) {
+               child.components().forEach((tr: any) => {
+                 if ((tr.get('tagName') || '').toLowerCase() === 'tr') allRows.push(tr);
+               });
+            }
+          });
+          
+          allRows.forEach(r => {
+             const isThead = r.parent() && (r.parent().get('tagName') || '').toLowerCase() === 'thead';
+             const tagName = isThead ? 'th' : 'td';
+             r.components().add({
+                type: 'text',
+                tagName,
+                content: 'New',
+                classes: sel.getClasses() // inherit classes for tailwind styling
+             }, { at: cellIndex + 1 });
+          });
+        }
+      });
+
+      editor.Commands.add('table-del-col', {
+        run(ed: any) {
+          const sel = ed.getSelected();
+          if (!sel) return;
+          const tag = (sel.get('tagName') || '').toLowerCase();
+          if (tag !== 'td' && tag !== 'th') return;
+          
+          const row = sel.parent();
+          if (!row) return;
+          
+          const cellIndex = sel.index();
+          let container = row.parent();
+          let table = container?.parent();
+          if (table && (table.get('tagName') || '').toLowerCase() !== 'table') {
+             table = table.parent();
+          }
+          if (!table) table = container;
+          
+          const allRows: any[] = [];
+          table.components().forEach((child: any) => {
+            const ctag = (child.get('tagName') || '').toLowerCase();
+            if (ctag === 'tr') {
+               allRows.push(child);
+            } else if (['thead', 'tbody', 'tfoot'].includes(ctag)) {
+               child.components().forEach((tr: any) => {
+                 if ((tr.get('tagName') || '').toLowerCase() === 'tr') allRows.push(tr);
+               });
+            }
+          });
+          
+          ed.selectRemove(sel);
+          allRows.forEach(r => {
+             const cell = r.components().at(cellIndex);
+             if (cell) cell.remove();
+          });
+        }
+      });
+
+      // --- END TABLE COMMANDS ---
+
       // Custom command for cropping images
       editor.Commands.add('crop-image', {
         run(editor: any) {
@@ -1849,6 +1988,59 @@ export default function Builder() {
                 attributes: { title: 'Crop Image' },
                 command: 'crop-image',
               }, ...tb];
+              model.set('toolbar', newTb);
+            }
+          }, 50);
+        }
+
+        // Add table toolbar buttons with clear text labels
+        if (selTag === 'tr' || selTag === 'td' || selTag === 'th') {
+          setTimeout(() => {
+            const tb = model.get('toolbar') || [];
+            const newTb = [...tb];
+            
+            // Add Row
+            if (!newTb.some((t: any) => t.command === 'table-add-row')) {
+              newTb.unshift({
+                label: `<span style="font-size:10px;font-weight:bold;padding:0 4px;white-space:nowrap;">+ Row</span>`,
+                attributes: { title: 'Add Row Below' },
+                command: 'table-add-row',
+              });
+            }
+            // Delete Row
+            if (!newTb.some((t: any) => t.command === 'table-del-row')) {
+              newTb.unshift({
+                label: `<span style="font-size:10px;font-weight:bold;padding:0 4px;white-space:nowrap;color:#ff4b4b;">- Row</span>`,
+                attributes: { title: 'Delete Row' },
+                command: 'table-del-row',
+              });
+            }
+            // Add Col
+            if (!newTb.some((t: any) => t.command === 'table-add-col')) {
+              newTb.unshift({
+                label: `<span style="font-size:10px;font-weight:bold;padding:0 4px;white-space:nowrap;">+ Col</span>`,
+                attributes: { title: 'Add Column Right' },
+                command: 'table-add-col',
+              });
+            }
+            // Delete Col
+            if (!newTb.some((t: any) => t.command === 'table-del-col')) {
+              newTb.unshift({
+                label: `<span style="font-size:10px;font-weight:bold;padding:0 4px;white-space:nowrap;color:#ff4b4b;">- Col</span>`,
+                attributes: { title: 'Delete Column' },
+                command: 'table-del-col',
+              });
+            }
+            // Delete Table
+            if (!newTb.some((t: any) => t.command === 'table-del-table')) {
+              newTb.unshift({
+                label: `<span style="font-size:10px;font-weight:bold;padding:0 4px;white-space:nowrap;color:#ff4b4b;">X Table</span>`,
+                attributes: { title: 'Delete Entire Table' },
+                command: 'table-del-table',
+              });
+            }
+            
+            if (newTb.length !== tb.length) {
               model.set('toolbar', newTb);
             }
           }, 50);

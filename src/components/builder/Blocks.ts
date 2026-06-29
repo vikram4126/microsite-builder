@@ -435,7 +435,76 @@ export const registerBlocks = (editor: any) => {
     content: '<ul data-animation="slide-up" class="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300"><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>',
   });
 
-  
+  bm.add('table-basic', {
+    label: 'Data Table',
+    category: 'Basic',
+    media: '<div class="flex items-center justify-center p-2 bg-white border border-slate-200 h-full w-full rounded"><svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>',
+    content: `
+      <div data-animation="slide-up" class="w-full overflow-x-auto my-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
+          <thead class="text-xs text-gray-800 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+            <tr>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider">Item Name</th>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider">Category</th>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider">Price</th>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-slate-900 divide-y divide-gray-100 dark:divide-gray-800">
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+              <td data-gjs-type="text" class="px-6 py-4 font-medium text-gray-900 dark:text-white">Premium Package</td>
+              <td data-gjs-type="text" class="px-6 py-4">Software</td>
+              <td data-gjs-type="text" class="px-6 py-4">$199.00</td>
+              <td data-gjs-type="text" class="px-6 py-4 text-right"><a href="#" class="font-semibold text-[#1e49e2] hover:underline">Edit</a></td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+              <td data-gjs-type="text" class="px-6 py-4 font-medium text-gray-900 dark:text-white">Basic Starter</td>
+              <td data-gjs-type="text" class="px-6 py-4">Software</td>
+              <td data-gjs-type="text" class="px-6 py-4">$49.00</td>
+              <td data-gjs-type="text" class="px-6 py-4 text-right"><a href="#" class="font-semibold text-[#1e49e2] hover:underline">Edit</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `
+  });
+
+  bm.add('table-striped', {
+    label: 'Striped Table',
+    category: 'Basic',
+    media: '<div class="flex items-center justify-center p-2 bg-slate-50 border border-slate-200 h-full w-full rounded"><svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>',
+    content: `
+      <div data-animation="slide-up" class="w-full overflow-x-auto my-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
+          <thead class="text-xs text-white uppercase bg-[#00338d]">
+            <tr>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider rounded-tl-lg">Project</th>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider">Status</th>
+              <th data-gjs-type="text" scope="col" class="px-6 py-4 font-bold tracking-wider rounded-tr-lg">Budget</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-slate-900 divide-y divide-gray-100 dark:divide-gray-800">
+            <tr class="bg-white dark:bg-slate-900 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+              <td data-gjs-type="text" class="px-6 py-4 font-medium text-gray-900 dark:text-white">Website Redesign</td>
+              <td class="px-6 py-4"><span data-gjs-type="text" class="px-2.5 py-1 text-xs font-bold text-green-700 bg-green-100 rounded-full">Completed</span></td>
+              <td data-gjs-type="text" class="px-6 py-4">$5,400</td>
+            </tr>
+            <tr class="bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+              <td data-gjs-type="text" class="px-6 py-4 font-medium text-gray-900 dark:text-white">Mobile App</td>
+              <td class="px-6 py-4"><span data-gjs-type="text" class="px-2.5 py-1 text-xs font-bold text-blue-700 bg-blue-100 rounded-full">In Progress</span></td>
+              <td data-gjs-type="text" class="px-6 py-4">$12,000</td>
+            </tr>
+            <tr class="bg-white dark:bg-slate-900 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+              <td data-gjs-type="text" class="px-6 py-4 font-medium text-gray-900 dark:text-white">Marketing Campaign</td>
+              <td class="px-6 py-4"><span data-gjs-type="text" class="px-2.5 py-1 text-xs font-bold text-orange-700 bg-orange-100 rounded-full">Pending</span></td>
+              <td data-gjs-type="text" class="px-6 py-4">$3,200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `
+  });
+
   // POPUPS CATEGORY
   bm.add("popup-simple", {
     label: "Simple Info Popup",

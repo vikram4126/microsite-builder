@@ -95,96 +95,100 @@ export const TypographyUI = ({ editor }: { editor: any }) => {
   };
 
   const updateStyle = (key: string, value: any) => {
-    const selected = editor.getSelected();
-    if (!selected) return;
+    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+    if (!selectedElements.length) return;
     
     setStyles(prev => ({ ...prev, [key]: value }));
     
-    if (key === 'fontSize') {
-        selected.addStyle({ 'font-size': `${value}px` });
-    } else if (key === 'fontWeight') {
-        selected.addStyle({ 'font-weight': value });
-    } else if (key === 'fontFamily') {
-        selected.addStyle({ 'font-family': value });
-    } else if (key === 'letterSpacing') {
-        selected.addStyle({ 'letter-spacing': value });
-    } else if (key === 'color') {
-        selected.addStyle({ color: value });
-    } else if (key === 'backgroundColor') {
-        selected.addStyle({ 'background-color': value });
-    } else if (key === 'textAlign') {
-        selected.addStyle({ 'text-align': value });
-    } else if (key === 'listStyleType') {
-        let targetComp = selected;
-        let p = targetComp;
-        while(p && p.get && p.get('tagName')) {
-            const t = p.get('tagName').toLowerCase();
-            if (t === 'ul' || t === 'ol') {
-                targetComp = p;
-                break;
+    selectedElements.forEach((selected: any) => {
+        if (key === 'fontSize') {
+            selected.addStyle({ 'font-size': `${value}px` });
+        } else if (key === 'fontWeight') {
+            selected.addStyle({ 'font-weight': value });
+        } else if (key === 'fontFamily') {
+            selected.addStyle({ 'font-family': value });
+        } else if (key === 'letterSpacing') {
+            selected.addStyle({ 'letter-spacing': value });
+        } else if (key === 'color') {
+            selected.addStyle({ color: value });
+        } else if (key === 'backgroundColor') {
+            selected.addStyle({ 'background-color': value });
+        } else if (key === 'textAlign') {
+            selected.addStyle({ 'text-align': value });
+        } else if (key === 'listStyleType') {
+            let targetComp = selected;
+            let p = targetComp;
+            while(p && p.get && p.get('tagName')) {
+                const t = p.get('tagName').toLowerCase();
+                if (t === 'ul' || t === 'ol') {
+                    targetComp = p;
+                    break;
+                }
+                if (t === 'wrapper' || t === 'body') break;
+                p = p.parent();
             }
-            if (t === 'wrapper' || t === 'body') break;
-            p = p.parent();
-        }
 
-        if (!value || value === 'none') {
-            const currentTag = targetComp.get('tagName')?.toLowerCase();
-            if (currentTag === 'ul' || currentTag === 'ol') {
-                targetComp.set('tagName', 'p');
-                targetComp.removeStyle('list-style-type');
-                targetComp.removeStyle('padding-left');
-                targetComp.removeStyle('margin-left');
-                
-                const el = targetComp.getEl();
-                if (el) {
-                    const items = Array.from(el.querySelectorAll('li')).map((li: any) => li.innerHTML);
-                    if (items.length > 0) {
-                        targetComp.components(items.join('<br/>'));
-                    }
-                }
-            } else {
-                targetComp.removeStyle('list-style-type');
-            }
-        } else {
-            const currentTag = targetComp.get('tagName')?.toLowerCase();
-            const tag = (value === 'decimal' || value.includes('roman') || value.includes('alpha')) ? 'ol' : 'ul';
-            
-            if (currentTag !== 'ul' && currentTag !== 'ol') {
-                targetComp.set('tagName', tag);
-                targetComp.addStyle({ 'list-style-type': value, 'padding-left': '2rem', 'margin-left': '0' });
-                
-                const el = targetComp.getEl();
-                if (el) {
-                    const htmlContent = el.innerHTML;
-                    if (!htmlContent.includes('<li')) {
-                        // Split by <br> tags or Divs to infer lines
-                        let lines = htmlContent.split(/<br\s*\/?>/i).map((l: string) => l.trim()).filter(Boolean);
-                        // If no breaks, try innerText lines
-                        if (lines.length === 0 || lines.length === 1) {
-                            const textLines = (el.innerText || 'List item').split('\n').map((l: string) => l.trim()).filter(Boolean);
-                            if (textLines.length > lines.length) {
-                                lines = textLines;
-                            }
+            if (!value || value === 'none') {
+                const currentTag = targetComp.get('tagName')?.toLowerCase();
+                if (currentTag === 'ul' || currentTag === 'ol') {
+                    targetComp.set('tagName', 'p');
+                    targetComp.removeStyle('list-style-type');
+                    targetComp.removeStyle('padding-left');
+                    targetComp.removeStyle('margin-left');
+                    
+                    const el = targetComp.getEl();
+                    if (el) {
+                        const items = Array.from(el.querySelectorAll('li')).map((li: any) => li.innerHTML);
+                        if (items.length > 0) {
+                            targetComp.components(items.join('<br/>'));
                         }
-                        if (lines.length === 0) lines = ['List item'];
-                        
-                        const listHtml = lines.map((l: string) => `<li>${l}</li>`).join('');
-                        targetComp.components(listHtml);
                     }
+                } else {
+                    targetComp.removeStyle('list-style-type');
                 }
             } else {
-                targetComp.set('tagName', tag);
-                targetComp.addStyle({ 'list-style-type': value });
+                const currentTag = targetComp.get('tagName')?.toLowerCase();
+                const tag = (value === 'decimal' || value.includes('roman') || value.includes('alpha')) ? 'ol' : 'ul';
+                
+                if (currentTag !== 'ul' && currentTag !== 'ol') {
+                    targetComp.set('tagName', tag);
+                    targetComp.addStyle({ 'list-style-type': value, 'padding-left': '2rem', 'margin-left': '0' });
+                    
+                    const el = targetComp.getEl();
+                    if (el) {
+                        const htmlContent = el.innerHTML;
+                        if (!htmlContent.includes('<li')) {
+                            // Split by <br> tags or Divs to infer lines
+                            let lines = htmlContent.split(/<br\s*\/?>/i).map((l: string) => l.trim()).filter(Boolean);
+                            // If no breaks, try innerText lines
+                            if (lines.length === 0 || lines.length === 1) {
+                                const textLines = (el.innerText || 'List item').split('\n').map((l: string) => l.trim()).filter(Boolean);
+                                if (textLines.length > lines.length) {
+                                    lines = textLines;
+                                }
+                            }
+                            if (lines.length === 0) lines = ['List item'];
+                            
+                            const listHtml = lines.map((l: string) => `<li>${l}</li>`).join('');
+                            targetComp.components(listHtml);
+                        }
+                    }
+                } else {
+                    targetComp.set('tagName', tag);
+                    targetComp.addStyle({ 'list-style-type': value });
+                }
             }
+        } else if (key === 'textDecoration') {
+            selected.addStyle({ 'text-decoration': value });
+        } else if (key === 'textTransform') {
+            selected.addStyle({ 'text-transform': value });
         }
-        
-        if (targetComp !== selected) {
-            editor.select(targetComp);
-        }
-    } else if (key === 'textDecoration') {
-        selected.addStyle({ 'text-decoration': value });
-    } else if (key === 'textTransform') {
-        selected.addStyle({ 'text-transform': value });
+    });
+    
+    // For listStyleType, handle selection update if single element
+    if (key === 'listStyleType' && selectedElements.length === 1) {
+       // logic handled above already morphed the component, but re-selection might be needed 
+       // keeping it simple by not forcing re-select for multi
     }
   };
 

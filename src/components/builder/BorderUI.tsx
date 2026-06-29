@@ -70,8 +70,8 @@ export const BorderUI = ({ editor }: { editor: any }) => {
   }, [editor]);
 
   const handleBorderWidthUpdate = (side: 'top' | 'right' | 'bottom' | 'left', val: number) => {
-    const selected = editor.getSelected();
-    if (!selected) return;
+    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+    if (!selectedElements.length) return;
 
     const newStyle: any = {};
     const unit = borderWidth.unit;
@@ -93,12 +93,12 @@ export const BorderUI = ({ editor }: { editor: any }) => {
             setBorderStyle('solid');
         }
     }
-    selected.addStyle(newStyle);
+    selectedElements.forEach((el: any) => el.addStyle(newStyle));
   };
 
   const handleRadiusUpdate = (corner: 'tl' | 'tr' | 'bl' | 'br', val: number) => {
-    const selected = editor.getSelected();
-    if (!selected) return;
+    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+    if (!selectedElements.length) return;
 
     const newStyle: any = {};
     const unit = radii.unit;
@@ -113,36 +113,36 @@ export const BorderUI = ({ editor }: { editor: any }) => {
         newStyle[fullMap[corner]] = `${val}${unit}`;
         setRadii(prev => ({ ...prev, [corner]: val }));
     }
-    selected.addStyle(newStyle);
+    selectedElements.forEach((el: any) => el.addStyle(newStyle));
   };
 
   const handleShadowUpdate = (val: string) => {
-      const selected = editor.getSelected();
-      if (!selected) return;
-      selected.addStyle({ 'box-shadow': val });
+      const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+      if (!selectedElements.length) return;
+      selectedElements.forEach((el: any) => el.addStyle({ 'box-shadow': val }));
       setBoxShadow(val);
   };
 
   const changeUnit = (type: 'border' | 'radius', unit: string) => {
-    const selected = editor.getSelected();
-    if (!selected) return;
+    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+    if (!selectedElements.length) return;
 
     if (type === 'border') {
       setBorderWidth(b => ({ ...b, unit }));
-      selected.addStyle({
+      selectedElements.forEach((el: any) => el.addStyle({
         'border-top-width': `${borderWidth.top}${unit}`,
         'border-right-width': `${borderWidth.right}${unit}`,
         'border-bottom-width': `${borderWidth.bottom}${unit}`,
         'border-left-width': `${borderWidth.left}${unit}`
-      });
+      }));
     } else {
       setRadii(r => ({ ...r, unit }));
-      selected.addStyle({
+      selectedElements.forEach((el: any) => el.addStyle({
         'border-top-left-radius': `${radii.tl}${unit}`,
         'border-top-right-radius': `${radii.tr}${unit}`,
         'border-bottom-left-radius': `${radii.bl}${unit}`,
         'border-bottom-right-radius': `${radii.br}${unit}`
-      });
+      }));
     }
   };
 
@@ -239,7 +239,12 @@ export const BorderUI = ({ editor }: { editor: any }) => {
              <div className="space-y-1">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Style</label>
                 <div className="relative">
-                  <select value={borderStyle} onChange={(e) => { const s = e.target.value; setBorderStyle(s); editor.getSelected()?.addStyle({'border-style': s}); }}
+                  <select value={borderStyle} onChange={(e) => { 
+                    const s = e.target.value; 
+                    setBorderStyle(s); 
+                    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+                    selectedElements.forEach((el: any) => el.addStyle({'border-style': s})); 
+                  }}
                     className="w-full appearance-none bg-[#F5F7FA] border border-gray-200 rounded-lg px-2 py-1.5 text-[11px] font-medium text-gray-700 outline-none focus:ring-1 focus:ring-blue-500/20 focus:border-[#1E49E2] transition-all cursor-pointer"
                   >
                     <option value="none">None</option>
@@ -257,12 +262,22 @@ export const BorderUI = ({ editor }: { editor: any }) => {
                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Color</label>
                 <div className="flex items-center space-x-2 bg-[#F5F7FA] border border-gray-200 rounded-lg px-2 py-1.5 h-[32px] focus-within:ring-1 focus-within:ring-blue-500/20 focus-within:border-[#1E49E2] transition-all">
                     <div className="w-3.5 h-3.5 border border-gray-300 shadow-sm shrink-0 rounded-sm" style={{ backgroundColor: borderColor }} />
-                    <input type="text" value={borderColor} onChange={(e) => { const c = e.target.value; setBorderColor(c); editor.getSelected()?.addStyle({'border-color': c}); }}
+                    <input type="text" value={borderColor} onChange={(e) => { 
+                        const c = e.target.value; 
+                        setBorderColor(c); 
+                        const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+                        selectedElements.forEach((el: any) => el.addStyle({'border-color': c})); 
+                    }}
                         className="w-full bg-transparent border-none outline-none text-[9px] uppercase font-mono font-bold text-gray-700"
                     />
                     <div className="relative w-4 h-4 flex items-center justify-center cursor-pointer shrink-0">
                         <Palette size={12} className="text-gray-400 hover:text-black" />
-                        <input type="color" className="absolute inset-0 opacity-0 cursor-pointer" value={borderColor} onChange={(e) => { const c = e.target.value; setBorderColor(c); editor.getSelected()?.addStyle({'border-color': c}); }} />
+                        <input type="color" className="absolute inset-0 opacity-0 cursor-pointer" value={borderColor} onChange={(e) => { 
+                            const c = e.target.value; 
+                            setBorderColor(c); 
+                            const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+                            selectedElements.forEach((el: any) => el.addStyle({'border-color': c})); 
+                        }} />
                     </div>
                 </div>
              </div>
@@ -271,7 +286,11 @@ export const BorderUI = ({ editor }: { editor: any }) => {
           {/* Color Presets */}
           <div className="flex flex-wrap gap-2 justify-center">
             {brandColors.map(c => (
-                <button key={c} onClick={() => { setBorderColor(c); editor.getSelected()?.addStyle({'border-color': c}); }}
+                <button key={c} onClick={() => { 
+                    setBorderColor(c); 
+                    const selectedElements = editor.getSelectedAll ? editor.getSelectedAll() : [editor.getSelected()].filter(Boolean);
+                    selectedElements.forEach((el: any) => el.addStyle({'border-color': c})); 
+                }}
                 className={`w-5 h-5 border border-gray-200 transition-all hover:scale-110 active:scale-95 ${borderColor.toLowerCase() === c.toLowerCase() ? 'ring-1 ring-black ring-offset-1 scale-110' : ''}`}
                 style={{ backgroundColor: c }} title={c}
                 />
