@@ -474,8 +474,66 @@ export default function Builder() {
       injectSectionHelperRules();
       (editorRef.current as any)._injectSectionHelperRules = injectSectionHelperRules;
 
+      // Register Tab Stepper Trait - Simple +/- UI for non-technical users
+      editor.TraitManager.addType('tab-stepper', {
+        createInput() {
+          const el = document.createElement('div');
+          el.innerHTML = `
+            <div style="display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px 12px;margin-top:4px;">
+              <button class="tab-dec" style="width:30px;height:30px;border-radius:6px;background:white;border:1px solid #cbd5e1;color:#1e49e2;font-size:18px;font-weight:bold;cursor:pointer;flex-shrink:0;line-height:1;">−</button>
+              <span class="tab-count" style="flex:1;text-align:center;font-size:16px;font-weight:700;color:#0c233c;">6</span>
+              <button class="tab-inc" style="width:30px;height:30px;border-radius:6px;background:#1e49e2;border:none;color:white;font-size:18px;font-weight:bold;cursor:pointer;flex-shrink:0;line-height:1;">+</button>
+            </div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:4px;text-align:center;">Min: 1 &nbsp;|&nbsp; Max: 12 tabs</div>
+          `;
+          return el;
+        },
+        onUpdate({ elInput, component }: any) {
+          if (!elInput) return;
+          const cur = parseInt(component.getAttributes()['numTabs'] || '6', 10);
+          const val = isNaN(cur) ? 6 : cur;
+
+          const countEl = elInput.querySelector('.tab-count');
+          const decBtn = elInput.querySelector('.tab-dec');
+          const incBtn = elInput.querySelector('.tab-inc');
+
+          if (countEl) countEl.textContent = String(val);
+          if (decBtn) {
+            decBtn.style.opacity = val <= 1 ? '0.35' : '1';
+            decBtn.style.cursor = val <= 1 ? 'not-allowed' : 'pointer';
+            decBtn.onclick = () => {
+              const current = parseInt(component.getAttributes()['numTabs'] || '6', 10);
+              if (current <= 1) return;
+              const next = current - 1;
+              component.addAttributes({ numTabs: String(next) });
+              if (typeof component.handleNumTabsChange === 'function') component.handleNumTabsChange.call(component);
+              // Update display immediately without waiting for onUpdate
+              if (countEl) countEl.textContent = String(next);
+              if (decBtn) { decBtn.style.opacity = next <= 1 ? '0.35' : '1'; decBtn.style.cursor = next <= 1 ? 'not-allowed' : 'pointer'; }
+              if (incBtn) { incBtn.style.opacity = next >= 12 ? '0.35' : '1'; incBtn.style.cursor = next >= 12 ? 'not-allowed' : 'pointer'; }
+            };
+          }
+          if (incBtn) {
+            incBtn.style.opacity = val >= 12 ? '0.35' : '1';
+            incBtn.style.cursor = val >= 12 ? 'not-allowed' : 'pointer';
+            incBtn.onclick = () => {
+              const current = parseInt(component.getAttributes()['numTabs'] || '6', 10);
+              if (current >= 12) return;
+              const next = current + 1;
+              component.addAttributes({ numTabs: String(next) });
+              if (typeof component.handleNumTabsChange === 'function') component.handleNumTabsChange.call(component);
+              // Update display immediately
+              if (countEl) countEl.textContent = String(next);
+              if (decBtn) { decBtn.style.opacity = next <= 1 ? '0.35' : '1'; decBtn.style.cursor = next <= 1 ? 'not-allowed' : 'pointer'; }
+              if (incBtn) { incBtn.style.opacity = next >= 12 ? '0.35' : '1'; incBtn.style.cursor = next >= 12 ? 'not-allowed' : 'pointer'; }
+            };
+          }
+        }
+      });
+
       // Register Custom Trait BEFORE load so it is available when components are parsed
       editor.TraitManager.addType('layout-toggle', {
+
         createInput() {
           const el = document.createElement('div');
           el.innerHTML = `
@@ -727,23 +785,9 @@ export default function Builder() {
               'id',
               'title',
               {
-                type: 'select',
+                type: 'tab-stepper',
                 name: 'numTabs',
-                label: 'Number of Tabs',
-                options: [
-                  { id: '1', name: '1' },
-                  { id: '2', name: '2' },
-                  { id: '3', name: '3' },
-                  { id: '4', name: '4' },
-                  { id: '5', name: '5' },
-                  { id: '6', name: '6' },
-                  { id: '7', name: '7' },
-                  { id: '8', name: '8' },
-                  { id: '9', name: '9' },
-                  { id: '10', name: '10' },
-                  { id: '11', name: '11' },
-                  { id: '12', name: '12' },
-                ]
+                label: 'Tabs',
               },
               {
                 type: 'color',
@@ -764,11 +808,11 @@ export default function Builder() {
             // Use timeout to ensure children are fully parsed into models
             setTimeout(() => {
               this.syncRadioNames();
-              // Set the trait value to match existing labels count
+              // Set numTabs attribute to match current tab count so stepper displays correctly
               const labelsContainer = this.find('.deal-labels-container')[0];
               if (labelsContainer) {
                 const count = labelsContainer.components().length;
-                this.getTrait('numTabs').set('value', count);
+                this.addAttributes({ numTabs: String(count) });
               }
             }, 100);
 
@@ -859,23 +903,9 @@ export default function Builder() {
               'id',
               'title',
               {
-                type: 'select',
+                type: 'tab-stepper',
                 name: 'numTabs',
-                label: 'Number of Tabs',
-                options: [
-                  { id: '1', name: '1' },
-                  { id: '2', name: '2' },
-                  { id: '3', name: '3' },
-                  { id: '4', name: '4' },
-                  { id: '5', name: '5' },
-                  { id: '6', name: '6' },
-                  { id: '7', name: '7' },
-                  { id: '8', name: '8' },
-                  { id: '9', name: '9' },
-                  { id: '10', name: '10' },
-                  { id: '11', name: '11' },
-                  { id: '12', name: '12' },
-                ]
+                label: 'Tabs',
               },
               {
                 type: 'color',
@@ -894,10 +924,11 @@ export default function Builder() {
 
             setTimeout(() => {
               this.syncRadioNames();
+              // Set numTabs attribute to match current tab count so stepper displays correctly
               const labelsContainer = this.find('.deal-labels-container')[0];
               if (labelsContainer) {
                 const count = labelsContainer.components().length;
-                this.getTrait('numTabs').set('value', count);
+                this.addAttributes({ numTabs: String(count) });
               }
             }, 100);
 
@@ -2642,6 +2673,18 @@ export default function Builder() {
             attributes: { href: `/builder/${projectId}/${slug}` },
             content: p.name,
           });
+        });
+
+        // Always add Get Started CTA button at the end
+        nav.append({
+          tagName: 'a',
+          type: 'link',
+          removable: false,
+          draggable: false,
+          copyable: false,
+          classes: ['bg-primary', 'text-white', 'hover:bg-accent', 'px-5', 'py-2.5', 'rounded-lg', 'shadow', 'transition-all', 'w-full', 'md:w-auto', 'text-center', 'mt-2', 'md:mt-0'],
+          attributes: { href: '#' },
+          content: 'Get Started',
         });
       });
     };
