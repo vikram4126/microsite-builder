@@ -591,7 +591,7 @@ export const sectionsLibrary: SectionDef[] = [
     html: `
       <div data-gjs-type="section" data-animation="slide-up" data-gjs-name="Split Card Banner (Download)" class="w-full bg-secondary py-10 md:py-20 lg:py-20" layout-mode="container">
         <div class="container mx-auto">
-          <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl bg-white">
+          <div class="max-w-5xl mx-auto flex flex-col md:flex-row overflow-hidden shadow-2xl bg-white">
             <div data-animation="slide-left" class="flex-1 min-h-[400px]">
               <img src="/background/background-1.jpg" class="w-full h-full object-cover" alt="Handshake" />
             </div>
@@ -863,7 +863,7 @@ export const sectionsLibrary: SectionDef[] = [
             </p>
           </div>
 
-          <div data-gjs-type="responsive-grid" data-cols-desktop="3" data-cols-tablet="2" data-cols-mobile="1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div data-gjs-type="responsive-grid" data-cols-desktop="3" data-cols-tablet="2" data-cols-mobile="1" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <!-- Card 1 -->
             <div class="border border-white/40 rounded-lg p-5 flex items-center gap-4 hover:bg-white/5 transition-colors">
               <div class="w-16 h-16 md:w-20 md:h-20 shrink-0">
@@ -1859,7 +1859,7 @@ export const sectionsLibrary: SectionDef[] = [
     label: 'Vertical Tabs',
     svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Key Deal Insights</text><rect x="5" y="15" width="30" height="8" fill="#e2e8f0"/><rect x="5" y="25" width="30" height="8" fill="#f1f5f9"/><rect x="5" y="35" width="30" height="8" fill="#f1f5f9"/><rect x="38" y="15" width="57" height="38" fill="#1e49e2"/><circle cx="45" cy="22" r="3" fill="none" stroke="white"/><text x="52" y="23" font-size="3" fill="white" font-weight="bold">Key personnel</text><rect x="42" y="30" width="45" height="2" fill="white" opacity="0.8"/><rect x="42" y="35" width="45" height="2" fill="white" opacity="0.8"/><rect x="42" y="40" width="45" height="2" fill="white" opacity="0.8"/></svg>',
     html: `
-      <div id="section-vertical-tabs" data-gjs-type="vertical-tabs" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+      <div id="section-vertical-tabs" data-gjs-type="vertical-tabs" data-gjs-name="Vertical Tabs" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
         <div class="container mx-auto relative">
           
           <div class="tabs-container-wrapper relative">
@@ -1893,16 +1893,16 @@ export const sectionsLibrary: SectionDef[] = [
                 background-color: #f1f5f9;
                 color: #0c233c;
                 font-weight: 700;
-                border-left-color: #00b8f5 !important;
+                border-left-color: var(--tab-active-border, #00b8f5) !important;
                 border-right-color: transparent !important;
               }
               .deal-labels-container label:has(input:checked) .deal-arrow {
-                color: #00b8f5;
+                color: var(--tab-active-border, #00b8f5);
               }
               @media (min-width: 768px) {
                 .deal-labels-container label:has(input:checked) {
                   border-left-color: transparent !important;
-                  border-right-color: #00b8f5 !important;
+                  border-right-color: var(--tab-active-border, #00b8f5) !important;
                 }
               }
             </style>
@@ -2039,6 +2039,111 @@ export const sectionsLibrary: SectionDef[] = [
             </div>
 
 
+
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: 'section-tabs-horizontal',
+    category: 'Tabs',
+    label: 'Horizontal Tabs',
+    svg: '<svg viewBox="0 0 100 60" class="w-full h-full" fill="none"><rect width="100" height="60" fill="#f8fafc"/><text x="5" y="10" font-size="4" fill="#0c233c" font-weight="bold">Horizontal Tabs</text><rect x="5" y="15" width="25" height="6" fill="#1e49e2"/><rect x="32" y="15" width="25" height="6" fill="#e2e8f0"/><rect x="59" y="15" width="25" height="6" fill="#e2e8f0"/><rect x="5" y="21" width="90" height="30" fill="#1e49e2"/><rect x="10" y="27" width="80" height="2" fill="white" opacity="0.8"/><rect x="10" y="32" width="80" height="2" fill="white" opacity="0.8"/><rect x="10" y="37" width="60" height="2" fill="white" opacity="0.8"/></svg>',
+    html: `
+      <div id="section-horizontal-tabs" data-gjs-type="horizontal-tabs" data-gjs-name="Horizontal Tabs" class="w-full py-20 bg-slate-50 dark:bg-slate-900" layout-mode="container">
+        <div class="container mx-auto relative px-4">
+          
+          <div class="tabs-container-wrapper relative">
+            <div class="max-w-3xl mb-10 text-center mx-auto">
+              <h2 class="text-3xl md:text-4xl font-display font-black text-[#0c233c] dark:text-white mb-4 tracking-tight">Features & Capabilities</h2>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
+                Explore the powerful features our platform offers.
+              </p>
+            </div>
+            
+            <style>
+              /* === Active panel reveal === */
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(1) input:checked) .deal-panels-container .deal-panel:nth-of-type(1),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(2) input:checked) .deal-panels-container .deal-panel:nth-of-type(2),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(3) input:checked) .deal-panels-container .deal-panel:nth-of-type(3),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(4) input:checked) .deal-panels-container .deal-panel:nth-of-type(4),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(5) input:checked) .deal-panels-container .deal-panel:nth-of-type(5),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(6) input:checked) .deal-panels-container .deal-panel:nth-of-type(6),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(7) input:checked) .deal-panels-container .deal-panel:nth-of-type(7),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(8) input:checked) .deal-panels-container .deal-panel:nth-of-type(8),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(9) input:checked) .deal-panels-container .deal-panel:nth-of-type(9),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(10) input:checked) .deal-panels-container .deal-panel:nth-of-type(10),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(11) input:checked) .deal-panels-container .deal-panel:nth-of-type(11),
+              .tabs-container-wrapper:has(.deal-labels-container label:nth-of-type(12) input:checked) .deal-panels-container .deal-panel:nth-of-type(12) {
+                opacity: 1; pointer-events: auto; z-index: 10; position: relative;
+              }
+
+              /* Hide inactive panels from flow */
+              .deal-panels-container .deal-panel {
+                 opacity: 0; pointer-events: none; z-index: 0; position: absolute; top: 0; left: 0; right: 0;
+              }
+
+              /* === Active tab button indicator === */
+              .deal-labels-container label:has(input:checked) {
+                background-color: var(--tab-active-bg, #00338d);
+                color: #ffffff;
+                font-weight: 700;
+                border-bottom-color: transparent !important;
+              }
+            </style>
+            
+            <div class="flex flex-col w-full shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800">
+              
+              <!-- Top: Tab Buttons (Labels) -->
+              <div data-animation="slide-down" class="deal-labels-container w-full flex flex-row overflow-x-auto border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 scrollbar-hide">
+                 
+                 <label class="deal-btn cursor-pointer whitespace-nowrap text-center px-6 py-4 flex-1 transition-all text-slate-600 dark:text-slate-300 font-semibold border-b-2 border-transparent hover:bg-slate-100 hover:text-[#00338d]">
+                    <input type="radio" name="horiz-tabs" class="hidden" checked />
+                    <span>Analytics</span>
+                 </label>
+                 
+                 <label class="deal-btn cursor-pointer whitespace-nowrap text-center px-6 py-4 flex-1 transition-all text-slate-600 dark:text-slate-300 font-semibold border-b-2 border-transparent hover:bg-slate-100 hover:text-[#00338d]">
+                    <input type="radio" name="horiz-tabs" class="hidden" />
+                    <span>Security</span>
+                 </label>
+                 
+                 <label class="deal-btn cursor-pointer whitespace-nowrap text-center px-6 py-4 flex-1 transition-all text-slate-600 dark:text-slate-300 font-semibold border-b-2 border-transparent hover:bg-slate-100 hover:text-[#00338d]">
+                    <input type="radio" name="horiz-tabs" class="hidden" />
+                    <span>Integrations</span>
+                 </label>
+                 
+              </div>
+              
+              <!-- Bottom: Tab Content Panels -->
+              <div data-animation="slide-up" class="deal-panels-container w-full bg-white dark:bg-slate-800 relative min-h-[300px]">
+                
+                <!-- Panel 1 -->
+                <div class="deal-panel p-8 md:p-12 transition-opacity duration-300 w-full h-full">
+                   <h3 class="text-3xl font-display font-bold text-[#0c233c] dark:text-white mb-6">Real-time Analytics</h3>
+                   <p class="text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                     Get deep insights into your business performance with our comprehensive analytics dashboard. Track metrics, monitor growth, and make data-driven decisions seamlessly.
+                   </p>
+                </div>
+
+                <!-- Panel 2 -->
+                <div class="deal-panel p-8 md:p-12 transition-opacity duration-300 w-full h-full">
+                   <h3 class="text-3xl font-display font-bold text-[#0c233c] dark:text-white mb-6">Enterprise Grade Security</h3>
+                   <p class="text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                     Your data is protected by industry-leading security protocols. We offer end-to-end encryption, regular audits, and compliance with global standards.
+                   </p>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="deal-panel p-8 md:p-12 transition-opacity duration-300 w-full h-full">
+                   <h3 class="text-3xl font-display font-bold text-[#0c233c] dark:text-white mb-6">Seamless Integrations</h3>
+                   <p class="text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                     Connect your existing tools with a single click. Our platform natively integrates with CRM, ERP, and marketing automation software to streamline your workflow.
+                   </p>
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </div>

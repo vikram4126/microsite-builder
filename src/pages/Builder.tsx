@@ -549,7 +549,7 @@ export default function Builder() {
 
           // update component classes
           const classes = component.getClasses();
-          const newClasses = classes.filter((c: string) => !c.match(/^(md:|sm:)?grid-cols-\d+$/));
+          const newClasses = classes.filter((c: string) => !c.match(/^(sm:|md:|lg:|xl:|2xl:)?grid-cols-\d+$/));
           newClasses.push(`grid-cols-${mobile}`);
           newClasses.push(`sm:grid-cols-${tablet}`);
           newClasses.push(`md:grid-cols-${desktop}`);
@@ -576,7 +576,8 @@ export default function Builder() {
           if (!desktop) {
             const classes = component.getClasses();
             classes.forEach((c: string) => {
-              if (c.startsWith('md:grid-cols-')) desktop = c.split('-')[2];
+              if (c.startsWith('lg:grid-cols-') || c.startsWith('xl:grid-cols-') || c.startsWith('2xl:grid-cols-')) desktop = c.split('-')[2];
+              else if (c.startsWith('md:grid-cols-')) desktop = desktop || c.split('-')[2]; // Fallback if no lg:
               else if (c.startsWith('sm:grid-cols-')) tablet = c.split('-')[2];
               else if (c.startsWith('grid-cols-')) mobile = c.split('-')[2];
             });
@@ -745,6 +746,11 @@ export default function Builder() {
                 ]
               },
               {
+                type: 'color',
+                name: 'activeColor',
+                label: 'Active Tab Color',
+              },
+              {
                 type: 'layout-toggle',
                 name: 'layout-mode',
                 label: 'Content Layout Width',
@@ -768,6 +774,13 @@ export default function Builder() {
 
             // GrapesJS fires 'change:attributes:traitName' when trait changes
             this.listenTo(this, 'change:attributes:numTabs', this.handleNumTabsChange);
+            this.listenTo(this, 'change:attributes:activeColor', this.handleColorChange);
+          },
+          handleColorChange() {
+            const color = this.getAttributes()['activeColor'];
+            if (color) {
+              this.addStyle({ '--tab-active-bg': color, '--tab-active-border': color });
+            }
           },
           syncRadioNames() {
             const labelsContainer = this.find('.deal-labels-container')[0];
@@ -818,6 +831,131 @@ export default function Builder() {
                 if (p) p.remove();
               }
               // Ensure at least one tab is checked
+              setTimeout(() => {
+                const remRadios = labelsContainer.find('input[type="radio"]');
+                let anyChecked = false;
+                remRadios.forEach((r: any) => {
+                  if (r.getAttributes().checked) anyChecked = true;
+                });
+                if (!anyChecked && remRadios.length > 0) {
+                  remRadios[0].addAttributes({ checked: 'checked' });
+                  const radioEl = remRadios[0].getEl() as HTMLInputElement;
+                  if (radioEl) radioEl.checked = true;
+                }
+              }, 50);
+            }
+          }
+        }
+      });
+
+      // Register Horizontal Tabs Widget Type
+      domc.addType('horizontal-tabs', {
+        extend: 'section',
+        isComponent: (el: any) => el.getAttribute && el.getAttribute('data-gjs-type') === 'horizontal-tabs',
+        model: {
+          defaults: {
+            name: 'Horizontal Tabs',
+            traits: [
+              'id',
+              'title',
+              {
+                type: 'select',
+                name: 'numTabs',
+                label: 'Number of Tabs',
+                options: [
+                  { id: '1', name: '1' },
+                  { id: '2', name: '2' },
+                  { id: '3', name: '3' },
+                  { id: '4', name: '4' },
+                  { id: '5', name: '5' },
+                  { id: '6', name: '6' },
+                  { id: '7', name: '7' },
+                  { id: '8', name: '8' },
+                  { id: '9', name: '9' },
+                  { id: '10', name: '10' },
+                  { id: '11', name: '11' },
+                  { id: '12', name: '12' },
+                ]
+              },
+              {
+                type: 'color',
+                name: 'activeColor',
+                label: 'Active Tab Color',
+              },
+              {
+                type: 'layout-toggle',
+                name: 'layout-mode',
+                label: 'Content Layout Width',
+              }
+            ]
+          },
+          init() {
+            this.uniqueRadioName = 'htabs-' + this.getId();
+
+            setTimeout(() => {
+              this.syncRadioNames();
+              const labelsContainer = this.find('.deal-labels-container')[0];
+              if (labelsContainer) {
+                const count = labelsContainer.components().length;
+                this.getTrait('numTabs').set('value', count);
+              }
+            }, 100);
+
+            this.listenTo(this, 'change:attributes:numTabs', this.handleNumTabsChange);
+            this.listenTo(this, 'change:attributes:activeColor', this.handleColorChange);
+          },
+          handleColorChange() {
+            const color = this.getAttributes()['activeColor'];
+            if (color) {
+              this.addStyle({ '--tab-active-bg': color, '--tab-active-border': color });
+            }
+          },
+          syncRadioNames() {
+            const labelsContainer = this.find('.deal-labels-container')[0];
+            if (!labelsContainer) return;
+            const labels = labelsContainer.components();
+            labels.forEach((label: any) => {
+              const radio = label.find('input[type="radio"]')[0];
+              if (radio) {
+                radio.addAttributes({ name: this.uniqueRadioName });
+              }
+            });
+          },
+          handleNumTabsChange() {
+            const newNum = parseInt(this.getAttributes()['numTabs'] || '6', 10);
+            if (isNaN(newNum) || newNum < 1 || newNum > 12) return;
+
+            const labelsContainer = this.find('.deal-labels-container')[0];
+            const panelsContainer = this.find('.deal-panels-container')[0];
+
+            if (!labelsContainer || !panelsContainer) return;
+
+            const currentLabels = labelsContainer.components();
+            const currentPanels = panelsContainer.components();
+            const currentNum = currentLabels.length;
+
+            if (newNum > currentNum) {
+              for (let i = currentNum; i < newNum; i++) {
+                const n = i + 1;
+                const numDisplay = n < 10 ? ('0' + n) : String(n);
+                const labelHtml = '<label class="deal-btn cursor-pointer whitespace-nowrap text-center px-6 py-4 flex-1 transition-all text-slate-600 dark:text-slate-300 font-semibold border-b-2 border-transparent hover:bg-slate-100 hover:text-[var(--tab-active-bg,#00338d)]">'
+                  + '<input type="radio" name="' + this.uniqueRadioName + '" class="hidden" />'
+                  + '<span>New Tab ' + n + '</span>'
+                  + '</label>';
+                const panelHtml = '<div class="deal-panel p-8 md:p-12 absolute inset-0 flex flex-col overflow-y-auto opacity-0 z-0 pointer-events-none transition-opacity duration-300 bg-white dark:bg-slate-800">'
+                  + '<h3 class="text-3xl font-display font-bold text-[#0c233c] dark:text-white mb-6">New Tab ' + n + '</h3>'
+                  + '<p class="text-slate-600 dark:text-slate-300">Add your content here for tab ' + n + '.</p>'
+                  + '</div>';
+                labelsContainer.append(labelHtml);
+                panelsContainer.append(panelHtml);
+              }
+            } else if (newNum < currentNum) {
+              for (let i = currentNum - 1; i >= newNum; i--) {
+                const l = currentLabels.at(i);
+                if (l) l.remove();
+                const p = currentPanels.at(i);
+                if (p) p.remove();
+              }
               setTimeout(() => {
                 const remRadios = labelsContainer.find('input[type="radio"]');
                 let anyChecked = false;
@@ -1377,7 +1515,6 @@ export default function Builder() {
             body.gjs-dashed .container-custom > div {
                outline: 1px dashed rgba(100, 116, 139, 0.6) !important;
                outline-offset: -2px;
-               background-color: rgba(241, 245, 249, 0.3);
             }
             body.gjs-dashed [data-gjs-type="responsive-grid"],
             body.gjs-dashed .container-custom {
@@ -1946,6 +2083,14 @@ export default function Builder() {
           return;
         }
 
+        // Auto-scroll to element in canvas if selected from the layers panel
+        if (activeTabRef.current === 'layers') {
+          const el = model.getEl();
+          if (el && typeof el.scrollIntoView === 'function') {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+
         const newBreadcrumb = getBreadcrumb(model);
         setBreadcrumb(prev => {
           if (JSON.stringify(prev) === JSON.stringify(newBreadcrumb)) return prev;
@@ -2311,6 +2456,7 @@ export default function Builder() {
             }
           }
           isProjectLoaded.current = true;
+          setTimeout(syncNavLinks, 100);
         }
         return;
       }
@@ -2428,6 +2574,8 @@ export default function Builder() {
               if (comps && comps[0]) {
                 comps[0].set({ removable: false, copyable: false });
               }
+              // Immediately sync nav links to ensure Get Started button and page links appear on new pages
+              setTimeout(syncNavLinks, 100);
             }
             if (injectTailwindThemeRef.current) injectTailwindThemeRef.current();
             isSyncingRef.current = false;

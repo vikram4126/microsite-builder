@@ -48,7 +48,7 @@ export const registerTemplates = (editor: any) => {
            <a href="#" class="font-semibold text-secondary hover:underline">Learn more about our mission &rarr;</a>
         </div>
         <div class="flex-1">
-           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="rounded-2xl shadow-xl w-full" />
+           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team" class="shadow-xl w-full" />
         </div>
       </div>
     </div>
